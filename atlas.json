@@ -6,6 +6,7 @@
     "toc.html",
     "preface.asciidoc",
     "ch01.asciidoc",
+    "sample_chapter.asciidoc",
     "author_bio.html"
   ],
   "formats": {
