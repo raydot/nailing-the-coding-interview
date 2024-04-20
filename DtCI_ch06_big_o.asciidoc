@@ -2,10 +2,7 @@
 
 == Big O Notation
 
-
-
 After reading this chapter the reader should understand what Big O notation is, why it’s important, how to determine Big O, and some tips for making better guesses
-
 
 
 === Big O Introduction
@@ -34,7 +31,7 @@ After reading this chapter the reader should understand what Big O notation is, 
 
 ==== Logarithmic Time
 
-==== latexmath: [$n^2$], latexmath: [$n^3$], … etc
+==== latexmath:[{n^2}, {n^3}], … etc
 
 === Example Questions
 
