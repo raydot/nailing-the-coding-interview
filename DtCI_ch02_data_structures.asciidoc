@@ -21,11 +21,19 @@ Commodo occaecat eiusmod sunt mollit commodo fugiat.
 
 ==== Example Questions
 
+Test question 1
+
 ===== Finding a Character or Word in a String
+
+Test question 2
 
 ===== Reversing a String Without `reverse()`
 
+Test question
+
 ===== Palindromes
+
+A palindrome is a string of text that contains the same characters in the same order both forwards and backwards, excluding spaces and punctuation.  
 
 === Arrays
 
@@ -33,77 +41,162 @@ Do mollit tempor ullamco minim proident nulla fugiat eiusmod deserunt.
 
 ==== Terminology
 
+Arrays have some special terminology
+
 ==== Numbering
+
+In most programming languages, arrays are numbered from zero
 
 ==== Basic Array Functions
 
-==== Sorting
+Most languages contain basic functions for arrays
 
-==== Searching
+===== Sorting
 
-==== Reversing
+Sorting
+
+===== Searching
+
+Searching is when
+
+===== Reversing
+
+Reversing
 
 ==== Sliding Windows
 
+This one comes up a lot, good basic technique to know.
+
 ==== Example Questions
+
+Here are some example questions 
 
 ===== Maximum and Minimum Element
 
+MINIMAX
+
 ===== Array Rotation
+
+Rotate
 
 ===== Permutations
 
+ABCDE = EBDCA
+
 ===== Longest or Highest Subset 
+
+This one will help you xyc
 
 
 === Stacks and Queues
 
+Stacks and Queues are two kinds of data structures that
+
 ==== FIFO v. LIFO
+
+FIFO v. LIFO
+
 ==== Stack Definition
+
+A stack is a data structure
+
 ==== Queue Definition
-==== Developing Intuition What are stacks and queues used for?
+
+A queue is a data structure
+
+==== Developing Intuition: What are stacks and queues used for?
+
+Here's how to develop intuition
+
 ==== Example Questions
+
+Here is an example of the sample that you're ample
+
 ===== Balanced parentheses
+
+How can you balance parentheses
+
 ===== Find the second smallest item
+
+What is the second smallest
+
 ===== Implement x using a stack
 
+How to implement x
 
 === Heaps
 
+Heaps and heaps and heaps
+
 ==== Heap Definition
+
+A heap is a data structure that
 
 ==== Developing Intuition: What are heaps used for?
 
+Thhink and grow heaps
+
 ==== Max heaps and min heaps
+
+MINIMAX and heap
 
 ==== Example questions
 
+Before you get your heap on here's what you need to know.  
+
 ===== Is heap a max or min heap?
+
+IS IT MAX OR MIN
 
 ==== Convert max heap to min heap
 
+Min is max and max is min
 
 === Linked Lists
 
+Link your lists
+
 ==== Linked List Definition
+
+Link your definitions ipsum
 
 ==== Singly Linked List
 
+One list with one link to rule them on
+
 ==== Doubly Linked List
+
+Two links to rule them all
 
 ==== Developing Intuition: What are Linked Lists Used For?
 
+Think and grow lists
+
 ==== Example Questions
+
+Here are the examples you might find
 
 ===== Find
 
+Find this is 
+
 ===== Insert
+
+Insert is a this and that
 
 ===== Delete
 
+Delete and you need to know
+
 ===== Reversing a linked list
+
+Reverse play the reverse card
 
 ===== Item Swap
 
+You go this way, I go that way.  
+
 ===== Merging linked lists
+
+All together now.  
 
