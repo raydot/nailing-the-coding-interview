@@ -1,8 +1,110 @@
 [[DtCI_ch03]]
-== Chapter Title Goes Here
+== Hashes, Trees, and Graphs
 
-Put some introductory text here.
+After reading this chapter, the reader should understand the definition of a hash, a tree, and a graph, and what each is used for in programming.   The reader will be given some idea of what kinds of questions to expect on a coding test about these data structures and strategies for solving them.
 
-=== Your First Section Heading Here
+=== Hashes
 
-Put more content here.
+==== Hash definition
+
+==== Building Intuition: What are hashes used for?
+
+==== Reasoning about Hashes
+
+==== Real world example
+
+==== Hashes and encryption
+
+==== Salts
+
+==== Example Questions
+
+===== Word Count
+
+===== Palindromes II
+
+===== Anagrams
+
+===== etc…
+
+===== Using AI to Study for Hash Problems
+
+=== Trees
+
+==== Trees Definition
+
+==== Building Intuition: What are trees used for?
+==== Trees and heaps
+
+==== Reasoning about trees
+
+==== Tree Operations
+
+===== Insertion
+
+===== Deletion
+
+===== Balancing
+
+==== Types of Trees
+
+==== Binary Trees
+
+===== Properties
+
+===== Search
+
+===== Sort
+
+==== Other Tree Types
+
+===== Red and Black Trees
+
+===== AVL Trees
+
+==== Tries
+
+==== Other trees
+
+==== Example Questions
+
+===== Finding height of tree
+
+===== Tree longest path
+
+===== Balanced tree
+
+===== Merging trees
+
+
+=== Graphs 
+
+==== Graph Definition
+
+==== Building Intuition: What are graphs used for?
+
+==== Graph data structures
+
+===== Arrays
+
+===== Matrices	
+
+==== Reasoning about graphs
+
+==== Depth First Graph
+
+==== Breadth First Graph
+
+==== Weighted Graph
+
+==== Dijkstra’s algorithm
+
+==== Example Questions
+
+===== Closest path
+
+===== Furthest path
+
+===== Knight walk
+
+===== Flood fill

@@ -1,8 +1,28 @@
 [[DtCI_ch01]]
-== Chapter Title Goes Here
+== Preparing for the Coding Interview
 
-Put some introductory text here.
+After reading this chapter, the reader should know how to formulate a study plan and understand how to begin using the exercises in the book to prepare for a coding interview
 
-=== Your First Section Heading Here
+=== How to use this Book
 
 Put more content here.
+
+==== Study Plan
+
+ipsum
+
+==== Interview Plan
+
+lorem
+
+==== Backup Plan
+
+dolor
+
+=== The Importance of Doing the Work
+
+Quis sit nostrud excepteur anim aliqua.
+
+=== Developing Intuition
+
+Elit nostrud in id commodo et esse tempor.

@@ -1,8 +1,109 @@
 [[DtCI_ch02]]
-== Chapter Title Goes Here
+== Data Structures
 
-Put some introductory text here.
+After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect.  This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own
 
-=== Your First Section Heading Here
+=== Linear Data Structures
 
 Put more content here.
+
+=== Strings
+
+Proident mollit laboris fugiat officia in do eiusmod dolor reprehenderit adipisicing.
+
+==== Breaking Down a String
+
+Cillum est et do ad.
+
+==== Built-in String Functions
+
+Commodo occaecat eiusmod sunt mollit commodo fugiat.
+
+==== Example Questions
+
+===== Finding a Character or Word in a String
+
+===== Reversing a String Without `reverse()`
+
+===== Palindromes
+
+=== Arrays
+
+Do mollit tempor ullamco minim proident nulla fugiat eiusmod deserunt.
+
+==== Terminology
+
+==== Numbering
+
+==== Basic Array Functions
+
+==== Sorting
+
+==== Searching
+
+==== Reversing
+
+==== Sliding Windows
+
+==== Example Questions
+
+===== Maximum and Minimum Element
+
+===== Array Rotation
+
+===== Permutations
+
+===== Longest or Highest Subset 
+
+
+=== Stacks and Queues
+
+==== FIFO v. LIFO
+==== Stack Definition
+==== Queue Definition
+==== Developing Intuition What are stacks and queues used for?
+==== Example Questions
+===== Balanced parentheses
+===== Find the second smallest item
+===== Implement x using a stack
+
+
+=== Heaps
+
+==== Heap Definition
+
+==== Developing Intuition: What are heaps used for?
+
+==== Max heaps and min heaps
+
+==== Example questions
+
+===== Is heap a max or min heap?
+
+==== Convert max heap to min heap
+
+
+=== Linked Lists
+
+==== Linked List Definition
+
+==== Singly Linked List
+
+==== Doubly Linked List
+
+==== Developing Intuition: What are Linked Lists Used For?
+
+==== Example Questions
+
+===== Find
+
+===== Insert
+
+===== Delete
+
+===== Reversing a linked list
+
+===== Item Swap
+
+===== Merging linked lists
+
