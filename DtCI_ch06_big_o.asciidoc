@@ -34,7 +34,7 @@ After reading this chapter the reader should understand what Big O notation is, 
 
 ==== Logarithmic Time
 
-==== n^2, n^3, … etc
+==== latexmath: [$n^2$], latexmath: [$n^3$], … etc
 
 === Example Questions
 
