@@ -1,8 +1,86 @@
 [[DtCI_ch04]]
-== Chapter Title Goes Here
 
-Put some introductory text here.
+== Functions and Recursion
 
-=== Your First Section Heading Here
+After reading this chapter the reader should know how to use functions both recursive and non-recursive, how to reason about functions, and what type of functions problems to expect on a coding test.
 
-Put more content here.
+=== Functions 101
+
+==== You will be asked a question about functions
+
+==== What is a function?
+
+==== Building Intuition: Reasoning about functions
+
+=== Functions basics
+
+==== Function prototypes
+
+==== Constructing functions
+
+==== Receiving function data
+
+==== Returning function data
+
+==== Closures
+
+=== Functions Advanced
+
+==== The mystical “this”
+
+==== Constructor functions
+
+==== Generator functions
+
+==== Function chaining
+
+==== Side effects and functional programming
+
+==== Currying
+
+==== Higher Order Functions
+
+=== Building Intuition: Functions Ideas
+
+==== Functions and state
+
+==== Function refactoring
+
+==== Function composition
+
+==== Example Questions
+
+===== Swap two numbers in place
+
+===== Refactor this function
+
+===== “Program to an interface, not an implementation”
+
+=== Recursion
+
+=== Introduction to Recursion
+
+=== The Elements of Recursion
+
+==== Base Case	
+
+==== Recursive Case
+
+==== Reasoning about Recursion
+
+===== When you (might) have a recursive pattern
+
+===== When is it time to use recursion
+
+===== Don’t paint yourself into a corner!
+
+==== Example Questions
+
+===== Factorial
+
+===== Fibonacci
+
+===== Making Change
+
+===== Reversing a String
+

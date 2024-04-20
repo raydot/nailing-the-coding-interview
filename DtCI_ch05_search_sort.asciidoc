@@ -1,8 +1,66 @@
 [[DtCI_ch05]]
-== Chapter Title Goes Here
 
-Put some introductory text here.
+== Search and Sort
 
-=== Your First Section Heading Here
 
-Put more content here.
+
+After reading this chapter, the reader should know the basics of search and sort algorithms, how to reason about search and algorithms, and general guidelines for choosing the right search and/or sort algorithm to use to solve the problems that might arise in a coding interview.  This chapter will build on ideas presented in earlier chapters.
+
+
+
+=== Search
+
+==== What does “search” mean?
+
+==== How is search used
+
+==== Why is search important
+
+==== Building Intuition: Reasoning about Search 
+
+==== Types of search
+
+==== Linear search
+
+===== Binary Search
+
+===== Other types of search
+
+==== Example Questions
+
+===== Partitioning
+
+===== Solve x problem using y search
+
+===== Search optimization
+
+===== Searching and data structures
+
+=== Sort
+
+==== What does “sort” mean?
+
+==== How is sort used?
+
+==== Why sort is important to understand
+
+==== Building Intuition: Reasoning about Sort
+
+===== Types of sort
+
+===== Insertion sort
+
+===== Bubble sort
+
+===== Quick sort
+
+===== Merge sort
+
+==== Example Questions
+
+===== Anagrams
+
+===== Partitioning
+
+===== Optimization
+

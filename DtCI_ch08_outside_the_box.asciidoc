@@ -1,8 +1,11 @@
 [[DtCI_ch08]]
-== Chapter Title Goes Here
+== Outside the Box Questions
+("Outside the Box" is an awful phrase)
 
 Put some introductory text here.
 
-=== Your First Section Heading Here
+=== Reasoning Questions
 
-Put more content here.
+=== Active Listening Questions
+
+=== Logic Questions
