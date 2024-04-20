@@ -5,8 +5,14 @@
     "copyright.html",
     "toc.html",
     "preface.asciidoc",
-    "ch01.asciidoc",
-    "sample_chapter.asciidoc",
+    "DtCI_ch01_preparing.asciidoc",
+    "DtCI_ch02_data_structures.asciidoc",
+    "DtCI_ch03_hash_tree_graph.asciidoc",
+    "DtCI_ch04_functions.asciidoc",
+    "DtCI_ch05_search_sort.asciidoc",
+    "DtCI_ch06_big_o.asciidoc",
+    "DtCI_ch07_dynamic_programming.asciidoc",
+    "DtCI_ch08_outside_the_box.asciidoc",
     "author_bio.html"
   ],
   "formats": {
