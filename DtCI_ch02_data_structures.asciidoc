@@ -112,6 +112,11 @@ Here's how to develop intuition
 
 Here is an example of the sample that you're ample
 
+[source,python]
+----
+print('hello world')
+----
+
 ===== Balanced parentheses
 
 How can you balance parentheses
