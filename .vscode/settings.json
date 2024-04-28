@@ -1,3 +1,23 @@
 {
-  "asciidoc.antora.enableAntoraSupport": true
+  "asciidoc.antora.enableAntoraSupport": true,
+  "workbench.colorTheme": "GitHub Light",
+  "editor.accessibilitySupport": "off",
+  "editor.rulers": [80],
+  "[asciidoc]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
+  },
+  "cSpell.words": [
+    "chipset",
+    "commodo",
+    "Commodo",
+    "EBDCA",
+    "eiusmod",
+    "fugiat",
+    "manipul",
+    "mollit",
+    "occaecat",
+    "sunt",
+    "Thhink"
+  ]
 }

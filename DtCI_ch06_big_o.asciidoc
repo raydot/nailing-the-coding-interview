@@ -2,12 +2,17 @@
 
 == Big O Notation
 
-After reading this chapter the reader should understand what Big O notation is, why it’s important, how to determine Big O, and some tips for making better guesses
-
+After reading this chapter the reader should understand what Big O notation is, why it’s important, how to answer questions about Big O notation, and some tips for making better guesses.
 
 === Big O Introduction
 
+Big O (short for "big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.  While the phrase "Big O" means something specific it is also sometimes used in a general way that means "algorithmic analysis."  
+
+This is exactly what Big O is for, analyzing the speed of algorithms.  The most important idea behind Big O and related terms is that they measure speed in a general, and not specific, way.  What "general" means is that Big O is great for comparing algorithmic approaches or finding algorithmic optimizations.  What Big O is not used for is measuring exact run times.  If you need to do that, programming languages and libraries contain execution and runtime timers that can tell you exactly how long something takes.  Where most people get stuck is on the idea that Big O is a precise way to measure speed.  Think of Big O as more of a benchmark.  See is a bar that can be set to see if the algorithm can be improved.
+
 ==== What is Big O Notation?
+
+
 
 ==== Building Intuition: How is Big O used?
 
@@ -31,7 +36,7 @@ After reading this chapter the reader should understand what Big O notation is, 
 
 ==== Logarithmic Time
 
-==== latexmath:[{n^2}, {n^3}], … etc
+==== latexmath:[{n^2}, {n^3}, {n log n}], … etc
 
 === Example Questions
 

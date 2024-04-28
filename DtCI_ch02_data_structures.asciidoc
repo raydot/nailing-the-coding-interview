@@ -1,19 +1,76 @@
 [[DtCI_ch02]]
 == Data Structures
 
-After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect.  This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own
+After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own...
+
+We should start by determining what is meant by a "data structure."  This book assumes you have an introductory understanding of at least one programming language, so you should already be familiar with a single variable:
+
+`x = 10`
+
+In Python and similar languages, an `=` in most contexts acts as the "assignment operator." This means that the value on the right side of the `=` is "assigned" to the variable on the left side. The variable, `x`, now holds a value of 10 which can be used wherever it's needed in the code. But that's one single variable and a single variable is not considered a data structure. A single variable holds a piece of data, but it doesn't do much to structure it with other pieces of data. 
+
+A data structure, on the other hand, is code that can contain multiple pieces of data and create meaningful relationships between each piece. Meaningful for programmers, anyway -- you probably wouldn't want to try to read the works of William Shakespeare in data structure form. 
+
+Data structures can be thought of as recipes for combining data in specific ways. To use cooking as an analogy, say you're hungry and you find milk, eggs, sugar, and flour in your pantry. Those same ingredients can be used to make different things depending on the cooking techniques you apply to them. Mixing and cooking the ingredients in one specific way and you'll end up with pancakes. With a slightly different technique, you can turn those same ingredients into noodles. Cook it all up a third way and you might get something more like pudding. Based on the technique for pancakes, you can choose to make nice thick hearty pancakes, or you can make thinner pancakes that can be used as a wrapper for other ingredients, like crepes or dumplings.
+
+You can think of data structures as the specific recipes suggested above. Mix arrays with functions that link them together, and you get one specific type of data structure, perhaps a linked list. Mix them with different functions and the list can become a tree. Modify a tree yet again and under certain conditions and the tree can become a graph, or vice versa. This analogy should give you a simple idea of how the basic things you might already know how to do as a programmer can be combined to do more advanced things and these advanced things might all be created from the same basic sets of principles with minor modifications depending on the desired result. Keep this in mind as the overall idea of data structures as you proceed through this book.
+
+Data structures play an important part in programming interviews for two reasons: 1) they can specifically illustrate the familiarity programmers have with specific techniques and 2) They can be used (sometimes interchangeably) to solve specific problems. So think of data structures both as tools for becoming a better programmer and also as ways of thinking about programming that will become more relevant the more advanced you become as a programmer. As useful as these skills will be to pass coding interviews, if you can master them they'll also make you better at your job once you get it. 
+
+In this book, we will consider four data structures commonly used in coding interviews. We will consider linear data structures in this chapter, and hash, tree, and graph data structures in the next.
+
 
 === Linear Data Structures
 
-Put more content here.
+This book will begin with an example of "linear" data structures. As the name implies, these are data structures that keep data in a "line," which usually means contiguous addresses in memory, referenced by pointers. The "memory addresses" part is beyond the scope of this book, but we will address what linear data structures are and how they can be manipulated algorithmically.
+
+=== Arrays
+
+**This is the wrong way to go. You're teaching algorithms, not basics.**
+[.line-through]#The first time I saw an array, as a young programmer back when the earth was still cooling, I could not imagine that something so amazing could be available for my use as a programmer. I had, up until then, been using single variables for single pieces of data. I tried to develop an adventure game, and I quickly ran into problems with this approach. For instance, this is how I might have defined a single player:#
+
+```python
+playerName = "DoomSlayer",
+playerLevel = "14", 
+playerWeapon1 = "Sword",
+playerWeapon2 = "Blaster"
+```
+
+[.line-through]#x You can immediately see the problems with this approach. What if I want to have more than one player in the game?  What if I want that player to have a third weapon?  What if I want to add other player attributes, like `playerDefense` or `playerMultiplier`?  It's not too easy to do!  This approach requires that I think up every single piece of data that might ever become available to my player, and if I exceed that#
+
+Let's begin with the simplest linear data structure, the array. In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array's "index."  I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you're about to encounter. 
+
+.Levels of Abstraction
+****
+Programming languages can be categorized by levels of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" languages, like Assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer's hardware directly using what is known as "machine code." 
+
+Low-level languages tend to make more sense to computers than humans, though, and it was realized long ago that abstractions were needed to connect human thinking and language to computer actions. "High-level" languages, like C++, take human-readable language and compile it into machine code instructions that can be used to manipulate a computer's chipset directly. There's a higher abstraction than this though. "Interpreted" languages, sometimes referred to as "scripting languages", contain an even higher level of abstraction, as these languages don't interact with the computer chipset at all. Scripting languages are instead fed to an application, like a web browser, that attempts to "interpret" their instructions into machine code. It's well worth your time to understand layers of abstraction as a programmer, and it goes far beyond what can be explained in a single side note.
+****
+
+
+==== Terminology
+
+Arrays have some special terminology
+
+==== Numbering
+
+In most programming languages, arrays are numbered from zero
+
+==== Basic Array Functions
+
+Most languages contain basic functions for arrays
 
 === Strings
 
-Proident mollit laboris fugiat officia in do eiusmod dolor reprehenderit adipisicing.
+Strings are of course one of the most commonly used data structures in programming. The documentation of most programming languages starts with the ubiquitous "Hello World" program, which almost always involves rendering a string. 
+
+In Python, all that's required to render text to the console is a simple `print` statement:
+
+`print("Hello World")`
 
 ==== Breaking Down a String
 
-Cillum est et do ad.
+A string is nothing more than an 
 
 ==== Built-in String Functions
 
@@ -33,23 +90,8 @@ Test question
 
 ===== Palindromes
 
-A palindrome is a string of text that contains the same characters in the same order both forwards and backwards, excluding spaces and punctuation.  
+A palindrome is a string of text that contains the same characters in the same order both forwards and backward, excluding spaces and punctuation. 
 
-=== Arrays
-
-Do mollit tempor ullamco minim proident nulla fugiat eiusmod deserunt.
-
-==== Terminology
-
-Arrays have some special terminology
-
-==== Numbering
-
-In most programming languages, arrays are numbered from zero
-
-==== Basic Array Functions
-
-Most languages contain basic functions for arrays
 
 ===== Sorting
 
@@ -147,7 +189,7 @@ MINIMAX and heap
 
 ==== Example questions
 
-Before you get your heap on here's what you need to know.  
+Before you get your heap on here's what you need to know. 
 
 ===== Is heap a max or min heap?
 
@@ -199,9 +241,9 @@ Reverse play the reverse card
 
 ===== Item Swap
 
-You go this way, I go that way.  
+You go this way, I go that way. 
 
 ===== Merging linked lists
 
-All together now.  
+All together now. 
 
