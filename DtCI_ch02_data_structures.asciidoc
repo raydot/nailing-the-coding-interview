@@ -1,23 +1,42 @@
 [[DtCI_ch02]]
 == Data Structures
 
-After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own...
+After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. 
+This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own...
 
-We should start by determining what is meant by a "data structure."  This book assumes you have an introductory understanding of at least one programming language, so you should already be familiar with a single variable:
+We should start by determining what is meant by a "data structure."  
+This book assumes you have an introductory understanding of at least one programming language, so you should already be familiar with a single variable:
 
 `x = 10`
 
-In Python and similar languages, an `=` in most contexts acts as the "assignment operator." This means that the value on the right side of the `=` is "assigned" to the variable on the left side. The variable, `x`, now holds a value of 10 which can be used wherever it's needed in the code. But that's one single variable and a single variable is not considered a data structure. A single variable holds a piece of data, but it doesn't do much to structure it with other pieces of data. 
+In Python and similar languages, an `=` in most contexts acts as the "assignment operator." 
+This means that the value on the right side of the `=` is "assigned" to the variable on the left side. The variable, `x`, now holds a value of 10 which can be used wherever it's needed in the code. 
+But that's one single variable and a single variable is not considered a data structure. 
+A single variable holds a piece of data, but it doesn't do much to structure it with other pieces of data. 
 
 A data structure, on the other hand, is code that can contain multiple pieces of data and create meaningful relationships between each piece. Meaningful for programmers, anyway -- you probably wouldn't want to try to read the works of William Shakespeare in data structure form. 
 
-Data structures can be thought of as recipes for combining data in specific ways. To use cooking as an analogy, say you're hungry and you find milk, eggs, sugar, and flour in your pantry. Those same ingredients can be used to make different things depending on the cooking techniques you apply to them. Mixing and cooking the ingredients in one specific way and you'll end up with pancakes. With a slightly different technique, you can turn those same ingredients into noodles. Cook it all up a third way and you might get something more like pudding. Based on the technique for pancakes, you can choose to make nice thick hearty pancakes, or you can make thinner pancakes that can be used as a wrapper for other ingredients, like crepes or dumplings.
+Data structures can be thought of as recipes for combining data in specific ways. 
+To use cooking as an analogy, say you're hungry and you find milk, eggs, sugar, and flour in your pantry. 
+Those same ingredients can be used to make different things depending on the cooking techniques you apply to them. 
+Mixing and cooking the ingredients in one specific way and you'll end up with pancakes. 
+With a slightly different technique, you can turn those same ingredients into noodles. 
+Cook it all up a third way and you might get something more like pudding. 
+Based on the technique for pancakes, you can choose to make nice thick hearty pancakes, or you can make thinner pancakes that can be used as a wrapper for other ingredients, like crepes or dumplings.
 
-You can think of data structures as the specific recipes suggested above. Mix arrays with functions that link them together, and you get one specific type of data structure, perhaps a linked list. Mix them with different functions and the list can become a tree. Modify a tree yet again and under certain conditions and the tree can become a graph, or vice versa. This analogy should give you a simple idea of how the basic things you might already know how to do as a programmer can be combined to do more advanced things and these advanced things might all be created from the same basic sets of principles with minor modifications depending on the desired result. Keep this in mind as the overall idea of data structures as you proceed through this book.
+You can think of data structures as the specific recipes suggested above. 
+Mix arrays with functions that link them together, and you get one specific type of data structure, perhaps a linked list. 
+Mix them with different functions and the list can become a tree. 
+Modify a tree yet again and under certain conditions and the tree can become a graph, or vice versa. 
+This analogy should give you a simple idea of how the basic things you might already know how to do as a programmer can be combined to do more advanced things and these advanced things might all be created from the same basic sets of principles with minor modifications depending on the desired result. 
+Keep this in mind as the overall idea of data structures as you proceed through this book.
 
-Data structures play an important part in programming interviews for two reasons: 1) they can specifically illustrate the familiarity programmers have with specific techniques and 2) They can be used (sometimes interchangeably) to solve specific problems. So think of data structures both as tools for becoming a better programmer and also as ways of thinking about programming that will become more relevant the more advanced you become as a programmer. As useful as these skills will be to pass coding interviews, if you can master them they'll also make you better at your job once you get it. 
+Data structures play an important part in programming interviews for two reasons: 
+1) they can specifically illustrate the familiarity programmers have with specific techniques and 
+2) They can be used (sometimes interchangeably) to solve specific problems. So think of data structures both as tools for becoming a better programmer and also as ways of thinking about programming that will become more relevant and make you more efficient the more advanced you become as a programmer. 
+As useful as these skills are for passing coding interviews, if you can master them they'll also make you better at your job once you get it. 
 
-In this book, we will consider four data structures commonly used in coding interviews. We will consider linear data structures in this chapter, and hash, tree, and graph data structures in the next.
+In this book, we will consider four data structures commonly used in coding interviews. We will consider linear data structures in this chapter, and hash, tree, and graph data structures in the next. There are more data structures than this, but knowledge of these four should be enough to get you through any coding test.  
 
 
 === Linear Data Structures
@@ -26,23 +45,11 @@ This book will begin with an example of "linear" data structures. As the name im
 
 === Arrays
 
-**This is the wrong way to go. You're teaching algorithms, not basics.**
-[.line-through]#The first time I saw an array, as a young programmer back when the earth was still cooling, I could not imagine that something so amazing could be available for my use as a programmer. I had, up until then, been using single variables for single pieces of data. I tried to develop an adventure game, and I quickly ran into problems with this approach. For instance, this is how I might have defined a single player:#
-
-```python
-playerName = "DoomSlayer",
-playerLevel = "14", 
-playerWeapon1 = "Sword",
-playerWeapon2 = "Blaster"
-```
-
-[.line-through]#x You can immediately see the problems with this approach. What if I want to have more than one player in the game?  What if I want that player to have a third weapon?  What if I want to add other player attributes, like `playerDefense` or `playerMultiplier`?  It's not too easy to do!  This approach requires that I think up every single piece of data that might ever become available to my player, and if I exceed that#
-
 Let's begin with the simplest linear data structure, the array. In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array's "index."  I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you're about to encounter. 
 
 .Levels of Abstraction
 ****
-Programming languages can be categorized by levels of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" languages, like Assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer's hardware directly using what is known as "machine code." 
+Programming languages can be categorized by levels of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" languages, like assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer's hardware directly using what is known as "machine code." 
 
 Low-level languages tend to make more sense to computers than humans, though, and it was realized long ago that abstractions were needed to connect human thinking and language to computer actions. "High-level" languages, like C++, take human-readable language and compile it into machine code instructions that can be used to manipulate a computer's chipset directly. There's a higher abstraction than this though. "Interpreted" languages, sometimes referred to as "scripting languages", contain an even higher level of abstraction, as these languages don't interact with the computer chipset at all. Scripting languages are instead fed to an application, like a web browser, that attempts to "interpret" their instructions into machine code. It's well worth your time to understand layers of abstraction as a programmer, and it goes far beyond what can be explained in a single side note.
 ****
@@ -50,15 +57,134 @@ Low-level languages tend to make more sense to computers than humans, though, an
 
 ==== Terminology
 
-Arrays have some special terminology
+Arrays are close in equivalence to what is known in mathematics as a "set." 
+A set is a list of items that have some relation to one another, that can be represented by a single notation. 
+In strongly typed languages, arrays can only contain the same type of data, but in weakly-typed languages arrays can contain mixed data types. 
+Arrays have some special terminology related to their specific use:
+
+Element, index, set
+
+<diagram of an array>
+
+In their original versions, and as is still the case in languages like {cpp}, arrays worked hand-in-hand with data "pointers", or reference objects that "point" to specific memory addresses. 
+Once an array is created in {cpp}, the programmer can "dereference" each address in memory to get the value stored there. 
+Because a pointer points to a specific type of data, incrementing a pointer moves it in memory the length of that piece of data. 
+
+In {cpp}, for instance, an integer usually (but not always!) occupies four bytes of memory. So pointing a pointer at the beginning of an array and then incrementing it by one moves it over four bytes -- to the beginning of the next item in the array. Because this type of array manipulation has become language-specific, we're not going to use pointers in this book. We'll instead settle for array items simply being referenced by their index numbers. 
+
+//// THERE IS SOME UNIVERSAL SIZE THING BEING DESCRIBED HERE, WORTH IT'S OWN SECTION ////
+
+The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array's "scope," or length. 
+
+
+
+.Weak vs. Strongly Typed Languages
+****
+The difference between weak-typed and strongly-typed languages comes down to whether or not a language will let you mix types of data. In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing.  In weak-typed languages, this mixing is allowed, accepted, and even encouraged!  
+
+In {cpp} an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in {cpp}. It can only be used to hold five integer values, no more, and no other type of data is allowed. 
+
+`int intArray[5] = {33, 22, 11, 18, 96}`
+
+In weakly-typed JavaScript, all different types of data can be mixed together, and the language interpreter doesn't mind at all:
+
+`mixedArray = [33, 22, 3.15159, "hello", false]`
+
+The reasons for these differences are logical, of course, and mostly have to do with the way memory is allocated by different programming languages.
+****
 
 ==== Numbering
 
-In most programming languages, arrays are numbered from zero
+In most programming languages, arrays are numbered from zero. This is because arrays are meant to be thought of as contiguous elements in a computer's memory, as explained in the section on pointers, above. If arrays started counting from 1, there would be space unaccounted for in that first position in the memory that exists between 0 and 1. It's the same reason why the 19th century starts in 1800. You have to account for the First Century somehow, and no one wants to be from the "Zeroeth Century."  
+
+That means the first element in the array `testArray` is located at array position 0. If `testArray = [21, 31, 41, ...]` then `testArray[0]` is where to find 21, `testArray[1]` is where to find 31, `testArray[2]` is where to find 41, etc. 
+
+It's not uncommon for programmers to use an "offset" variable to account for the difference in counting from 0, but I think it's pretty easy to just add or subtract 1, as needed.
+
+```python
+someArray = []
+for (int i = 0; i < someArray.length, i++):
+  print "The item at position", i + 1, " is " someArray[i]
+```
+
+==== Arrays and For Loops
+
+When I taught an introductory Java class, I used to tell my students that "arrays and for loops go together like peanut butter and jelly."  What I mean by this is that they go together well, as a for loop is one of the easiest ways to traverse through an array by index, as shown in the example just above. 
+
+One day when I was giving this example, I heard a student say "Ew, why would you mix peanuts with jelly?!"  I realized this was something that was not commonly done in her culture, and that not all foods are American foods. So if "peanut butter and jelly" makes you cringe, please feel free to pick your own food analogy: "Rice and beans", "fish and rice," "flour and butter", or any two foods that blend together well in your mind will do. The point being, if you have to iterate over an array (peanut butter), use a for loop (jelly)! 
+
+
+==== Modifying...or not modifying
+
+In strongly typed languages, arrays can't be modified in length or data type once created. 
+This leads to the desired outcome of an array always being what the programmer says they are. 
+For a short time in the history of computer programming, this became an undesirable thing, as the rise of web programming created a generation of programmers that didn't need or want to worry about data types in their arrays since it was the browser's problem.
+
+In that way where all old things become new again in computer programming, there has been a recent shift towards "functional programming," which insists that programmers regain control of arrays and not simply modify them according to their moods. 
+In "pure" functional programming you should not modify an array at all, but create a new copy every time you add or remove something from it. 
+This keeps the array in a certain state and ensures that past states can be re-created from older copies. 
+If you've ever worked with a library like Redux you might be used to this approach.
+
+In the programming interview, make sure you understand what you're being asked to do, and treat your arrays with intention. 
+Don't just blithely and blindly push information into and out of an array without understanding the problem you're being asked to solve. 
+
+Additionally, in some languages you can't simply copy an array, because the copy will copy not the array but will only copy its pointers. 
+The pointers in the copy will continue to point to the data to which the original array was told to point. 
+This means that modifying the data in the new array will modify the data in the old array, and vice-versa. This type of copy is called a "shallow" copy, as opposed to a "deep" copy. 
+It's import to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that's what you want instead).
 
 ==== Basic Array Functions
 
-Most languages contain basic functions for arrays
+Most languages contain a library of functions for arrays and questions about these functions are fairly commonly found in coding tests. These are functions that allow programmers to modify arrays in ways that make them more useful to programmers.
+
+As you read through these examples, keep in mind that these functions -- and really any functions -- are not created by magic. They have been added to the language by programmers trying to make their jobs easier by making the language more useful. As you read about array functions, try to think of how you might create them yourself. Or better still, create them yourself and look inside the language specification to see how the problem has actually been solved. 
+
+Array functions fall into two general categories: modifying array data and retrieving array data. As mentioned earlier, the length of the array is important for making most of these operations work properly. 
+
+.Arrays vs. Objects vs. Tuples vs. ???
+****
+In the beginning was the array, and no other data type could be used for grouping related data.
+
+Recently many programming languages have added "objects" as primitives, which are data types where the information is relational. 
+Items in an object can be indexed by more than just a number, and can actually be specifically named. 
+We will explore this idea more deeply when we get into hashes in the next chapter. 
+In some languages, like JavaScript, there is no "array" primitive data type -- all arrays are actually objects!    
+
+If that's not already confusing enough, most modern programming languages, like Python, have realized the need to combine multiple data types in new and more useful ways. In addition to arrays, Python contains lists, tuples, and dicts, all of which are array-like data structures with specific properties for specific uses.
+
+This book is not geared toward teaching primitive data types, so make sure you well understand the different types and functions available in your specific language. 
+And remember, if you don't see an array data type or function you like, you can always create your own!
+****
+
+Array modification functions include the following operations:
+
+`length()`  Retrieve the length of the array, usually to do something else with it. Sometimes shortened to `len()`
+
+[source, python]
+----
+demoArray = [1, 2, 3, 4, 5]
+print(len(demoArray)) # returns '5'
+----
+
+`for/in` Some programming languages -- usually the weakly-typed ones -- support `for/in` operations, which automatically consider the length of an array in iteration. 
+
+[source, python]
+----
+items = ["loaf of bread", "container of milk", "stick of butter"]
+for item in items:
+    print(item)
+----
+
+
+`push() / pop()`  These functions are called different things in different languages but they are for pushing an element into the end (or beginning) of an array and for retrieving an element from the beginning (or end) of an array. 
+
+`slice()` Despite the similar-sounding names, these functions perform somewhat different tasks. 
+
+`splice()`
+
+`reverse()` Many programming languages contain a function for reversing a string. This can be useful for searching/sorting algorithms, which will be covered in chapter 
+
+
 
 === Strings
 
