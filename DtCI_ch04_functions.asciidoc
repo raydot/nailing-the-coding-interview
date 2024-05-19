@@ -2,19 +2,76 @@
 
 == Functions and Recursion
 
-After reading this chapter the reader should know how to use functions both recursive and non-recursive, how to reason about functions, and what type of functions problems to expect on a coding test.
+After reading this chapter the reader should know how to use both recursive and non-recursive functions, how to reason about functions, and what type of functions problems to expect on a coding test.
 
 === Functions 101
 
 ==== You will be asked a question about functions
 
+While there are many ways to define and describe functions I've never heard on more accurate than "functions are the building blocks of code."  
+Functions are a primary and essential part of coding that you should absolutely expect to be asked about in a coding interview. 
+Even if you're not asked a question about functions directly, you will almost certainly need to use a function to solve a harder problem.
+
 ==== What is a function?
+Functions are usually the first "advanced" things a programmer learns.
+Functions in programming are similar to the function equations you may have learned in high school algebra, which looked something like this:
+
+f(x) = 2x
+
+Learning about functions often included exercises to create tables of the expected results.  The table for f(x) = 2x might look like this:
+
+[cols="1,1"]
+|===
+|x|f(x)
+
+|1
+|2
+
+|2
+|4
+
+|3
+|6
+|===
+
+Functions in programming perform a similar, um, function, allowing data passed in to be transformed in a way specified by the programmer.  
+Here is the above-mentioned example high-school algebra function in Python:
+
+[source, python]
+----
+def doubler-function(value):
+  return (2 * value)
+----
+
+Function implementations are language-specific, with C++ and Java requiring functions be set to data types, and JavaScript containing several ways to create functions, depending on what you're trying to accomplish.
+In every language, however, functions are just like the ones you encountered in high-school algebra.
+They take a value (or values), transform them according to a set of rules, and return the result.
 
 ==== Building Intuition: Reasoning about functions
 
 === Functions basics
 
 ==== Function prototypes
+In strongly typed languages, functions are usually defined by a _prototype_, a block of code that defines the function in terms of the data it can expect to receive and return. 
+In this way, function prototypes are used to enforce type checking, to make sure that the values that are being passed to a function are what it expects to receive.
+This is an example function prototype in C:
+
+[source, c]
+----
+// Function prototype
+float multIntAndFloat(int num1, float num2);
+----
+
+The first `float` in this prototype indicates that it will return a float.
+The `int` and `float` keywords preceding the two values being passed in means these values _must_ be an int and a float.
+If you pass or return any other type of data, the compiler will return an error -- or at least a warning, depending on the C implementation you're using.
+
+Weakly typed languages don't require function prototypes, but there are ways to require them, of course.
+The Typescript programming language is probably the best current example of creating type-checking, for all data and not just functions, in JavaScript.
+
+TIP: Try coming up with examples of situations in which it would be important to check data passed to a function.
+Are the checks limited to checking data types?
+If your language doesn't support function prototyping, how can data checks in functions be enforced?
 
 ==== Constructing functions
 

@@ -178,17 +178,26 @@ for item in items:
 
 `push() / pop()`  These functions are called different things in different languages but they are for pushing an element into the end (or beginning) of an array and for retrieving an element from the beginning (or end) of an array. 
 
-`slice()` Despite the similar-sounding names, these functions perform somewhat different tasks. 
-
-`splice()`
-
-`reverse()` Many programming languages contain a function for reversing a string. This can be useful for searching/sorting algorithms, which will be covered in chapter 
 
 
+`slice()` The slice function allows you to
+
+`splice()` The splice function is useful for
+
+`reverse()` Many programming languages contain a function for reversing a string. 
+This can be useful for searching/sorting algorithms, which will be covered in chapter 
+
+[NOTE]
+====
+Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions.
+These functions are also inside of the programming languages because they're so often used, and this means they're the basis for a lot of programming interview questions.
+So download the source, dig through the source code, read the spec, and above all else, program them yourself!
+====
 
 === Strings
 
-Strings are of course one of the most commonly used data structures in programming. The documentation of most programming languages starts with the ubiquitous "Hello World" program, which almost always involves rendering a string. 
+Strings are of course one of the most commonly used data structures in programming. 
+The documentation of most programming languages starts with the ubiquitous "Hello World" program, which almost always involves rendering a string. 
 
 In Python, all that's required to render text to the console is a simple `print` statement:
 
@@ -196,11 +205,32 @@ In Python, all that's required to render text to the console is a simple `print`
 
 ==== Breaking Down a String
 
-A string is nothing more than an 
+In most programming languages a string is nothing more than an array with a character at each position.  
 
 ==== Built-in String Functions
 
-Commodo occaecat eiusmod sunt mollit commodo fugiat.
+`split()`  This function will split an array element into pieces according to a delimiter.  
+When the delimiter is left empty, every element of the array will be split into an element of its own.
+This function has different implementations, depending on the language, so examples of splitting strings into individual characters in different languages are shown below. 
+The {cpp} standard libraries don't have a straightforward way to accomplish this task, and the easiest way to do this in Java uses a regular expression, so if you're focused on those languages you will have to either look up these implementations, or, better yet, write your own! 
+
+Python:
+
+----
+myString = "algorithms"
+print([*myString])
+# Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
+----
+
+JavaScript:
+[source, javascript]
+----
+console.log("algorithms".split(''))
+// Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
+----
+
+
+
 
 ==== Example Questions
 
@@ -241,7 +271,9 @@ Here are some example questions
 
 ===== Maximum and Minimum Element
 
-MINIMAX
+Given an array, can you return the highest or lowest element according to a given criteria?
+
+Example:  What is the largest number in the array [7, 2, 8, 6, 5]?
 
 ===== Array Rotation
 
@@ -266,21 +298,47 @@ FIFO v. LIFO
 
 ==== Stack Definition
 
-A stack is a data structure
+A stack has a few different meanings in computer science, but when it comes to data structures, a stack is a "last in, first out" way of ordering data.
+The analogy commonly given is of a stack of plates in a cafeteria, where the last plate placed on the stack is the first one that comes off the top.
+Earlier we talked about "push/pop" functions available for arrays, and these are often used with stacks as well. 
+A plate (or a pancake, or data) can be pushed onto the top of the stack, and that same plate (pancake, data) will be the first one popped off the top.  
 
 ==== Queue Definition
 
-A queue is a data structure
+A queue is a "first in, first out" data structure akin to standing in line.
+The first piece of data pushed into a queue is the first piece of data to be taken back out of it again.  
 
 ==== Developing Intuition: What are stacks and queues used for?
 
-Here's how to develop intuition
+Stacks and queues are often used to indicate _priority_ in the processing of data.  
+It's not hard to see why.
+Imagine an elevator that only goes to two floors, say the ground floor and the 10th floor.
+Ten people enter the elevator on the ground floor.
+Because of the way elevators -- and society -- are constructed, the last people to board the elevator will be the first ones to leave it.
+The elevator creates a priority by the way it is boarded.
+It's simply impossible for the people who first board the elevator to exit first, as they will be furthest from the door.
+This is an example of a stack.
+
+A queue is even easier to understand.
+We've all waited in line.
+It even seems "unfair" for people to cut in line; the first in must be the first out!
+
+There are, of course, exceptions to these rules. 
+Pause for a moment and try to think of a real-world exception to each.
+
+There are a few ways to use stacks and queues in computer science, but most often they are used for assigning priority to tasks.
+They can be used to determine the priority of packets in a network or to determine tasks that must be completed before other tasks begin.
+
+Is a for loop an example of a stack or a queue?  
+What about a nested for loop?
+What about the browser event loop?  
+
 
 ==== Example Questions
 
 Here is an example of the sample that you're ample
 
-[source,python]
+[source, python]
 ----
 print('hello world')
 ----
