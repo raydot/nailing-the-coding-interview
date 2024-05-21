@@ -8,8 +8,8 @@ After reading this chapter the reader should know how to use both recursive and 
 
 ==== You will be asked a question about functions
 
-While there are many ways to define and describe functions I've never heard on more accurate than "functions are the building blocks of code."  
-Functions are a primary and essential part of coding that you should absolutely expect to be asked about in a coding interview. 
+While there are many ways to define and describe functions I've never heard one more accurate than "functions are the building blocks of code."  
+Functions are a primary and essential part of coding that you should absolutely expect to use in a coding interview. 
 Even if you're not asked a question about functions directly, you will almost certainly need to use a function to solve a harder problem.
 
 ==== What is a function?

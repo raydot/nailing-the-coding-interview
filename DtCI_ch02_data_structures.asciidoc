@@ -166,6 +166,11 @@ demoArray = [1, 2, 3, 4, 5]
 print(len(demoArray)) # returns '5'
 ----
 
+`for` loops
+Every programming language contains a function that allows for simple iteration, or "counting."
+Iteration is a process that has been available in programming languages from the very beginning, as it's essential to making computers work.  
+
+
 `for/in` Some programming languages -- usually the weakly-typed ones -- support `for/in` operations, which automatically consider the length of an array in iteration. 
 
 [source, python]
@@ -190,8 +195,8 @@ This can be useful for searching/sorting algorithms, which will be covered in ch
 [NOTE]
 ====
 Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions.
-These functions are also inside of the programming languages because they're so often used, and this means they're the basis for a lot of programming interview questions.
-So download the source, dig through the source code, read the spec, and above all else, program them yourself!
+These functions are often added to programming languages because of how often they're used, and this means they're the basis for a lot of programming interview questions.
+So download the source, dig through the source code, read the spec, reverse engineer, and figure out how to program them yourself!
 ====
 
 === Strings
@@ -230,32 +235,89 @@ console.log("algorithms".split(''))
 ----
 
 
-
-
 ==== Example Questions
 
-Test question 1
+These next few example questions will give you a taste of what's coming in the "Searching, Sorting, and Manipulation" part of this chapter.
+Try to solve the following problems without looking ahead to that section.
+Or, if you get really stuck, come back and solve these problems after reading the next section.
 
 ===== Finding a Character or Word in a String
 
-Test question 2
+_Create a function that takes a string and a character and returns the position of that character in the string.  
+For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 4.  
+Notice that there are three "a"s in the string. How would you return the positions of all of them?
+Does your function account for capital and lower-case letters?_
+
+_Similarly, create a function that takes a string and returns the position of a word.
+Given the same string as above, find the position of the word "tall."
+Again, as above, account for the fact that there is more than one instance of "tall" in the string.
+What if the word you're given is part of a larger word?  The word "add" can be found inside the word "ladder."
+Does your algorithm work for the cases in which this is and isn't a valid solution to the problem?
+Can you think of any other things that should be considered in solving this problem?_
 
 ===== Reversing a String Without `reverse()`
 
-Test question
+_Write your own function to reverse a string.  For instance, if passed the string "apple," the function should return "elppa."  Can you do the same for a sentence, turning "Look at the moon" into "moon the at look?"  Again, can you think of any other conditions that should be considered?_
 
 ===== Palindromes
 
-A palindrome is a string of text that contains the same characters in the same order both forwards and backward, excluding spaces and punctuation. 
+_A palindrome is a string of text that contains the same characters in the same order both forwards and backward, excluding spaces and punctuation.
+A simple example is the word "level", but the sentence "Evade, Dave!" is also a palindrome because without the capitalization, comma, space, and exclamation point the letters are "evadedave" which are the same forwards and backwards.
+Write a function that determines whether or not a given string is a palindrome. If you get it working with the example given, search the internet for other examples of palindromes to test your function._
 
+==== Array Searching, Sorting, and Manipulation
+
+Now that you know the basics of using arrays with built-in functions, this next section will focus on essential algorithms for working with data in arrays.
+Much of computer programming is about searching, sorting, and manipulating data, and many programming interviews will require you to understand the basics of how to implement these algorithms.
+Even if you aren't directly asked questions about these algorithms, they are incredibly useful tools to have in your programming toolbox and they can be used to solve many different types of programming problems.
 
 ===== Sorting
 
-Sorting
+Sorting is just what it sounds like: sorting data according to a given criteria.
+
+Let's start with the most straightforward sort algorithm to understand
 
 ===== Searching
 
-Searching is when
+Searching is when you find an item or items in a set of data.
+The main differences between the search algorithms are the quantity of data being searched, and whether or not that data is in a specific order to start.
+
+To try to gain some intuition for the differences in search algorithms, consider this simple example.
+Let's say you decided to go to the pound to get a puppy.
+There are one hundred kennels containing dogs to choose from.
+You walk past all the kennels and you see a dog you just love named "Harry."
+
+The animal trainer who works at the pound hands you a stack of papers and says you have to find Harry's paper to take him home.
+The papers aren't sorted.
+Right off the bat it would clearly be easier to search through the stack if the papers were already sorted.
+But stop for a moment and think about how you're going to do that?
+Are you just going to page through the papers from A-H until you find Harry?
+Start the search at Z?
+Something else?
+Would you search through the papers the same way if there were only 10?
+Or 10,000?
+But it's not any of those things; it's a stack of 100 unsorted papers.
+So how are you going to go about finding "Harry?"
+Stop and consider these questions for a moment before moving on.
+
+Let's start with a simple search: the binary search.
+You may have used this one before if you've ever played "Guess the Number."
+Someone says to you, "I'm thinking of a number between one and 100 and if you can guess the number in 6 guesses or fewer, I'll give you $5.  After every guess I'll tell you if my number is higher or lower than the one you choose."
+Does it matter that you're told whether or not the number is higher or lower after every guess?
+Why?
+How would you go about solving this problem?
+
+Even people who have never played the game before will quickly come up with winning strategies.
+It doesn't make a lot of sense to guess numbers in order because that would give you only about a 5% chance to guess the number before running out of guesses.
+You're also only going to guess numbers based on the clues provided to you by the person who makes the offer.
+If you guess 71, and she tells you it's going to be higher than 71, it makes no sense to guess 20 on the next turn.
+
+The foolproof way to win this game every time is by conducting a binary search.
+The reason it's called a binary search is because every guess reduces the remaining number pool into two parts, and then eliminates one of them from further consideration.
+
+Following this strategy, your first guess should be 50.
+It cuts the remaining number pool in half.
+
 
 ===== Reversing
 
@@ -349,7 +411,10 @@ How can you balance parentheses
 
 ===== Find the second smallest item
 
-What is the second smallest
+Find the second-smallest number in an array of integers.
+Can you scale this to the third smallest?
+Third largest?
+Can you scale this to other sorts of ordering, like alphabetical order?
 
 ===== Implement x using a stack
 
