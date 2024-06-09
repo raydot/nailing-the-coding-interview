@@ -1,0 +1,12 @@
+[[DtCI_ch14]]
+
+== Outside the Box Questions
+("Outside the Box" is an awful phrase)
+
+Put some introductory text here.
+
+=== Reasoning Questions
+
+=== Active Listening Questions
+
+=== Logic Questions

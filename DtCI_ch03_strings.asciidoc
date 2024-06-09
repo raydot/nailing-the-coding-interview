@@ -1,5 +1,6 @@
-[[DtCI_ch02]]
-== Data Structures
+[[DtCI_ch03]]
+
+== Strings
 
 After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. 
 This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own...
@@ -317,6 +318,8 @@ The reason it's called a binary search is because every guess reduces the remain
 
 Following this strategy, your first guess should be 50.
 It cuts the remaining number pool in half.
+
+**  Consider adding coding questions to the end of sections **
 
 
 ===== Reversing

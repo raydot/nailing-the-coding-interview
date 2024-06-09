@@ -1,4 +1,4 @@
-[[DtCI_ch05]]
+[[DtCI_ch12]]
 
 == Search and Sort
 

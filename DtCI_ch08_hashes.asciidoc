@@ -1,9 +1,8 @@
-[[DtCI_ch03]]
-== Hashes, Trees, and Graphs
+[[DtCI_ch08]]
 
-After reading this chapter, the reader should understand the definition of a hash, a tree, and a graph, and what each is used for in programming.   The reader will be given some idea of what kinds of questions to expect on a coding test about these data structures and strategies for solving them.
+== Hashes
 
-=== Hashes
+After reading this chapter, the reader should understand the definition of a hash ipsum.
 
 ==== Hash definition
 

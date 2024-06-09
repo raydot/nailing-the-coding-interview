@@ -1,6 +1,6 @@
-[[DtCI_ch08]]
-== Outside the Box Questions
-("Outside the Box" is an awful phrase)
+[[DtCI_ch15]]
+
+== Using Generative AI to Study
 
 Put some introductory text here.
 
