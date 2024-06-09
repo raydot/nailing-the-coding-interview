@@ -1,0 +1,179 @@
+[[DtCI_ch02]]
+:stem:
+
+== Big O Notation
+
+After reading this chapter the reader should understand what Big O notation is, why it’s important, how to answer questions about Big O notation, and some tips for making better guesses.
+
+=== Big O Introduction
+
+I'm going to start this chapter with a confession: I hated math growing up.
+I once gleefully told my 12th-grade precalculus teacher that I would never need to know one single thing he taught me.
+Mr. Wittekind, on the off chance you're reading this book right now, you were right and I was wrong.
+
+In my biased opinion, and with a further apology to Mr. Wittekind, I think this has a lot to do with the way math is taught.
+Children are asked to memorize a bunch of formulas and concepts, without much of an idea of why they're important or even what they are.
+If you ask most American high school students about algebra, they can likely tell you something vague about equations, quadratics, or slopes of lines.
+If you ask most American high school students "What _is_ algebra?" I'm guessing they won't know.
+
+Unlike computer programming, it can be hard to make mathematical concepts immediately appreciable and understandable.
+I can teach you about a for loop, and then show you a cool example where you can make a computer say your name ten times.
+I can teach you `y = mx + b` and you might not understand why that's important and useful to know for quite some time, if ever.
+It's certainly hard to see why immediately.
+
+No wonder I was always drawn much more to computer programming than mathematics.
+
+Now that that's out of the way, there is an undeniable link between mathematics and computer science.
+In many cases, the latest discoveries of one have been found thanks to ideas or methods derived from the other.
+This doesn't mean you have to be a math whiz to be a great computer programmer, but a little bit of knowledge of math can certainly never hurt you.
+
+Big O Notation is one of those little bits of math. 
+You don't need to solve long sets of problems or memorize lists of equations to understand and use big O. 
+There are some general principles you have to understand, and once you understand them you can add the Big O tool to your arsenal. 
+
+Understanding big O is a vital tool for getting through coding interviews, so this book is going to start with it. Rather than taking some crazy deep dive into every equation imaginable, I'm going to give you a few  "Rules of Thumb" to keep in mind for a coding interview.
+
+==== What is Big O Notation?
+
+Big O (short for "big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.
+While the phrase "Big O" means something specific it is also sometimes used in a general way that means "algorithmic analysis."  
+
+This is exactly what Big O is for, analyzing the speed of algorithms. 
+The most important idea behind big O and related terms is that they measure speed in a general and relative, and not specific, way. 
+What "general" means is that Big O is great for comparing algorithmic approaches or finding algorithmic optimizations. 
+
+What Big O is not used for is measuring exact run times. 
+If you need to do that, programming languages and libraries contain execution and runtime timers that can tell you exactly how long something takes.
+Where most people get stuck is on the idea that Big O is a precise way to measure speed. Think of Big O as more of a benchmark. 
+Big O is a bar that can be set to see if an algorithm can be improved.
+
+=== The Shapes of Big O
+
+Let's dive in.
+There are four Big O "shapes" you need to know.
+By "shapes" I mean slopes of a line on a graph, but I think it's easier just to consider them as shapes.
+If there's one thing to memorize in this book, it's these shapes -- especially as they relate to one another.
+Yes, there are more. 
+Yes, it's more complicated than what I'm about to say. 
+But if you can understand these four principles you've gained most of what you need to know to get through a coding interview.
+
+I can't promise you're not going to be asked to explain how to derive Big O equations during your coding interview. 
+But it's unlikely. 
+What you might be asked is to describe the efficiency of your algorithm in terms of Big O, and whether or not it can be improved. 
+
+In each of these graphs, the Y or vertical axis is the number of inputs.
+The X or horizontal axis is the number of operations that need to be performed to accomplish a given task.
+Usually, it's not possible to decrease the number of inputs, so what makes an algorithm more or less efficient in terms of Big O is a reduction in the number of operations.
+As such, "flatter" graphs are generally preferred to "steeper" ones, as described below.
+
+==== O(n)
+image::images/oh_of_en.png["O(n)"]
+
+Notice the shape of this graph.
+The number of inputs (y-axis) equals the number of operations(x-axis).
+An example of this is printing a list of names from a database.
+If there are 100 names, there will be 100 calls to `print()`.
+If there are a thousand names, there will be a thousand calls.
+
+O(n) can be very efficient if there are only a few inputs.
+That's a great place to start, but when you discuss Big O, you must always consider it at scale.
+If there are 100 inputs or one thousand, as mentioned above, it still might be more efficient than other approaches.
+But what if there are 500,000, or a million, or a trillion?
+The efficiencies of O(n) might diminish considerably compared to other approaches.
+
+==== O(1)
+image::images/oh_of_one.png["O(1)"]
+
+With O(1), no matter how many inputs you have, there's only one operation that needs to happen.
+Generally speaking, it's hard to beat this approach.
+Most algorithms don't run with this kind of efficiency, but some do, and they'll be discussed below.
+Notice that the shape of this graph is flat, and you can't get more efficient than that.
+
+==== O(latexmath:[n^2])
+image::images/oh_of_en_squared.png["O(latexmath:[n^2])"]
+
+O(latexmath:[n^2]) is the least efficient of all of the algorithms discussed in this section.
+O(latexmath:[n^2]) means that every operation must be done the same number of times as the number of inputs.
+If you have 100 inputs, it will take latexmath:[100^2] or 10,000 operations to complete the task.
+Notice that the shape of this graph takes off quickly and goes nearly vertical.
+The addition of even a small number of inputs will quickly cause the number of operations to skyrocket.
+An example of this happening is in nested for loops.
+Keep in mind that it gets worse than O(latexmath:[n^2]).
+Poorly built algorithms can take on O(latexmath:[n^3]) or O(latexmath:[n^4]) or even worse, so try to avoid these approaches if you can.
+There are even worse metrics, including O(latexmath:[n^n]) and O(n!).
+We'll discuss these more later in this chapter and point out examples in the algorithms sections as they arise.
+
+==== O(log n)
+image::images/oh_of_log_en.png["O(log n)"]
+
+If you don't remember logarithms from high school, a logarithm is the number something would have to be raised to in order to come up with a given number.
+To put that in a hopefully less confusing way, think about it like this: what would 2 have to be raised to in order to get 8?  Since latexmath:[2^3] is 8 the answer is 3.
+There's more to logarithms than this, of course, but right now we're focusing on the shapes.
+Notice how slowly O(log n) grows, and how for a small number of inputs it can be even more efficient than O(1).
+
+O(log n) arises from algorithms that repeatedly split the relevant numbers of inputs to consider in half, repeatedly.
+You'll soon see that this is the case with some searching and sorting algorithms, and also with binary trees.
+(In general if the word "binary" is involved in the description of an algorithm, it's O(log n).)
+This is a highly desirable efficiency and one that should be sought wherever possible.
+
+Closely related to O(log n) is O(n log n), which is less desirable than O(n) but certainly superior to O(latexmath:[n^2]).
+
+==== All of the shapes together
+image::images/oh_of_all_shapes.png["O of all shapes"]
+
+Here are all of the shapes together.
+Take a moment and compare each shape to the others, and go back and re-read the description of any shape in isolation if you don't understand what it means.
+These shapes are going to form the basis of the rest of the discussion of Big O, so really take a moment here if you need it.
+If someone asks you "Which is more efficient: O(latexmath:[n^2]) or O(latexmath:[log n])?" you should see the two shapes in your head and immediately know the answer.
+
+If you really want to cement your understanding, find a graphing calculator application and graph these shapes yourself.
+Zoom in and out on the graph and notice the points at which the lines cross, and come up with situations in which one operation would be preferable to another.
+Nothing builds understanding like doing.
+
+=== Discussion of Big-O
+
+Now that you've seen the shapes, let's discuss the terms.
+I started with the shapes so that you could keep them in mind as we discuss Big O in depth, so that it's far less of an abstraction than what's in computer science textbooks.
+
+
+
+==== Operation
+
+In presenting the shapes to you I said that the Y-axis represented the number of inputs, while the X-axis represented the number of operations.
+It should be clear that the number of inputs is the number of pieces of data processed, but less clear is what is meant by the number of operations.
+
+
+As mentioned earlier, there's a lot more to Big O than what's in this chapter, but you're not too likely to be asked about it in a coding interview.
+Exceptions will be noted in later chapters as they arise, but if you can understand these four graphs they'll cover most of what you need to know.
+
+==== Constant Time
+
+==== Logarithmic Time
+
+==== latexmath:[{n^2}, {n^3}, {n log n}], … etc
+
+==== Building Intuition: How is Big O used?
+
+==== Why Big O is important to understand
+
+=== Big O Breakdown
+
+==== Space
+
+==== Time
+
+==== Best Case
+
+==== Worst Case
+
+==== Average Case
+
+
+=== Example Questions
+
+==== Refactoring for Big O
+
+==== “What Big O is This?”
+
+==== “Give an example of this Big O”
+
