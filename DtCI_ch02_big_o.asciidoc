@@ -47,6 +47,10 @@ If you need to do that, programming languages and libraries contain execution an
 Where most people get stuck is on the idea that Big O is a precise way to measure speed. Think of Big O as more of a benchmark. 
 Big O is a bar that can be set to see if an algorithm can be improved.
 
+=== Random Paragraph
+(This just popped up down below, not sure it's useful) As mentioned earlier, there's a lot more to Big O than what's in this chapter, but you're not too likely to be asked about it in a coding interview.
+Exceptions will be noted in later chapters as they arise, but if you can understand these four graphs they'll cover most of what you need to know.
+
 === The Shapes of Big O
 
 Let's dive in.
@@ -60,6 +64,7 @@ But if you can understand these four principles you've gained most of what you n
 I can't promise you're not going to be asked to explain how to derive Big O equations during your coding interview. 
 But it's unlikely. 
 What you might be asked is to describe the efficiency of your algorithm in terms of Big O, and whether or not it can be improved. 
+
 
 In each of these graphs, the Y or vertical axis is the number of inputs.
 The X or horizontal axis is the number of operations that need to be performed to accomplish a given task.
@@ -76,7 +81,7 @@ If there are 100 names, there will be 100 calls to `print()`.
 If there are a thousand names, there will be a thousand calls.
 
 O(n) can be very efficient if there are only a few inputs.
-That's a great place to start, but when you discuss Big O, you must always consider it at scale.
+That's a great place to start, but when you discuss Big O, you must always consider it at scale.``
 If there are 100 inputs or one thousand, as mentioned above, it still might be more efficient than other approaches.
 But what if there are 500,000, or a million, or a trillion?
 The efficiencies of O(n) might diminish considerably compared to other approaches.
@@ -92,8 +97,8 @@ Notice that the shape of this graph is flat, and you can't get more efficient th
 ==== O(latexmath:[n^2])
 image::images/oh_of_en_squared.png["O(latexmath:[n^2])"]
 
-O(latexmath:[n^2]) is the least efficient of all of the algorithms discussed in this section.
-O(latexmath:[n^2]) means that every operation must be done the same number of times as the number of inputs.
+O(latexmath:[n^2]) is the least efficient of all of the "shapes" discussed in this section.
+O(latexmath:[n^2]) (also called "quadratic") means that every operation must be done the same number of times as the number of inputs.
 If you have 100 inputs, it will take latexmath:[100^2] or 10,000 operations to complete the task.
 Notice that the shape of this graph takes off quickly and goes nearly vertical.
 The addition of even a small number of inputs will quickly cause the number of operations to skyrocket.
@@ -111,7 +116,7 @@ To put that in a hopefully less confusing way, think about it like this: what wo
 There's more to logarithms than this, of course, but right now we're focusing on the shapes.
 Notice how slowly O(log n) grows, and how for a small number of inputs it can be even more efficient than O(1).
 
-O(log n) arises from algorithms that repeatedly split the relevant numbers of inputs to consider in half, repeatedly.
+O(log n) arises from algorithms that split the relevant numbers of inputs under consideration by half, repeatedly.
 You'll soon see that this is the case with some searching and sorting algorithms, and also with binary trees.
 (In general if the word "binary" is involved in the description of an algorithm, it's O(log n).)
 This is a highly desirable efficiency and one that should be sought wherever possible.
@@ -126,14 +131,36 @@ Take a moment and compare each shape to the others, and go back and re-read the 
 These shapes are going to form the basis of the rest of the discussion of Big O, so really take a moment here if you need it.
 If someone asks you "Which is more efficient: O(latexmath:[n^2]) or O(latexmath:[log n])?" you should see the two shapes in your head and immediately know the answer.
 
-If you really want to cement your understanding, find a graphing calculator application and graph these shapes yourself.
-Zoom in and out on the graph and notice the points at which the lines cross, and come up with situations in which one operation would be preferable to another.
 Nothing builds understanding like doing.
+If you want to cement the relationship between the equations in your mind, find a graphing calculator application or website and graph these shapes yourself.
+Zoom in and out on the graph and the points at which the lines cross, and come up with situations in which one operation would be preferable to another. 
+Which shapes are better for smaller or larger numbers of inputs?
 
 === Discussion of Big-O
 
-Now that you've seen the shapes, let's discuss the terms.
 I started with the shapes so that you could keep them in mind as we discuss Big O in depth, so that it's far less of an abstraction than what's in computer science textbooks.
+Now that you've seen the shapes, it's time to discuss in more detail what they mean.
+
+==== Big O is a Limit
+Big O is not about measuring the actual speed of an algorithm.
+For starters, that's not an easy thing to do universally because different computers come in different memory and chipset configurations.
+
+Big O is a type of "asymptotic analysis," which is a way to mathematical way to describe limiting behavior.  
+"Limiting behavior" means the best (or worst) a process can possibly do.  
+For instance, when you buy a car you're usually told what your expected gas mileage will be.
+This doesn't mean your car will always get this exact gas milage.
+The number given is usually the absolute best the car can be expected to do, under a very specific set of conditions.
+But depending on any number of factors -- passenger weight, tire pressure, weather, road conditions -- your car won't do as well as what the number promises.
+And no matter what, your car will not do better.
+So the number describes a "limit."
+
+Big O also describes a limit, but unlike the example above Big O actually describes the _worst_ an algorithm can possibly do.
+If the graph describes the _best_ an algorithm can possibly do, that's referred to as Big Omega or Big Ω notation.
+The average case is described as Big Theta, or Big Θ notation.
+This is a not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O and the four shapes we considered earlier.
+
+To sum it up, if an algorithm is said to run in Big O(latexmath:[n^2] time), that algorithm in its worst case will run worse than an algorithm running at Big O(latexmath:[log n]) time.
+To think about it another way, an algorithm running at Big O(latexmath:[log n] time) will _usually_, but not always, run better than an algorithm running at Big O(latexmath:[n^2]).
 
 
 
@@ -141,10 +168,8 @@ I started with the shapes so that you could keep them in mind as we discuss Big 
 
 In presenting the shapes to you I said that the Y-axis represented the number of inputs, while the X-axis represented the number of operations.
 It should be clear that the number of inputs is the number of pieces of data processed, but less clear is what is meant by the number of operations.
+More specifically, what exactly is an operation?
 
-
-As mentioned earlier, there's a lot more to Big O than what's in this chapter, but you're not too likely to be asked about it in a coding interview.
-Exceptions will be noted in later chapters as they arise, but if you can understand these four graphs they'll cover most of what you need to know.
 
 ==== Constant Time
 
