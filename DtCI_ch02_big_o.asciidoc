@@ -54,12 +54,12 @@ Exceptions will be noted in later chapters as they arise, but if you can underst
 === The Shapes of Big O
 
 Let's dive in.
-There are four Big O "shapes" you need to know.
+There are five Big O "shapes" you need to know.
 By "shapes" I mean slopes of a line on a graph, but I think it's easier just to consider them as shapes.
 If there's one thing to memorize in this book, it's these shapes -- especially as they relate to one another.
 Yes, there are more. 
 Yes, it's more complicated than what I'm about to say. 
-But if you can understand these four principles you've gained most of what you need to know to get through a coding interview.
+But if you can understand these five principles you've gained most of what you need to know to get through a coding interview.
 
 I can't promise you're not going to be asked to explain how to derive Big O equations during your coding interview. 
 But it's unlikely. 
@@ -72,7 +72,7 @@ Usually, it's not possible to decrease the number of inputs, so what makes an al
 As such, "flatter" graphs are generally preferred to "steeper" ones, as described below.
 
 ==== O(n)
-image::images/oh_of_en.png["O(n)"]
+image::images/ch_02/oh_of_en.png["O(n)"]
 
 Notice the shape of this graph.
 The number of inputs (y-axis) equals the number of operations(x-axis).
@@ -81,13 +81,13 @@ If there are 100 names, there will be 100 calls to `print()`.
 If there are a thousand names, there will be a thousand calls.
 
 O(n) can be very efficient if there are only a few inputs.
-That's a great place to start, but when you discuss Big O, you must always consider it at scale.``
+That's a great place to start, but when you discuss Big O, you must always consider it at scale.
 If there are 100 inputs or one thousand, as mentioned above, it still might be more efficient than other approaches.
 But what if there are 500,000, or a million, or a trillion?
 The efficiencies of O(n) might diminish considerably compared to other approaches.
 
 ==== O(1)
-image::images/oh_of_one.png["O(1)"]
+image::images/ch_02/oh_of_one.png["O(1)"]
 
 With O(1), no matter how many inputs you have, there's only one operation that needs to happen.
 Generally speaking, it's hard to beat this approach.
@@ -95,7 +95,7 @@ Most algorithms don't run with this kind of efficiency, but some do, and they'll
 Notice that the shape of this graph is flat, and you can't get more efficient than that.
 
 ==== O(latexmath:[n^2])
-image::images/oh_of_en_squared.png["O(latexmath:[n^2])"]
+image::images/ch_02/oh_of_en_squared.png["O(latexmath:[n^2])"]
 
 O(latexmath:[n^2]) is the least efficient of all of the "shapes" discussed in this section.
 O(latexmath:[n^2]) (also called "quadratic") means that every operation must be done the same number of times as the number of inputs.
@@ -109,7 +109,7 @@ There are even worse metrics, including O(latexmath:[n^n]) and O(n!).
 We'll discuss these more later in this chapter and point out examples in the algorithms sections as they arise.
 
 ==== O(log n)
-image::images/oh_of_log_en.png["O(log n)"]
+image::images/ch_02/oh_of_log_en.png["O(log n)"]
 
 If you don't remember logarithms from high school, a logarithm is the number something would have to be raised to in order to come up with a given number.
 To put that in a hopefully less confusing way, think about it like this: what would 2 have to be raised to in order to get 8?  Since latexmath:[2^3] is 8 the answer is 3.
@@ -124,7 +124,7 @@ This is a highly desirable efficiency and one that should be sought wherever pos
 Closely related to O(log n) is O(n log n), which is less desirable than O(n) but certainly superior to O(latexmath:[n^2]).
 
 ==== All of the shapes together
-image::images/oh_of_all_shapes.png["O of all shapes"]
+image::images/ch_02/oh_of_all_shapes.png["O of all shapes"]
 
 Here are all of the shapes together.
 Take a moment and compare each shape to the others, and go back and re-read the description of any shape in isolation if you don't understand what it means.
@@ -146,9 +146,9 @@ Big O is not about measuring the actual speed of an algorithm.
 For starters, that's not an easy thing to do universally because different computers come in different memory and chipset configurations.
 
 Big O is a type of "asymptotic analysis," which is a way to mathematical way to describe limiting behavior.  
-"Limiting behavior" means the best (or worst) a process can possibly do.  
+"Limiting behavior" means the best or worst a process can possibly do.  
 For instance, when you buy a car you're usually told what your expected gas mileage will be.
-This doesn't mean your car will always get this exact gas milage.
+This doesn't mean your car will always (or ever) get this exact gas mileage.
 The number given is usually the absolute best the car can be expected to do, under a very specific set of conditions.
 But depending on any number of factors -- passenger weight, tire pressure, weather, road conditions -- your car won't do as well as what the number promises.
 And no matter what, your car will not do better.
@@ -157,10 +157,12 @@ So the number describes a "limit."
 Big O also describes a limit, but unlike the example above Big O actually describes the _worst_ an algorithm can possibly do.
 If the graph describes the _best_ an algorithm can possibly do, that's referred to as Big Omega or Big Ω notation.
 The average case is described as Big Theta, or Big Θ notation.
-This is a not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O and the four shapes we considered earlier.
+This is not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O and the four shapes we considered earlier.
 
 To sum it up, if an algorithm is said to run in Big O(latexmath:[n^2] time), that algorithm in its worst case will run worse than an algorithm running at Big O(latexmath:[log n]) time.
 To think about it another way, an algorithm running at Big O(latexmath:[log n] time) will _usually_, but not always, run better than an algorithm running at Big O(latexmath:[n^2]).
+
+These descriptions should give you a sense that the idea behind Big O is to compare two approaches as generally "better" or "worse" in terms of expected performance.
 
 
 

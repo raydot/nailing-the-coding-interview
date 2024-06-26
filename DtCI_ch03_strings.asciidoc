@@ -1,5 +1,9 @@
 [[DtCI_ch03]]
 
+= PART 2: Data Structures
+
+Data structure ipsum laboris deserunt ea incididunt sit ea amet ullamco nulla aute laboris. Nisi ad commodo qui esse exercitation non. Nostrud laboris duis proident reprehenderit dolor. Excepteur cillum aliquip qui proident.
+
 == Strings
 
 After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. 
@@ -60,7 +64,7 @@ Low-level languages tend to make more sense to computers than humans, though, an
 
 Arrays are close in equivalence to what is known in mathematics as a "set." 
 A set is a list of items that have some relation to one another, that can be represented by a single notation. 
-In strongly typed languages, arrays can only contain the same type of data, but in weakly-typed languages arrays can contain mixed data types. 
+In strongly typed languages, arrays can only contain the same type of data, but in weakly-typed languages, arrays can contain mixed data types. 
 Arrays have some special terminology related to their specific use:
 
 Element, index, set

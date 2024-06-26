@@ -1,5 +1,9 @@
 [[DtCI_ch11]]
 
+= PART 3: Algorithms
+
+Part 3 Lorem ad consectetur pariatur ea. Eiusmod sint est in est deserunt sunt consectetur. Sit amet Lorem magna ea ea quis consectetur fugiat. Ad aliquip do aute laborum aute dolor. Non mollit anim Lorem enim irure ipsum velit reprehenderit. Reprehenderit duis tempor sit sunt commodo reprehenderit velit voluptate.
+
 == Functions and Recursion
 
 After reading this chapter the reader should know how to use both recursive and non-recursive functions, how to reason about functions, and what type of functions problems to expect on a coding test.

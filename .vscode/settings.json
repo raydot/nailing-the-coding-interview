@@ -17,7 +17,17 @@
     "manipul",
     "mollit",
     "occaecat",
+    "precalculus",
     "sunt",
-    "Thhink"
-  ]
+    "Thhink",
+    "Wittekind"
+  ],
+  "cSpell.customDictionaries": {
+    "custom-dictionary-workspace": {
+      "name": "custom-dictionary-workspace",
+      "path": "${workspaceFolder:demystifying-the-coding-interview}/.cspell/custom-dictionary-workspace.txt",
+      "addWords": true,
+      "scope": "workspace"
+    }
+  }
 }

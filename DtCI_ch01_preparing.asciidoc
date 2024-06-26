@@ -1,4 +1,9 @@
 [[DtCI_ch01]]
+
+= Part I: Introduction
+
+Part I cupidatat ad aute ea id dolore eiusmod mollit qui in. Veniam eu duis aliquip pariatur ullamco mollit. Commodo pariatur proident incididunt aute ad magna sit elit ullamco laborum. Duis aliqua enim esse commodo velit minim sunt minim do.
+
 == Preparing for the Coding Interview
 
 After reading this chapter, the reader should know how to formulate a study plan and understand how to begin using the exercises in the book to prepare for a coding interview
@@ -21,8 +26,45 @@ dolor
 
 === The Importance of Doing the Work
 
-Quis sit nostrud excepteur anim aliqua.
+There is no learning without doing.
+You can read this book many times over but unless you have a photographic memory, you will have a hard time learning data structures and algorithms without going through the exercises and trying things out for yourself.
+Also, if you have a photographic memory, I can't see why you would have to read the book more than once.
+
+It's incredibly important that you sit down in front of a computer and try the things you need to learn from this book.
+At the end of most chapters I will give ideas for ways to expand on the concepts that have been covered.
+As someone who always skips over these kinds of things, I'm asking you not to skip over these things.
+Spend some time with the ideas.
+If they're too easy, find a way to modify them to suit your skill level, or find a LeetCode problem that utilizes them.
+If they're too hard, break them down into smaller problems that you can solve -- an idea I'll come back to more than once in this book.
 
 === Developing Intuition
 
-Elit nostrud in id commodo et esse tempor.
+When I first decided to learn math as an adult, outside of school, I was given some really good advice by a very smart person.
+She told me not to worry so much about the specifics of equations, but instead to try to understand what the equation is trying to do.
+latexmath:[y=1/x], for instance, must describe a limit since x can never reach zero because anything over zero is undefined.
+I can see that graph in my head.
+If I can't see it exactly, I can understand the basic idea it's trying to convey.
+
+x is a number that will get smaller and smaller and smaller but will never hit zero, so it describes a curve that glides along the y-axis, peaking at one, before it turns to never reach zero along the x-axis.
+I'm not a human calculator, I just found a way to understand what anything over zero must represent.
+It forms a picture in my mind that I can understand.
+
+I tell my students, "Don't start coding before you understand what you're trying to do."  
+Because if you don't you're going to be just like the x in that graph.
+You can push yourself further and further and further along an axis, but you'll never reach it.
+
+If instead you stop for a moment and try to take a concept and put it into words that you can understand, try to really unpack what it's saying and what it's trying to do, you won't have to memorize it because you can simply re-create it from your understanding.
+
+The several sections in this book that begin with the heading "Developing Intuition" are written to get you to come to this understanding.
+Take some extra time with these.
+Putting in a little effort in the short term might save you lots of time in the long run because you won't have to struggle to understand what you're being asked.
+
+"I see that x at the bottom of the fraction, so I know x can never be zero.
+Because it's in the denominator of the I know that the bigger the number gets, the smaller the equation gets. 1/1 is pretty small, 1/10,000 is even smaller and 1/1,000,000,000 is tiny.
+Aha!
+This equation must describe a limit approaching zero!"
+
+I didn't look that up, I didn't memorize that, I only have a general idea of what the resulting graph might look like.
+Bit I used my understanding and a little bit of intuition to explain that example, and I'm pretty sure I'm right.
+The more you can do that with the concepts in this book, the sooner you'll master the ideas needed to prevail.
+
