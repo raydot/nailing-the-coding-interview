@@ -17,12 +17,18 @@ Low-level languages tend to make more sense to computers than humans, though, an
 
 Arrays are close in equivalence to what is known in mathematics as a "set." 
 A set is a list of items that have some relation to one another, that can be represented by a single notation. 
-In strongly typed languages, arrays can only contain the same type of data, but in weakly-typed languages, arrays can contain mixed data types. 
+In strongly typed languages, arrays can only contain the same type of data, but in weakly typed languages, arrays can contain mixed data types. 
 Arrays have some special terminology related to their specific use:
 
 Element, index, set
 
 <diagram of an array>
+We looked at a simple example of an array in the last chapter, with an image showing how an array is a string of characters.
+
+GRAPHIC:
+['H', 'e', 'l', 'l', 'o', '\s', 'w', 'o', 'r', 'l', 'd', '!', '\n']
+[ 0,   1,   2,   3,   4,    5,   6,   7,   8,   9,   10,  11,  12 ]
+
 
 In their original versions, and as is still the case in languages like {cpp}, arrays worked hand-in-hand with data "pointers", or reference objects that "point" to specific memory addresses. 
 Once an array is created in {cpp}, the programmer can "dereference" each address in memory to get the value stored there. 
@@ -30,15 +36,21 @@ Because a pointer points to a specific type of data, incrementing a pointer move
 
 In {cpp}, for instance, an integer usually (but not always!) occupies four bytes of memory. So pointing a pointer at the beginning of an array and then incrementing it by one moves it over four bytes -- to the beginning of the next item in the array. Because this type of array manipulation has become language-specific, we're not going to use pointers in this book. We'll instead settle for array items simply being referenced by their index numbers. 
 
+<GRAPHIC>
+
 //// THERE IS SOME UNIVERSAL SIZE THING BEING DESCRIBED HERE, WORTH IT'S OWN SECTION ////
 
 The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array's "scope," or length. 
 
-
-
-.Weak vs. Strongly Typed Languages
+.Weakly vs. Strongly Typed Languages
 ****
-The difference between weak-typed and strongly-typed languages comes down to whether or not a language will let you mix types of data. In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing.  In weak-typed languages, this mixing is allowed, accepted, and even encouraged!  
+The difference between weakly typed and strongly typed languages comes down to how strict the language requires programmers to be when mixing data. 
+In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing.  
+In weakly typed languages, this mixing is allowed, accepted, and even encouraged!
+
+If you've used Typescript you're used to a hybrid of both, with Typescript being a language that adds strong data typing to Javascript.
+There's some controversy over whether this is desirable or should even be allowed.  
+Is Typescript a useful tool or simply meant to make Javascript more palatable for coders coming from more strongly typed languages, like Java.
 
 In {cpp} an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in {cpp}. It can only be used to hold five integer values, no more, and no other type of data is allowed. 
 
@@ -69,7 +81,10 @@ for (int i = 0; i < someArray.length, i++):
 
 When I taught an introductory Java class, I used to tell my students that "arrays and for loops go together like peanut butter and jelly."  What I mean by this is that they go together well, as a for loop is one of the easiest ways to traverse through an array by index, as shown in the example just above. 
 
-One day when I was giving this example, I heard a student say "Ew, why would you mix peanuts with jelly?!"  I realized this was something that was not commonly done in her culture, and that not all foods are American foods. So if "peanut butter and jelly" makes you cringe, please feel free to pick your own food analogy: "Rice and beans", "fish and rice," "flour and butter", or any two foods that blend together well in your mind will do. The point being, if you have to iterate over an array (peanut butter), use a for loop (jelly)! 
+One day when I was giving this example, a student cringed and said "Ew, why would you mix peanuts with jelly?!"  
+I realized this was something that was not commonly done in her culture, and that not all foods are American foods. 
+So if "peanut butter and jelly" makes you cringe, please feel free to pick your own food analogy: "Rice and beans", "fish and rice," "flour and butter", or any two foods that blend together well in your mind will do. 
+The point is if you have to iterate over an array (peanut butter), use a for loop (jelly)! 
 
 
 === Modifying...or not modifying
@@ -89,7 +104,7 @@ Don't just blithely and blindly push information into and out of an array withou
 Additionally, in some languages you can't simply copy an array, because the copy will copy not the array but will only copy its pointers. 
 The pointers in the copy will continue to point to the data to which the original array was told to point. 
 This means that modifying the data in the new array will modify the data in the old array, and vice-versa. This type of copy is called a "shallow" copy, as opposed to a "deep" copy. 
-It's import to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that's what you want instead).
+It's important to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that's what you want instead).
 
 === Basic Array Functions
 
@@ -108,9 +123,10 @@ Items in an object can be indexed by more than just a number, and can actually b
 We will explore this idea more deeply when we get into hashes in the next chapter. 
 In some languages, like JavaScript, there is no "array" primitive data type -- all arrays are actually objects!    
 
-If that's not already confusing enough, most modern programming languages, like Python, have realized the need to combine multiple data types in new and more useful ways. In addition to arrays, Python contains lists, tuples, and dicts, all of which are array-like data structures with specific properties for specific uses.
+If that's not already confusing enough, most modern programming languages, like Python, have realized the need to combine multiple data types in new and more useful ways. 
+In addition to arrays, Python contains lists, tuples, and dicts, all of which are array-like data structures with specific properties for specific uses.
 
-This book is not geared toward teaching primitive data types, so make sure you well understand the different types and functions available in your specific language. 
+This book is not geared toward teaching primitive data types, so make sure you understand the different types and functions available in your specific language. 
 And remember, if you don't see an array data type or function you like, you can always create your own!
 ****
 
@@ -148,9 +164,70 @@ for item in items:
 `reverse()` Many programming languages contain a function for reversing a string. 
 This can be useful for searching/sorting algorithms, which will be covered in chapter 
 
+8. Sliding window "Find the longest substring with k unique characters in string."  Linear data structure, subset, condition.
+
 [NOTE]
 ====
 Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions.
 These functions are often added to programming languages because of how often they're used, and this means they're the basis for a lot of programming interview questions.
 So download the source, dig through the source code, read the spec, reverse engineer, and figure out how to program them yourself!
 ====
+
+==== Array Copying
+Deep copy v. shallow copy
+
+==== JSON (JavaScript Object Notation)
+
+
+==== Array Searching, Sorting, and Manipulation
+
+Now that you know the basics of using arrays with built-in functions, this next section will focus on essential algorithms for working with data in arrays.
+Much of computer programming is about searching, sorting, and manipulating data, and many programming interviews will require you to understand the basics of how to implement these algorithms.
+Even if you aren't directly asked questions about these algorithms, they are incredibly useful tools to have in your programming toolbox and they can be used to solve many different types of programming problems.
+
+===== Sorting
+
+Sorting is just what it sounds like: sorting data according to a given criteria.
+
+Let's start with the most straightforward sort algorithm to understand
+
+===== Searching
+
+Searching is when you find an item or items in a set of data. We'll talk more about search in Chapter 12, but we can start the conversation here in our discussion of arrays.
+The main differences that determine the difference in whether of not to prefer a given search algorithm is the quantity of data being searched, and whether or not that data is in a specific order to start.
+
+To try to gain some intuition for the differences in search algorithms, consider this simple example.
+Let's say you decided to go to the pound to get a puppy.
+There are one hundred kennels containing dogs to choose from.
+You walk past all the kennels and you see a dog you just love named "Harry."
+
+The animal trainer who works at the pound hands you a stack of papers and says you have to find Harry's paper to take him home.
+The papers aren't sorted.
+Right off the bat it would clearly be easier to search through the stack if the papers were already sorted.
+But stop for a moment and think about how you're going to do that?
+Are you just going to page through the papers from A-H until you find Harry?
+Start the search at Z?
+Something else?
+Would you search through the papers the same way if there were only 10?
+Or 10,000?
+But it's not any of those things; it's a stack of 100 unsorted papers.
+So how are you going to go about finding "Harry?"
+Stop and consider these questions for a moment before moving on.
+
+Let's start with a simple search: the binary search.
+You may have used this one before if you've ever played "Guess the Number."
+Someone says to you, "I'm thinking of a number between one and 100 and if you can guess the number in 6 guesses or fewer, I'll give you $5.  After every guess I'll tell you if my number is higher or lower than the one you choose."
+Does it matter that you're told whether or not the number is higher or lower after every guess?
+Why?
+How would you go about solving this problem?
+
+Even people who have never played the game before will quickly come up with winning strategies.
+It doesn't make a lot of sense to guess numbers in order because that would give you only about a 5% chance to guess the number before running out of guesses.
+You're also only going to guess numbers based on the clues provided to you by the person who makes the offer.
+If you guess 71, and she tells you it's going to be higher than 71, it makes no sense to guess 20 on the next turn.
+
+The foolproof way to win this game every time is by conducting a binary search.
+The reason it's called a binary search is because every guess reduces the remaining number pool into two parts, and then eliminates one of them from further consideration.
+
+Following this strategy, your first guess should be 50.
+It cuts the remaining number pool in half.

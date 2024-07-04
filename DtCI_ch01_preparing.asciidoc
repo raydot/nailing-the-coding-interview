@@ -65,6 +65,16 @@ Aha!
 This equation must describe a limit approaching zero!"
 
 I didn't look that up, I didn't memorize that, I only have a general idea of what the resulting graph might look like.
-Bit I used my understanding and a little bit of intuition to explain that example, and I'm pretty sure I'm right.
+I just used my understanding and a little bit of intuition to explain that example, and I'm pretty sure I'm right.
 The more you can do that with the concepts in this book, the sooner you'll master the ideas needed to prevail.
 
+8 LeetCode patterns (in reverse order of difficulty)
+
+1. The two-pointer pattern.  Iterate through sorted array.  LeetCode #167 "Two Sum Problem."  Use a pointer at either end and iterate up/down depending if the total is less or more than the target.  LeetCode #15 "Three Sum Problem," triplets that add up to zero in a sorted array
+2. Binary Tree BFS.  Solved using queue.  LeetCode #102 "Binary Tree Level Order Transversal"
+3. Topological Sort on DAG.  Used for "prerequisite chains." LeetCode #207 "Course Schedule."  
+4. Binary Tree DFS.  Solve using recursion.  LeetCode #104. "Maximum depth of binary tree."
+5. Top k elements.  "Find k largest elements in an array"  Input is linear data structure. Solve using heap. 
+6. Modified Binary Search.  LeetCode #33 "Search in Rotated Sorted Array."  Array contains duplicates?  Solution not found?  Python `bisect.left` and `bisect.right`
+7. Subset "Find all possible combinations"  LeetCode #46 "Permutations."  Build by levels, similar to BFS.
+8. Sliding window "Find the longest substring with k unique characters in string."  Linear data structure, subset, condition.

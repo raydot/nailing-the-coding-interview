@@ -2,14 +2,16 @@
 
 = PART 2: Data Structures
 
+How to add parts to book?
+
 Data structure ipsum laboris deserunt ea incididunt sit ea amet ullamco nulla aute laboris. Nisi ad commodo qui esse exercitation non. Nostrud laboris duis proident reprehenderit dolor. Excepteur cillum aliquip qui proident.
 
-== Strings
+
 
 After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. 
 This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own...
 
-We should start by determining what is meant by a "data structure."  
+We should start by determining what is meant by a "data structure." 
 This book assumes you have an introductory understanding of at least one programming language, so you should already be familiar with a single variable:
 
 `x = 10`
@@ -41,188 +43,183 @@ Data structures play an important part in programming interviews for two reasons
 2) They can be used (sometimes interchangeably) to solve specific problems. So think of data structures both as tools for becoming a better programmer and also as ways of thinking about programming that will become more relevant and make you more efficient the more advanced you become as a programmer. 
 As useful as these skills are for passing coding interviews, if you can master them they'll also make you better at your job once you get it. 
 
-In this book, we will consider four data structures commonly used in coding interviews. We will consider linear data structures in this chapter, and hash, tree, and graph data structures in the next. There are more data structures than this, but knowledge of these four should be enough to get you through any coding test.  
+In this book, we will consider four data structures commonly used in coding interviews. We will consider linear data structures in this chapter, and hash, tree, and graph data structures in the next. There are more data structures than this, but knowledge of these four should be enough to get you through any coding test. 
 
+== Strings
 
-=== Linear Data Structures
-
-This book will begin with an example of "linear" data structures. As the name implies, these are data structures that keep data in a "line," which usually means contiguous addresses in memory, referenced by pointers. The "memory addresses" part is beyond the scope of this book, but we will address what linear data structures are and how they can be manipulated algorithmically.
-
-=== Arrays
-
-Let's begin with the simplest linear data structure, the array. In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array's "index."  I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you're about to encounter. 
-
-.Levels of Abstraction
-****
-Programming languages can be categorized by levels of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" languages, like assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer's hardware directly using what is known as "machine code." 
-
-Low-level languages tend to make more sense to computers than humans, though, and it was realized long ago that abstractions were needed to connect human thinking and language to computer actions. "High-level" languages, like C++, take human-readable language and compile it into machine code instructions that can be used to manipulate a computer's chipset directly. There's a higher abstraction than this though. "Interpreted" languages, sometimes referred to as "scripting languages", contain an even higher level of abstraction, as these languages don't interact with the computer chipset at all. Scripting languages are instead fed to an application, like a web browser, that attempts to "interpret" their instructions into machine code. It's well worth your time to understand layers of abstraction as a programmer, and it goes far beyond what can be explained in a single side note.
-****
-
-
-==== Terminology
-
-Arrays are close in equivalence to what is known in mathematics as a "set." 
-A set is a list of items that have some relation to one another, that can be represented by a single notation. 
-In strongly typed languages, arrays can only contain the same type of data, but in weakly-typed languages, arrays can contain mixed data types. 
-Arrays have some special terminology related to their specific use:
-
-Element, index, set
-
-<diagram of an array>
-
-In their original versions, and as is still the case in languages like {cpp}, arrays worked hand-in-hand with data "pointers", or reference objects that "point" to specific memory addresses. 
-Once an array is created in {cpp}, the programmer can "dereference" each address in memory to get the value stored there. 
-Because a pointer points to a specific type of data, incrementing a pointer moves it in memory the length of that piece of data. 
-
-In {cpp}, for instance, an integer usually (but not always!) occupies four bytes of memory. So pointing a pointer at the beginning of an array and then incrementing it by one moves it over four bytes -- to the beginning of the next item in the array. Because this type of array manipulation has become language-specific, we're not going to use pointers in this book. We'll instead settle for array items simply being referenced by their index numbers. 
-
-//// THERE IS SOME UNIVERSAL SIZE THING BEING DESCRIBED HERE, WORTH IT'S OWN SECTION ////
-
-The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array's "scope," or length. 
-
-
-
-.Weak vs. Strongly Typed Languages
-****
-The difference between weak-typed and strongly-typed languages comes down to whether or not a language will let you mix types of data. In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing.  In weak-typed languages, this mixing is allowed, accepted, and even encouraged!  
-
-In {cpp} an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in {cpp}. It can only be used to hold five integer values, no more, and no other type of data is allowed. 
-
-`int intArray[5] = {33, 22, 11, 18, 96}`
-
-In weakly-typed JavaScript, all different types of data can be mixed together, and the language interpreter doesn't mind at all:
-
-`mixedArray = [33, 22, 3.15159, "hello", false]`
-
-The reasons for these differences are logical, of course, and mostly have to do with the way memory is allocated by different programming languages.
-****
-
-==== Numbering
-
-In most programming languages, arrays are numbered from zero. This is because arrays are meant to be thought of as contiguous elements in a computer's memory, as explained in the section on pointers, above. If arrays started counting from 1, there would be space unaccounted for in that first position in the memory that exists between 0 and 1. It's the same reason why the 19th century starts in 1800. You have to account for the First Century somehow, and no one wants to be from the "Zeroeth Century."  
-
-That means the first element in the array `testArray` is located at array position 0. If `testArray = [21, 31, 41, ...]` then `testArray[0]` is where to find 21, `testArray[1]` is where to find 31, `testArray[2]` is where to find 41, etc. 
-
-It's not uncommon for programmers to use an "offset" variable to account for the difference in counting from 0, but I think it's pretty easy to just add or subtract 1, as needed.
-
-```python
-someArray = []
-for (int i = 0; i < someArray.length, i++):
-  print "The item at position", i + 1, " is " someArray[i]
-```
-
-==== Arrays and For Loops
-
-When I taught an introductory Java class, I used to tell my students that "arrays and for loops go together like peanut butter and jelly."  What I mean by this is that they go together well, as a for loop is one of the easiest ways to traverse through an array by index, as shown in the example just above. 
-
-One day when I was giving this example, I heard a student say "Ew, why would you mix peanuts with jelly?!"  I realized this was something that was not commonly done in her culture, and that not all foods are American foods. So if "peanut butter and jelly" makes you cringe, please feel free to pick your own food analogy: "Rice and beans", "fish and rice," "flour and butter", or any two foods that blend together well in your mind will do. The point being, if you have to iterate over an array (peanut butter), use a for loop (jelly)! 
-
-
-==== Modifying...or not modifying
-
-In strongly typed languages, arrays can't be modified in length or data type once created. 
-This leads to the desired outcome of an array always being what the programmer says they are. 
-For a short time in the history of computer programming, this became an undesirable thing, as the rise of web programming created a generation of programmers that didn't need or want to worry about data types in their arrays since it was the browser's problem.
-
-In that way where all old things become new again in computer programming, there has been a recent shift towards "functional programming," which insists that programmers regain control of arrays and not simply modify them according to their moods. 
-In "pure" functional programming you should not modify an array at all, but create a new copy every time you add or remove something from it. 
-This keeps the array in a certain state and ensures that past states can be re-created from older copies. 
-If you've ever worked with a library like Redux you might be used to this approach.
-
-In the programming interview, make sure you understand what you're being asked to do, and treat your arrays with intention. 
-Don't just blithely and blindly push information into and out of an array without understanding the problem you're being asked to solve. 
-
-Additionally, in some languages you can't simply copy an array, because the copy will copy not the array but will only copy its pointers. 
-The pointers in the copy will continue to point to the data to which the original array was told to point. 
-This means that modifying the data in the new array will modify the data in the old array, and vice-versa. This type of copy is called a "shallow" copy, as opposed to a "deep" copy. 
-It's import to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that's what you want instead).
-
-==== Basic Array Functions
-
-Most languages contain a library of functions for arrays and questions about these functions are fairly commonly found in coding tests. These are functions that allow programmers to modify arrays in ways that make them more useful to programmers.
-
-As you read through these examples, keep in mind that these functions -- and really any functions -- are not created by magic. They have been added to the language by programmers trying to make their jobs easier by making the language more useful. As you read about array functions, try to think of how you might create them yourself. Or better still, create them yourself and look inside the language specification to see how the problem has actually been solved. 
-
-Array functions fall into two general categories: modifying array data and retrieving array data. As mentioned earlier, the length of the array is important for making most of these operations work properly. 
-
-.Arrays vs. Objects vs. Tuples vs. ???
-****
-In the beginning was the array, and no other data type could be used for grouping related data.
-
-Recently many programming languages have added "objects" as primitives, which are data types where the information is relational. 
-Items in an object can be indexed by more than just a number, and can actually be specifically named. 
-We will explore this idea more deeply when we get into hashes in the next chapter. 
-In some languages, like JavaScript, there is no "array" primitive data type -- all arrays are actually objects!    
-
-If that's not already confusing enough, most modern programming languages, like Python, have realized the need to combine multiple data types in new and more useful ways. In addition to arrays, Python contains lists, tuples, and dicts, all of which are array-like data structures with specific properties for specific uses.
-
-This book is not geared toward teaching primitive data types, so make sure you well understand the different types and functions available in your specific language. 
-And remember, if you don't see an array data type or function you like, you can always create your own!
-****
-
-Array modification functions include the following operations:
-
-`length()`  Retrieve the length of the array, usually to do something else with it. Sometimes shortened to `len()`
-
-[source, python]
-----
-demoArray = [1, 2, 3, 4, 5]
-print(len(demoArray)) # returns '5'
-----
-
-`for` loops
-Every programming language contains a function that allows for simple iteration, or "counting."
-Iteration is a process that has been available in programming languages from the very beginning, as it's essential to making computers work.  
-
-
-`for/in` Some programming languages -- usually the weakly-typed ones -- support `for/in` operations, which automatically consider the length of an array in iteration. 
-
-[source, python]
-----
-items = ["loaf of bread", "container of milk", "stick of butter"]
-for item in items:
-    print(item)
-----
-
-
-`push() / pop()`  These functions are called different things in different languages but they are for pushing an element into the end (or beginning) of an array and for retrieving an element from the beginning (or end) of an array. 
-
-
-
-`slice()` The slice function allows you to
-
-`splice()` The splice function is useful for
-
-`reverse()` Many programming languages contain a function for reversing a string. 
-This can be useful for searching/sorting algorithms, which will be covered in chapter 
-
-[NOTE]
-====
-Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions.
-These functions are often added to programming languages because of how often they're used, and this means they're the basis for a lot of programming interview questions.
-So download the source, dig through the source code, read the spec, reverse engineer, and figure out how to program them yourself!
-====
+While this book assumes you've had an introduction to computer programming, this chapter will contain an exploration of some basic concepts in order to create a baseline of understanding for the content to follow.
+If you come across something in this chapter that you already know feel free to skip ahead.
 
 === Strings
 
-Strings are of course one of the most commonly used data structures in programming. 
-The documentation of most programming languages starts with the ubiquitous "Hello World" program, which almost always involves rendering a string. 
+Strings are (of course) one of the most commonly used data structures in programming. 
+The documentation of most programming languages starts with the ubiquitous "Hello World" program, which usually involves rendering a string. 
 
-In Python, all that's required to render text to the console is a simple `print` statement:
+In Python, for instance, all that's required to render text to the console is a simple `print` statement:
 
 `print("Hello World")`
 
+What a great 10-character example! 
+Or is it 11? 
+13? 
+Something else? 
+To understand how to manipulate strings, you must begin by understanding the way in which they're constructed and represented by computer operating systems and programming languages.
+
 ==== Breaking Down a String
 
-In most programming languages a string is nothing more than an array with a character at each position.  
+In most programming languages a string is nothing more than an array with a character at each position.
+
+GRAPHIC:
+['H', 'e', 'l', 'l', 'o', '\s'  , 'w', 'o', 'r', 'l', 'd', '!', '\n']
+[ 0,   1,   2,   3,   4,    5,     6,   7,   8,   9,   10, 11,   12 ]
+
+Arrays are covered in the next chapter, but let's begin by discussing what is meant by a "character."
+If you're already familiar with this subject, please feel free to skip this section.
+
+Whenever you press a key on your keyboard, like I'm doing to write this book, a character comes out on the other end.
+Without going into too much detail on exactly what happens during this process, the electrical signal generated by the key is sent to the operating system, which then uses a character "lookup table" to look up the character represented by that signal.
+The two most commonly used lookup tables for computers that use Latin-character-based languages (like English) are ASCII and Unicode. 
+Again, there are piles of documents written about these two systems and others, and if you're interested a quick web search will show you more than you ever needed to know about these two systems.
+
+The positions of the characters in this table are direct descendants of the teletype systems that were widely in use in the middle part of the 20th Century.
+If you're watching a movie and you see a chattering machine spitting out the urgent message onto a sheet of paper that needs to be seen immediately by a spy or government, that's a teletype machine.
+It might be hard to imagine, but not all that long ago computers were only able to output to printers and not screens.
+
+The size of a character in most operating systems is based on a byte.
+A byte contains eight bits. 
+A bit is a symbol that can contain a one or a zero.
+Since each bit can represent two states, the number of signals that can be represented by a given number is bits is 2^n, where n is the number of bits.
+
+For instance, 2 bits can represent 2^2, or 4 discrete states: [0, 0], [1, 0], [0, 1], and [1, 1]. 
+Three bits can represent 2^3 or eight discrete states. 2^4 is 16 states, 2^5 is 32 states, etc.
+While there are leetCode questions that cover binary numbers, they're beyond the scope of this book.
+There are piles of information available that cover computer operating systems and binary mathematics, and if you have more of an interest in the subject I encourage you to look them up.
+
+A byte, which contains eight bits, can represent 2^8 or 256 discrete states, and so most character systems are based on a representation of 256 characters.
+Usually, the first 128 of these characters are usually reserved for "regular" keys on a keyboard, while the second 128 are reserved for "special" characters.
+So when you press that 'd' key on your keyboard, it sends a numeric symbol to the operating system which then looks up which character is represented by that number. 
+In the case of an English keyboard, the lowercase 'd' is represented by the decimal number 100.
+(This is not the same as the uppercase 'D', which is represented by the number 68.)
+
+There's nothing special about the positions of these characters. 
+If you grew up speaking a language other than English, you've probably used a keyboard where the characters are in different positions than they are on an English keyboard.
+That same 'd' key on a different keyboard might instead stand for "M", or "7", or "Ü", or "α".
+It all depends on how the keys are mapped in that lookup table. 
+The reason why should be clear: it's easier to change a look-up table than it is to rebuild a keyboard!
+
+So when computer programmers talk about "characters," this is what is meant.
+A series of symbols mapped to a lookup table, that translates them to the corresponding electrical signal represented by a keyboard key.
+None of that is likely to come up as an interview question, but it's a basic idea that it's important to understand as a developer.
+
+Another important thing to know is that not all characters are visible characters. 
+The "space", "tab", "return", and "enter" (not always the same as return!) characters -- and others -- are mapped to the lookup table the same as visible characters, and have to be accounted for when you're parsing strings.
+These characters are sometimes called "escape" characters since they can only be represented in strings using a symbol preceded by the character "\".
+A "tab", "space", and "newline" are meaningful symbols to many programming languages and so you can't always just type them into a string.  
+Instead you must type a tab character as "\t".
+A return is "\r", newline is "\n", even a space must sometimes be escaped as "\ " to mean a string as a character and not a symbol that a programming language needs to consider.
+
+These are all things to keep in mind when you hear the word "character."
+When you hear the phrase "array of characters" you should immediately think of a string, and vice-versa.
+And when you think of either you should picture that array as potentially containing the visible and non-visible characters that can be found in a table stored somewhere in the operating system.
+
+Here's another look at that image above one more time:
+
+GRAPHIC:
+['H', 'e', 'l', 'l', 'o', '\s'  , 'w', 'o', 'r', 'l', 'd', '!', '\n']
+[ 0,   1,   2,   3,   4,    5,     6,   7,   8,   9,   10, 11,   12 ]
+
+
+==== Accessing a String
+
+As mentioned before, usually the first thing a programming student is shown how to do is generate output using some kind of variation of a "print" statement.
+You won't be asked interview questions about that.
+What you might be asked questions about, however, is the ways in which you can manipulate strings to get the results you need to accomplish the task you want.
+
+I recently was working for a client that needed data parsed from an Excel document to the web.
+Among many of the things complicating this task was that we on the programming team had no control over what was in the Excel document.
+This means that many of the cells in Excel were "polluted" with data that kept our program from running properly.
+
+For instance, many of the cells contained line returns, or the "\n" character.
+This interfered with our program, because when we wanted to put a piece of data into a specific place if we printed it with the line return it would knock all of the data following out of alignment.
+I used the Python Panda's `strip()` command to get rid of these unwanted characters, but even this was limited in its effectiveness as it only considers items at the beginning and end of a string.
+The team eventually had to use some custom lambda functions to get the results we wanted.
+Parsing string data is absolutely something you will do more than once in your programming career.
+
+==== Typecasting
+
+Everyone knows that 2 + 2 = 4, but while that's fine for English or mathematics, that's not necessarily the case at all when it comes to programming languages.
+For starters, "=" is the assignment operator, which means that 2 + 2 = 4 will return an error.
+Additionally, do you as a programmer mean the _expression_ 2 + 2 = 4 or do you mean the _string_ "2 + 2 = 4"? 
+Notice that one is in quotes and the other is not, because one is a string and the other is not.  
+
+Context is important in computer programming.
+Compilers really can't be bothered trying to figure out what it is you, the programmer, are _trying_ to do.
+They don't care.
+They're literal, and logical.
+
+If you're trying to evaluate whether 2 + 2 = 4, the correct expression is:
+
+`2 + 2 == 4`
+`True`
+
+Enter `"2" + "2" == 4` however, and what seems true is now false.
+
+>>> "2" + "2" == 4
+False
+
+The reason for this is that like most programming languages, Python treats strings and symbols separately.
+2 without quotes is the "symbol" for 2.
+It means the number 2 which is exactly what you think it means.
+2 fingers, 2 sisters, 2 dollars.
+
+"2" is the string representation of 2, which doesn't mean anything to Python except that it's a string.
+
+
 
 ==== Built-in String Functions
 
-`split()`  This function will split an array element into pieces according to a delimiter.  
+Most programming languages contain a number of functions for manipulating strings.
+One of the more basic and widely used is the "concatenation operator," which connects one string to another.
+
+`myVar = "Hello" + "world!"`
+
+The plus in this instance does not mean addition, it means concatenation, or joining together.
+Eagle-eyed readers may have noticed that this concatenation may have an unwanted result.
+
+`print(myVar)`
+`HelloWorld!`
+
+Oops!  
+Where did the space go?
+There are multiple ways to account for it, including adding it to the first or second string in the concatenation, but the object here is to make you aware that you need to account for it when processing your data.
+
+Processing strings is an important part of data science, and so knowing how to do it is a fundamental skill all programmers must possess.
+As such, you absolutely should know how at least the basics of string processing, and the built-in functions most languages contain.
+Built-in string functions are also a great place to start building up your programming interview skills, as knowing how to build each of the following functions from scratch will help you gain a lot of skill in string and character processing.
+
+While these functions may differ in name from language to language, they're all available to you as a programmer interested in manipulating strings:
+
+`length()` or `len()` or `sizeof()` These are different names for functions that return the length of the array that is passed to them.
+This is incredibly useful for processing strings because it allows your code to handle strings of whatever size is passed to it. 
+
+
+[source, python]
+---
+myVar == "Hello world!"
+print(len(myVar))
+12
+---
+
+`toUpper() or toLower()`
+
+These functions will change every character in a string either to upper or lower case, as the function name suggests.
+This can be invaluable for data entry.
+
+
+`split()` This function will split an array element into pieces according to a delimiter. 
 When the delimiter is left empty, every element of the array will be split into an element of its own.
 This function has different implementations, depending on the language, so examples of splitting strings into individual characters in different languages are shown below. 
-The {cpp} standard libraries don't have a straightforward way to accomplish this task, and the easiest way to do this in Java uses a regular expression, so if you're focused on those languages you will have to either look up these implementations, or, better yet, write your own! 
+The {cpp} standard libraries don't have a straightforward way to accomplish this task, and the easiest way to do this in Java uses a regular expression, so if you're focused on those languages you will have to either look up these implementations, or, better yet, build your skill by writing your own!
 
 Python:
 
@@ -239,6 +236,46 @@ console.log("algorithms".split(''))
 // Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
 ----
 
+`splice()`  This function allows you to choose a very specific part of a string, selected by an index.
+
+[source, python]
+---
+slice()
+slice(start)
+slice(start, end)
+slice(start, end, step)
+---
+
+
+
+In languages that implement `splice()`, the data is returned without modifying the original.
+This can be useful as a "stripping" operation, say to remove a line return and dollar sign from the beginning of every string in a group of strings.
+Python contains the most robust splicing function, allowing programs to choose by an index that can be passed in a number of useful ways.
+
+Be careful when using these functions as they all work slightly differently, and the difference usually has to do with how the range of items is chosen.
+For example, in Python, you can use a ":" to select the range of the items you're interested in.  Arrays start at 0, and the second value in a splice parameter is the item _before_ the one in the number.
+
+[source, python]
+---
+>>> myVar = ["turtle", "gecko", "frog"]
+>>> myVar[1:2] # select from position to before position 2
+['gecko']
+>>> myVar[:3] # select everything before position 3
+['turtle', 'gecko', 'frog']
+>>> myVar[:2] # select everything up until position two
+['turtle', 'gecko'] 
+>>> myVar[2:] # select everything after position 2
+['frog']
+>>> 
+---
+
+There are more concepts that are applicable to strings that will be discussed in the upcoming section on arrays, including `slice()` and `reverse()`.
+
+
+
+
+
+I will revisit the construction of some of these functions in the upcoming "Arrays" chapter, but hopefully this has helped you start to the importance of these basic string manipulation issues and why they might come up in programming tests. 
 
 ==== Example Questions
 
@@ -248,21 +285,21 @@ Or, if you get really stuck, come back and solve these problems after reading th
 
 ===== Finding a Character or Word in a String
 
-_Create a function that takes a string and a character and returns the position of that character in the string.  
-For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 4.  
+_Create a function that takes a string and a character and returns the position of that character in the string. 
+For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 4. 
 Notice that there are three "a"s in the string. How would you return the positions of all of them?
 Does your function account for capital and lower-case letters?_
 
 _Similarly, create a function that takes a string and returns the position of a word.
 Given the same string as above, find the position of the word "tall."
 Again, as above, account for the fact that there is more than one instance of "tall" in the string.
-What if the word you're given is part of a larger word?  The word "add" can be found inside the word "ladder."
+What if the word you're given is part of a larger word? The word "add" can be found inside the word "ladder."
 Does your algorithm work for the cases in which this is and isn't a valid solution to the problem?
 Can you think of any other things that should be considered in solving this problem?_
 
 ===== Reversing a String Without `reverse()`
 
-_Write your own function to reverse a string.  For instance, if passed the string "apple," the function should return "elppa."  Can you do the same for a sentence, turning "Look at the moon" into "moon the at look?"  Again, can you think of any other conditions that should be considered?_
+_Write your own function to reverse a string. For instance, if passed the string "apple," the function should return "elppa" Can you do the same for a sentence, turning "Look at the moon" into "moon the at look?" Again, can you think of any other conditions that should be considered?_
 
 ===== Palindromes
 
@@ -270,60 +307,9 @@ _A palindrome is a string of text that contains the same characters in the same 
 A simple example is the word "level", but the sentence "Evade, Dave!" is also a palindrome because without the capitalization, comma, space, and exclamation point the letters are "evadedave" which are the same forwards and backwards.
 Write a function that determines whether or not a given string is a palindrome. If you get it working with the example given, search the internet for other examples of palindromes to test your function._
 
-==== Array Searching, Sorting, and Manipulation
 
-Now that you know the basics of using arrays with built-in functions, this next section will focus on essential algorithms for working with data in arrays.
-Much of computer programming is about searching, sorting, and manipulating data, and many programming interviews will require you to understand the basics of how to implement these algorithms.
-Even if you aren't directly asked questions about these algorithms, they are incredibly useful tools to have in your programming toolbox and they can be used to solve many different types of programming problems.
 
-===== Sorting
-
-Sorting is just what it sounds like: sorting data according to a given criteria.
-
-Let's start with the most straightforward sort algorithm to understand
-
-===== Searching
-
-Searching is when you find an item or items in a set of data.
-The main differences between the search algorithms are the quantity of data being searched, and whether or not that data is in a specific order to start.
-
-To try to gain some intuition for the differences in search algorithms, consider this simple example.
-Let's say you decided to go to the pound to get a puppy.
-There are one hundred kennels containing dogs to choose from.
-You walk past all the kennels and you see a dog you just love named "Harry."
-
-The animal trainer who works at the pound hands you a stack of papers and says you have to find Harry's paper to take him home.
-The papers aren't sorted.
-Right off the bat it would clearly be easier to search through the stack if the papers were already sorted.
-But stop for a moment and think about how you're going to do that?
-Are you just going to page through the papers from A-H until you find Harry?
-Start the search at Z?
-Something else?
-Would you search through the papers the same way if there were only 10?
-Or 10,000?
-But it's not any of those things; it's a stack of 100 unsorted papers.
-So how are you going to go about finding "Harry?"
-Stop and consider these questions for a moment before moving on.
-
-Let's start with a simple search: the binary search.
-You may have used this one before if you've ever played "Guess the Number."
-Someone says to you, "I'm thinking of a number between one and 100 and if you can guess the number in 6 guesses or fewer, I'll give you $5.  After every guess I'll tell you if my number is higher or lower than the one you choose."
-Does it matter that you're told whether or not the number is higher or lower after every guess?
-Why?
-How would you go about solving this problem?
-
-Even people who have never played the game before will quickly come up with winning strategies.
-It doesn't make a lot of sense to guess numbers in order because that would give you only about a 5% chance to guess the number before running out of guesses.
-You're also only going to guess numbers based on the clues provided to you by the person who makes the offer.
-If you guess 71, and she tells you it's going to be higher than 71, it makes no sense to guess 20 on the next turn.
-
-The foolproof way to win this game every time is by conducting a binary search.
-The reason it's called a binary search is because every guess reduces the remaining number pool into two parts, and then eliminates one of them from further consideration.
-
-Following this strategy, your first guess should be 50.
-It cuts the remaining number pool in half.
-
-**  Consider adding coding questions to the end of sections **
+** Consider adding coding questions to the end of sections **
 
 
 ===== Reversing
@@ -342,7 +328,7 @@ Here are some example questions
 
 Given an array, can you return the highest or lowest element according to a given criteria?
 
-Example:  What is the largest number in the array [7, 2, 8, 6, 5]?
+Example: What is the largest number in the array [7, 2, 8, 6, 5]?
 
 ===== Array Rotation
 
@@ -352,154 +338,28 @@ Rotate
 
 ABCDE = EBDCA
 
-===== Longest or Highest Subset 
+===== Longest Substring Without Repeating Characters 
 
-This one will help you xyc
+Given a string s, find the length of the longest 
+substring
+ without repeating characters.
 
+ 
 
-=== Stacks and Queues
+Example 1:
 
-Stacks and Queues are two kinds of data structures that
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+Example 2:
 
-==== FIFO v. LIFO
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
 
-FIFO v. LIFO
-
-==== Stack Definition
-
-A stack has a few different meanings in computer science, but when it comes to data structures, a stack is a "last in, first out" way of ordering data.
-The analogy commonly given is of a stack of plates in a cafeteria, where the last plate placed on the stack is the first one that comes off the top.
-Earlier we talked about "push/pop" functions available for arrays, and these are often used with stacks as well. 
-A plate (or a pancake, or data) can be pushed onto the top of the stack, and that same plate (pancake, data) will be the first one popped off the top.  
-
-==== Queue Definition
-
-A queue is a "first in, first out" data structure akin to standing in line.
-The first piece of data pushed into a queue is the first piece of data to be taken back out of it again.  
-
-==== Developing Intuition: What are stacks and queues used for?
-
-Stacks and queues are often used to indicate _priority_ in the processing of data.  
-It's not hard to see why.
-Imagine an elevator that only goes to two floors, say the ground floor and the 10th floor.
-Ten people enter the elevator on the ground floor.
-Because of the way elevators -- and society -- are constructed, the last people to board the elevator will be the first ones to leave it.
-The elevator creates a priority by the way it is boarded.
-It's simply impossible for the people who first board the elevator to exit first, as they will be furthest from the door.
-This is an example of a stack.
-
-A queue is even easier to understand.
-We've all waited in line.
-It even seems "unfair" for people to cut in line; the first in must be the first out!
-
-There are, of course, exceptions to these rules. 
-Pause for a moment and try to think of a real-world exception to each.
-
-There are a few ways to use stacks and queues in computer science, but most often they are used for assigning priority to tasks.
-They can be used to determine the priority of packets in a network or to determine tasks that must be completed before other tasks begin.
-
-Is a for loop an example of a stack or a queue?  
-What about a nested for loop?
-What about the browser event loop?  
-
-
-==== Example Questions
-
-Here is an example of the sample that you're ample
-
-[source, python]
-----
-print('hello world')
-----
-
-===== Balanced parentheses
-
-How can you balance parentheses
-
-===== Find the second smallest item
-
-Find the second-smallest number in an array of integers.
-Can you scale this to the third smallest?
-Third largest?
-Can you scale this to other sorts of ordering, like alphabetical order?
-
-===== Implement x using a stack
-
-How to implement x
-
-=== Heaps
-
-Heaps and heaps and heaps
-
-==== Heap Definition
-
-A heap is a data structure that
-
-==== Developing Intuition: What are heaps used for?
-
-Thhink and grow heaps
-
-==== Max heaps and min heaps
-
-MINIMAX and heap
-
-==== Example questions
-
-Before you get your heap on here's what you need to know. 
-
-===== Is heap a max or min heap?
-
-IS IT MAX OR MIN
-
-==== Convert max heap to min heap
-
-Min is max and max is min
-
-=== Linked Lists
-
-Link your lists
-
-==== Linked List Definition
-
-Link your definitions ipsum
-
-==== Singly Linked List
-
-One list with one link to rule them on
-
-==== Doubly Linked List
-
-Two links to rule them all
-
-==== Developing Intuition: What are Linked Lists Used For?
-
-Think and grow lists
-
-==== Example Questions
-
-Here are the examples you might find
-
-===== Find
-
-Find this is 
-
-===== Insert
-
-Insert is a this and that
-
-===== Delete
-
-Delete and you need to know
-
-===== Reversing a linked list
-
-Reverse play the reverse card
-
-===== Item Swap
-
-You go this way, I go that way. 
-
-===== Merging linked lists
-
-All together now. 
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 

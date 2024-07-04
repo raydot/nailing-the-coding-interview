@@ -1,18 +1,31 @@
 [[DtCI_ch07]]
 
-== Heaps
+=== Heaps
 
-After reading this chapter, the reader should understand the definition of a hash, a tree, and a graph, and what each is used for in programming.   The reader will be given some idea of what kinds of questions to expect on a coding test about these data structures and strategies for solving them.
+Heaps and heaps and heaps
 
-=== Heap Definition
+==== Heap Definition
 
-=== What are heaps used for?
+A heap is a data structure that
 
-=== Max heaps and min heaps
+==== Developing Intuition: What are heaps used for?
 
-=== Example questions
+Thhink and grow heaps
 
-=== Is heap a max or min heap?
+==== Max heaps and min heaps
 
-=== Convert max heap to min heap
+MINIMAX and heap
+
+==== Example questions
+
+Before you get your heap on here's what you need to know. 
+
+===== Is heap a max or min heap?
+
+IS IT MAX OR MIN
+
+==== Convert max heap to min heap
+
+Min is max and max is min
+
 

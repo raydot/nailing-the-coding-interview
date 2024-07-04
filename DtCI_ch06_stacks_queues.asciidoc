@@ -4,10 +4,72 @@
 
 After reading this chapter, the reader should understand the ...
 
-=== LVL 3
+=== Stacks and Queues
 
-==== LVL 4
+Stacks and Queues are two kinds of data structures that
 
-==== LVL 4
+==== FIFO v. LIFO
 
-==== LVL 4
+FIFO v. LIFO
+
+==== Stack Definition
+
+A stack has a few different meanings in computer science, but when it comes to data structures, a stack is a "last in, first out" way of ordering data.
+The analogy commonly given is of a stack of plates in a cafeteria, where the last plate placed on the stack is the first one that comes off the top.
+Earlier we talked about "push/pop" functions available for arrays, and these are often used with stacks as well. 
+A plate (or a pancake, or data) can be pushed onto the top of the stack, and that same plate (pancake, data) will be the first one popped off the top.  
+
+==== Queue Definition
+
+A queue is a "first in, first out" data structure akin to standing in line.
+The first piece of data pushed into a queue is the first piece of data to be taken back out of it again.  
+
+==== Developing Intuition: What are stacks and queues used for?
+
+Stacks and queues are often used to indicate _priority_ in the processing of data.  
+It's not hard to see why.
+Imagine an elevator that only goes to two floors, say the ground floor and the 10th floor.
+Ten people enter the elevator on the ground floor.
+Because of the way elevators -- and society -- are constructed, the last people to board the elevator will be the first ones to leave it.
+The elevator creates a priority by the way it is boarded.
+It's simply impossible for the people who first board the elevator to exit first, as they will be furthest from the door.
+This is an example of a stack.
+
+A queue is even easier to understand.
+We've all waited in line.
+It even seems "unfair" for people to cut in line; the first in must be the first out!
+
+There are, of course, exceptions to these rules. 
+Pause for a moment and try to think of a real-world exception to each.
+
+There are a few ways to use stacks and queues in computer science, but most often they are used for assigning priority to tasks.
+They can be used to determine the priority of packets in a network or to determine tasks that must be completed before other tasks begin.
+
+Is a for loop an example of a stack or a queue?  
+What about a nested for loop?
+What about the browser event loop?  
+
+
+==== Example Questions
+
+Here is an example of the sample that you're ample
+
+[source, python]
+----
+print('hello world')
+----
+
+===== Balanced parentheses
+
+How can you balance parentheses
+
+===== Find the second smallest item
+
+Find the second-smallest number in an array of integers.
+Can you scale this to the third smallest?
+Third largest?
+Can you scale this to other sorts of ordering, like alphabetical order?
+
+===== Implement x using a stack
+
+How to implement x

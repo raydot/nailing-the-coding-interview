@@ -2,12 +2,52 @@
 
 == Linked Lists
 
-After reading this chapter, the reader should understand the ...
+After reading the chapter the reader will understand lorem...
 
-=== LVL 3
+=== Linked Lists
 
-==== LVL 4
+Link your lists
 
-==== LVL 4
+==== Linked List Definition
 
-==== LVL 4
+Link your definitions ipsum
+
+==== Singly Linked List
+
+One list with one link to rule them on
+
+==== Doubly Linked List
+
+Two links to rule them all
+
+==== Developing Intuition: What are Linked Lists Used For?
+
+Think and grow lists
+
+==== Example Questions
+
+Here are the examples you might find
+
+===== Find
+
+Find this is 
+
+===== Insert
+
+Insert is a this and that
+
+===== Delete
+
+Delete and you need to know
+
+===== Reversing a linked list
+
+Reverse play the reverse card
+
+===== Item Swap
+
+You go this way, I go that way. 
+
+===== Merging linked lists
+
+All together now. 
