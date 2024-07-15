@@ -1,6 +1,10 @@
+# Files
+NOTES.md
+
 # Directories
 notebooks/
 grapher/
 
 # Items
 .vscode
+.yaml
