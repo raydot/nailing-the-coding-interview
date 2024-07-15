@@ -1,30 +1,30 @@
 [[DtCI_ch06]]
 
-== Stacks and Queues
+= Stacks and Queues
 
 After reading this chapter, the reader should understand the ...
 
-=== Stacks and Queues
+== Stacks and Queues
 
 Stacks and Queues are two kinds of data structures that
 
-==== FIFO v. LIFO
+== FIFO v. LIFO
 
 FIFO v. LIFO
 
-==== Stack Definition
+== Stack Definition
 
 A stack has a few different meanings in computer science, but when it comes to data structures, a stack is a "last in, first out" way of ordering data.
 The analogy commonly given is of a stack of plates in a cafeteria, where the last plate placed on the stack is the first one that comes off the top.
 Earlier we talked about "push/pop" functions available for arrays, and these are often used with stacks as well. 
 A plate (or a pancake, or data) can be pushed onto the top of the stack, and that same plate (pancake, data) will be the first one popped off the top.  
 
-==== Queue Definition
+== Queue Definition
 
 A queue is a "first in, first out" data structure akin to standing in line.
 The first piece of data pushed into a queue is the first piece of data to be taken back out of it again.  
 
-==== Developing Intuition: What are stacks and queues used for?
+== Developing Intuition: What are stacks and queues used for?
 
 Stacks and queues are often used to indicate _priority_ in the processing of data.  
 It's not hard to see why.
@@ -50,7 +50,7 @@ What about a nested for loop?
 What about the browser event loop?  
 
 
-==== Example Questions
+== Example Questions
 
 Here is an example of the sample that you're ample
 
@@ -59,17 +59,17 @@ Here is an example of the sample that you're ample
 print('hello world')
 ----
 
-===== Balanced parentheses
+=== Balanced parentheses
 
 How can you balance parentheses
 
-===== Find the second smallest item
+=== Find the second smallest item
 
 Find the second-smallest number in an array of integers.
 Can you scale this to the third smallest?
 Third largest?
 Can you scale this to other sorts of ordering, like alphabetical order?
 
-===== Implement x using a stack
+=== Implement x using a stack
 
 How to implement x

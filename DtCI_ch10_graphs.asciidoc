@@ -1,36 +1,36 @@
 [[DtCI_ch10]]
 
-== Graphs
+= Graphs
 
 After reading this chapter, the reader should understand the definition of a hash, a tree, and a graph, and what each is used for in programming.   The reader will be given some idea of what kinds of questions to expect on a coding test about these data structures and strategies for solving them.
 
 
-=== Graph Definition
+== Graph Definition
 
-=== Building Intuition: What are graphs used for?
+== Building Intuition: What are graphs used for?
 
-=== Graph data structures
+== Graph data structures
 
-==== Arrays
+== Arrays
 
-==== Matrices	
+== Matrices	
 
-=== Reasoning about graphs
+== Reasoning about graphs
 
-=== Depth First Graph
+== Depth First Graph
 
-=== Breadth First Graph
+== Breadth First Graph
 
-=== Weighted Graph
+== Weighted Graph
 
-=== Dijkstra’s algorithm
+== Dijkstra’s algorithm
 
-=== Example Questions
+== Example Questions
 
-==== Closest path
+== Closest path
 
-==== Furthest path
+== Furthest path
 
-==== Knight walk
+== Knight walk
 
-==== Flood fill
+== Flood fill

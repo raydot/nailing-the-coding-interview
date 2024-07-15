@@ -1,109 +1,31 @@
 [[DtCI_ch08]]
 
-== Hashes
+= Hashes
 
 After reading this chapter, the reader should understand the definition of a hash ipsum.
 
-==== Hash definition
+== Hash definition
 
-==== Building Intuition: What are hashes used for?
+== Building Intuition: What are hashes used for?
 
-==== Reasoning about Hashes
+== Reasoning about Hashes
 
-==== Real world example
+== Real world example
 
-==== Hashes and encryption
+== Hashes and encryption
 
-==== Salts
+== Salts
 
-==== Example Questions
+== Example Questions
 
-===== Word Count
+=== Word Count
 
-===== Palindromes II
+=== Palindromes II
 
-===== Anagrams
+=== Anagrams
 
-===== etc…
+=== etc…
 
-===== Using AI to Study for Hash Problems
-
-=== Trees
-
-==== Trees Definition
-
-==== Building Intuition: What are trees used for?
-==== Trees and heaps
-
-==== Reasoning about trees
-
-==== Tree Operations
-
-===== Insertion
-
-===== Deletion
-
-===== Balancing
-
-==== Types of Trees
-
-==== Binary Trees
-
-===== Properties
-
-===== Search
-
-===== Sort
-
-==== Other Tree Types
-
-===== Red and Black Trees
-
-===== AVL Trees
-
-==== Tries
-
-==== Other trees
-
-==== Example Questions
-
-===== Finding height of tree
-
-===== Tree longest path
-
-===== Balanced tree
-
-===== Merging trees
+=== Using AI to Study for Hash Problems
 
 
-=== Graphs 
-
-==== Graph Definition
-
-==== Building Intuition: What are graphs used for?
-
-==== Graph data structures
-
-===== Arrays
-
-===== Matrices	
-
-==== Reasoning about graphs
-
-==== Depth First Graph
-
-==== Breadth First Graph
-
-==== Weighted Graph
-
-==== Dijkstra’s algorithm
-
-==== Example Questions
-
-===== Closest path
-
-===== Furthest path
-
-===== Knight walk
-
-===== Flood fill

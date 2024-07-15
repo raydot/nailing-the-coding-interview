@@ -1,56 +1,11 @@
 [[DtCI_ch03]]
 
-= PART 2: Data Structures
+= Strings
 
-How to add parts to book?
-
-Data structure ipsum laboris deserunt ea incididunt sit ea amet ullamco nulla aute laboris. Nisi ad commodo qui esse exercitation non. Nostrud laboris duis proident reprehenderit dolor. Excepteur cillum aliquip qui proident.
-
-
-
-After reading this chapter, the reader should understand the definition of a heap, stack, and queue, what they’re used for in computer science, and what kinds of questions to expect. 
-This book will hint at how the array structure can be turned into a tree, but trees will be given a chapter of their own...
-
-We should start by determining what is meant by a "data structure." 
-This book assumes you have an introductory understanding of at least one programming language, so you should already be familiar with a single variable:
-
-`x = 10`
-
-In Python and similar languages, an `=` in most contexts acts as the "assignment operator." 
-This means that the value on the right side of the `=` is "assigned" to the variable on the left side. The variable, `x`, now holds a value of 10 which can be used wherever it's needed in the code. 
-But that's one single variable and a single variable is not considered a data structure. 
-A single variable holds a piece of data, but it doesn't do much to structure it with other pieces of data. 
-
-A data structure, on the other hand, is code that can contain multiple pieces of data and create meaningful relationships between each piece. Meaningful for programmers, anyway -- you probably wouldn't want to try to read the works of William Shakespeare in data structure form. 
-
-Data structures can be thought of as recipes for combining data in specific ways. 
-To use cooking as an analogy, say you're hungry and you find milk, eggs, sugar, and flour in your pantry. 
-Those same ingredients can be used to make different things depending on the cooking techniques you apply to them. 
-Mixing and cooking the ingredients in one specific way and you'll end up with pancakes. 
-With a slightly different technique, you can turn those same ingredients into noodles. 
-Cook it all up a third way and you might get something more like pudding. 
-Based on the technique for pancakes, you can choose to make nice thick hearty pancakes, or you can make thinner pancakes that can be used as a wrapper for other ingredients, like crepes or dumplings.
-
-You can think of data structures as the specific recipes suggested above. 
-Mix arrays with functions that link them together, and you get one specific type of data structure, perhaps a linked list. 
-Mix them with different functions and the list can become a tree. 
-Modify a tree yet again and under certain conditions and the tree can become a graph, or vice versa. 
-This analogy should give you a simple idea of how the basic things you might already know how to do as a programmer can be combined to do more advanced things and these advanced things might all be created from the same basic sets of principles with minor modifications depending on the desired result. 
-Keep this in mind as the overall idea of data structures as you proceed through this book.
-
-Data structures play an important part in programming interviews for two reasons: 
-1) they can specifically illustrate the familiarity programmers have with specific techniques and 
-2) They can be used (sometimes interchangeably) to solve specific problems. So think of data structures both as tools for becoming a better programmer and also as ways of thinking about programming that will become more relevant and make you more efficient the more advanced you become as a programmer. 
-As useful as these skills are for passing coding interviews, if you can master them they'll also make you better at your job once you get it. 
-
-In this book, we will consider four data structures commonly used in coding interviews. We will consider linear data structures in this chapter, and hash, tree, and graph data structures in the next. There are more data structures than this, but knowledge of these four should be enough to get you through any coding test. 
-
-== Strings
-
-While this book assumes you've had an introduction to computer programming, this chapter will contain an exploration of some basic concepts in order to create a baseline of understanding for the content to follow.
+While this book assumes you've had an introduction to computer programming, this chapter and the next will contain an exploration of some basic computer science concepts in order to create a baseline of understanding for the content to follow.
 If you come across something in this chapter that you already know feel free to skip ahead.
 
-=== Strings
+== Strings
 
 Strings are (of course) one of the most commonly used data structures in programming. 
 The documentation of most programming languages starts with the ubiquitous "Hello World" program, which usually involves rendering a string. 
@@ -65,13 +20,11 @@ Or is it 11?
 Something else? 
 To understand how to manipulate strings, you must begin by understanding the way in which they're constructed and represented by computer operating systems and programming languages.
 
-==== Breaking Down a String
+=== Breaking Down a String
 
 In most programming languages a string is nothing more than an array with a character at each position.
 
-GRAPHIC:
-['H', 'e', 'l', 'l', 'o', '\s'  , 'w', 'o', 'r', 'l', 'd', '!', '\n']
-[ 0,   1,   2,   3,   4,    5,     6,   7,   8,   9,   10, 11,   12 ]
+image::images/ch_03/string_as_array.png["String as Array of Characters"]
 
 Arrays are covered in the next chapter, but let's begin by discussing what is meant by a "character."
 If you're already familiar with this subject, please feel free to skip this section.
@@ -82,7 +35,7 @@ The two most commonly used lookup tables for computers that use Latin-character-
 Again, there are piles of documents written about these two systems and others, and if you're interested a quick web search will show you more than you ever needed to know about these two systems.
 
 The positions of the characters in this table are direct descendants of the teletype systems that were widely in use in the middle part of the 20th Century.
-If you're watching a movie and you see a chattering machine spitting out the urgent message onto a sheet of paper that needs to be seen immediately by a spy or government, that's a teletype machine.
+If you're watching a movie and you see a chattering machine spitting out the latest news or a top-secret message that needs to be seen immediately by the people in charge onto a sheet of paper one line at a time, that's a teletype machine.
 It might be hard to imagine, but not all that long ago computers were only able to output to printers and not screens.
 
 The size of a character in most operating systems is based on a byte.
@@ -124,12 +77,10 @@ And when you think of either you should picture that array as potentially contai
 
 Here's another look at that image above one more time:
 
-GRAPHIC:
-['H', 'e', 'l', 'l', 'o', '\s'  , 'w', 'o', 'r', 'l', 'd', '!', '\n']
-[ 0,   1,   2,   3,   4,    5,     6,   7,   8,   9,   10, 11,   12 ]
+image::images/ch_03/string_as_array.png["String as Array of Characters"]
 
 
-==== Accessing a String
+=== Accessing a String
 
 As mentioned before, usually the first thing a programming student is shown how to do is generate output using some kind of variation of a "print" statement.
 You won't be asked interview questions about that.
@@ -145,7 +96,7 @@ I used the Python Panda's `strip()` command to get rid of these unwanted charact
 The team eventually had to use some custom lambda functions to get the results we wanted.
 Parsing string data is absolutely something you will do more than once in your programming career.
 
-==== Typecasting
+=== Typecasting
 
 Everyone knows that 2 + 2 = 4, but while that's fine for English or mathematics, that's not necessarily the case at all when it comes to programming languages.
 For starters, "=" is the assignment operator, which means that 2 + 2 = 4 will return an error.
@@ -176,7 +127,7 @@ It means the number 2 which is exactly what you think it means.
 
 
 
-==== Built-in String Functions
+=== Built-in String Functions
 
 Most programming languages contain a number of functions for manipulating strings.
 One of the more basic and widely used is the "concatenation operator," which connects one string to another.
@@ -246,8 +197,6 @@ slice(start, end)
 slice(start, end, step)
 ---
 
-
-
 In languages that implement `splice()`, the data is returned without modifying the original.
 This can be useful as a "stripping" operation, say to remove a line return and dollar sign from the beginning of every string in a group of strings.
 Python contains the most robust splicing function, allowing programs to choose by an index that can be passed in a number of useful ways.
@@ -269,21 +218,25 @@ For example, in Python, you can use a ":" to select the range of the items you'r
 >>> 
 ---
 
+
+
 There are more concepts that are applicable to strings that will be discussed in the upcoming section on arrays, including `slice()` and `reverse()`.
 
+[NOTE]
+====
+Modifying data
+====
 
 
+I will revisit the construction of some of these functions in the upcoming "Arrays" chapter, but hopefully this has helped you start to see the importance of these basic string manipulation problems and why they might come up in programming tests. 
 
-
-I will revisit the construction of some of these functions in the upcoming "Arrays" chapter, but hopefully this has helped you start to the importance of these basic string manipulation issues and why they might come up in programming tests. 
-
-==== Example Questions
+=== Example Questions
 
 These next few example questions will give you a taste of what's coming in the "Searching, Sorting, and Manipulation" part of this chapter.
 Try to solve the following problems without looking ahead to that section.
 Or, if you get really stuck, come back and solve these problems after reading the next section.
 
-===== Finding a Character or Word in a String
+==== Finding a Character or Word in a String
 
 _Create a function that takes a string and a character and returns the position of that character in the string. 
 For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 4. 
@@ -297,11 +250,11 @@ What if the word you're given is part of a larger word? The word "add" can be fo
 Does your algorithm work for the cases in which this is and isn't a valid solution to the problem?
 Can you think of any other things that should be considered in solving this problem?_
 
-===== Reversing a String Without `reverse()`
+==== Reversing a String Without `reverse()`
 
 _Write your own function to reverse a string. For instance, if passed the string "apple," the function should return "elppa" Can you do the same for a sentence, turning "Look at the moon" into "moon the at look?" Again, can you think of any other conditions that should be considered?_
 
-===== Palindromes
+==== Palindromes
 
 _A palindrome is a string of text that contains the same characters in the same order both forwards and backward, excluding spaces and punctuation.
 A simple example is the word "level", but the sentence "Evade, Dave!" is also a palindrome because without the capitalization, comma, space, and exclamation point the letters are "evadedave" which are the same forwards and backwards.
@@ -312,33 +265,27 @@ Write a function that determines whether or not a given string is a palindrome. 
 ** Consider adding coding questions to the end of sections **
 
 
-===== Reversing
+==== Reversing
 
 Reversing
 
-==== Sliding Windows
+=== Sliding Windows
 
 This one comes up a lot, good basic technique to know.
 
-==== Example Questions
+=== Example Questions
 
 Here are some example questions 
 
-===== Maximum and Minimum Element
+==== Maximum and Minimum Element
 
 Given an array, can you return the highest or lowest element according to a given criteria?
 
 Example: What is the largest number in the array [7, 2, 8, 6, 5]?
 
-===== Array Rotation
 
-Rotate
 
-===== Permutations
-
-ABCDE = EBDCA
-
-===== Longest Substring Without Repeating Characters 
+==== Longest Substring Without Repeating Characters 
 
 Given a string s, find the length of the longest 
 substring
@@ -362,4 +309,8 @@ Input: s = "pwwkew"
 Output: 3
 Explanation: The answer is "wke", with the length of 3.
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+==== Food for Further Thought
+
+Look up the Rabin-Karp algorithm for finding a substring in a string.  This is an algorithm you probably use all the time, like when you press CTRL-F to find text in a longer document.  The Rabin-Karp algorithm works by converting the substring to a hash value which allows it to run in O(1) time. Hashes will not be covered until Chapter 8, but try to begin thinking about Rabin-Karp now.  Is it a suitable algorithm to be used in a coding interview? Why or why not?
 

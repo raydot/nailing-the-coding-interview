@@ -1,43 +1,121 @@
 [[DtCI_ch01]]
 
-= Part I: Introduction
 
-Part I cupidatat ad aute ea id dolore eiusmod mollit qui in. Veniam eu duis aliquip pariatur ullamco mollit. Commodo pariatur proident incididunt aute ad magna sit elit ullamco laborum. Duis aliqua enim esse commodo velit minim sunt minim do.
+= Preparing for the Coding Interview
 
-== Preparing for the Coding Interview
+If you've looked for a job as a developer anytime over the past 10 years, you've almost certainly been asked to take a coding test.
+The very phrase, "coding test," strikes fear into the hearts of developers from Palo Alto to the Passaic.  
+If this describes you, fear no longer.
+The book in your hands (or on your screen) is your guide to how to take and pass coding tests.
+With some time, effort, and energy this book will hopefully help you build the knowledge and skills needed to answer coding interview questions like a pro.  
 
-After reading this chapter, the reader should know how to formulate a study plan and understand how to begin using the exercises in the book to prepare for a coding interview
+== How to use this Book
 
-=== How to use this Book
+One question I see asked all the time online goes something like this: "I've been studying LeetCode for a few weeks now, and I can't even answer the most basic questions."
+Should I quit?
+The reason for this usually turns out to be because the question asker has made the assumption that LeetCode is the place to begin.
+Except it isn't.
+Without a basic knowledge of data structures and algorithms -- also known as "DSA," -- you won't get far on LeetCode at all.
+It's like trying to swim against a strong ocean current.
+You'll make no headway and only tire yourself out.  
 
-Put more content here.
+This book is the DSA primer you might not have gotten if you don't have a computer science degree, or if you got one in the days before coding questions became required for most programming jobs.
+Coding boot camps, for instance, are a great way to gain some basic knowledge about how to get started as a developer, but they aren't necessarily focused on teaching the broader concepts covered by DSA.  
+This book aims to bridge that gap.
 
-==== Study Plan
+== Study Plan
 
-ipsum
+My first job as a computer programmer began with a phone call on Friday afternoon.
+Would I be willing to come down on the following Tuesday and interview for a position with a newly formed tech company?
+I eagerly said yes, hung up the phone, and realized I had no idea how to do what they were hiring me for.
+So I went into the storeroom at work and "borrowed" the manual for the software I was expected to know how to use.
+I read the whole thing from cover-to-cover twice over the weekend, and somehow managed to string together a small demo that convinced the company to give me the job.
+I've been a programmer ever since.
 
-==== Interview Plan
+My advice to you: Don't do that.
 
-lorem
+You have to give yourself enough time to be able to not only read about DSA, but to sit down and write some code and try some things and hopefully really absorb the content this book has to offer.
 
-==== Backup Plan
+To that end, I advise coming up with a plan that you can realistically accomplish.
+Maybe you already have some knowledge of DSA, and maybe it will only take you six weeks for the book to sink in.
+If you're like me and maybe you like to spend more time with things in order to fully understand them then perhaps a schedule of 15 weeks is more appropriate. 
+I can't say.
+I don't know you, and I can't see you.
+But I do want to help you. 
 
-dolor
+Sit down soon and maybe skim through this book one time.
+Take a moment to make an estimate of how long it will take to read it through.
+Maybe you don't need to know everything in every chapter.
+Maybe you can already tell that some chapters will go quicker than others.
+Whatever you decide, write it down.
+This gives you a baseline for how long you can expect to take to finish.
 
-=== The Importance of Doing the Work
+Then build a plan around that longer time period.
+Will you put two hours a day into this book?
+15 minutes on the bus ride to work?
+Marathon two-day sessions every weekend?
+Figure that part out and write it all into a calendar -- preferably one that you can easily modify.
+
+As you work through the first several chapters, check back in with this plan.
+Is it going faster or slower than you think?
+Maybe everything is going exactly as you planned -- great!
+But if the time is not what you thought it was, go ahead and readjust your calendar to make a more realistic estimate.  
+
+The other thing that matters is consistency.
+However you plan to study, make sure you make it a habit.  
+
+After you've honed in on a realistic assessment, you'll have some way to track your progress. 
+You'll also know when you can start looking for work, and when you can plan to attend an interview and be effective.
+The more diligent and patient and careful you are in your planning, the more likely you are to reach your goal.
+
+If this is a Friday and you have the interview on Tuesday, good luck!
+
+== During the Interview
+
+There unfortunately is not a single way in which coding tests are administered by companies.
+What you are asked can change from company-to-company, and even from interviewer to interviewer.
+You might be put into a room and asked to solve three questions on your own in an hour, or the interviewer might say "Let's solve a problem together" and take you through a team exercise.
+
+If it's just you and a coding test and a clock then spend a moment thinking about how to maximize your time.
+The questions will be of different difficulties.
+Oftentimes you will not be able to answer all of the questions in the time given.
+Do you feel more comfortable answering several hard questions or a single easy one?
+If it's a group exercise, would you like to spend more time talking or more time coding?
+
+There are a lot of resources online about how to present yourself in interviews from how to write a resume to how to dress to how to speak.
+Spend some time looking at these so you're not surprised by what you find once you get into the interview room.
+
+== Backup Plan
+
+Things don't always go the way we expect, even (especially) when they seem like they will.
+The odds are, you won't get the job.
+Expect it.
+You might know exactly why you didn't get the job or you might have no idea.
+Don't take it personally, it really doesn't matter and likely has little to do with you as an individual person.
+The only thing you can do is regroup, figure out how to improve, and figure out what to do differently the next time.
+After you leave the interview, take a moment and reflect.
+Write down the questions if you can remember them. 
+Go home and look up anything you didn't understand.
+Fortify yourself for the next time.
+The re-plan, re-apply, and expect to do better the next time!
+
+== The Importance of Doing the Work
 
 There is no learning without doing.
 You can read this book many times over but unless you have a photographic memory, you will have a hard time learning data structures and algorithms without going through the exercises and trying things out for yourself.
-Also, if you have a photographic memory, I can't see why you would have to read the book more than once.
 
 It's incredibly important that you sit down in front of a computer and try the things you need to learn from this book.
-At the end of most chapters I will give ideas for ways to expand on the concepts that have been covered.
+At the end of most chapters I will give ideas for ways to expand on the concepts that have been covered on your own.
 As someone who always skips over these kinds of things, I'm asking you not to skip over these things.
 Spend some time with the ideas.
 If they're too easy, find a way to modify them to suit your skill level, or find a LeetCode problem that utilizes them.
 If they're too hard, break them down into smaller problems that you can solve -- an idea I'll come back to more than once in this book.
 
-=== Developing Intuition
+I also suggest you "grow before you know," which means working on problems that seem a little more challenging than you can handle.
+The more you push yourself, the faster you'll learn.
+It's an uncomfortable feeling, and I suggest you get used to it!
+
+== Developing Intuition
 
 When I first decided to learn math as an adult, outside of school, I was given some really good advice by a very smart person.
 She told me not to worry so much about the specifics of equations, but instead to try to understand what the equation is trying to do.
@@ -53,14 +131,14 @@ I tell my students, "Don't start coding before you understand what you're trying
 Because if you don't you're going to be just like the x in that graph.
 You can push yourself further and further and further along an axis, but you'll never reach it.
 
-If instead you stop for a moment and try to take a concept and put it into words that you can understand, try to really unpack what it's saying and what it's trying to do, you won't have to memorize it because you can simply re-create it from your understanding.
+If instead you stop for a moment and try to take a concept and put it into words that you can understand, then you'll be more prepared to see when it's useful in a coding interview. If you pause and try to really unpack what it's saying and what it's trying to do, you won't have to memorize it because you can simply re-create it from your understanding.
 
 The several sections in this book that begin with the heading "Developing Intuition" are written to get you to come to this understanding.
 Take some extra time with these.
 Putting in a little effort in the short term might save you lots of time in the long run because you won't have to struggle to understand what you're being asked.
 
 "I see that x at the bottom of the fraction, so I know x can never be zero.
-Because it's in the denominator of the I know that the bigger the number gets, the smaller the equation gets. 1/1 is pretty small, 1/10,000 is even smaller and 1/1,000,000,000 is tiny.
+Because it's in the denominator of the fraction I know that the bigger the number gets, the smaller the equation gets. 1/1 is pretty small, 1/10,000 is even smaller and 1/1,000,000,000 is tiny.
 Aha!
 This equation must describe a limit approaching zero!"
 
@@ -68,13 +146,3 @@ I didn't look that up, I didn't memorize that, I only have a general idea of wha
 I just used my understanding and a little bit of intuition to explain that example, and I'm pretty sure I'm right.
 The more you can do that with the concepts in this book, the sooner you'll master the ideas needed to prevail.
 
-8 LeetCode patterns (in reverse order of difficulty)
-
-1. The two-pointer pattern.  Iterate through sorted array.  LeetCode #167 "Two Sum Problem."  Use a pointer at either end and iterate up/down depending if the total is less or more than the target.  LeetCode #15 "Three Sum Problem," triplets that add up to zero in a sorted array
-2. Binary Tree BFS.  Solved using queue.  LeetCode #102 "Binary Tree Level Order Transversal"
-3. Topological Sort on DAG.  Used for "prerequisite chains." LeetCode #207 "Course Schedule."  
-4. Binary Tree DFS.  Solve using recursion.  LeetCode #104. "Maximum depth of binary tree."
-5. Top k elements.  "Find k largest elements in an array"  Input is linear data structure. Solve using heap. 
-6. Modified Binary Search.  LeetCode #33 "Search in Rotated Sorted Array."  Array contains duplicates?  Solution not found?  Python `bisect.left` and `bisect.right`
-7. Subset "Find all possible combinations"  LeetCode #46 "Permutations."  Build by levels, similar to BFS.
-8. Sliding window "Find the longest substring with k unique characters in string."  Linear data structure, subset, condition.

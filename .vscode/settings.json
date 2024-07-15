@@ -29,5 +29,8 @@
       "addWords": true,
       "scope": "workspace"
     }
-  }
+  },
+  "grammarly.config.suggestionCategories.conjugationAtStartOfSentence": "on",
+  "grammarly.config.suggestionCategories.passiveVoice": "on",
+  "cSpell.userWords": ["latexmath"]
 }

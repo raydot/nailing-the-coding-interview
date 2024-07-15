@@ -1,51 +1,51 @@
 [[DtCI_ch09]]
 
-== Trees
+= Trees
 
 After reading this chapter, the reader should understand the definition of a tree...ipsum
 
 
-=== Trees Definition
+== Trees Definition
 
-=== Building Intuition: What are trees used for?
-=== Trees and heaps
+== Building Intuition: What are trees used for?
+== Trees and heaps
 
-=== Reasoning about trees
+== Reasoning about trees
 
-=== Tree Operations
+== Tree Operations
 
-==== Insertion
+== Insertion
 
-==== Deletion
+== Deletion
 
-==== Balancing
+== Balancing
 
-=== Types of Trees
+== Types of Trees
 
-=== Binary Trees
+== Binary Trees
 
-==== Properties
+== Properties
 
-==== Search
+== Search
 
-==== Sort
+== Sort
 
-=== Other Tree Types
+== Other Tree Types
 
-==== Red and Black Trees
+== Red and Black Trees
 
-==== AVL Trees
+== AVL Trees
 
-=== Tries
+== Tries
 
-=== Other trees
+== Other trees
 
-=== Example Questions
+== Example Questions
 
-==== Finding height of tree
+== Finding height of tree
 
-==== Tree longest path
+== Tree longest path
 
-==== Balanced tree
+== Balanced tree
 
-==== Merging trees
+== Merging trees

@@ -23,33 +23,30 @@ It's certainly hard to see why immediately.
 
 No wonder I was always drawn much more to computer programming than mathematics.
 
-Now that that's out of the way, there is an undeniable link between mathematics and computer science.
+Now that that's out of the way, there is of course a strong link between mathematics and computer science.
 In many cases, the latest discoveries of one have been found thanks to ideas or methods derived from the other.
 This doesn't mean you have to be a math whiz to be a great computer programmer, but a little bit of knowledge of math can certainly never hurt you.
 
 Big O Notation is one of those little bits of math. 
-You don't need to solve long sets of problems or memorize lists of equations to understand and use big O. 
+You don't need to solve long sets of problems or memorize lists of equations to understand and use Big O. 
 There are some general principles you have to understand, and once you understand them you can add the Big O tool to your arsenal. 
 
-Understanding big O is a vital tool for getting through coding interviews, so this book is going to start with it. Rather than taking some crazy deep dive into every equation imaginable, I'm going to give you a few  "Rules of Thumb" to keep in mind for a coding interview.
+Understanding Big O is a vital skill for getting through coding interviews, so this book is going to start with it. 
+Rather than taking some crazy deep dive into every equation imaginable, I'm going to give you a few "Rules of Thumb" to keep in mind for a coding interview.
 
 ==== What is Big O Notation?
 
-Big O (short for "big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.
-While the phrase "Big O" means something specific it is also sometimes used in a general way that means "algorithmic analysis."  
+Big O (short for "Big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.
+While the phrase "Big O" itself means something specific it is also sometimes used in a general way that means "algorithmic analysis."  
 
 This is exactly what Big O is for, analyzing the speed of algorithms. 
-The most important idea behind big O and related terms is that they measure speed in a general and relative, and not specific, way. 
+The most important idea behind Big O and related terms is that they measure speed in a general and relative, and not specific, way. 
 What "general" means is that Big O is great for comparing algorithmic approaches or finding algorithmic optimizations. 
 
 What Big O is not used for is measuring exact run times. 
 If you need to do that, programming languages and libraries contain execution and runtime timers that can tell you exactly how long something takes.
 Where most people get stuck is on the idea that Big O is a precise way to measure speed. Think of Big O as more of a benchmark. 
 Big O is a bar that can be set to see if an algorithm can be improved.
-
-=== Random Paragraph
-(This just popped up down below, not sure it's useful) As mentioned earlier, there's a lot more to Big O than what's in this chapter, but you're not too likely to be asked about it in a coding interview.
-Exceptions will be noted in later chapters as they arise, but if you can understand these four graphs they'll cover most of what you need to know.
 
 === The Shapes of Big O
 
@@ -71,6 +68,14 @@ The X or horizontal axis is the number of operations that need to be performed t
 Usually, it's not possible to decrease the number of inputs, so what makes an algorithm more or less efficient in terms of Big O is a reduction in the number of operations.
 As such, "flatter" graphs are generally preferred to "steeper" ones, as described below.
 
+==== O(1)
+image::images/ch_02/oh_of_one.png["O(1)"]
+
+With O(1), no matter how many inputs you have, there's only one operation that needs to happen.
+Generally speaking, it's hard to beat this approach.
+Most algorithms don't run with this kind of efficiency, but some do, and they'll be discussed below.
+Notice that the shape of this graph is flat, and you can't get more efficient than that.
+
 ==== O(n)
 image::images/ch_02/oh_of_en.png["O(n)"]
 
@@ -86,19 +91,12 @@ If there are 100 inputs or one thousand, as mentioned above, it still might be m
 But what if there are 500,000, or a million, or a trillion?
 The efficiencies of O(n) might diminish considerably compared to other approaches.
 
-==== O(1)
-image::images/ch_02/oh_of_one.png["O(1)"]
-
-With O(1), no matter how many inputs you have, there's only one operation that needs to happen.
-Generally speaking, it's hard to beat this approach.
-Most algorithms don't run with this kind of efficiency, but some do, and they'll be discussed below.
-Notice that the shape of this graph is flat, and you can't get more efficient than that.
 
 ==== O(latexmath:[n^2])
 image::images/ch_02/oh_of_en_squared.png["O(latexmath:[n^2])"]
 
 O(latexmath:[n^2]) is the least efficient of all of the "shapes" discussed in this section.
-O(latexmath:[n^2]) (also called "quadratic") means that every operation must be done the same number of times as the number of inputs.
+O(latexmath:[n^2]) (also called "quadratic") means that every operation must be done _number of inputs_ multiplied by _number of inputs_ times.
 If you have 100 inputs, it will take latexmath:[100^2] or 10,000 operations to complete the task.
 Notice that the shape of this graph takes off quickly and goes nearly vertical.
 The addition of even a small number of inputs will quickly cause the number of operations to skyrocket.
@@ -112,9 +110,10 @@ We'll discuss these more later in this chapter and point out examples in the alg
 image::images/ch_02/oh_of_log_en.png["O(log n)"]
 
 If you don't remember logarithms from high school, a logarithm is the number something would have to be raised to in order to come up with a given number.
-To put that in a hopefully less confusing way, think about it like this: what would 2 have to be raised to in order to get 8?  Since latexmath:[2^3] is 8 the answer is 3.
+To put that in a hopefully less confusing way, think about it like this: what would 2 have to be raised to in order to get 8?  
+Since latexmath:[2^3] is 8 the answer is 3 times, and so latexmath:[$\log_2(8)$] = 3.
 There's more to logarithms than this, of course, but right now we're focusing on the shapes.
-Notice how slowly O(log n) grows, and how for a small number of inputs it can be even more efficient than O(1).
+Notice how slowly O(log n) grows, flattens as it grows larger, and how for a small number of inputs it can be even more efficient than O(1).
 
 O(log n) arises from algorithms that split the relevant numbers of inputs under consideration by half, repeatedly.
 You'll soon see that this is the case with some searching and sorting algorithms, and also with binary trees.
@@ -124,6 +123,7 @@ This is a highly desirable efficiency and one that should be sought wherever pos
 Closely related to O(log n) is O(n log n), which is less desirable than O(n) but certainly superior to O(latexmath:[n^2]).
 
 ==== All of the shapes together
+
 image::images/ch_02/oh_of_all_shapes.png["O of all shapes"]
 
 Here are all of the shapes together.
@@ -142,6 +142,7 @@ I started with the shapes so that you could keep them in mind as we discuss Big 
 Now that you've seen the shapes, it's time to discuss in more detail what they mean.
 
 ==== Big O is a Limit
+
 Big O is not about measuring the actual speed of an algorithm.
 For starters, that's not an easy thing to do universally because different computers come in different memory and chipset configurations.
 
@@ -157,43 +158,151 @@ So the number describes a "limit."
 Big O also describes a limit, but unlike the example above Big O actually describes the _worst_ an algorithm can possibly do.
 If the graph describes the _best_ an algorithm can possibly do, that's referred to as Big Omega or Big Ω notation.
 The average case is described as Big Theta, or Big Θ notation.
-This is not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O and the four shapes we considered earlier.
+This is not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O as a general term for algorithmic analysis and the five shapes we considered earlier.
 
 To sum it up, if an algorithm is said to run in Big O(latexmath:[n^2] time), that algorithm in its worst case will run worse than an algorithm running at Big O(latexmath:[log n]) time.
 To think about it another way, an algorithm running at Big O(latexmath:[log n] time) will _usually_, but not always, run better than an algorithm running at Big O(latexmath:[n^2]).
 
 These descriptions should give you a sense that the idea behind Big O is to compare two approaches as generally "better" or "worse" in terms of expected performance.
 
-
-
-==== Operation
+==== Operations
 
 In presenting the shapes to you I said that the Y-axis represented the number of inputs, while the X-axis represented the number of operations.
 It should be clear that the number of inputs is the number of pieces of data processed, but less clear is what is meant by the number of operations.
 More specifically, what exactly is an operation?
 
+For the purposes of Big O, operations are the things that have to happen for the algorithm to execute.  
+Because for the purposes of tech interviews Big O is about _trends_ and not actual timing, think of an "operation" as a constant value.
+There could be three things happening, or four, or ten, but we're more interested in how many times this _group_ of things has to happen, than in the number of items in the group.
+
+As an example, consider the multiplication table you may have learned in grade school:
+
+image::images/ch_02/multiplication_table.png["Multiplication Table"] 
+
+Here's a general example of how this might be accomplished.
+Ignore the fact that there are no headers or proper spacing or optimizations and just focus on the fact the code contains a function definition, two `for` loops, and two `print` statements.
+There's nothing complicated here: the code runs through two for loops and for each iteration through the loop prints out the number in the "i * j" position, much like the multiplication table itself does.
+The multiplication table in this form can be considered a "two-dimensional" piece of data.
+
+[source, python]
+---
+def multiply(limit):
+  for i in range(1, limit + 1):
+    for j in range(1, limit + 1):
+      print(f"{i * j}", end=" ")
+    print("\n")
+---
+
+How many operations is this? You could consider that the function definition is one, the two `for` loops are two, and the two `print()` statements are two resulting in 5 operations.
+But as far as Big O is concerned, the answer is it doesn't matter.
+For the purposes of Big O there are two for loops, which means that whatever you pass into `limit`, the number of operations in this code is latexmath:[limit^2], or latexmath:[n^2] times.  
+The running time is O[n^2].
+
+What if you make the following modification to the code to add a header and a notification that the program has finished?
+Does this change the number of Big O operations involved?
+
+---
+def multiply(limit):
+  print("Multiplication Table from 1 to ", limit)
+  for i in range(1, limit + 1):
+    for j in range(1, limit + 1):
+      print(f"{i * j}", end=" ")
+    print("\n")
+  print("Finished!")
+---
+
+If all you're adding is two lines of code, Big O remains at latexmath[O(n^2)]
+Why?
+Because as I mentioned earlier, Big O is about the _trend_ of the code running time, and not about the running time specifically.
+
+So why is this important?
+It's important because Big O allows us to talk about the _optimization_ of code in terms of _overall_ improvements to the running time of the algorithm.
+Again, because of the inherent differences between computers, the comparison between the running times of algorithms can be pretty meaningless.
+The `multiply()` function above is a very simple (I will not use the word "trivial" one single time in this book, other than right now) example that I picked to specifically illustrate latexmath[O(n^2)], but as we go through this book we will see some algorithmic approaches that improve Big O in terms of either time or space complexity.
+
+_Pause and think: Can the multiplication example above be improved so it doesn't use two `for` loops?
+Can it be improved so it doesn't use `for` loops at all?
+Does this change the number of operations required to run this code?_
+
+Now that I've presented you with some introductory ideas regarding Big O, it's a good time to consider some further specifics.
 
 ==== Constant Time
 
-==== Logarithmic Time
+"Constant Time," or Big O(1) means that the number of operations remains the same no matter how many inputs are passed to it.
+As such, this is a highly desired state of algorithmic optimization.
+It should come as no surprise to you, however, that it's an incredibly hard state to obtain, and for some problems may simply not be possible.
 
-==== latexmath:[{n^2}, {n^3}, {n log n}], … etc
+Looking once again at printing the multiplication table above, no matter how you refactor the `multiply()` function, it's going to have to run at latexmath:[O(n^2)].
+It has to in order to print the required numbers the required number of times.
+It cannot be optimized further.
+
+But there will be examples in this book of starting with a "brute force" algorithm and optimizing that algorithm in order to flatten the curve.
+For instance, the Rabin-Karp algorithm discussed briefly in Chapter 3 changes a latexmath:[O(n^2)] algorithm into O(1) time
+
+==== Logarithmic Time (log n, n log n)
+
+Logarithmic time usually describes algorithms that split the data set in half with each iteration.
+For example Binary Search algorithm, discussed in Chapter 12, works by splitting the data set in half every time loop through the data is performed.
+The height of binary trees, discussed in Chapter 9, can also be derived logarithmically.
+Most (but not all) of the time we're dealing with a base-2 logarithm, as is expected from a repeated reduction by half.
+
+==== latexmath:[{n^2}, {n^3}]
+
+"Polynomial" time often occurs when a process is run through multiple loops, like in the Multiplication Table example above.  
+If every loop through means every item needs to be considered once (or more than once), you're in polynomial times.
+Of the five examples of Big O shapes given in this chapter, polynomial time is the most complex (and so the "steepest"), but there are even steeper curves including latexmath:[O{2^n}] and latexmath:[O{n^!}].
+There will not be too many examples of such complex algorithms given in this book, but they're out there.
+
+==== Space
+Big O notation in this book will refer to the complexity of the running time of the algorithm, as has been discussed throughout this entire chapter.
+It is possible, however, to also discuss Big O in terms of the space required to run the algorithm.
+Does the algorithm have to make a copy (or multiple copies) of the data to run, or can it use the existing data "in place" without the need for additional copies?
+
+At the beginning of my career the internet was awfully slow, storage memory was a lot more expensive, and "plug and play" hardware had yet to come along, and so it was cheaper and faster to mail our spiffy presentations out to customers on 3.5" floppy disks than to ask them to sit through an hours long download.
+The capacity of a 3.5" floppy disk is just under 2MB.
+So everything we did had to fit within that memory space.
+
+You might be glad those days are gone, but for programmers of embedded systems, microcontrollers or IoT devices memory can still be a precious commodity.
+So algorithms that unnecessarily duplicate data in order to process it may need to be optimized to handle space as well as time complexity.
+
+Don't be surprised if you go for an interview at a company that focuses on these types of products and you're asked a question about improving space complexity.
+Even if you don't plan to apply for these kinds of jobs, a 100MB web page is a bad practice that happens all too often because developers don't understand space complexity.
+Computer memory is a lot cheaper than it once was, but that doesn't mean it's not precious!
+
+==== Best, and Worst Case Complexities
+
+For the last part of this chapter, I would like to focus on some different-than-best-case, um, cases.
+I briefly mentioned these above and will now expand a little bit on these different boundaries.
+The changes in boundaries can come from improvements to algorithms, or by using entirely different, better or worse algorithms, as you would expect.
+But they can also come from changes to the data. 
+For instance, the Quicksort algorithm has a best case (Big O) of latexmath:[log n] but a worst case (Big Ω) of latexmath:[n^2].
+The only difference between the two cases is whether or not the data is already sorted.  
+Because of the way the Quicksort algorithm works, it actually runs the slowest _when the data is already sorted._
+This idea will be considered further when we examine Quicksort in Chapter 12.
+
+Not all algorithms necessarily have a best and worst-case scenario.
+An algorithm that runs in constant time, for example, has a best case that is identical to its worst case.
+
+==== Average Case (Big Theta (θ) Complexity)
+
+This is also sometimes called the "exact case."  
+If you specifically measure every instance of every iteration of an algorithm and chart it, that could be considered an example of Big Theta. 
+It would also result in a fairly crooked line that might represent a linear trend, or might be show that the operating system speed is being adversely affected by having too many browser windows open. 
+Because we're looking to understand general trends and not exact algorithmic analysis, in this book Big θ will mean "average."
 
 ==== Building Intuition: How is Big O used?
 
-==== Why Big O is important to understand
+In coding interviews, Big O will usually be used to test one of two things: Do you understand the complexity of the algorithm you're looking at, and/or can you reduce the complexity of the algorithm you're looking at?
 
-=== Big O Breakdown
+For example, you might be given a problem that requires you to sort an array.
+As a first option, you might choose to use the Quicksort algorithm which, as discussed above, has a worst-case running time of latexmath:[{n^2}] if the data is already sorted.
 
-==== Space
-
-==== Time
-
-==== Best Case
-
-==== Worst Case
-
-==== Average Case
+The questions regarding the complexity of Quicksort could come up in a number of ways:  
+Do you know the average (Big Theta) time of this algorithm?
+Do you know the best-case (Big Omega) running time of this algorithm?
+Do you know of an algorithm that runs faster than Quicksort?
+What has to change for the Quicksort to become more or less effective?
+Do you know why Quicksort runs in Big O when the array is already sorted?
 
 
 === Example Questions
