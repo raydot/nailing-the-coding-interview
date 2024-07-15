@@ -1,11 +1,11 @@
 [[DtCI_ch03]]
 
-= Strings
+== Strings
 
 While this book assumes you've had an introduction to computer programming, this chapter and the next will contain an exploration of some basic computer science concepts in order to create a baseline of understanding for the content to follow.
 If you come across something in this chapter that you already know feel free to skip ahead.
 
-== Strings
+=== Strings
 
 Strings are (of course) one of the most commonly used data structures in programming. 
 The documentation of most programming languages starts with the ubiquitous "Hello World" program, which usually involves rendering a string. 
@@ -20,7 +20,7 @@ Or is it 11?
 Something else? 
 To understand how to manipulate strings, you must begin by understanding the way in which they're constructed and represented by computer operating systems and programming languages.
 
-=== Breaking Down a String
+==== Breaking Down a String
 
 In most programming languages a string is nothing more than an array with a character at each position.
 
@@ -80,7 +80,7 @@ Here's another look at that image above one more time:
 image::images/ch_03/string_as_array.png["String as Array of Characters"]
 
 
-=== Accessing a String
+==== Accessing a String
 
 As mentioned before, usually the first thing a programming student is shown how to do is generate output using some kind of variation of a "print" statement.
 You won't be asked interview questions about that.
@@ -96,7 +96,7 @@ I used the Python Panda's `strip()` command to get rid of these unwanted charact
 The team eventually had to use some custom lambda functions to get the results we wanted.
 Parsing string data is absolutely something you will do more than once in your programming career.
 
-=== Typecasting
+==== Typecasting
 
 Everyone knows that 2 + 2 = 4, but while that's fine for English or mathematics, that's not necessarily the case at all when it comes to programming languages.
 For starters, "=" is the assignment operator, which means that 2 + 2 = 4 will return an error.
@@ -110,12 +110,12 @@ They're literal, and logical.
 
 If you're trying to evaluate whether 2 + 2 = 4, the correct expression is:
 
-`2 + 2 == 4`
+`2 + 2 === 4`
 `True`
 
-Enter `"2" + "2" == 4` however, and what seems true is now false.
+Enter `"2" + "2" === 4` however, and what seems true is now false.
 
->>> "2" + "2" == 4
+>>> "2" + "2" === 4
 False
 
 The reason for this is that like most programming languages, Python treats strings and symbols separately.
@@ -127,7 +127,7 @@ It means the number 2 which is exactly what you think it means.
 
 
 
-=== Built-in String Functions
+==== Built-in String Functions
 
 Most programming languages contain a number of functions for manipulating strings.
 One of the more basic and widely used is the "concatenation operator," which connects one string to another.
@@ -156,7 +156,7 @@ This is incredibly useful for processing strings because it allows your code to 
 
 [source, python]
 ---
-myVar == "Hello world!"
+myVar === "Hello world!"
 print(len(myVar))
 12
 ---
@@ -223,20 +223,20 @@ For example, in Python, you can use a ":" to select the range of the items you'r
 There are more concepts that are applicable to strings that will be discussed in the upcoming section on arrays, including `slice()` and `reverse()`.
 
 [NOTE]
-====
+======
 Modifying data
-====
+======
 
 
 I will revisit the construction of some of these functions in the upcoming "Arrays" chapter, but hopefully this has helped you start to see the importance of these basic string manipulation problems and why they might come up in programming tests. 
 
-=== Example Questions
+==== Example Questions
 
 These next few example questions will give you a taste of what's coming in the "Searching, Sorting, and Manipulation" part of this chapter.
 Try to solve the following problems without looking ahead to that section.
 Or, if you get really stuck, come back and solve these problems after reading the next section.
 
-==== Finding a Character or Word in a String
+====== Finding a Character or Word in a String
 
 _Create a function that takes a string and a character and returns the position of that character in the string. 
 For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 4. 
@@ -250,11 +250,11 @@ What if the word you're given is part of a larger word? The word "add" can be fo
 Does your algorithm work for the cases in which this is and isn't a valid solution to the problem?
 Can you think of any other things that should be considered in solving this problem?_
 
-==== Reversing a String Without `reverse()`
+====== Reversing a String Without `reverse()`
 
 _Write your own function to reverse a string. For instance, if passed the string "apple," the function should return "elppa" Can you do the same for a sentence, turning "Look at the moon" into "moon the at look?" Again, can you think of any other conditions that should be considered?_
 
-==== Palindromes
+====== Palindromes
 
 _A palindrome is a string of text that contains the same characters in the same order both forwards and backward, excluding spaces and punctuation.
 A simple example is the word "level", but the sentence "Evade, Dave!" is also a palindrome because without the capitalization, comma, space, and exclamation point the letters are "evadedave" which are the same forwards and backwards.
@@ -265,19 +265,19 @@ Write a function that determines whether or not a given string is a palindrome. 
 ** Consider adding coding questions to the end of sections **
 
 
-==== Reversing
+====== Reversing
 
 Reversing
 
-=== Sliding Windows
+==== Sliding Windows
 
 This one comes up a lot, good basic technique to know.
 
-=== Example Questions
+==== Example Questions
 
 Here are some example questions 
 
-==== Maximum and Minimum Element
+====== Maximum and Minimum Element
 
 Given an array, can you return the highest or lowest element according to a given criteria?
 
@@ -285,7 +285,7 @@ Example: What is the largest number in the array [7, 2, 8, 6, 5]?
 
 
 
-==== Longest Substring Without Repeating Characters 
+====== Longest Substring Without Repeating Characters 
 
 Given a string s, find the length of the longest 
 substring
@@ -310,7 +310,7 @@ Output: 3
 Explanation: The answer is "wke", with the length of 3.
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
-==== Food for Further Thought
+====== Food for Further Thought
 
 Look up the Rabin-Karp algorithm for finding a substring in a string.  This is an algorithm you probably use all the time, like when you press CTRL-F to find text in a longer document.  The Rabin-Karp algorithm works by converting the substring to a hash value which allows it to run in O(1) time. Hashes will not be covered until Chapter 8, but try to begin thinking about Rabin-Karp now.  Is it a suitable algorithm to be used in a coding interview? Why or why not?
 

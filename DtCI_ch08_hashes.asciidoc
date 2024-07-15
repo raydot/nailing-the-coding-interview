@@ -1,31 +1,31 @@
 [[DtCI_ch08]]
 
-= Hashes
+== Hashes
 
 After reading this chapter, the reader should understand the definition of a hash ipsum.
 
-== Hash definition
+=== Hash definition
 
-== Building Intuition: What are hashes used for?
+=== Building Intuition: What are hashes used for?
 
-== Reasoning about Hashes
+=== Reasoning about Hashes
 
-== Real world example
+=== Real world example
 
-== Hashes and encryption
+=== Hashes and encryption
 
-== Salts
+=== Salts
 
-== Example Questions
+=== Example Questions
 
-=== Word Count
+==== Word Count
 
-=== Palindromes II
+==== Palindromes II
 
-=== Anagrams
+==== Anagrams
 
-=== etc…
+==== etc…
 
-=== Using AI to Study for Hash Problems
+==== Using AI to Study for Hash Problems
 
 

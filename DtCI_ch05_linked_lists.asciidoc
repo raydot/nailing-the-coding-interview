@@ -1,53 +1,53 @@
 [[DtCI_ch05]]
 
-= Linked Lists
+== Linked Lists
 
 After reading the chapter the reader will understand lorem...
 
-== Linked Lists
+=== Linked Lists
 
 Link your lists
 
-== Linked List Definition
+=== Linked List Definition
 
 Link your definitions ipsum
 
-== Singly Linked List
+=== Singly Linked List
 
 One list with one link to rule them on
 
-== Doubly Linked List
+=== Doubly Linked List
 
 Two links to rule them all
 
-== Developing Intuition: What are Linked Lists Used For?
+=== Developing Intuition: What are Linked Lists Used For?
 
 Think and grow lists
 
-== Example Questions
+=== Example Questions
 
 Here are the examples you might find
 
-=== Find
+==== Find
 
 Find this is 
 
-=== Insert
+==== Insert
 
 Insert is a this and that
 
-=== Delete
+==== Delete
 
 Delete and you need to know
 
-=== Reversing a linked list
+==== Reversing a linked list
 
 Reverse play the reverse card
 
-=== Item Swap
+==== Item Swap
 
 You go this way, I go that way. 
 
-=== Merging linked lists
+==== Merging linked lists
 
 All together now. 

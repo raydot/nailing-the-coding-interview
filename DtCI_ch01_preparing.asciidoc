@@ -1,7 +1,7 @@
 [[DtCI_ch01]]
 
 
-= Preparing for the Coding Interview
+== Preparing for the Coding Interview
 
 If you've looked for a job as a developer anytime over the past 10 years, you've almost certainly been asked to take a coding test.
 The very phrase, "coding test," strikes fear into the hearts of developers from Palo Alto to the Passaic.  
@@ -9,7 +9,7 @@ If this describes you, fear no longer.
 The book in your hands (or on your screen) is your guide to how to take and pass coding tests.
 With some time, effort, and energy this book will hopefully help you build the knowledge and skills needed to answer coding interview questions like a pro.  
 
-== How to use this Book
+=== How to use this Book
 
 One question I see asked all the time online goes something like this: "I've been studying LeetCode for a few weeks now, and I can't even answer the most basic questions."
 Should I quit?
@@ -23,7 +23,7 @@ This book is the DSA primer you might not have gotten if you don't have a comput
 Coding boot camps, for instance, are a great way to gain some basic knowledge about how to get started as a developer, but they aren't necessarily focused on teaching the broader concepts covered by DSA.  
 This book aims to bridge that gap.
 
-== Study Plan
+=== Study Plan
 
 My first job as a computer programmer began with a phone call on Friday afternoon.
 Would I be willing to come down on the following Tuesday and interview for a position with a newly formed tech company?
@@ -70,7 +70,7 @@ The more diligent and patient and careful you are in your planning, the more lik
 
 If this is a Friday and you have the interview on Tuesday, good luck!
 
-== During the Interview
+=== During the Interview
 
 There unfortunately is not a single way in which coding tests are administered by companies.
 What you are asked can change from company-to-company, and even from interviewer to interviewer.
@@ -85,7 +85,7 @@ If it's a group exercise, would you like to spend more time talking or more time
 There are a lot of resources online about how to present yourself in interviews from how to write a resume to how to dress to how to speak.
 Spend some time looking at these so you're not surprised by what you find once you get into the interview room.
 
-== Backup Plan
+=== Backup Plan
 
 Things don't always go the way we expect, even (especially) when they seem like they will.
 The odds are, you won't get the job.
@@ -99,7 +99,7 @@ Go home and look up anything you didn't understand.
 Fortify yourself for the next time.
 The re-plan, re-apply, and expect to do better the next time!
 
-== The Importance of Doing the Work
+=== The Importance of Doing the Work
 
 There is no learning without doing.
 You can read this book many times over but unless you have a photographic memory, you will have a hard time learning data structures and algorithms without going through the exercises and trying things out for yourself.
@@ -115,7 +115,7 @@ I also suggest you "grow before you know," which means working on problems that 
 The more you push yourself, the faster you'll learn.
 It's an uncomfortable feeling, and I suggest you get used to it!
 
-== Developing Intuition
+=== Developing Intuition
 
 When I first decided to learn math as an adult, outside of school, I was given some really good advice by a very smart person.
 She told me not to worry so much about the specifics of equations, but instead to try to understand what the equation is trying to do.

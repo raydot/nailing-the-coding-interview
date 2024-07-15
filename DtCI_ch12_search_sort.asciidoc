@@ -1,6 +1,6 @@
 [[DtCI_ch12]]
 
-= Search and Sort
+== Search and Sort
 
 
 
@@ -8,59 +8,59 @@ After reading this chapter, the reader should know the basics of search and sort
 
 
 
-== Search
+=== Search
 
-== What does “search” mean?
+=== What does “search” mean?
 
-== How is search used
+=== How is search used
 
-== Why is search important
+=== Why is search important
 
-== Building Intuition: Reasoning about Search 
+=== Building Intuition: Reasoning about Search 
 
-== Types of search
+=== Types of search
 
-== Linear search
+=== Linear search
 
-=== Binary Search
+==== Binary Search
 
-=== Other types of search
+==== Other types of search
 
-== Example Questions
+=== Example Questions
 
-=== Partitioning
+==== Partitioning
 
-=== Solve x problem using y search
+==== Solve x problem using y search
 
-=== Search optimization
+==== Search optimization
 
-=== Searching and data structures
+==== Searching and data structures
 
-== Sort
+=== Sort
 
-== What does “sort” mean?
+=== What does “sort” mean?
 
-== How is sort used?
+=== How is sort used?
 
-== Why sort is important to understand
+=== Why sort is important to understand
 
-== Building Intuition: Reasoning about Sort
+=== Building Intuition: Reasoning about Sort
 
-=== Types of sort
+==== Types of sort
 
-=== Insertion sort
+==== Insertion sort
 
-=== Bubble sort
+==== Bubble sort
 
-=== Quick sort
+==== Quick sort
 
-=== Merge sort
+==== Merge sort
 
-== Example Questions
+=== Example Questions
 
-=== Anagrams
+==== Anagrams
 
-=== Partitioning
+==== Partitioning
 
-=== Optimization
+==== Optimization
 

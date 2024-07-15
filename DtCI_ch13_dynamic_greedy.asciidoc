@@ -1,26 +1,26 @@
 [[DtCI_ch13]]
 
-= Dynamic Programming and Greedy Algorithms
+== Dynamic Programming and Greedy Algorithms
 
 After reading this chapter, the reader should know the basics of dynamic programming, how to reason about dynamic programming, general guidelines for solving problems related to dynamic programming, and how to use dynamic programming to solve problems in a coding interview.
 
-== Introduction to Dynamic Programming
+=== Introduction to Dynamic Programming
 
-== Why Dynamic Programming Matters
+=== Why Dynamic Programming Matters
 
-== Building Intuition: Reasoning about Dynamic Programming
+=== Building Intuition: Reasoning about Dynamic Programming
 
-== Solving Problems using Dynamic Programming
+=== Solving Problems using Dynamic Programming
 
-== Memoization
+=== Memoization
 
-== Recursion, revisited
+=== Recursion, revisited
 
-== Example problems
+=== Example problems
 
-=== The Climbing Stair problem
+==== The Climbing Stair problem
 
-=== The Knapsack problem
+==== The Knapsack problem
 
-=== Longest common substring
+==== Longest common substring
 

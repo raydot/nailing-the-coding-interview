@@ -13,7 +13,7 @@ Low-level languages tend to make more sense to computers than humans, though, an
 ****
 
 
-== Array Terminology
+=== Array Terminology
 
 Arrays are close in equivalence to what is known in mathematics as a "set." 
 A set is a list of items that have some relation to one another, that can be represented by a single notation. 
@@ -38,7 +38,7 @@ In {cpp}, for instance, an integer usually (but not always!) occupies four bytes
 
 <GRAPHIC>
 
-//// THERE IS SOME UNIVERSAL SIZE THING BEING DESCRIBED HERE, WORTH IT'S OWN SECTION ////
+//// THERE IS SOME UNIVERSAL MEMORY SIZE THING BEING DESCRIBED HERE, WORTH IT'S OWN SECTION ////
 
 The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array's "scope," or length. 
 
@@ -63,7 +63,7 @@ In weakly-typed JavaScript, all different types of data can be mixed together, a
 The reasons for these differences are logical, of course, and mostly have to do with the way memory is allocated by different programming languages.
 ****
 
-== Array Numbering
+=== Array Numbering
 
 In most programming languages, arrays are numbered from zero. This is because arrays are meant to be thought of as contiguous elements in a computer's memory, as explained in the section on pointers, above. If arrays started counting from 1, there would be space unaccounted for in that first position in the memory that exists between 0 and 1. It's the same reason why the 19th century starts in 1800. You have to account for the First Century somehow, and no one wants to be from the "Zeroeth Century."  
 
@@ -77,7 +77,7 @@ for (int i = 0; i < someArray.length, i++):
   print "The item at position", i + 1, " is " someArray[i]
 ```
 
-== Arrays and For Loops
+=== Arrays and For Loops
 
 When I taught an introductory Java class, I used to tell my students that "arrays and for loops go together like peanut butter and jelly."  What I mean by this is that they go together well, as a for loop is one of the easiest ways to traverse through an array by index, as shown in the example just above. 
 
@@ -87,7 +87,7 @@ So if "peanut butter and jelly" makes you cringe, please feel free to pick your 
 The point is if you have to iterate over an array (peanut butter), use a for loop (jelly)! 
 
 
-== Modifying (or not Modifying) Arrays
+=== Modifying (or not Modifying) Arrays
 
 In strongly typed languages, arrays can't be modified in length or data type once created. 
 This leads to the desired outcome of an array always being what the programmer says they are. 
@@ -106,7 +106,7 @@ The pointers in the copy will continue to point to the data to which the origina
 This means that modifying the data in the new array will modify the data in the old array, and vice-versa. This type of copy is called a "shallow" copy, as opposed to a "deep" copy. 
 It's important to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that's what you want instead).
 
-== Basic Array Functions
+=== Basic Array Functions
 
 Most languages contain a library of functions for arrays and questions about these functions are fairly commonly found in coding tests. These are functions that allow programmers to modify arrays in ways that make them more useful to programmers.
 
@@ -167,31 +167,31 @@ This can be useful for searching/sorting algorithms, which will be covered in ch
 8. Sliding window "Find the longest substring with k unique characters in string."  Linear data structure, subset, condition.
 
 [NOTE]
-===
+====
 Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions.
 These functions are often added to programming languages because of how often they're used, and this means they're the basis for a lot of programming interview questions.
 So download the source, dig through the source code, read the spec, reverse engineer, and figure out how to program them yourself!
-===
+====
 
-== Array Copying
+=== Array Copying
 Deep copy v. shallow copy
 
-== JSON (JavaScript Object Notation)
+=== JSON (JavaScript Object Notation)
 
 
-== Array Searching, Sorting, and Manipulation
+=== Array Searching, Sorting, and Manipulation
 
 Now that you know the basics of using arrays with built-in functions, this next section will focus on essential algorithms for working with data in arrays.
 Much of computer programming is about searching, sorting, and manipulating data, and many programming interviews will require you to understand the basics of how to implement these algorithms.
 Even if you aren't directly asked questions about these algorithms, they are incredibly useful tools to have in your programming toolbox and they can be used to solve many different types of programming problems.
 
-=== Sorting
+==== Sorting
 
 Sorting is just what it sounds like: sorting data according to a given criteria.
 
 Let's start with the most straightforward sort algorithm to understand
 
-=== Searching
+==== Searching
 
 Searching is when you find an item or items in a set of data. We'll talk more about search in Chapter 12, but we can start the conversation here in our discussion of arrays.
 The main differences that determine the difference in whether of not to prefer a given search algorithm is the quantity of data being searched, and whether or not that data is in a specific order to start.
@@ -232,12 +232,12 @@ The reason it's called a binary search is because every guess reduces the remain
 Following this strategy, your first guess should be 50.
 It cuts the remaining number pool in half.
 
-== Sample Questions
+=== Sample Questions
 
-=== Array Rotation
+==== Array Rotation
 
 Rotate
 
-=== Permutations
+==== Permutations
 
 ABCDE = EBDCA
