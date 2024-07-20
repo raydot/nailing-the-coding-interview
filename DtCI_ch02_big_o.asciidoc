@@ -3,6 +3,7 @@
 
 = Part I: Data Structures
 
+[partintro]
 Part I velit enim sint aliquip excepteur veniam quis.
 
 == Big O Notation

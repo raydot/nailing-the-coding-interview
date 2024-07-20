@@ -2,6 +2,7 @@
 
 = Part III: [WHAT TO CALL PART 3?]
 
+[partintro]
 Part III ipsum adipiscing elit enim sint aliquip
 
 == Dynamic Programming and Greedy Algorithms
