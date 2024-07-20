@@ -1,5 +1,9 @@
 [[DtCI_ch08]]
 
+= Part II: Algorithms
+
+Part II:  excepteur veniam quis velit enim sint aliquip.
+
 == Hashes
 
 After reading this chapter, the reader should understand the definition of a hash ipsum.
