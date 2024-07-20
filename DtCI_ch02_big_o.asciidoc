@@ -172,7 +172,7 @@ It should be clear that the number of inputs is the number of pieces of data pro
 More specifically, what exactly is an operation?
 
 For the purposes of Big O, operations are the things that have to happen for the algorithm to execute.  
-Because for the purposes of tech interviews Big O is about _trends_ and not actual timing, think of an "operation" as a constant value.
+Because for the purposes of tech interviews Big O is about _limits_ and not actual timing, think of an "operation" as a constant value.
 There could be three things happening, or four, or ten, but we're more interested in how many times this _group_ of things has to happen, than in the number of items in the group.
 
 As an example, consider the multiplication table you may have learned in grade school:
