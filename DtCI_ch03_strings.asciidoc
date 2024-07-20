@@ -1,5 +1,10 @@
 [[DtCI_ch03]]
 
+= Part I: Data Structures
+
+[partintro]
+Part I velit enim sint aliquip excepteur veniam quis.
+
 == Strings
 
 While this book assumes you've had an introduction to computer programming, this chapter and the next will contain an exploration of some basic computer science concepts in order to create a baseline of understanding for the content to follow.
