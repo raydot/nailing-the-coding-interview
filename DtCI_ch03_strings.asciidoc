@@ -29,6 +29,7 @@ To understand how to manipulate strings, you must begin by understanding the way
 
 In most programming languages a string is nothing more than an array with a character at each position.
 
+.A string as an array of characters
 image::images/ch_03/string_as_array.png["String as Array of Characters"]
 
 Arrays are covered in the next chapter, but let's begin by discussing what is meant by a "character."

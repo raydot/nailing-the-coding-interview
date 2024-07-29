@@ -69,7 +69,10 @@ Usually, it's not possible to decrease the number of inputs, so what makes an al
 As such, "flatter" graphs are generally preferred to "steeper" ones, as described below.
 
 ==== O(1)
+
+.O(1)
 image::images/ch_02/oh_of_one.png["O(1)"]
+
 
 With O(1), no matter how many inputs you have, there's only one operation that needs to happen.
 Generally speaking, it's hard to beat this approach.
@@ -77,6 +80,8 @@ Most algorithms don't run with this kind of efficiency, but some do, and they'll
 Notice that the shape of this graph is flat, and you can't get more efficient than that.
 
 ==== O(n)
+
+.O(n)
 image::images/ch_02/oh_of_en.png["O(n)"]
 
 Notice the shape of this graph.
@@ -93,6 +98,8 @@ The efficiencies of O(n) might diminish considerably compared to other approache
 
 
 ==== O(latexmath:[n^2])
+
+.O(latexmath:[n^2])
 image::images/ch_02/oh_of_en_squared.png["O(latexmath:[n^2])"]
 
 O(latexmath:[n^2]) is the least efficient of all of the "shapes" discussed in this section.
@@ -107,6 +114,8 @@ There are even worse metrics, including O(latexmath:[n^n]) and O(n!).
 We'll discuss these more later in this chapter and point out examples in the algorithms sections as they arise.
 
 ==== O(log n)
+
+.O(log n)
 image::images/ch_02/oh_of_log_en.png["O(log n)"]
 
 If you don't remember logarithms from high school, a logarithm is the number something would have to be raised to in order to come up with a given number.
@@ -124,6 +133,7 @@ Closely related to O(log n) is O(n log n), which is less desirable than O(n) but
 
 ==== All of the shapes together
 
+.All Big O Shapes Together
 image::images/ch_02/oh_of_all_shapes.png["O of all shapes"]
 
 Here are all of the shapes together.
@@ -177,6 +187,7 @@ There could be three things happening, or four, or ten, but we're more intereste
 
 As an example, consider the multiplication table you may have learned in grade school:
 
+.Multiplication Table
 image::images/ch_02/multiplication_table.png["Multiplication Table"] 
 
 Here's a general example of how this might be accomplished.
@@ -246,7 +257,12 @@ For example Binary Search algorithm, discussed in Chapter 12, works by splitting
 The height of binary trees, discussed in Chapter 9, can also be derived logarithmically.
 Most (but not all) of the time we're dealing with a base-2 logarithm, as is expected from a repeated reduction by half.
 
-==== latexmath:[{n^2}, {n^3}]
+Logarithmic time can provide a significant improvement over polynomial times (see below) even if considerable algorithmic complexity is required as a result. 
+There are algorithms that perform multiple complex steps but that might change complexity from a single latexmath:[O({n^2})] step to three steps that are _O(n log n_), _O(n)_, and _O(n log n)_ in complexity, leading to the entire effort running in _O(n log n)_ time.
+Such effort might drastically increase the complexity of the algorithm which now performs in three steps instead of one, but if you're running thousands or millions of these operations -- perhaps even in real-time -- the short-term complexity is more than worth the long-term gain in speed.
+(We will not cover any such examples in this book, but look into the "Fast Fourier Transform" if you're interested.)
+
+==== Polynomial Time (latexmath:[{n^2}, {n^3}])
 
 "Polynomial" time often occurs when a process is run through multiple loops, like in the Multiplication Table example above.  
 If every loop through means every item needs to be considered once (or more than once), you're in polynomial times.
