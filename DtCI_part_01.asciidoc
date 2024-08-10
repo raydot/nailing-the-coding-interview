@@ -1,6 +1,6 @@
 [[DtCI_Part_I]]
 [part]
-== Part I: Data Structures
+== Data Structures
 
 [partintro]
 --

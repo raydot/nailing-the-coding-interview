@@ -54,7 +54,14 @@ After reading this chapter, the reader should know the basics of search and sort
 
 ==== Quick sort
 
-==== Merge sort
+==== Merge sort: Divide and Conquer
+
+There are three steps to divide and conquer:
+* Divide
+* Conquer
+* Combine
+
+
 
 === Example Questions
 

@@ -1,6 +1,6 @@
 [[DtCI_Part_II]]
 [part]
-== Part II Ipsum
+== Algorithms
 
 [partintro]
 --

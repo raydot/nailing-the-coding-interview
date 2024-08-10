@@ -1,6 +1,6 @@
 [[DtCI_Part_III]]
 [part]
-== Part III: Something Topics
+== Some Things Else
 
 [partintro]
 --
