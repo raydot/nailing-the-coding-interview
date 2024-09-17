@@ -1,6 +1,6 @@
 [[DtCI_ch13]]
 
-= Part III: [WHAT TO CALL PART 3?]
+= Part III: [WHAT TO CALL PART 3?] Working title: Verities and Balderdash
 
 [partintro]
 Part III ipsum adipiscing elit enim sint aliquip
