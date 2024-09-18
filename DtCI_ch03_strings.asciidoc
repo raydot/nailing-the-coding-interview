@@ -14,8 +14,9 @@ In Python, for instance, all that's required to render text to the console is a 
 
 `print("Hello World")`
 
-What a great 10-character example! 
-Or is it 11? 
+This outputs the 10 characters comprising the string "Hello World."
+
+Or is it 11 characters?
 13? 
 Something else? 
 To understand how to manipulate strings, you must begin by understanding the way in which they're constructed and represented by computer operating systems and programming languages.
