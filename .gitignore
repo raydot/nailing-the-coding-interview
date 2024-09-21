@@ -4,7 +4,9 @@ NOTES.md
 # Directories
 notebooks/
 grapher/
+drafts/
 
 # Items
 .vscode
 .yaml
+.pdf
