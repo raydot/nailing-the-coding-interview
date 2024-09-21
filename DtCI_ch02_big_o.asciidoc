@@ -3,9 +3,10 @@
 
 == Big O Notation
 
-After reading this chapter the reader should understand what Big O notation is, why it’s important, how to answer questions about Big O notation, and some tips for making better guesses.
-
-=== Big O Introduction
+In this chapter we dive into Big O Notation, a computer science concept that is vital for understanding the efficiency of algorithms.  
+This is often a section buried deep in the back of a book, with a large scary disclaimer in front of it complete with complex math equations that seems meant to scare off the weak of heart. 
+It is a deep and important topic, but I'm going to try to explain it in a way that's not so intimidating.
+The idea is that you learn to see the general patterns represented by the most used equations, and how to apply them to your own analysis of algorithms.
 
 I'm going to start this chapter with a confession: I hated math growing up.
 I once gleefully told my 12th-grade precalculus teacher that I would never need to know one single thing he taught me.
@@ -19,7 +20,7 @@ If you ask most American high school students "What _is_ algebra?" I'm guessing 
 Unlike computer programming, it can be hard to make mathematical concepts immediately appreciable and understandable.
 I can teach you about a for loop, and then show you a cool example where you can make a computer say your name ten times.
 I can teach you `y = mx + b` and you might not understand why that's important and useful to know for quite some time, if ever.
-It's certainly hard to see why immediately.
+It's certainly hard to see immediately.
 
 No wonder I was always drawn much more to computer programming than mathematics.
 
@@ -29,30 +30,75 @@ This doesn't mean you have to be a math whiz to be a great computer programmer, 
 
 Big O Notation is one of those little bits of math. 
 You don't need to solve long sets of problems or memorize lists of equations to understand and use Big O. 
-There are some general principles you have to understand, and once you understand them you can add the Big O tool to your arsenal. 
+There are some general principles you have to understand, and once you understand them you can add the Big O toolset to your arsenal. 
 
-Understanding Big O is a vital skill for getting through coding interviews, so this book is going to start with it. 
-Rather than taking some crazy deep dive into every equation imaginable, I'm going to give you a few "Rules of Thumb" to keep in mind for a coding interview.
+
 
 ==== What is Big O Notation?
 
 Big O (short for "Big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.
-While the phrase "Big O" itself means something specific it is also sometimes used in a general way that means "algorithmic analysis."  
+While the phrase "Big O" itself means something specific, which we'll get to in a moment, what I mean by "Big O Notation" as used so far in this chapter is a set of equations that form curves on a graph.  
+These curves usually represent time on the horizontal axis and the number of inputs to an operation -- or set of operations -- on the vertical axis.
+The "shapes" of these curves give developers a way to compare the efficiency of algorithms.
+Generally speaking, the flatter the curve, the more efficient the algorithm.
+What determines the slope of the curve is the number of operations that need to be performed to accomplish a given task.
+
+For an example, imagine you and three friends go for dinner at a restaurant. 
+The waitperson has only one "operation," and that's telling the kitchen staff what you want for dinner. 
+Each of your orders can individually be considered an "input" to this operation.
+
+Imaging the waitperson isn't terribly efficient.  
+He asks the friend across to from you what they want for dinner, and then goes into the kitchen to tell the kitchen staff your friends order.  
+He then comes back out and askes the person on your right what they would like for dinner, and runs back into the kitchen again to place the order.  
+The waitperson continues around the table person by person, each time going into the kitchen to tell the kitchen staff what each person wants as soon as it's ordered.
+
+What does the curve look like?
+For each person at the table the waitperson has to go into the kitchen one time.
+Since there are four people at your table, the waitperson has to go into the kitchen four times.
+So this curve is a straight line, with the number of operations equal to the number of people at the table.
+
+We're going get to the terminology later, but this operation is in "O(n)" time, where "n" is the number of people at the table.  The shape of the curve is a straight line at a 45º angle.  Kind of steep!
+
+.O(n)
+image::images/ch_02/oh_of_en.png["O(n)"]
+[Cartoon of version of this picture needed.]
+
+Can we make this more efficient, and in so doing flatten the curve?  
+Of course!
+If the waitperson asks everyone at the table what they want all at once, then goes into the kitchen with everyone's order at the same time, the number of operations is reduced to one!
+This is a nice flat curve that describes one operation no matter how many people are sitting at the table.
+
+Again, holding off on the terminology, this operation is in "O(1)" time, where "1" is the number of operations.  This is also known as "contant time" because the number of inputs -- people sitting at the table -- doesn't affect the number of operations required to place the order.
+
+.O(1)
+image::images/ch_02/oh_of_one.png["O(1)"]
+
+[sidebar]
+Can you think of a way to make the curve even steeper than O(n)?
+Remember, Big O is about the _number_ of operations, not the _speed_ of the operations, so having the waitperson walk around the block on their way to the kitchen doesn't change the shape of the curve.
+[/sidebar]
+
 
 This is exactly what Big O is for, analyzing the speed of algorithms. 
 The most important idea behind Big O and related terms is that they measure speed in a general and relative, and not specific, way. 
 What "general" means is that Big O is great for comparing algorithmic approaches or finding algorithmic optimizations. 
 
-What Big O is not used for is measuring exact run times. 
+What Big O is not used for is measuring exact run times -- the "walk around the block" I mentioned earlier.
+The reason why is because computers can vary widely in terms of memory, running speed, available resources etc.
+So Big O is about seeing the overall trend of an algorithm, and not about getting a to-the-microsecond measurement of how long it takes to run. 
 If you need to do that, programming languages and libraries contain execution and runtime timers that can tell you exactly how long something takes.
-Where most people get stuck is on the idea that Big O is a precise way to measure speed. Think of Big O as more of a benchmark. 
+Think of Big O as more of a benchmark. 
 Big O is a bar that can be set to see if an algorithm can be improved.
+
+Understanding Big O is a vital skill for getting through coding interviews, which is why this book is going to start with it. 
+Rather than taking some crazy deep dive into every equation imaginable, I'm going to give you a few "Rules of Thumb" to keep in mind for a coding interview.
+These rules cover the most common Big O shapes you'll come across, and according to an extremely non-scientific poll I never conducted, I would say that with these five shapes you can get through 80-90% of the Big O questions you're likely to come across.
 
 === The Shapes of Big O
 
 Let's dive in.
 There are five Big O "shapes" you need to know.
-By "shapes" I mean slopes of a line on a graph, but I think it's easier just to consider them as shapes.
+By "shapes" I mean slopes of a line on a graph, as I mentioned above but I think it's easier just to consider them as shapes.
 If there's one thing to memorize in this book, it's these shapes -- especially as they relate to one another.
 Yes, there are more. 
 Yes, it's more complicated than what I'm about to say. 
@@ -61,7 +107,6 @@ But if you can understand these five principles you've gained most of what you n
 I can't promise you're not going to be asked to explain how to derive Big O equations during your coding interview. 
 But it's unlikely. 
 What you might be asked is to describe the efficiency of your algorithm in terms of Big O, and whether or not it can be improved. 
-
 
 In each of these graphs, the Y or vertical axis is the number of inputs.
 The X or horizontal axis is the number of operations that need to be performed to accomplish a given task.
@@ -168,7 +213,7 @@ So the number describes a "limit."
 Big O also describes a limit, but unlike the example above Big O actually describes the _worst_ an algorithm can possibly do.
 If the graph describes the _best_ an algorithm can possibly do, that's referred to as Big Omega or Big Ω notation.
 The average case is described as Big Theta, or Big Θ notation.
-This is not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O as a general term for algorithmic analysis and the five shapes we considered earlier.
+This is not a book about asymptotic analysis, and there are lot of them out there, so let's stick with Big O as a general term for algorithmic analysis and the four shapes we considered earlier.
 
 To sum it up, if an algorithm is said to run in Big O(latexmath:[n^2] time), that algorithm in its worst case will run worse than an algorithm running at Big O(latexmath:[log n]) time.
 To think about it another way, an algorithm running at Big O(latexmath:[log n] time) will _usually_, but not always, run better than an algorithm running at Big O(latexmath:[n^2]).
@@ -212,6 +257,7 @@ The running time is O[n^2].
 What if you make the following modification to the code to add a header and a notification that the program has finished?
 Does this change the number of Big O operations involved?
 
+[source, python]
 ---
 def multiply(limit):
   print("Multiplication Table from 1 to ", limit)
@@ -270,6 +316,7 @@ Of the five examples of Big O shapes given in this chapter, polynomial time is t
 There will not be too many examples of such complex algorithms given in this book, but they're out there.
 
 ==== Space
+
 Big O notation in this book will refer to the complexity of the running time of the algorithm, as has been discussed throughout this entire chapter.
 It is possible, however, to also discuss Big O in terms of the space required to run the algorithm.
 Does the algorithm have to make a copy (or multiple copies) of the data to run, or can it use the existing data "in place" without the need for additional copies?
@@ -323,9 +370,56 @@ Do you know why Quicksort runs in Big O when the array is already sorted?
 
 === Example Questions
 
+Here are some example questions you might be asked in a coding interview regarding Big O:
+
 ==== Refactoring for Big O
 
-==== “What Big O is This?”
+Since we haven't gotten to the algorithms section yet, let's consider another simple example of improving an algorithm in terms of Big O.
 
-==== “Give an example of this Big O”
+Imagine you have a drawer full of socks.
+All of the socks are identical, except half are white, and half are black.  
+The room is dark and you need to find a pair of matching socks.
+What's the most efficient way to do this?
+
+You could reach into the drawer and pull out two socks, and then go out into the lighted hallway to see if they match.  
+If they don't, throw them in a pile on the floor and repeat the process until you find a matching pair.  
+
+If this is the way you choose to solve this task, there is no guarantee that you will ever find a matching pair! 
+
+Can you think of a way to improve this process?
+What if you compare the socks in your hand and keep the one in your left hand, discarding the one in your right hand if they don't match?
+This is an improvement, but you could end up looking at half of the socks in the drawer before you find a match.
+That's not a big deal if there are only 10 socks in the drawer, but what if you have, like, a million socks in the drawer?
+No good!  
+
+There is a guaranteed way to get a match on the first try no matter how many socks are in the drawer.  
+If you grab three socks from the drawer right at the start, no matter what you are guaranteed to have a matching pair in your hands.  
+
+This is a Big O(1) solution to the problem, and you can't get more efficient than that.  
+In a coding interview, you might be asked similar questions about an algorithm and you should consider it in a similar way.  
+
+"This works if I have a small number if input, but can I be guaranteed a small number of inputs?"
+
+"Do I have to grab only two socks at a time from the drawer?"
+
+"Can I fix the light so I can just see the socks?"
+
+As we get into the algorithms later in the book, I will be discussing the algorithms in terms of Big O, and will try to demonstrate how/why I came up with that particular Big O for that particular algorithm, and whether or not it can be improved.
+
+
+==== Example Questions
+
+Think of a simple (or complex) everyday situation you might encounter, and think about how it might be improved.
+For instance, I used to work in a print shop with an offset press, and whenever we had to print a two-sided document, I would stand at the output tray turning every sheet of paper over one at a time as it came out.
+A senior employee pointed out to me that if I just waited until the end and turned the whole stack over at the same time, I could improve my efficiency.
+What Big O shape is my approach?  
+What Big O shape is the improved approach?
+
+Find an algorithm you've written in the past and analyze it in terms of Big O.
+Can you find an optimization?
+
+In an interview, you might be asked to analyze an algorithm in terms of Big O, be it your own or one that's given to you, and asked for ways to improve it.  
+You might also be asked to compare two algorithms in terms of Big O and asked which is more efficient, and why.
+
+
 

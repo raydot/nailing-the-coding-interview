@@ -275,9 +275,6 @@ Reversing
 
 This one comes up a lot, good basic technique to know.
 
-==== Example Questions
-
-Here are some example questions 
 
 ====== Maximum and Minimum Element
 
