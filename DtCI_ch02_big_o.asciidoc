@@ -3,7 +3,7 @@
 
 == Big O Notation
 
-In this chapter we dive into Big O Notation, a computer science concept that is vital for understanding the efficiency of algorithms.  
+In this chapter we dive into Big O Notation, a computer science concept that is vital for understanding the efficiency of algorithms. 
 This is often a section buried deep in the back of a book, with a large scary disclaimer in front of it complete with complex math equations that seems meant to scare off the weak of heart. 
 It is a deep and important topic, but I'm going to try to explain it in a way that's not so intimidating.
 The idea is that you learn to see the general patterns represented by the most used equations, and how to apply them to your own analysis of algorithms.
@@ -37,7 +37,7 @@ There are some general principles you have to understand, and once you understan
 ==== What is Big O Notation?
 
 Big O (short for "Big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.
-While the phrase "Big O" itself means something specific, which we'll get to in a moment, what I mean by "Big O Notation" as used so far in this chapter is a set of equations that form curves on a graph.  
+While the phrase "Big O" itself means something specific, which we'll get to in a moment, what I mean by "Big O Notation" as used so far in this chapter is a set of equations that form curves on a graph. 
 These curves usually represent time on the horizontal axis and the number of inputs to an operation -- or set of operations -- on the vertical axis.
 The "shapes" of these curves give developers a way to compare the efficiency of algorithms.
 Generally speaking, the flatter the curve, the more efficient the algorithm.
@@ -47,9 +47,9 @@ For an example, imagine you and three friends go for dinner at a restaurant.
 The waitperson has only one "operation," and that's telling the kitchen staff what you want for dinner. 
 Each of your orders can individually be considered an "input" to this operation.
 
-Imaging the waitperson isn't terribly efficient.  
-He asks the friend across to from you what they want for dinner, and then goes into the kitchen to tell the kitchen staff your friends order.  
-He then comes back out and askes the person on your right what they would like for dinner, and runs back into the kitchen again to place the order.  
+Imaging the waitperson isn't terribly efficient. 
+He asks the friend across to from you what they want for dinner, and then goes into the kitchen to tell the kitchen staff your friends order. 
+He then comes back out and askes the person on your right what they would like for dinner, and runs back into the kitchen again to place the order. 
 The waitperson continues around the table person by person, each time going into the kitchen to tell the kitchen staff what each person wants as soon as it's ordered.
 
 What does the curve look like?
@@ -57,7 +57,7 @@ For each person at the table the waitperson has to go into the kitchen one time.
 Since there are four people at your table, the waitperson has to go into the kitchen four times.
 So this curve is a straight line, with the number of operations equal to the number of people at the table.
 
-We're going get to the terminology later, but this operation is in "O(n)" time, where "n" is the number of people at the table.  The shape of the curve is a straight line at a 45º angle.  Kind of steep!
+We're going get to the terminology later, but this operation is in "O(n)" time, where "n" is the number of people at the table. The shape of the curve is a straight line at a 45º angle. Kind of steep!
 
 .O(n)
 image::images/ch_02/oh_of_en.png["O(n)"]
@@ -68,7 +68,7 @@ Of course!
 If the waitperson asks everyone at the table what they want all at once, then goes into the kitchen with everyone's order at the same time, the number of operations is reduced to one!
 This is a nice flat curve that describes one operation no matter how many people are sitting at the table.
 
-Again, holding off on the terminology, this operation is in "O(1)" time, where "1" is the number of operations.  This is also known as "contant time" because the number of inputs -- people sitting at the table -- doesn't affect the number of operations required to place the order.
+Again, holding off on the terminology, this operation is in "O(1)" time, where "1" is the number of operations. This is also known as "contant time" because the number of inputs -- people sitting at the table -- doesn't affect the number of operations required to place the order.
 
 .O(1)
 image::images/ch_02/oh_of_one.png["O(1)"]
@@ -201,8 +201,8 @@ Now that you've seen the shapes, it's time to discuss in more detail what they m
 Big O is not about measuring the actual speed of an algorithm.
 For starters, that's not an easy thing to do universally because different computers come in different memory and chipset configurations.
 
-Big O is a type of "asymptotic analysis," which is a way to mathematical way to describe limiting behavior.  
-"Limiting behavior" means the best or worst a process can possibly do.  
+Big O is a type of "asymptotic analysis," which is a way to mathematical way to describe limiting behavior. 
+"Limiting behavior" means the best or worst a process can possibly do. 
 For instance, when you buy a car you're usually told what your expected gas mileage will be.
 This doesn't mean your car will always (or ever) get this exact gas mileage.
 The number given is usually the absolute best the car can be expected to do, under a very specific set of conditions.
@@ -226,7 +226,7 @@ In presenting the shapes to you I said that the Y-axis represented the number of
 It should be clear that the number of inputs is the number of pieces of data processed, but less clear is what is meant by the number of operations.
 More specifically, what exactly is an operation?
 
-For the purposes of Big O, operations are the things that have to happen for the algorithm to execute.  
+For the purposes of Big O, operations are the things that have to happen for the algorithm to execute. 
 Because for the purposes of tech interviews Big O is about _limits_ and not actual timing, think of an "operation" as a constant value.
 There could be three things happening, or four, or ten, but we're more interested in how many times this _group_ of things has to happen, than in the number of items in the group.
 
@@ -251,7 +251,7 @@ def multiply(limit):
 
 How many operations is this? You could consider that the function definition is one, the two `for` loops are two, and the two `print()` statements are two resulting in 5 operations.
 But as far as Big O is concerned, the answer is it doesn't matter.
-For the purposes of Big O there are two for loops, which means that whatever you pass into `limit`, the number of operations in this code is latexmath:[limit^2], or latexmath:[n^2] times.  
+For the purposes of Big O there are two for loops, which means that whatever you pass into `limit`, the number of operations in this code is latexmath:[limit^2], or latexmath:[n^2] times. 
 The running time is O[n^2].
 
 What if you make the following modification to the code to add a header and a notification that the program has finished?
@@ -310,7 +310,7 @@ Such effort might drastically increase the complexity of the algorithm which now
 
 ==== Polynomial Time (latexmath:[{n^2}, {n^3}])
 
-"Polynomial" time often occurs when a process is run through multiple loops, like in the Multiplication Table example above.  
+"Polynomial" time often occurs when a process is run through multiple loops, like in the Multiplication Table example above. 
 If every loop through means every item needs to be considered once (or more than once), you're in polynomial times.
 Of the five examples of Big O shapes given in this chapter, polynomial time is the most complex (and so the "steepest"), but there are even steeper curves including latexmath:[O{2^n}] and latexmath:[O{n^!}].
 There will not be too many examples of such complex algorithms given in this book, but they're out there.
@@ -339,7 +339,7 @@ I briefly mentioned these above and will now expand a little bit on these differ
 The changes in boundaries can come from improvements to algorithms, or by using entirely different, better or worse algorithms, as you would expect.
 But they can also come from changes to the data. 
 For instance, the Quicksort algorithm has a best case (Big O) of latexmath:[log n] but a worst case (Big Ω) of latexmath:[n^2].
-The only difference between the two cases is whether or not the data is already sorted.  
+The only difference between the two cases is whether or not the data is already sorted. 
 Because of the way the Quicksort algorithm works, it actually runs the slowest _when the data is already sorted._
 This idea will be considered further when we examine Quicksort in Chapter 12.
 
@@ -377,12 +377,12 @@ Here are some example questions you might be asked in a coding interview regardi
 Since we haven't gotten to the algorithms section yet, let's consider another simple example of improving an algorithm in terms of Big O.
 
 Imagine you have a drawer full of socks.
-All of the socks are identical, except half are white, and half are black.  
+All of the socks are identical, except half are white, and half are black. 
 The room is dark and you need to find a pair of matching socks.
 What's the most efficient way to do this?
 
-You could reach into the drawer and pull out two socks, and then go out into the lighted hallway to see if they match.  
-If they don't, throw them in a pile on the floor and repeat the process until you find a matching pair.  
+You could reach into the drawer and pull out two socks, and then go out into the lighted hallway to see if they match. 
+If they don't, throw them in a pile on the floor and repeat the process until you find a matching pair. 
 
 If this is the way you choose to solve this task, there is no guarantee that you will ever find a matching pair! 
 
@@ -392,11 +392,11 @@ This is an improvement, but you could end up looking at half of the socks in the
 That's not a big deal if there are only 10 socks in the drawer, but what if you have, like, a million socks in the drawer?
 No good!  
 
-There is a guaranteed way to get a match on the first try no matter how many socks are in the drawer.  
-If you grab three socks from the drawer right at the start, no matter what you are guaranteed to have a matching pair in your hands.  
+There is a guaranteed way to get a match on the first try no matter how many socks are in the drawer. 
+If you grab three socks from the drawer right at the start, no matter what you are guaranteed to have a matching pair in your hands. 
 
-This is a Big O(1) solution to the problem, and you can't get more efficient than that.  
-In a coding interview, you might be asked similar questions about an algorithm and you should consider it in a similar way.  
+This is a Big O(1) solution to the problem, and you can't get more efficient than that. 
+In a coding interview, you might be asked similar questions about an algorithm and you should consider it in a similar way. 
 
 "This works if I have a small number if input, but can I be guaranteed a small number of inputs?"
 
@@ -405,6 +405,29 @@ In a coding interview, you might be asked similar questions about an algorithm a
 "Can I fix the light so I can just see the socks?"
 
 As we get into the algorithms later in the book, I will be discussing the algorithms in terms of Big O, and will try to demonstrate how/why I came up with that particular Big O for that particular algorithm, and whether or not it can be improved.
+
+==== Big O "Heuristic"  
+
+"Heuristic" is a fancy word for "trying a bunch of different things until you find one that works."  
+It can be challenging to optimize an algorithm for speed and efficiency, and until you gain some experience in writing algorithms, you are definitely going to want to make sure you're able to be effective in terms of optimizing your code. 
+
+The first and most important thing you have to understand is what is the problem you're trying to solve. 
+If you don't understand the problem you're trying to solve the last thing in the world you should be doing is writing code.
+In the sample interview in the preface you'll notice in the dialogue that the candidate is repeating the question back to the interviewer. 
+This accomplishes two tasks: 1) It shows the interviewer that you're a careful and active listener, and 2) It give you a chance to slow things down so you can think about the problem for yourself. 
+
+
+
+Here are some basic steps to follow to optimize your code, whether you're sitting in a coding interview or coding at work:
+
+. _Put the problem into plain language._  It does not matter how you do this. Write it down, say it out loud, draw a picture, whatever, but you need to say the problem in a way that allows you to comprehend what it is you're trying to accomplish. In a work environment there might be time allocated to this, but in an interview you might have to just get this done on the side or in your head. 
+
+. _Start with a brute force solution._ Start writing some code that solves the problem in the most straightforward way you can come up with. Do not try to start with optimization. Unless you see the optimization immediately, you're much better off getting something down that works and then going back through the optimization process with the interviewer. 
+
+. _Look for improvements._  An important part of being successful in a coding interview is "pattern recognition," a theme that will be returned to throughout this book. Nested for loops? That can probably be improved. Repeatedly calculating the same information? You can definitely get the time down on that. Once you've got the basic code down it's a lot easier to see where the things are that can be done better. If you're not sure, your can always ask the interviewer if there's a way to improve the code. Plenty of examples of moving from brute force to a more optimized solution will be given in the algorithms section of this book.
+
+. _Remember the "shapes" of the Big O Curves_  Once I was in a large team meeting where a very smart developer pointed out that a solution a team member had come up with was "quadratic." No one knew what he meant, and no one raised their hand. As mentioned just above, "quadratic" means the multiplication table, nested for loops, O(n^2)!  Often -- not always but often -- quadratic solutions can be improved. Once you recognize that this is the case, even if you can't figure out how to improve the code, you can at least identify the problem, and signal to the interviewer that you're aware of the issue. 
+
 
 
 ==== Example Questions
@@ -418,7 +441,7 @@ What Big O shape is the improved approach?
 Find an algorithm you've written in the past and analyze it in terms of Big O.
 Can you find an optimization?
 
-In an interview, you might be asked to analyze an algorithm in terms of Big O, be it your own or one that's given to you, and asked for ways to improve it.  
+In an interview, you might be asked to analyze an algorithm in terms of Big O, be it your own or one that's given to you, and asked for ways to improve it. 
 You might also be asked to compare two algorithms in terms of Big O and asked which is more efficient, and why.
 
 

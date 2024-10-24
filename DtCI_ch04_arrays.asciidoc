@@ -1,7 +1,10 @@
 [[DtCI_ch04]]
 
-
 == Arrays
+
+Chapter into here
+
+=== Arrays
 
 Let's begin with the simplest linear data structure, the array. In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array's "index."  I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you're about to encounter. 
 
@@ -13,7 +16,7 @@ Low-level languages tend to make more sense to computers than humans, though, an
 ****
 
 
-=== Array Terminology
+==== Array Terminology
 
 Arrays are close in equivalence to what is known in mathematics as a "set." 
 A set is a list of items that have some relation to one another, that can be represented by a single notation. 
@@ -63,7 +66,7 @@ In weakly-typed JavaScript, all different types of data can be mixed together, a
 The reasons for these differences are logical, of course, and mostly have to do with the way memory is allocated by different programming languages.
 ****
 
-=== Array Numbering
+==== Array Indexing/Numbering
 
 In most programming languages, arrays are numbered from zero. This is because arrays are meant to be thought of as contiguous elements in a computer's memory, as explained in the section on pointers, above. If arrays started counting from 1, there would be space unaccounted for in that first position in the memory that exists between 0 and 1. It's the same reason why the 19th century starts in 1800. You have to account for the First Century somehow, and no one wants to be from the "Zeroeth Century."  
 
@@ -71,13 +74,14 @@ That means the first element in the array `testArray` is located at array positi
 
 It's not uncommon for programmers to use an "offset" variable to account for the difference in counting from 0, but I think it's pretty easy to just add or subtract 1, as needed.
 
-```python
+[source, python]
+****
 someArray = []
 for (int i = 0; i < someArray.length, i++):
   print "The item at position", i + 1, " is " someArray[i]
-```
+****
 
-=== Arrays and For Loops
+==== Arrays and For Loops
 
 When I taught an introductory Java class, I used to tell my students that "arrays and for loops go together like peanut butter and jelly."  What I mean by this is that they go together well, as a for loop is one of the easiest ways to traverse through an array by index, as shown in the example just above. 
 
@@ -87,13 +91,14 @@ So if "peanut butter and jelly" makes you cringe, please feel free to pick your 
 The point is if you have to iterate over an array (peanut butter), use a for loop (jelly)! 
 
 
-=== Modifying (or not Modifying) Arrays
+==== Modifying (or not Modifying) Arrays
 
 In strongly typed languages, arrays can't be modified in length or data type once created. 
 This leads to the desired outcome of an array always being what the programmer says they are. 
 For a short time in the history of computer programming, this became an undesirable thing, as the rise of web programming created a generation of programmers that didn't need or want to worry about data types in their arrays since it was the browser's problem.
 
 In that way where all old things become new again in computer programming, there has been a recent shift towards "functional programming," which insists that programmers regain control of arrays and not simply modify them according to their moods. 
+The last chapter talked about "side effects," which is modifying original copies of data in a way that can't be easily reversed.
 In "pure" functional programming you should not modify an array at all, but create a new copy every time you add or remove something from it. 
 This keeps the array in a certain state and ensures that past states can be re-created from older copies. 
 If you've ever worked with a library like Redux you might be used to this approach.
@@ -106,7 +111,7 @@ The pointers in the copy will continue to point to the data to which the origina
 This means that modifying the data in the new array will modify the data in the old array, and vice-versa. This type of copy is called a "shallow" copy, as opposed to a "deep" copy. 
 It's important to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that's what you want instead).
 
-=== Basic Array Functions
+==== Basic Array Functions
 
 Most languages contain a library of functions for arrays and questions about these functions are fairly commonly found in coding tests. These are functions that allow programmers to modify arrays in ways that make them more useful to programmers.
 
@@ -157,26 +162,23 @@ for item in items:
 
 `push() / pop()`  These functions are called different things in different languages but they are for pushing an element into the end (or beginning) of an array and for retrieving an element from the beginning (or end) of an array. 
 
-`slice()` The slice function allows you to
-
-`splice()` The splice function is useful for
 
 `reverse()` Many programming languages contain a function for reversing a string. 
-This can be useful for searching/sorting algorithms, which will be covered in chapter 
+I showed you how to build your own reverse function in the last chapter. 
+How does that solution compare to the built-in function of your preferred programming language?  
+How do you know?
 
-8. Sliding window "Find the longest substring with k unique characters in string."  Linear data structure, subset, condition.
-
-[NOTE]
+.Building Your Own Built-In Functions
 ====
 Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions.
 These functions are often added to programming languages because of how often they're used, and this means they're the basis for a lot of programming interview questions.
 So download the source, dig through the source code, read the spec, reverse engineer, and figure out how to program them yourself!
 ====
 
-=== Array Copying
+==== Array Copying
 Deep copy v. shallow copy
 
-=== JSON (JavaScript Object Notation)
+==== JSON (JavaScript Object Notation)
 
 
 === Array Searching, Sorting, and Manipulation
@@ -232,12 +234,162 @@ The reason it's called a binary search is because every guess reduces the remain
 Following this strategy, your first guess should be 50.
 It cuts the remaining number pool in half.
 
-=== Sample Questions
 
-==== Array Rotation
+==== Sliding Windows
+
+Many problems that involve subsets of strings can be solved using the so-called "sliding window" technique.
+Just like it sounds, the technique involves moving a data "window" over a string, and collecting, analyzing, or manipulating the data in that window.
+
+[SLIDING WINDOW ILLUSTRATION]
+
+In languages that support them, the sliding window technique is implemented using data pointers. 
+In languages that don't support pointers the technique requires the coder to create their own pointers, but fortunately that's not a terribly difficult thing to do. 
+A pointer is just a variable that contains the location of another variable.  
+You can think of it like this: imagine you're looking at a row of lockers.  
+You can't see what's in the lockers, but you can see the numbers on the front of the lockers.  
+In front of the lockers stands a robot who knows what's in each locker.
+You ask can ask the robot two questions: 
+  "What's in locker x?"
+  "Which locker contains item x."
+In this analogy, the robot is the pointer, the lockers are the array, and the contents of the lockers are data.  
+
+You use a type of pointer when iterating over a for loop, with a variable that is usually named `i`.  
+
+[source, python]
+----
+for i in range(len(arr)):
+  print(arr[i])
+----
+
+In this case, `i` is the pointer that will go down the line of "lockers" represented by the array `arr`, and "open" (also called "dereference") each locker to see what's inside, returning the contents to the "print" function.  
+Keep this analogy in mind as you go over the sliding window problem.  
+The sliding window is literally a window -- or multiple windows -- that allow us to see what's in the lockers.  
+You can assign logical conditions to these windows, and use them to solve problems that involve subsets of strings.
+
+Example Sliding Window Problem:
+
+_Given an array of integers, find the two adjacent integers with the largest sum._
+
+Array: [22, 1, 21, 12, 7, 19, 9, 3, 8, 17, 2, 20]
+
+Looking the over quickly it's not too hard to see that the two adjacent integers with the largest sum are 21 and 12, which add up to 33.
+
+Let's start by solving this problem with a brute force solution. 
+In this case, a nested for loop is great place to start.
+In this solution, the variables `i` and `j` are used as the "pointers", and because j always equals `i + 1`, the sum of any two adjacent integers can be calculated by adding `arr[i]` and `arr[j]`, which comprise the two-element "window" that is moved over the array:
+
+[source, python]
+----
+def largest_sum(arr):
+  largest = 0
+  for i in range(len(arr)):
+    for j in range(i + 1, len(arr)):
+      if arr[i] + arr[j] > largest:
+        largest = arr[i] + arr[j]
+  return largest
+----
+
+Great start, but it's not the most efficient solution.
+Nested for loops should always come under consideration for optimization, as their runtime is O(n^2) -- the dreaded "quadratic."
+So how can we do better?
+Do we really need to use two for loops?
+Can we just run that single comparison "window" over the array and get the same result?
+Let's try it!
+
+[source, python]
+----
+def largest_sum(arr):
+  largest = 0
+  for i in range(len(arr) - 1):
+    if arr[i] + arr[i + 1] > largest:
+      largest = arr[i] + arr[i + 1]
+  return largest
+----
+
+Excellent!  We've eliminated the nested for loop, and not the runtime of the function is now the preferable "linear" time of O(n).
+
+So that's a simple example of the sliding window technique.
+Let's look at a more complicated example.
+Now the interviewer asks you to find the longest substring within a given string that contains only unique characters. 
+For instance, if you're given the string:
+
+"abbcaabdcbb"
+
+The answer is "abdc", because it's the longest substring that contains only unique characters.
+
+Let's first try to get this with a brute force solution:
+
+[source, python]
+---- 
+def longest_unique_substring(s):
+  longest = 0
+  for i in range(len(s)):
+    for j in range(i + 1, len(s)):
+      if len(set(s[i:j])) == j - i:
+        if j - i > longest:
+          longest = j - i
+  return longest
+
+someVar = "abbcaabdcbb"
+print(longest_unique_substring(someVar))
+----
+
+This might be an example of where the brute force solution is a little more brutal than it needs to be, but I wanted to take a moment to talk about the `set()` function.
+A "set" in math and logic is a group of related but distinct items, be they words, number, objects, etc. 
+The days of the week are a set, as are the months of the year. 
+
+`set()` (or `new Set()` in JavaScript) is a function that takes an array and returns one of each unique element in that array.
+What's returned is probably not going to be in any kind of determined order.
+For instance, here's what happened when I just ran the line of code:
+
+[source, python]
+----
+>>> print (set ("abcdeabcdeabcde"))
+
+{'d', 'a', 'b', 'c'}
+----
+
+Correct!
+But why in that order?  
+I don't really know, and I don't think it matters. 
+Why I'm discussing it is because you might be asked about using `set()` to solve problems related to uniqueness, and sometimes it absolutely is the right tool for the job. 
+In this case, however, it's not.
+Can you see why?
+
+Consider the run time of the function above. 
+Using `set()` to iterate repeatedly over chunks of items in the string can be considered a third nested loop, and so the runtime of the function is now O(n^3), which is a shape I didn't even mention because hopefully you won't come across it all that often.
+So if you're asked "Why didn't you use `set()`," be careful, it's a trick question!
+Let's see how sliding windows can help solve this problem more effectively.
+
+[source, python]
+----
+def longest_unique_substring(s):
+    longest_length = 0
+    start = 0
+    longest_start = 0
+    char_index_map = {}
+
+    for end in range(len(s)):
+        char = s[end]
+        if char in char_index_map and char_index_map[char] >= start:
+            start = char_index_map[char] + 1
+        char_index_map[char] = end
+        if end - start + 1 > longest_length:
+            longest_length = end - start + 1
+            longest_start = start
+
+    return s[longest_start:longest_start + longest_length]
+
+test_var = "abbcaabdcbb"
+print(longest_unique_substring(test_var))  # Output: "bcad"
+----
+
+==== Sample Questions
+
+===== Array Rotation
 
 Rotate
 
-==== Permutations
+===== Permutations
 
 ABCDE = EBDCA

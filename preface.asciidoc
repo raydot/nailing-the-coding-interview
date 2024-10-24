@@ -45,12 +45,12 @@ He rolled his eyes at me.
 "Obviously.  
 But how many of each?"
 
-_Divide by ten?_
+_Keep, uh, dividing by ten?_
 
 He took the pen back from me, capped it, and walked out of the room without even attempting to hide his disgust.
 "We'll let the agency know what we think."  
-The whole process took less than five minutes.  
-He didn't ask me a single question about me, my prior work experience, or how smart I was.
+That whole encounter took less time than it took me to walk from the street to the conference room.  
+Tech Bro didn't ask me a single question about me, my prior work experience, or how smart I was.
 
 The moment I walked out of the building I got on the phone and called the agency.
 I knew I'd blown it, and I tried defending myself to the recruiter -- who was not the one making the hiring decision. 
@@ -71,7 +71,7 @@ He was having a bad day.
 He doesn't know what he's doing. 
 
 But then I had another such interview, and another, and a third.
-All for companies that I thought would simple just hand me the job on the spot. 
+All for companies that I thought would simply just hand me the job on the spot. 
 
 At one company, as I was leaving I could see the guy who had just finished interviewing me shaking his head as he told the recruiter what a waste of time I was.
 At another, I tried to bluff my way through the tech interview saying, "Well we don't need to do this I don't think, let me tell you about some of the stuff I've done.
@@ -109,9 +109,9 @@ This book aims to bridge that gap.
 
 === How to use this Book
 
-[TIP]
-====
-Developing Intuition
+The primary goal of this book is to help you get a job.
+The secondary goal of this book is to help you _develop intuition_ about how to solve coding problems.
+Developing intuition is a vital skill for programmers because it allows you to reason more quickly and accurately about the problems you're trying to solve.
 
 When I first decided to try to really learn math as an adult, outside of school, I was given some really good advice by a very smart person.
 She told me not to worry so much about the specifics of equations, but instead to try to understand what the equation is trying to do.
@@ -140,7 +140,9 @@ I didn't look that up, I didn't memorize that, I only have a general idea of wha
 I just used my understanding and a little bit of intuition to explain that example, and I'm pretty sure I'm right.
 The more you can break down the ideas in this book, into understandable, recognizable, and digestible chunks, the sooner you'll master the ideas needed to prevail.
 If all you do it try to memorize a bunch of abstract concepts, you'll be like the x in that graph, pushing yourself further and further along an axis towards your goal but never reaching it.
-====
+
+There will be several sections in this book that will be labeled "Developing Intuition" that are designed to help you develop this skill.
+I encourage you to take your time with these sections, and to really try to understand what they're saying.
 
 
 === Have a Plan
