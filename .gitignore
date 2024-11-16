@@ -5,6 +5,7 @@ NOTES.md
 notebooks/
 grapher/
 drafts/
+.cspell/
 
 # Items
 .vscode
