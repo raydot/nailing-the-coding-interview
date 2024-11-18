@@ -436,7 +436,7 @@ We will see sorting algorithms suited more towards specific data structures or p
 
 ==== Searching
 
-Searching is when you find an item or items in a set of data. We'll talk more about search in Chapter 12, but we can start the conversation here in our discussion of arrays.
+Searching is when you find an item or items in a set of data. As with sorting, we'll talk more about search in Chapter 12, but we can start the conversation here in our discussion of arrays.
 The main differences that determine the difference in whether of not to prefer a given search algorithm is the quantity of data being searched, and whether or not that data is in a specific order to start.
 
 To try to gain some intuition for the differences in search algorithms, consider this simple example.
@@ -474,8 +474,66 @@ The reason it's called a binary search is because every guess reduces the remain
 
 Following this strategy, your first guess should be 50.
 It cuts the remaining number pool in half.
+If the person says "higher" you know the number is between 51 and 100. 
+If the answer is "lower" then it's between 1 and 49.
 
-TODO: finish searching
+The response you get is "lower," so you need to cut the space in half again. You guess 25. 
+The response you get is "lower" and so you cut the space between 1 and 25 right down the middle with a guess of 13. 
+"Higher" is the response, so you guess 19.
+"Higher" again, so you guess 22.
+"Higher" one last time and you've guessed the number: 23.
+
+That might have seemed like a lot of guesses, but you couldn't have done any better without luck.
+(And I deliberately chose a number that would take several guesses to find.)
+
+In fact, 7 guesses is the maximum number of guesses you'll need to guess any number between 1 and 100 using binary search.  
+
+The great think about binary search is it scales logarithmically. 
+Go back and look at the O(log n) graph in Chapter 2 if you don't remember what it looks like. 
+Because it grows logarithmically, every time the number of inputs doubles, the number of guesses required to get the answer only increases by one.  
+If someone wants to play this game with you using a number between 1 and 1,000,000, you are guaranteed to guess the number in 20 guesses of fewer using binary search.  
+
+[IMAGE OF O(log n) GRAPH PLOTTING VALUES V. NUM GUESSES]
+
+Here is a simple implementation binary search to guess a number between 1-100.  This is not meant to be a complete application, just some basic code to illustrated the big idea.
+[source, python]
+----
+def binary_search(arr, target):
+    left = 0
+    right = 100
+    # Make guess, receive feedback in the 
+    # form of "Higher" or "Lower"
+    while left <= right:
+        # Split the remaining guess space in half
+        guess = left + (right - left) // 2
+        if guess == target:
+            print ("Winner!")
+        elif arr[mid] < target:
+            left = guess + 1
+        else:
+            right = guess - 1
+----
+
+Now that I've covered the basics, let's see how this could be used to find the position of a value in an array.  
+The numbers 1-100 have a property that makes them perfect for binary search, in that they're already sorted in order.  
+Given a number between 1-100, I can be assured that every number to the "left"  of that number on the number line is smaller, and every number to the right is larger.  
+The leads to an important consideration when using binary search: the data must be _sorted_ for the algorithm to work.
+
+Consider this array:
+[source, python]
+----
+array = [21, 3, 47, 10, 40]
+----
+
+How could you use binary search to find the array position of the number 10?  
+What would your first guess be?
+If you guess position three, the number 47, then the binary search answer would be "lower", but the number 10 is not lower than 47.
+
+This is something to keep in mind when choosing the right algorithm for an interview response. 
+If the data is not sorted, then binary search will not work.  
+If the data must first be sorted, then the Big O of the sorting algorithm becomes as much of a factor as the Big O of the searching algorithm.
+
+There are algorithms that work with unsorted data and, as mentioned above, we'll be taking a look at some of these in Chapter 12. 
 
 
 ==== Sliding Windows
