@@ -269,6 +269,7 @@ While most of the arrays programmers work with are one-dimensional, there are ma
 These arrays are commonly called "nested arrays" because they contain arrays within arrays.
 For instance, the multiplication table example, above, is a two-dimensional array, and arrays with multiple (x, y, z) values are used extensively in creating 3D models for games or visualization.
 In this case the array becomes _nested_, with sub-arrays, each of which represents the values along a given dimension.  
+A multidimensional array might also be called a "matrix," a concept we'll return to in the problems at the end of this chapter.  
 Here is a two-dimensional array that could be used to represent the state of a Tic-Tac-Toe board.  
 
 [source, python]
@@ -797,133 +798,6 @@ The two-pointer technique is a valuable technique for solving array-based proble
 
 
 
-===== Valid Sudoku
-
-Sudoku is a popular numbers game that you can find in newspapers, puzzle books, and online.
-It's a simple idea with many variations.  
-The player is given a 9x9 grid of squares that is further subdivided into 9 3x3 grids of squares.
-Into each grid square the player can place a number from 1 to 9.
-The player must complete the grid from a set of starting hint numbers such that no number is repeated in any row, column, or 3x3 grid in the 9x9 grid of squares.  
-
-[picture of a sudoku puzzle]
-
-This leads to a number of potential interview questions, but let's start with an easy one: Given a 9x9 grid with some or all of the squares filled in, is the grid valid per the rules of Sudoku.
-In other words, does the grid contain any repeated numbers in any row, column, or 3x3 grid?
-
-[picture of valid and invalid sudoku grids]
-
-Note that the question does not ask if the solution is the correct solution or a unique solution or a preferred solution, nor does it ask you to solve the puzzle.
-It just asks for an algorithm that determines if the presented grid is valid.
-
-TODO: Finish valid sudoku question
-
-===== Winning Tic-Tac-Toe
-
-Tic-Tac-Toe (also called "Noughts and Crosses") is a great game for improving your knowledge of programming concepts because it has simple rules and a limited number of outcomes.  
-There are only two players, and the game can go no more than nine moves long. 
-xkcd, the best computer programming comic ever, [has mandatory coverage of the subject](https://xkcd.com/832/).
-Depending on how you choose to count, there are roughly a quarter-million possible games of Tic-Tac-Toe, which isn't really a lot for a computer.  
-It's even less when you consider that most of those games are duplicates of each other, since nearly 90% of them are rotations or reflections of the same game board.
-This section will give some ideas on how to get started, but it won't cover the logic of the game in its entirety.  
-That exercise is left up to the reader!
-
-It's easy to create a simple turn-based game of Tic-Tac-Toe in pretty much any programming language.  
-Once you've got the basic game play set up, then next problem is to determine the four states of the game:
-  1. Player Turn
-  2. Player X wins
-  3. Player O wins
-  4. Draw
-
-Once you've got that down, you can begin to think of how to create a computer opponent that can play the game.
-Beyond simply making random moves, the complexity of computer play generally involves three levels, in order of difficulty to implement:
-  1. Always make a move that blocks an opponent win
-  2. Always make a move that wins the game
-  3. Always make the best move
-
-For this question we're going to focus on four basic parts of play:
-  1. Determining if a player has won or the game is a draw
-  2. Determining how to play a blocking move
-  3. Determining how to play a winning move
-
-Tic-Tac-Toe is often used to ask array questions in interviews because the game board can be represented in two primary ways: as a one-dimensional, 9-element array, or as a two-dimensional, 3x3 array.  
-The 1-D array is easier to work with, but the 2-D array is more intuitive for humans to understand, so we'll stick with that representation in this question.
-
-
-[pictures of Tic-Tac-Toe games]
-
-Let's consider this game only from the point of view of player "X", the first player to play.  
-
-
-
-A one dimensional array of a Tic-Tac-Toe board looks as you'd expect, a list of nine moves: 
-
-[source, python]
-----
-tic_tac_toe_1d = ['X', 'O', 'X', ' ', 'O', ' ', ' ', 'X', 'O']
-----
-
-Again, just because it's easier to work with, we're going to use the dimensional representation, which would look like this:
-[source, python]
-----
-tic_tac_toe_2d = [
-    ['X', 'O', 'X'],
-    [' ', 'O', ' '],
-    [' ', 'X', 'O']
-]
-----
-
-A computer has no way of knowing how to play Tic-Tac-Toe, of course, and so doesn't know what a winning move looks like.  
-Here is a two-dimensional list of the winning moves by list, column, and diagonal.
-By checking against this list, the computer can determine whether or not it's won or is about to win (or lose!) a game of Tic-Tac-Toe, or if the game has resulted in a draw:
-
-[source, python]
-----
-winning_combinations = [
-    # Rows
-    [(0, 0), (0, 1), (0, 2)],
-    [(1, 0), (1, 1), (1, 2)],
-    [(2, 0), (2, 1), (2, 2)],
-    # Columns
-    [(0, 0), (1, 0), (2, 0)],
-    [(0, 1), (1, 1), (2, 1)],
-    [(0, 2), (1, 2), (2, 2)],
-    # Diagonals
-    [(0, 0), (1, 1), (2, 2)],
-    [(0, 2), (1, 1), (2, 0)],
-]
-----
-
-This list can be used to check and see if there is a winner, starting with this brute-force approach:
-[source, python]
-----
-def check_winner(board, player):
-    for combination in winning_combinations:
-        all_match = True
-        for i, j in combination:
-            if board[i][j] != player:
-                all_match = False
-                break
-        if all_match:
-            return True
-    return False
-----
-
-This code takes the representation of the board, and the letter of the player to evaluate.  
-It then sets the boolean `all_match` to True, changing it to False if no match is found among the winning combinations.
-
-
-
-
-
-[source, python]
-----
-def check_winner(board, player):
-    for combination in winning_combinations:
-        if all(board[i][j] == player for i, j in combination):
-            return True
-    return False
-----
-
 
 
 ===== Two Sum / Three Sum
@@ -975,9 +849,7 @@ def two_sum(array, target):
     return None
 ----
 
-===== N-Queens
 
-TODO: Finish N-Queens
 
 
 ===== Array Rotation
@@ -1166,9 +1038,368 @@ And represents the product of all of the positive integers from 1 to 5:
 So if you have a set of 5 items, there are 120 possible permutations -- combinations -- of those items.  
 
 So how can we generate permutations?
+This is a problem that I'll return to throughout the book, as the solutions will become both more sophisticated and easier to implement as we further explore data structures and algorithms.  
 
+In the mean time, let's start with this awfully iterative approach:
 
+We can 
+
+[source, python]
+----
+def permute(arr):
+    result = []
+    n = len(arr)
+    c = [0] * n  # Initialize the counter array
+    result.append(arr.copy())
+
+    i = 0
+    while i < n:
+        if c[i] < i:
+            if i % 2 == 0:
+                arr[0], arr[i] = arr[i], arr[0]  # Swap for even index
+            else:
+                arr[c[i]], arr[i] = arr[i], arr[c[i]]  # Swap for odd index
+            result.append(arr.copy())
+            c[i] += 1
+            i = 0
+        else:
+            c[i] = 0
+            i += 1
+
+    return result
+
+animals = ["lion", "tiger", "bear", "dog", "guppy"]
+permutations = permute(animals)
+
+for perm in permutations:
+    print(perm)
+----
 
 
 
 TODO: Finish Permutations
+
+The last three examples in this chapter are going to cover games.
+Everyday games are useful for testing algorithmic knowledge because they can be used to cover a discrete problem set with rules that are usually well known. 
+
+We're going to cover three games in these last examples: Tic-Tac-Toe, Chess, and Sudoku.  
+In this section I'm going to talk through the reasoning of building from simpler principles to a bigger idea, breaking each problem down into smaller and smaller steps until it consists of a number of relatively simple problems.
+
+It's my hope that you can follow my reasoning in a way that shows you how you can build up your ideas during an interview, and the kinds of things you'll need to take into consideration as you do.  
+While it's fairly unlikely that you will be asked to complete one of these takes in total during an in-person interview, you might be asked to complete a portion of one of them as a test of your reasoning and problem-solving skills, and the ways in which you respond to feedback.
+Or you might be asked to solve a similar complex task, and hopefully these examples give you an idea of how to proceed with confidence.  
+
+
+===== Winning Tic-Tac-Toe
+
+Tic-Tac-Toe (also called "Noughts and Crosses") is a great game for improving your knowledge of programming concepts because it has simple rules and a limited number of outcomes.  
+There are only two players, and the game can go no more than nine moves long. 
+xkcd, the best computer programming comic ever, [has mandatory coverage of the subject](https://xkcd.com/832/).
+
+Depending on how you choose to count, there are roughly a quarter-million possible games of Tic-Tac-Toe, which isn't really a lot for a computer.  
+It's even less when you consider that most of those games are duplicates of each other, since nearly 90% of them are rotations or reflections of the same game board.
+This section will give some ideas on how to get started, but it won't cover the logic of the game in its entirety.  
+That exercise is left up to the reader!
+
+It's easy to create a simple turn-based game of Tic-Tac-Toe in pretty much any programming language.  
+Once you've got the basic game play set up, then next problem is to determine the four states of the game:
+  1. Player Turn
+  2. Player X wins
+  3. Player O wins
+  4. Draw
+
+Once you've got that down, you can begin to think of how to create a computer opponent that can play the game.
+Beyond simply making random moves, the complexity of computer play generally involves three levels, in order of difficulty to implement:
+  1. Always make a move that blocks an opponent win
+  2. Always make a move that wins the game
+  3. Always make the best move
+
+For this question we're going to focus on four basic parts of play:
+  1. Determining if a player has won or the game is a draw
+  2. Determining how to play a blocking move
+  3. Determining how to play a winning move
+
+Tic-Tac-Toe is often used to ask array questions in interviews because the game board can be represented in two primary ways: as a one-dimensional, 9-element array, or as a two-dimensional, 3x3 array.  
+The 1-D array is easier to work with, but the 2-D array is more intuitive for humans to understand, so we'll stick with that representation in this question.
+
+
+[pictures of Tic-Tac-Toe games]
+
+Let's consider this game only from the point of view of player "X", the first player to play.  
+
+
+
+A one dimensional array of a Tic-Tac-Toe board looks as you'd expect, a list of nine moves: 
+
+[source, python]
+----
+tic_tac_toe_1d = ['X', 'O', 'X', ' ', 'O', ' ', ' ', 'X', 'O']
+----
+
+Again, just because it's easier to work with, we're going to use the dimensional representation, which would look like this:
+[source, python]
+----
+tic_tac_toe_2d = [
+    ['X', 'O', 'X'],
+    [' ', 'O', ' '],
+    [' ', 'X', 'O']
+]
+----
+
+A computer has no way of knowing how to play Tic-Tac-Toe, of course, and so doesn't know what a winning move looks like.  
+Here is a two-dimensional list of the winning moves by list, column, and diagonal.
+By checking against this list, the computer can determine whether or not it's won or is about to win (or lose!) a game of Tic-Tac-Toe, or if the game has resulted in a draw:
+
+[source, python]
+----
+winning_combinations = [
+    # Rows
+    [(0, 0), (0, 1), (0, 2)],
+    [(1, 0), (1, 1), (1, 2)],
+    [(2, 0), (2, 1), (2, 2)],
+    # Columns
+    [(0, 0), (1, 0), (2, 0)],
+    [(0, 1), (1, 1), (2, 1)],
+    [(0, 2), (1, 2), (2, 2)],
+    # Diagonals
+    [(0, 0), (1, 1), (2, 2)],
+    [(0, 2), (1, 1), (2, 0)],
+]
+----
+
+This list can be used to check and see if there is a winner, starting with this brute-force approach:
+[source, python]
+----
+def check_winner(board, player):
+    for combination in winning_combinations:
+        all_match = True
+        for i, j in combination:
+            if board[i][j] != player:
+                all_match = False
+                break
+        if all_match:
+            return True
+    return False
+----
+
+This code takes the representation of the board, and the letter of the player to evaluate.  
+It then sets the boolean `all_match` to True, changing it to False if no match is found among the winning combinations.
+
+
+
+
+
+[source, python]
+----
+def check_winner(board, player):
+    for combination in winning_combinations:
+        if all(board[i][j] == player for i, j in combination):
+            return True
+    return False
+----
+
+
+
+===== N-Queens
+
+The queen is the most powerful piece in chess.  
+She can move across the board in a single bound down any rank, file, or diagonal. 
+
+[Illustration of how the queen moves in chess]
+
+The N-Queens problem is a classic of computer science that involves placing N queens on an N x N chess board in a way that no queen can attack any other on her rank, file, or diagonal.  
+So of course, there's an algorithm for it!  
+
+I'll start by designing the board as a two-dimensional array, or matrix, with a "1" to represent a queen and a "0" to represent an empty space.
+
+[diagram of chess board with 1's and 0's on it]
+
+It's important when you work on algorithms that have the potential to become complex that you start with the simplest thing that could possibly work. 
+So before we build to a full 8x8 chess board, let's start with a quarter of that, a 4x4 board.
+
+One way to represent that board might similar to what we did in the tic-tac-toe example, using a matrix.
+
+[source, python]
+----
+chess_board = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+]
+----
+
+From here it's simple, right?
+Just check every array to make sure it only contains a single "1", then some check every column to make sure of the same and then check every diagonal.
+Those first two seem pretty straightforward, but the third might not be quite so easy.  
+Take a moment to think about it before you read on. 
+
+Let's start with the easy one, checking each row to make sure it only contains a single "1."
+
+[source, python]
+----
+def check_matrix(matrix):
+    for row in matrix:
+        if row.count(1) != 1:
+            return False
+    return True
+----
+
+If you pass in this matrix, it will return True, and so we have a match!
+[source, python]
+----
+valid_matrix = [
+    [0, 1, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1]
+]
+----
+
+If you pass in this matrix it will also return true:
+
+[source, python]
+----
+also_valid_matrix = [
+    [0, 1, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 0, 1]
+]
+----
+
+...but what you may have noticed is that while this matrix works well for the row checks, it is an invalid solution to the N-Queens problem because two "1's" appear in the first column.  
+
+Let's try now to add column checks.  First we'll start by just checking the columns for a single "1", as we did with the rows.  
+
+[source, python]
+----
+valid_matrix = [
+    [0, 1, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1]
+]
+----
+
+This one is a little tricker, but the idea is exactly the same: counting the number of "1's" in a column to make sure there is one and only one in each.
+
+[source, python]
+----
+def check_columns(matrix):
+    num_rows = len(matrix)
+    num_cols = len(matrix[0])
+    
+    for col in range(num_cols):
+        count = 0
+        for row in range(num_rows):
+            if matrix[row][col] == 1:
+                count += 1
+        if count != 1:
+            return False
+    return True
+----
+
+I'll let you test this one on your own.  
+Again, we run into a similar problem as with the row solution.  
+The matrix:
+
+[source, python]
+----
+also_valid_matrix = [
+    [0, 1, 1, 0],
+    [1, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 1]
+]
+----
+
+...will pass the column test, but is not a valid solution to the N-Queens problem because there are two queens in the first row that can attack each other.  
+
+At this point you can proceed in one of two ways. 
+You can try to bring the row and column checks together into a single function, or you can try to solve the diagonal problem first.
+Think about it for a moment. 
+Which do you choose?
+Why?
+
+While I could make a case for either approach, for the purposes of pedagogy I'm going to solve the diagonal problem before integrating the three solutions.
+This one takes a bit of tricky reasoning.
+
+One important thing to realize before you attack this problem is that the diagonals run in not one but two directions. 
+If you only check the diagonals from top-left to bottom-right, you might come up with a solution that is valid in only one direction.
+For instance:
+
+[source, python]
+----
+invalid_diagonal_matrix = [
+    [1, 0, 0, 0],
+    [0, 0, 1, 0],
+    [0, 1, 0, 0],
+    [0, 0, 0, 1]
+]
+----
+
+If I'm only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second and third rows clearly make this an invalid solution. 
+
+With that in mind, let's start by checking top-left to bottom right diagonals first.
+It might help to first draw a picture that helps you see the seven diagonals that run from top-left to bottom-right on a 4x4 matrix.
+
+[PICTURE OF TOP LEFT TO BOTTOM RIGHT DIAGONALS]
+
+From there, perhaps it's useful to use a coordinate system to see what the position of each diagonal is in the matrix.
+You may have already noticed that the single-digit diagonals -- the one in the top-left corner and the one in the bottom-right corner -- don't need to be checked.  
+Let's write out the list of the five remaining diagonals:
+
+    [1, 0, 0, 0],
+    [0, 0, 1, 0],
+    [0, 1, 0, 0],
+    [0, 0, 0, 1]
+
+From [0, 2] to [1, 3]
+From [0, 1] to [2, 3]
+From [0, 0] to [3, 3] # <-- the longest!
+From [1, 0] to [3, 2]
+From [2, 0] to [3, 1]
+
+Now that we have the coordinates of the diagonals, we can write a function to check them.
+
+# TODO: Break this down into the pattern represented in the loop.
+
+[source, python]
+----
+def check_diagonals(board):
+    num_rows = len(board)
+    num_cols = len(board[0])
+    
+    # Check main diagonals (top-left to bottom-right)
+    for start in range(num_rows + num_cols - 1):
+        count = 0
+        for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
+            if matrix[i][start - i] == 1:
+                count += 1
+        if count != 1:
+            return False
+----
+
+
+
+
+TODO: Finish N-Queens
+
+===== Valid Sudoku
+TODO: Finish valid sudoku question
+Sudoku is a popular numbers game that you can find in newspapers, puzzle books, and online.
+It's a simple idea with many variations.  
+The player is given a 9x9 grid of squares that is further subdivided into 9 3x3 grids of squares.
+Into each grid square the player can place a number from 1 to 9.
+The player must complete the grid from a set of starting hint numbers such that no number is repeated in any row, column, or 3x3 grid in the 9x9 grid of squares.  
+
+[picture of a sudoku puzzle]
+
+This leads to a number of potential interview questions, but let's start with an easy one: Given a 9x9 grid with some or all of the squares filled in, is the grid valid per the rules of Sudoku.
+In other words, does the grid contain any repeated numbers in any row, column, or 3x3 grid?
+
+[picture of valid and invalid sudoku grids]
+
+Note that the question does not ask if the solution is the correct solution or a unique solution or a preferred solution, nor does it ask you to solve the puzzle.
+It just asks for an algorithm that determines if the presented grid is valid.
