@@ -52,11 +52,35 @@ What about the browser event loop?
 
 === Example Questions
 
-Here is an example of the sample that you're ample
+==== Permutations, revisited
+
+Back in Chapter 4 we discussed permutations, and I showed you a simple iterative solution for coming up with all the combinations of a set of items in an array.  
+
+Now that we've discussed stacks and queues, I'd like to show you how you can use one to more effectively solve the permutations problem:
+
+Let's try doing it in a way that explores another concept called the _stack_.
 
 [source, python]
 ----
-print('hello world')
+def permute(arr):
+    result = []
+    stack = [(arr, [])]
+
+    while stack:
+        arr, path = stack.pop()
+        if not arr:
+            result.append(path)
+        else:
+            for i in range(len(arr)):
+                stack.append((arr[:i] + arr[i+1:], path + [arr[i]]))
+
+    return result
+
+animals = ["lion", "tiger", "bear", "dog", "guppy"]
+permutations = permute(animals)
+
+for perm in permutations:
+    print(perm)
 ----
 
 ==== Balanced parentheses

@@ -125,6 +125,27 @@ If your language doesn't support function prototyping, how can data checks in fu
 
 === Reasoning about Recursion
 
+Back in chapter 4, we discussed permutations, and I showed you a simple iterative solution for coming up with all the combinations of a set of items in an array.
+Then in chapter 6, we discussed stacks and queues, and I showed you how you can use one to more effectively solve the permutations problem.
+Now we're in chapter 11, and it's time to discuss how to use recursion to generate every combination of items in an array.
+First, the code:
+[source, python]
+----
+def permute(arr):
+    result = []
+    _permute_helper(arr, 0, len(arr) - 1, result)
+    return result
+
+def _permute_helper(arr, left, right, result):
+    if left == right:
+        result.append(arr.copy())
+    else:
+        for i in range(left, right + 1):
+            arr[left], arr[i] = arr[i], arr[left]  # Swap
+            _permute_helper(arr, left + 1, right, result)
+            arr[left], arr[i] = arr[i], arr[left]  # Swap back
+----
+
 ==== When you (might) have a recursive pattern
 
 ==== When is it time to use recursion
