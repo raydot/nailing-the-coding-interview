@@ -25,7 +25,7 @@ Arrays have some special terminology related to their specific use:
 
 Element, index, set
 
-<diagram of an array>
+<diagram of an array TK.>
 We looked at a simple example of an array in the last chapter, with an image showing how an array is a string of characters.
 
 GRAPHIC:
@@ -39,7 +39,7 @@ Because a pointer points to a specific type of data, incrementing a pointer move
 
 In {cpp}, for instance, an integer usually (but not always!) occupies four bytes of memory. So pointing a pointer at the beginning of an array and then incrementing it by one moves it over four bytes -- to the beginning of the next item in the array. Because this type of array manipulation has become language-specific, we're not going to use pointers in this book. We'll instead settle for array items simply being referenced by their index numbers. 
 
-<GRAPHIC of array with index numbers>
+<GRAPHIC TK of array with index numbers>
 
 The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array's "scope," or length. 
 
@@ -168,7 +168,7 @@ Strongly-typed languages will even allow programmers to do what's called "pointe
 In Python and Javascript though, while you can use pointers if you want to, kinda, you really don't have to and probably shouldn't.  
 Arrays in these languages should be left to the language, and even though it's using pointers behind the scene you usually don't have to worry about managing them directly.  
 
-
+Having said all of that, we will be returning to the concept of pointers as we progress through this book, with an expanded explanation coming in the very next chapter.  
 
 
 ==== Modifying (or not Modifying) Arrays
