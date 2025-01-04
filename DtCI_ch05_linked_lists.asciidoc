@@ -6,13 +6,16 @@ This chapter is kind of an "in-between" chapter as we turn from the simple, one-
 These data structures allow you to both tackle more complex problems as well as allowing you to tackle simpler problems in more efficient ways.  
 
 I will start with a little bit of review of pointers, and then we'll see how pointers can be used to build a sort of custom data structure called a linked list.  
+Then I'll move on to talking a bit about object-oriented programming in Python, and how classes and objects can be used to build linked lists.
 We'll also talk about what linked lists can be used for and the types of problems they can be used to solve.  
 Linked lists are a gateway data structure, as the concepts you learn in building linked lists are common to many other more advanced data structures.
+Pointers and classes are also foundational concepts in algorithms and data structures, so try to pay attention to the overall concepts, much like I asked you to focus on the "shapes" of the graphs of Big O notation in chapter 2.
 
 From my own experience, I can tell you this is where a lot of programmers start to lose interest.
 This can seem like an abstruse concept that you'll never have any use for in the real world.  
 Well you might not, but because, again, they build a strong foundation for more advanced concepts, I suggest hanging in there until the end of this chapter.  
 Slow down and take your time with any concepts you don't understand.  
+Type in the code examples an run them, and try to answer all of the end-of-chapter exercises.
 I promise you, it will be worth it.
 
 === Python Classes and Objects
@@ -31,8 +34,8 @@ Methods are functions that are defined within the class and can be called on in 
 Keeping with the house analogy, the data might be the number of rooms in the house, the names of the people who live there, the color of the walls, the amount of electricity used each month, etc.  
 The methods might be things like "turn on the lights," "open the garage door," "flush the toilet," etc.
 
-That's an incredibly simplistic view of object-oriented programming, but it should be enough to get you through this chapter.
-From this simple idea whole systems of thought have arisen, and while this book will not go too much further than the basic idea of classes and objects, methods and data, if you're interested in a deeper dive into object-oriented programming, there are many resources available to you.
+That's an incredibly simplistic view of object-oriented programming, but keep it in mind as you go through this chapter.
+From this simple idea entire systems of thought have arisen, and while this book will not go too much further than the basic idea of classes and objects, methods and data, if you're interested in a deeper dive into object-oriented programming, there are many resources available to you.
 
 Let's look at one more example in code.  
 Let's say we want to define a class called _Dog_ that has a name, age, and breed.  
@@ -64,8 +67,8 @@ class Dog:
            print(f"{self.name} says 'Woof!'")
 ----
 
-Now that the dog class has been defined, we can create as many dogs as we want by "instantiating" the class into an object and each object to do things.  
-Notice that each dog object contains its *own* data, independent of all of the other dogs.  
+Now that the dog class has been defined, we can create as many dogs as we want by "instantiating" the class into an object and asking each object to do things.  
+Notice that, once create, each dog object contains its *own* data and methods that are independent of all of the other dogs' data and methods.  
 This gives you some idea of the power of object-oriented programming.
 
 [source, python]
@@ -80,19 +83,23 @@ dog1.eat()
 dog2.sit()
 # outputs "Ellie is sitting."
 
+dog1.speak("bark")
+# outputs "Penny says 'Woof!'"
+
 dog3.speak("talk")
 # outputs "Cinder says 'I am a Black Lab and I am 2 years old.'"
 
 dog3.speak("bark")
 # outputs "Cinder says 'Woof!'"
-
-dog1.speak("bark")
-# outputs "Penny says 'Woof!'"
 ----
 
 Notice the use of the `self` keyword in the methods of the class.
-`self` can be thought of as a way in which an object refers to itself, as opposed to object methods, object data, or other objects of the same class.
-`self` is defined a little bit differently in different languages, but in Python, it is always the first argument to a method in a class definition.
+`self` can be thought of as a way in which an object refers to itself, as opposed to other object methods, object data, or other objects of the same class.
+`self` is defined and used a little bit differently in different languages, but in Python, it is always the first argument to a method in a class definition. 
+It might also be called "this" or "me" in other languages, but same basic principle applies.  
+Think about self like this: You have a name, and everyone refers to you by that name, but you (and everyone else) refer to yourself as "me" or "I."
+You can say "Can you help me figure this out?" to someone else, but you say "I need to figure this out mySELF" to yourself.
+`self` helps with the ambiguity of functions that might be available to the program as a whole, vs. functions that are kept separate within a given object. 
 
 __init__ is a special method in Python that is called one time when a new object is created from a class.
 This is sometimes called a "constructor" method in other languages.
@@ -150,13 +157,24 @@ node1.next = node2
 node2.next = node3
 ----
 
-In this example, we create three nodes, each with a data element and a pointer to the next node in the list.
-Having created the each nodes with its accompanying data, we then set the `next` pointer of each node to the next node in the list.
+In this example, we create three node objects, each created from the `Node` class with a data element and a pointer to the next node in the list.
+Having an object representing each element of data is a pattern we'll see often as we continue to dig into data structures.
+
+.Pointers
+****
+In this chapter, like in the last chapter, I'm using the term "pointer" to refer to a reference to an object in memory.
+You don't have to literally understand what happens under the hood, but the `next` attribute of the `Node` class is literally a reference to another object in memory.
+Print out the `next` attribute of a node, and you'll see something like `<__main__.Node object at 0x7f8e3c7b4b50>`.
+This is the memory address of the next node in the list.
+You don't have to account for this, you don't have to reference this, you don't have to store this or manage this, but it's good to understand that this is what's going on behind the scenes in Python.
+****
+
+Having created each of the nodes with its accompanying data, we then set the `next` pointer of each node to the next node in the list.
 It's not necessary to set the `next` pointer of the last node in the list to `None`, as it is already set to `None` in the `__init__` method of the `Node` class.
 
 <Diagram of a linked list with three nodes TK>
 
-This simple example is known as a "singly linked list," because each node in the list points to the next node in the list, until the end is reached.
+This simple example is known as a "singly linked list," because each node in the list "points" to the next node in the list, until the end is reached.
 It's exactly like a line of people three people standing in a row, each person pointing to the person to the right.  
 The last person in the line points to the wall, or to the end of the list.
 
@@ -272,6 +290,11 @@ This example is very procedural, so we'll look at a more effective say to work w
 === Developing Intuition: What are Linked Lists Used For?
 
 Linked lists are used in many different ways in programming, primarily as a basic building block for more complex data structures.
+The basic ideas behind them a necessary to understand in order to build the stacks, queues, and heaps I'll discuss in chapters 6 and 7.
+Again, as I mentioned earlier, linked lists are a gateway data structure, and understanding them will help you understand many other data structures.
+Keep in mind the overall concepts of pointers, classes, and objects as you work through the rest of this book.
+
+=== CRUD
 
 .CRUD
 ****
@@ -319,12 +342,11 @@ Here's an example of inserting a node into a doubly linked list:
 
 [source, python]
 ----
-
 class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        self.prev = None
+  def __init__(self, data):
+      self.data = data
+      self.next = None
+      self.prev = None
 
 node1 = Node("First")
 node2 = Node("Second")
@@ -372,17 +394,18 @@ Here's a simple algorithm that will go through a linked list and return the firs
 [source, python]
 ----
 class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+  def __init__(self, data):
+    self.data = data
+    self.next = None
 
-def find(head, data):
+  def find(head, data):
     current = head
     while current is not None:
-        if current.data == data:
-            return current
-        current = current.next
+      if current.data == data:
+        return current
+      current = current.next
     return False
+----  
 
 ==== Update
 
@@ -600,3 +623,7 @@ So this time there won't be sample interview questions, but here are some exerci
 * Re-write the data swapping version of the bubble sort algorithm to swap the nodes themselves instead of the data.
 * Write a function that takes a linked list and returns the middle node of the list, and that works on any length of list.  
 * Write a function that takes a linked list and returns the nth node from the beginning or end of the list.
+* Write a function that takes a linked list and returns the list in reverse order.
+Bonus points for using recursion.
+(Don't worry if you don't know what recursion is, I'll get to that in chapter 11.)
+* Write a function that takes a linked list and sorts the list in reverse order.

@@ -290,6 +290,133 @@ To access the value at any position, you have to pass two numbers to the array, 
 square = tic_tac_toe_2d[0][2]
 ----
 
+==== Spread Operator
+
+The spread operator is one of those things to know that really shows you've been paying attention.  
+You can use the spread operator in a few different ways, but it's invaluable for combining arrays and passing array data into functions:
+
+Here a Python example of a simple use of the spread operator to pass an array into a function:
+
+[source, python]
+----
+def sum(n1, n2, n3):
+    return a + b + c
+
+values = [10, 11, 12]
+print(sum(*values))
+----
+
+This code sample will output the value `33`.  Notice the (overloaded) star operator in the function call:
+
+`sum(*values)`
+
+The * operator used in the this fashion will "spread" the values into the function call.  
+
+Here's an example of a kind of reverse use, splitting a single piece of data into individual parts -- in this case converting a string into a list of each individual character: 
+
+[source, python]
+----
+spread_hello = [*"hello"]
+print(spread_hello)
+----
+
+This code will output the value `['h', 'e', 'l', 'l', 'o']`.
+
+Python 3.5 and later even supports the use of the spread operator with Python dictionaries, which can be used to combine dictionaries or pass dictionary data into functions.
+Note the use of the double star operator in the function call:
+
+[source, python]
+----
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'c': 3, 'd': 4}
+combined_dict = {**dict1, **dict2}
+print(combined_dict)
+----
+
+This code will output the value `{'a': 1, 'b': 2, 'c': 3, 'd': 4}`.
+
+Are there other ways to do this?  
+Yes.
+Are there cooler ways to do this?
+I just don't think so.  
+
+JavaScript also supports the spread operator, and it can be used in a similar way to Python.
+Instead of the `*` operator, JavaScript uses the `...` operator.
+You're not reading that wrong, it actually is three dots.
+
+[source, javascript]
+----
+function sum(n1, n2, n3) {
+    return n1 + n2 + n3;
+}
+
+let values = [10, 11, 12];
+console.log(sum(...values));
+----
+
+Similar to the example above, this code will output the value `33`.
+
+JavaScript also supports the reverse case, splitting a single piece of data into multiples:
+
+[source, javascript]
+----
+let spread_hello = [..."hello"];
+console.log(spread_hello);
+----
+
+As you might expect, this code will output the value `['h', 'e', 'l', 'l', 'o']`.
+
+The spread operator is great for instance of passing data into functions when you might not know what you're expecting.
+Here is a common use for passing props in a React component, where some of the props are required and some are optional:
+
+[source, javascript]
+----
+function SpreadComponent({requiredProp1, requiredProp2, ...optionalProps}) {
+    return (
+        <div>
+            <h1>{requiredProp1}</h1>
+            <h2>{requiredProp2}</h2>
+            <p>{optionalProps.optionalProp1}</p>
+            <p>{optionalProps.optionalProp2}</p>
+        </div>
+    );
+}
+
+let props = {
+    requiredProp1: "RP1",
+    requiredProp2: "RP2",
+    optionalProp1: "OP1",
+    optionalProp2: "OP2",
+    optionalProp3: "OP3"
+};
+
+// Usage:
+<SpreadComponent {...props} />
+----
+
+Note the two different uses of the spread operator in this example.
+The first is in the function definition, where the spread operator is used with `...optionalProps` to collect all the optional props into a single object.
+You can pass in as many optional props as you want, and give them all custom names, and once the function is invoked they will all be collected into the `optionalProps` object.
+
+The second use of the spread operator is in the function call, where the spread operator is used with `{...props}` to pass all the props into the function.
+This spread operator in this instance "spreads" the props object into the function call, and the function will receive the props as if they were passed in individually.
+
+==== `argv` and `argc`, the Prime Directive of arrays
+
+If you're a frontend programmer you might go your whole career without ever once encountering "argv" and "argc," but if you're a backend programmer you're going to see them all the time.
+"argv" stands for "argument vector," and it is a list of arguments that can be passed into a program at runtime.  
+"argc" stands for "argument count," or a count of the number of arguments that have been passed to the argument vector.
+
+While they're commonly used in C and C++, they're available in Python and JavaScript, and can be a valuable too for passing data to a program at runtime.  
+Node.js, for example, supports the use of `process.argv` to pass data into a a program "on the fly" at runtime:
+
+[source, javascript]
+----
+console.log(process.argv);
+----
+
+It's unlikely you'll ever be asked about `argv` and `argc` in a programming interview, but they're great tools to have in the box.  
+
 ==== JSON (JavaScript Object Notation)
 
 JavaScript Object Notation, or JSON, is being used more and more often these days across all programming languages.  
@@ -742,6 +869,8 @@ This will output:
 
 
 
+
+
 ==== Sample Questions
 
 ===== Container With Most Water (2 Pointer Solution)
@@ -807,7 +936,7 @@ In other words, you don't have to compare every wall to every other wall.
 You can start with the outermost walls and work your way in, comparing the area of the container formed by the two walls.
 This can be determined by using the "two pointer" technique, which is commonly used on certain array problems.  
 
-[PICTURE OF TWO POINTERS CLOSING IN ON THE CENTER]
+[PICTURE OF TWO POINTERS CLOSING IN ON THE CENTER TK]
 
 For "pointers" we can use two variables called "left" and "right" that start at the beginning and end of the array, respectively.
 By incrementing the left pointer while decrementing the right pointer, we can bring the two walls together until we have found our solution.  

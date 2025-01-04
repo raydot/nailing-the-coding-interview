@@ -33,7 +33,9 @@ Coding interviews are primarily given in one of three ways:
 
 . In person, with a computer
 . In person, with a whiteboard
+. Online using a platform like CoderPad or HackerRank
 . Online with a whiteboard
+
 
 Some companies will give longer tests that you can complete on your own time, but these usually ask you to build a project rather than solve coding problems, so they won't be covered in this book.
 
@@ -188,16 +190,39 @@ Interviewer: "Ok, but what's that funny `=>` thing you used?"
 
 You: "Oh, that's an arrow function. I know it's a way to write a function...I think it's just for `reduce` and maybe `map`?  Actually, I'm not really sure."
 
-Interviewer: "It's not just for reduce, but you're right, it is a way to write a function. It's kind of a shorthand for JavaScript functions, and you can use it pretty much anywhere you have a function. Well, I think I have a pretty good sense of your skills. Thanks so much for coming in today."
+Interviewer: "It's not just for reduce, but you're right, it is a way to write a function. It's kind of a shorthand for JavaScript functions, and you can use it pretty much anywhere you have a function. 
+We have a few minutes left, can you think of anything else you can add?"
+
+"Would it be ok if a added a test for the function?"
+
+Interviewer: "Wow, great idea! Our dev team is very much test-driven so please go right ahead."
+
+You: "I don't need to spend a lot of time doing this, but here's just a simple check. Normally I might do something using Jest, but why don't I just write write a simple test function that checks if the function returns the sum of the array `[1, 2, 3, 4, 5]`?"
+
+[source, javascript]
+----
+function testReturnSumOfArray() {
+  var testArray = [1, 2, 3, 4, 5];
+  var result = returnSumOfArray(testArray);
+  if (result === 15) {
+    console.log('Test passed!');
+  } else {
+    console.log('Test failed!');
+  }
+}
+----
+
+Interviewer: "Perfect addition, and clever approach.  Well, I think I have a pretty good sense of your skills. Thanks so much for coming in today."
 
 You: "Thank you so much for taking the time!  I hope to hear back from you soon."
 
 Ok, simple example. But consider all of the ways in which your communication tells the interviewer about your skills.
 
-. You repeated the question back to the interviewer
+. You repeated the task back to the interviewer
 . You asked questions to clarify the problem
 . You asked for feedback on your approach
 . You demonstrated that you know how to search for a solution
+. You demonstrated value-added improvements to your code by adding a test
 . You remained calm and polite
 . You demonstrated the limits of your knowledge without being defensive or deceitful
 

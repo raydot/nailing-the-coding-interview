@@ -303,7 +303,7 @@ myVar[:5] # selects "Hello", the first 5 characters in the string
 ----
 
 This is equivalent to the example given above where I explicitly stated the start and end positions of the slice operation.
-Can you figure out how to pass only one value to slice operation and end up with "Hlowrd," the selection of every other character in the string "Hello World!"
+Can you figure out how to pass only one value to slice operation and end up with "HloWrd", the selection of every other character in the string "Hello World!"
 
 Negative indices can also be passed to these functions, which allow you to choose from the end of the string instead of the beginning. 
 These work the same in Python and JavaScript.  

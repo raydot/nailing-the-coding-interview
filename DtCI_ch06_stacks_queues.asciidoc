@@ -2,27 +2,134 @@
 
 == Stacks and Queues
 
-After reading this chapter, the reader should understand the ...
+Having built on the concept of linked lists in Chapter 5, we can now move on to two more advanced and widely used data structures: stacks and queues. 
+By the end of this chapter you will understand the difference between the two, the applications of each, how to implement them both from their native versions and in code and how to answer questions about them in interviews.
 
 === Stacks and Queues
 
-Stacks and Queues are two kinds of data structures that
+Stacks and queues are two kinds of data structures that keep things in a kind of order.
+They are both similar to arrays, but with a few key differences.
+In an array, you can add things pretty much wherever you want.  
+In stacks and queues you only add things to one end or the other, and usually always from the same end.
 
-=== FIFO v. LIFO
+=== FIFO and LIFO
 
-FIFO v. LIFO
+FIFO and LIFO stand for "first in, first out" and "last in, first out," two concepts that describe the primary difference between each data structure.  
 
-=== Stack Definition
+The queue is a FIFO data structure, meaning that the first element added to the queue is the first one to be removed.
+Think of people waiting in line at a grocery store.  
+Assuming no one rude comes along, the first person in line at a grocery store is the first person to be checked out.  
 
-A stack has a few different meanings in computer science, but when it comes to data structures, a stack is a "last in, first out" way of ordering data.
-The analogy commonly given is of a stack of plates in a cafeteria, where the last plate placed on the stack is the first one that comes off the top.
-Earlier we talked about "push/pop" functions available for arrays, and these are often used with stacks as well. 
-A plate (or a pancake, or data) can be pushed onto the top of the stack, and that same plate (pancake, data) will be the first one popped off the top.  
+The stack is a LIFO data structure that works the opposite way.  
+In a stack the last element added to the stack is the first one to be removed.  
+You can think of a stack like a stack of pancakes.  
+All of the pancakes in a stack of pancakes are one on top of the other, and the last pancake added to the stack is the first one to be eaten.
 
-=== Queue Definition
+<Diagram of a stack and a queue TK>
 
-A queue is a "first in, first out" data structure akin to standing in line.
-The first piece of data pushed into a queue is the first piece of data to be taken back out of it again.  
+This might seem like a trivial difference, but it turns out to have tremendous implications depending on the problem you're trying to solve.
+
+=== PUSH and POP
+
+When dealing with stacks and queues, there are specific terms used to describing adding things too and removing them from the data structure.
+Generally, adding something to a stack or queue is called _pushing_ and removing something is called _popping_.
+
+<Diagram of push and pop TK>
+
+So let's say we have a simple stack of integers, which looks like this:
+
+[5, 3, 2, 8, 7]
+
+If I _push_ the number 4 onto the stack, it will look like this:
+
+[5, 3, 2, 8, 7, 4]
+
+If I _pop_ the stack twice, we will remove the 4 and the 7 and it will look like this:
+
+[5, 3, 2, 8]
+
+Some operations will return the value that was popped, while others will not.
+
+I'm going to start by looking the built-in Python list, which can be used as a stack or a queue.
+
+[source, python]
+----
+stack = []
+stack.append(5)
+stack.append(3)
+stack.append(2)
+stack.append(8)
+stack.append(7)
+stack.append(4)
+
+print(stack.pop())
+print(stack.pop())
+print(stack)
+----
+
+This will output:
+
+----
+4
+7
+[5, 3, 2, 8]
+----
+
+Let's go over this line by line.  
+I begin with an empty list as a stack, which I name "stack."
+I could have named it anything; there is nothing special about the name.  
+I only used it to illustrate that I am using the list as a stack.
+
+I then _push_ed the numbers 5, 3, 2, 8, 7, and 4 onto the stack, using the built-in Python `append` method.
+Next I _pop_ed the stack twice, which removes the last two elements from the stack, and returns them to the `print` function.
+Finally, I print the stack to show it's contents, which now contain the numbers 5, 3, and 2.
+
+Let's do the same thing using a list as a queue.
+
+[source, python]
+----
+queue = []
+queue.append(5)
+queue.append(3)
+queue.append(2)
+queue.append(8)
+queue.append(7)
+queue.append(4)
+
+print(queue.pop(0))
+print(queue.pop(0))
+print(queue)
+----
+
+This will output:
+
+----
+5
+3
+[2, 8, 7, 4]
+----
+
+If you notice I'm doing essentially the same thing I did with the stack, but in the case of the queue I'm using the `pop` method with an argument of `0` to remove the first element from the list.
+The only difference between the two is how the items are being removed from the list.
+Are the items on the left side of the list being removed first `pop(0)`, or the right side `pop()`?
+That's a highly contrived example, but it serves to illustrate the general idea.  
+
+The built-in Python list is not the most efficient way to implement a stack or a queue, but it is the most straightforward.
+The Python `collections` module has a `deque` class that is more efficient for queues, and the `queue` module has a `LifoQueue` class that is more efficient for stacks.
+By more "efficient" I mean that they are faster and use less memory than the same operations used above.  
+This won't matter if you've only got a few items as in the above example, but when dealing with considerable amounts of data, it can make a big difference.
+
+In JavaScript you have even more options, as there are no built-in stack or queue classes.  
+Instead you can use the `push` and `pop` methods of an array to implement a stack, and the `shift` and `unshift` methods to implement a queue.
+
+Play around with these methods a bit to get a feel for how they work.  
+You can even open a Python instance in your terminal or JavaScript console in your browser and try them out there.
+
+.Think about it:
+****
+Why are we only interested in FIFO and LIFO, and not FILO (first-in-last-out) or LILO?
+****
+
 
 === Developing Intuition: What are stacks and queues used for?
 
@@ -48,7 +155,6 @@ They can be used to determine the priority of packets in a network or to determi
 Is a for loop an example of a stack or a queue?  
 What about a nested for loop?
 What about the browser event loop?  
-
 
 === Example Questions
 
@@ -85,7 +191,38 @@ for perm in permutations:
 
 ==== Balanced parentheses
 
-How can you balance parentheses
+Back in the days before all of the wonderful IDE's that are available for free today, progammers had to write code in terminals or very simple text editors.
+If you've ever used `vim` or `emacs`, you know that they are not very good at telling you when you've made a mistake.
+Additionally, try writing some code in something like NotePad++ and you'll seriously wonder how programmers ever got anything done.  
+
+One very typical mistake that was easy to make in those days was to lose track of parentheses.  
+In a complicated parenthetical expression, it was easy to either forget to close an open parenthesis, or to add an extra one at the end.  
+I was once working on a long program that would not compile and I ended up printing out the entire program and marking the parentheses with a highlighter to find my mistake.
+Now the editor will just highlight the matching parenthesis for you, or just go ahead a fix them without your even noticing.  
+
+It's not magic that balances those parenthesis in your code editor though, it's a stack.  
+Specifically, it's a stack of open parentheses.
+Every time you open a parenthesis, you push it onto the stack.
+Every time you close a parenthesis, you pop if off the stack.
+
+If you finish with parenthesis still on the stack, you know you've forgotten to close something somewhere.  
+If you try to pop a parenthesis off of an empty stack, you know you're trying to close something that was never opened.
+If you end up with an empty stack, no more and no less, you can rest assured that your parentheses are balanced.
+
+[source, python]
+----
+def is_balanced(s):
+    stack = []
+    for c in s:
+        if c == "(":
+            stack.append(c)
+        elif c == ")":
+            if not stack:
+                return False
+            stack.pop()
+    return not stack
+----    
+
 
 ==== Find the second smallest item
 
