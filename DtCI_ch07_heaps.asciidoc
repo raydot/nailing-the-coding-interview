@@ -2,11 +2,306 @@
 
 == Heaps
 
-Heaps and heaps and heaps
+Congratulations, you've made it to heaps!
+This is a fantastic thing because heaps are the entrance to the "open seas" of data structures, where you leave behind more abstract, theoretical concepts and start working with practical, real-world data structures that have a wide range of applications.
+(Ok, that might be a bit of a stretch, but you get the general idea)
+By the end of this chapter you will understand what a heap is, what it's used for, and how to implement one. 
+You will also understand how heaps relate to trees and graphs, and how to use them build better search and sort algorithms.
 
 === Heap Definition
 
-A heap is a data structure that
+A heap is a data structure that expands on the idea of stacks and queues by adding an additional layer of organization to data.  
+Adding this layer means that data can be kept in a specific order, depending on the type of heap being used.  
+
+The most common type of heap is the "max heap," or it's mirror image counterpart, the "min heap."
+These are data structures that are organized in such a way that the largest (or smallest) element is always kept at the top or the heap.
+
+There's more to a heap than that, but as the wise man in the forest once said, "In order to understand the heap, you must first understand the tree."
+
+=== Trees
+
+While trees will be covered in much greater depth in chapter 9, this is a great place to start building a foundation of understanding.
+I'm going to move away from "code" for a moment and talk about the concept of a tree in a more general way.  
+
+In computer science a tree is a data structure that is used to organize data in a hierarchial way.  
+The concept comes from the fact that data in tree form can best be understood as an upside-down tree, with the "root" at the top and the "leaves" at the bottom.
+Why it isn't called something else, I'll never know.  
+
+<DIAGRAM OF A TREE TK>
+
+          50
+        /    \
+     10      63
+    /  \    /  \
+  5    15  60   75
+
+A tree is made up of nodes (items) and edges (connections).
+If you've studied any graph theory -- which we'll get to in Chapter 10 -- these terms may sound familiar.  
+In this tree example -- commonly known as a "binary tree" -- the root of the tree (at the top) is 50, and the leaves of the tree are 5, 15, 60, and 75.
+In this particular tree, the root (50) has two children (10 and 63), and each of those children has two children of its own.
+The leaves of the tree are the nodes that have no children.
+
+Conversely, except for the root each node in the tree has a parent.  
+The parent of a node is the node that is directly above it in the tree.
+In the example above, the parent of 60 is 63, and the parent of 63 is 50.
+
+What makes this particular tree a binary tree is that each node of data has a smaller value to the left and a larger value to the right.  
+In fact, if you read the tree from left to right horizontally, you'll see that the values are in ascending order: 5, 10, 15, 50, 60, 63, 75.
+Any new values added to the tree will need to be added in a way that keeps things in this order -- but we'll get back to that in Chapter 9.
+
+There is a close relationship between heaps, trees, and graphs, which is what I meant earlier when I said that heaps are the entrance to the "open seas" of data structures. 
+Keep this image of a binary tree in mind as we consider a heap.
+
+=== Heaps and Trees
+
+A heap can be thought of as almost a flat tree, with data organized in a way that makes it easy to find either the largest or smallest element.  
+The rules for organizing data in a heap keep the data in a specific order depending on the type of heap being used.
+A heap that keeps the maximum element at the top is called a "max heap," and a heap that keeps the minimum element at the top is called a "min heap."
+Let's revisit the tree example above and this time turn it into a max heap.
+
+<DIAGRAM OF A HEAP TK>
+
+          75
+        /    \
+     63      60
+    /  \    /  \
+  50   15  10   5
+
+This now is the same data but with a different organization.  
+The way this data is organized, and what makes it a "max" heap, is that the largest element is always at the top of the heap.
+In a max heap, instead of the values ascending from left to right as in the tree example, the values are organized in such a way that the largest value is always at the top.
+Instead of having a smaller value to the left and a larger value to the right, a heap is organized so that each parent contains a value that is larger than its children.
+
+Now you can't store data in a tree shape, of course, and if you fed the two above diagrams into a computer it wouldn't really know how to handle them.  
+So instead, let me consider the heap as a "flat tree" and see what it looks like as a linear data structure.  
+I'll start with a Python list:
+
+[source,python]
+----
+heap = [75, 63, 60, 50, 15, 10, 5]
+----
+
+As a heap, this list contains some organizational rules that keep the data the way it needs to be so that the values remain in the correct order.
+Every child in a heap has a parent, and the parent can be taking the child's index, subtracting one, and dividing by two.  
+Or:
+
+[source,python]
+----
+parent = (child - 1) // 2
+----
+
+To find the parent of 15, for instance, start with the index value of 15 which is 4.
+Subtract one from four to get three, and then divide by two to get one (remember that in Python that the `//` operator rounds down to the nearest integer).
+
+[source,python]
+----
+parent = (4 - 1) // 2 # step 1
+parent = 3 // 2 # step 2
+parent = 1 # step 3
+----
+
+Looking at list element 1, the parent of 15 is 63.
+Go ahead and try this "trick" with any other element in the list and I think you'll find that it works.  
+(If it didn't, I wouldn't have told you about it.)
+
+From this simple idea it's easy to build up some rules to implement a heap in code.
+
+=== Inserting into a Heap
+
+Let's return to our existing heap, once again in a tree view.  
+
+<DIAGRAM OF A HEAP TK>
+
+        75
+      /    \
+    63      60
+  /  \    /  \
+50   15  10   5
+
+I want to add a new value to this heap, and the value I want to add is 1.
+Stop for a moment and think about where you would add this value to the heap.
+There is only one place for it to go in order to maintain all of the rules we've discussed so far.
+In this case, and in every other case, a new value is always added to the end of the heap.
+The heap is then "heapified" to make sure it remains a heap.
+After inserting the 1 at the end of the list, the heap now looks like this:
+
+<DIAGRAM OF A HEAP TK>
+
+        75
+      /    \
+    63      60
+   /  \    /  \  
+  50   15 10   5
+ /
+1            <--- New value
+
+Have we maintained all of the rules we've learned so far?
+
+1. The largest value is at the top of the heap.
+2. Each parent contains a value that is larger than its children.
+
+In list form our heap now looks like this:
+
+[source,python]
+----
+heap = [75, 63, 60, 50, 15, 10, 5, 1]
+----
+
+Can we find the parent of 1 using the formula we discussed earlier?
+
+[source,python]
+----
+parent = (7 - 1) // 2
+parent = 6 // 2
+parent = 3
+----
+
+The parent of 1 is 50, which is correct.
+
+That was an easy one. 
+What if we want to add the value 67 to the heap?
+Looking at the heap, where would you add the value 67?
+
+<DIAGRAM OF A HEAP TK>
+
+        75
+      /    \
+    63      60
+   /  \    /  \  
+  50   15 10   5
+ /  \                       
+1    67
+
+As always, the new value is added to the end of the heap, but now the heap is clearly out of order!  67 is larger than both its parent, 50, and its grandparent, 63.
+
+Fortunately, there is a simple way to fix this.
+After adding a value to the end of a heap it is necessary to "bubble up" the value to its correct position.
+(I didn't make up the term "bubble up," but I drank a lot of it when I was a kid.)
+
+The steps involved in bubbling up a value are:
+
+1. Add the new value to the end of the heap.
+2. Compare the new value to its parent.
+3. If the new value is larger than its parent, swap the new value with its parent.
+
+Applying this to the heap with the new value 67:
+
+1. Add 67 to the end of the heap.
+2. Compare 67 to its parent, 50.
+3. 67 is larger than 50, so swap 67 and 50.
+
+        75
+      /    \
+    63      60
+   /  \    /  \  
+  67   15 10   5
+ /  \                       
+1    50
+
+4. Compare 67 to its new parent, 63.
+5. 67 is larger than 63, so bubble up again, swapping 67 and 63.
+
+        75
+      /    \
+    67      60
+   /  \    /  \  
+  63   15 10   5
+ /  \
+1    50
+
+Now the heap is back in order and all is right in the kingdom.  
+
+Before considering other cases, I'd like to stop for a moment and consider what this looks like in code.  Here is a Python class that implements the heap I've been discussing.  It prints the heap, inserts the value 67, bubbles it up, and prints the heap again:
+
+[source,python]
+----
+class Heap:
+    def __init__(self, input_list=None):
+        self.heap = []
+        if input_list:
+            self.heap = input_list.copy()
+    
+    def get_parent(self, index):
+        return (index - 1) // 2
+    
+    def insert(self, value):
+        self.heap.append(value)
+        self._bubble_up(len(self.heap) - 1)
+
+    def display(self):
+        return self.heap
+    
+    def _bubble_up(self, index):
+        parent = self.get_parent(index)
+        
+        if index > 0 and self.heap[index] > self.heap[parent]:
+            self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+            self._bubble_up(parent)
+    
+
+
+# Test the implementation
+heap = Heap([75, 63, 60, 50, 15, 10, 5, 1])
+print("Initial heap:", heap.display())
+heap.insert(67)
+print("After inserting 67:", heap.display())
+----
+
+Breaking this code down method by method, the first four are pretty straightforward:
+
+The `__init__` method initializes the heap with an optional input list.
+The `get_parent` method returns the parent of a given index.
+The `insert` method adds a new value to the heap and calls the `_bubble_up` method to maintain the heap property.
+It passes in the index of the new value which, being appended to the end of the heap, is the last index found at `len(self.heap) - 1`.
+The `display` method returns the heap, which can be passed to the `print` function in order to be displayed.  
+
+This leaves us with the `_bubble_up` method, which is the most interesting and important part of the code.
+[source,python]
+----
+def _bubble_up(self, index):
+    parent = self.get_parent(index)
+    
+    if index > 0 and self.heap[index] > self.heap[parent]:
+        self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+        self._bubble_up(parent)
+----
+
+def _bubble_up(self, index):
+    current = index
+    parent = self.get_parent(current)
+    
+    while current > 0 and self.heap[current] > self.heap[parent]:
+        # Swap current with parent
+        self.heap[current], self.heap[parent] = self.heap[parent], self.heap[current]
+        # Move up the heap
+        current = parent
+        parent = self.get_parent(current)
+
+The `_bubble_up` method takes the index of the item we're interest in checking to see if it needs to be bubbled up.
+It begins by finding the parent of the item at the given index.
+Next
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
 === Developing Intuition: What are heaps used for?
 

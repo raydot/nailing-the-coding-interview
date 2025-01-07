@@ -237,8 +237,8 @@ For example:
 
 [source, python]
 ----
-firsto = "Hello world!"
-print(firsto.index("o"))
+first_o = "Hello world!"
+print(first_o.index("o"))
 ----
 
 This will print 4, because the first "o" in the string "Hello world!" can be found at position 4.

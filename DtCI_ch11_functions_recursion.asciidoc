@@ -115,6 +115,35 @@ If your language doesn't support function prototyping, how can data checks in fu
 
 === Recursion
 
+In the course of my career I've written a _lot_ of recursive code, and all of it has one thing in common: it's been some kind of exercise.  
+I've been in a class and given a problem to be solved with recursion, I've been writing an exam and I promised there would be a problem that required recursion, or I've been in an interview and asked to solve a problem using recursion.
+
+In that same span of time I don't think I've ever written a single line of recursive code in a production environment.
+It's hard to come up with, hard to maintain, and if you get it wrong it can end up creating a heck of a lot more problems than it solves.
+
+So is recursion a useful concept?
+Or should it be left to academia and otherwise avoided?
+
+The simple answer to that question is: yes!
+
+While it's rarely the best tool for the job, recursion is a very useful concept in terms of gaining a deeper understanding of how code works.
+It's an absolutely invaluable way to reason about problems.
+The process used to come up with recursive solutions is identical to the process used to break larger problems into smaller, more manageable pieces.
+
+I was a musician as a youth, and even though I always played rock songs, I worked with a teacher who taught me jazz.  
+I loved it because playing jazz focused more on finesse, improvisation, and a broader musical understanding.  
+When I got together with band band and we played rock, it was a lot easier to play those songs because I had a deeper understanding of music.  
+(That's not a value judgement by the way.
+I'm not saying either is "better."
+Plenty of people hate jazz, and while I think they're making a huge mistake, I get it.)
+
+It's the same with recursion.  
+Understanding how to break a problem down in the way that's required to come up with recursive solutions is an invaluable skill for a programmer to have, even if you never use recursion in a production environment.  
+That's _why_ it's focused on so much in academia and in coding interviews -- it's a way to show an advanced understanding of ways to reason about code.
+
+
+
+
 === Introduction to Recursion
 
 === The Elements of Recursion
@@ -145,6 +174,39 @@ def _permute_helper(arr, left, right, result):
             _permute_helper(arr, left + 1, right, result)
             arr[left], arr[i] = arr[i], arr[left]  # Swap back
 ----
+
+Here's another example from chapter 7, where I talked about heaps.
+In that chapter I showed an example of the heap "bubble up" operation as a while loop.  
+
+[source, python]
+----
+def _bubble_up(self, index):
+    current = index
+    parent = self.get_parent(current)
+    
+    while current > 0 and self.heap[current] > self.heap[parent]:
+        # Swap current with parent
+        self.heap[current], self.heap[parent] = self.heap[parent], self.heap[current]
+        # Move up the heap
+        current = parent
+        parent = self.get_parent(current)
+----
+
+
+
+It stands to reason that once an item has been bubbled up, if it's larger than it's parent it can simply be bubbled up again.  
+In this example, the while loop is replaced by a recursive call to `_bubble_up`:
+
+[source,python]
+----
+def _bubble_up(self, index):
+    parent = self.get_parent(index)
+    
+    if index > 0 and self.heap[index] > self.heap[parent]:
+        self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+        self._bubble_up(parent)
+----
+
 
 ==== When you (might) have a recursive pattern
 

@@ -128,6 +128,9 @@ You can even open a Python instance in your terminal or JavaScript console in yo
 .Think about it:
 ****
 Why are we only interested in FIFO and LIFO, and not FILO (first-in-last-out) or LILO?
+
+Some (mostly older) programming languages also have a method called PEEK, which allows you to look at the first/top element of a queue or stack without removing it.  
+Why might you want to do this?
 ****
 
 
@@ -155,6 +158,34 @@ They can be used to determine the priority of packets in a network or to determi
 Is a for loop an example of a stack or a queue?  
 What about a nested for loop?
 What about the browser event loop?  
+
+=== Priority Queues
+
+A priority queue is a data structure that is a combination of a queue and a heap which I'll talk about in the next chapter.  
+In addition to having a FIFO order, a priority queue also has a priority order.
+You can think of a priority queue like people who have TSA PreCheck at the airport.
+They get to go to the front of the line, regardless of when they arrive.
+Once they've gone through, everyone else goes through the line in the order they arrived.  
+There are many ways to implement a priority queue, but one simplistic way to do it is to use a nested array (or Python list) where the first element is the priority and the second element is the data.
+
+[source, python]
+----
+priority_queue = []
+priority_queue.append([3, "low priority"])
+priority_queue.append([1, "high priority"])
+priority_queue.append([2, "medium priority"])
+----
+
+In this example, the high priority item will be removed first, followed by the medium priority item, and finally the low priority item.
+This might lead you to wonder what the point is of using a queue at all, since we're not following the FIFO order.  
+Imagine this being a much larger set of data, like a network across which data packets are sent.  
+This network might contain three levels of priority, but thousands, or even millions of packets.  
+Assigning one of three priorities to each of these packets allows for more important packets like packets containing text to be sent before less important packages like packets containing images.
+You may have even been on a slow network and notice that text loads before images, or added priority to an image as a web developer to make sure it's loaded no matter what.  
+This allows programmers to impose at least a little bit of order on the chaos of all of the data flying hither and yon down the information superhighway.
+
+
+
 
 === Example Questions
 
@@ -191,7 +222,7 @@ for perm in permutations:
 
 ==== Balanced parentheses
 
-Back in the days before all of the wonderful IDE's that are available for free today, progammers had to write code in terminals or very simple text editors.
+Back in the days before all of the wonderful IDE's that are available for free today, programmers had to write code in terminals or very simple text editors.
 If you've ever used `vim` or `emacs`, you know that they are not very good at telling you when you've made a mistake.
 Additionally, try writing some code in something like NotePad++ and you'll seriously wonder how programmers ever got anything done.  
 
@@ -221,10 +252,28 @@ def is_balanced(s):
                 return False
             stack.pop()
     return not stack
-----    
 
+# Usage
+print(is_balanced("((()))")) # True
+print(is_balanced("(()))")) # False
+----
+
+
+
+  
+
+.The Terminal
+****
+This may be another one of my unpopular opinions, but I'm always truly amazed when I find a programmer who doesn't know how to use the terminal, and doesn't care.
+It's not used anywhere near as much as it used to be (yes, I used to check my email in the terminal), but it's still an absolutely necessary thing to know.
+While you certainly don't have to read the Unix MAN pages from beginning to end, any programmer should know how to navigate through a file system, create and delete files and directories, and run programs from the command line.
+It's invaluable for not having to "context switch" between your editor and your terminal, and using it will give you lots of really, really boring stories to tell your grandkids.
+Also: it will absolutely make you a better programmer.
+****
 
 ==== Find the second smallest item
+
+
 
 Find the second-smallest number in an array of integers.
 Can you scale this to the third smallest?
@@ -234,3 +283,4 @@ Can you scale this to other sorts of ordering, like alphabetical order?
 ==== Implement x using a stack
 
 How to implement x
+

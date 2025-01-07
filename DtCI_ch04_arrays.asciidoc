@@ -463,7 +463,7 @@ Sorting is just what it sounds like: sorting data according to a given criteria.
 
 Yes, most programming languages have a function named `sort()`, but in the context of an interview this is something you might be asked to do.  
 
-.The AlgoRythmics
+.The AlgoRhythmics
 ----
 Only on YouTube: There is a collection of videos featuring Hungarian folk dancer computer scientists demonstrating common algorithms, including the Bubble Sort this chapter is about to cover.
 You can see for yourself at: https://www.youtube.com/@AlgoRythmics 
@@ -893,7 +893,7 @@ Clearly this question has little to do with walls and water.
 It's really about finding the maximum area of a rectangle -- width times height -- that can be formed by two lines on a graph.
 This is the kind of reasoning you can do out-loud during the interview to show your thought process.
 
-From here the brute force solution should suggest itself: check the area of the rectangle formed by every "wall" in the array against every other reactangle and return the biggest one.  
+From here the brute force solution should suggest itself: check the area of the rectangle formed by every "wall" in the array against every other rectangle and return the biggest one.  
 That approach would look something like this:
 
 [source, python]
@@ -1134,7 +1134,7 @@ def rotate_array(arr, k):
 If you've ever taken a course in computer programming, at some point you were probably introduced to the module operator, or _%_.
 The modulo operator is used to find the remainder of a division operation. 
 In grade school, for example, you may have learned to write the answer to a long division problem using a remainder.
-"11 divided by 3 is 3 with a remainder of 2."
+"11 divided by 3 is 3 with a remainder of 2." or "11 _r_ 2"
 Or, in computer terms, `11 % 3` will return `2`.
 
 Everyone learns that...and then forgets it!  
@@ -1146,7 +1146,7 @@ You will see it used more than once in this book, so vow to make friends with it
 ****
 
 What is the purpose of the modulo operator in this case?
-Think of a case where the array is five items long (n), and you're asked to rotate is 17 times (k).
+Think of a case where the array is five items long (n), and you're asked to rotate it 17 times (k).
 If you think about it, because a rotation always starts again where it ends, rotating an array three times is the same thing as rotating it once.
 You'll get the exact same result, right?
 
@@ -1156,7 +1156,7 @@ All you need to do is focus on the modulo -- remainder -- of `k % n` and rotate 
 In this case were n is 5 and k is 17, `k % n` = `2` and so the array only needs to be rotated twice.
 
 Additionally, we can use a more "pythonic" approach by using slicing to solve the problem. 
-As you may know (or recall from the last chapter) in python we can slice items the array by including the index in brackets.  
+As you may know (or recall from earlier in the book) in python we can slice items in an array by including the array index range in brackets.  
 This brings us to the following solution:
 
 [source, python]

@@ -627,3 +627,5 @@ So this time there won't be sample interview questions, but here are some exerci
 Bonus points for using recursion.
 (Don't worry if you don't know what recursion is, I'll get to that in chapter 11.)
 * Write a function that takes a linked list and sorts the list in reverse order.
+* A "circular" linked list is a linked list where the last node in the list points to the first node in the list.  
+Can you think of a potential use for a circular linked list?

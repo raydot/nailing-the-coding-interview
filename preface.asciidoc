@@ -214,6 +214,13 @@ They try to make the abstract concepts in this book more concrete, and to give y
 Take some extra time with these.
 Putting in a little effort in the short term might save you lots of time in the long run because you won't have to struggle to understand what you're being asked.
 
+One last note: this book is not a comprehensive guide to data structures.
+The focus of the book is on the coding interview, and how to prepare for it.
+Pretty much every subject covered in this book has been covered in much greater depth somewhere else.  
+I strongly encourage you to seek out those resources, and to approach the infinite amount of computer science knowledge available with curiosity, an open mind, and a willingness to learn.
+I am only your guide.  
+The path you choose to take is up to you.
+
 
 === Conventions Used in This Book
 

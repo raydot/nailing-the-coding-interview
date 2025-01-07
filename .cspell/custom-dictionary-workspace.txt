@@ -1,6 +1,10 @@
+deque
+elif
 Karp
 Palo
 partintro
 Passaic
 pseudocode
 Pythonic
+unshift
+xkcd
