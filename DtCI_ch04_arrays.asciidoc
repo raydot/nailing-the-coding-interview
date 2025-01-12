@@ -46,11 +46,11 @@ The length of an array is one of its most important properties. Many array opera
 .Weakly vs. Strongly Typed Languages
 ****
 The difference between weakly typed and strongly typed languages comes down to how strict the language requires programmers to be when mixing data. 
-In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing.  
+In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing. 
 In weakly typed languages, this mixing is allowed, accepted, and even encouraged!
 
 If you've used Typescript you're used to a hybrid of both, with Typescript being a language that adds strong data typing to Javascript.
-There's some controversy over whether this is desirable or should even be allowed.  
+There's some controversy over whether this is desirable or should even be allowed. 
 Is Typescript a useful tool or simply meant to make Javascript more palatable for coders coming from more strongly typed languages, like Java?
 
 In {cpp} an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in {cpp}. It can only be used to hold five integer values, no more, and no other type of data is allowed. 
@@ -91,8 +91,8 @@ for i in range(len(someArray)):
 ----
 
 Python also allows for the selection of elements in an array by passing in a range that takes a "slice" of the array.
-The slicing approach was covered in the last chapter.  
-The first number in the range is the index of the first element we wish to select while the second number is one more than the index of the second element.  
+The slicing approach was covered in the last chapter. 
+The first number in the range is the index of the first element we wish to select while the second number is one more than the index of the second element. 
 
 [source, python]
 ----
@@ -112,7 +112,7 @@ print(arr[:3])
 # prints [1, 2, 3]
 ----
 
-You can also pass negative values when requesting array items, which means to select from the end of the array instead of the beginning.  
+You can also pass negative values when requesting array items, which means to select from the end of the array instead of the beginning. 
 
 [source, python]
 ----
@@ -137,38 +137,38 @@ The point is if you have to iterate over an array (peanut butter), use a for loo
 
 It's a little beyond the scope of the book, but I'm going to spend just a moment on how arrays work under-the-hood, to give you a better sense of what's actually going on.
 
-An array is actually composed of not one but TWO pieces of data, the one you have control over and the one managed by the programming language.  
-As I mentioned in "Weak vs. Strongly Typed Languages," above, in strongly-typed languages data is allocated by type, and the type determines the size of the data in memory.  
+An array is actually composed of not one but TWO pieces of data, the one you have control over and the one managed by the programming language. 
+As I mentioned in "Weak vs. Strongly Typed Languages," above, in strongly-typed languages data is allocated by type, and the type determines the size of the data in memory. 
 
-In C, a strongly typed language, an `int` data type allocates four bytes, or 32 bits, to hold an integer value.  
-This idea behind this is to allow programmers to use only the amount of memory they need, and no more.  
+In C, a strongly typed language, an `int` data type allocates four bytes, or 32 bits, to hold an integer value. 
+This idea behind this is to allow programmers to use only the amount of memory they need, and no more. 
 If you have a variable that will never go above the value 10, for instance, you might prefer using a `short` data type, which is comprised of 2 bytes, or 16 bits.
-The obvious disadvantage to this approach is that while you might be able to control your program you can't control its users, and if a user enters a number that exceeds the size of the data block allocated to it, unexpected results can occur.  
+The obvious disadvantage to this approach is that while you might be able to control your program you can't control its users, and if a user enters a number that exceeds the size of the data block allocated to it, unexpected results can occur. 
 
-In JavaScript or Python, which are loosely typed languages, the script interpreter takes  anything you give it, allowing the programmer to mix-and-match in memory, while minimizing the "unexpected results" I just mentioned.  
+In JavaScript or Python, which are loosely typed languages, the script interpreter takes  anything you give it, allowing the programmer to mix-and-match in memory, while minimizing the "unexpected results" I just mentioned. 
 This does not mean that data types/sizes are not allocated though!  
-It just happens behind-the-scenes, and the programmer doesn't have to worry about it.  
+It just happens behind-the-scenes, and the programmer doesn't have to worry about it. 
 A JavaScript `Number` is 64-bits in memory while an integer in Python usually occupies 32-bits -- both of which are a lot more memory than needed to handle most numbers!  
 Both languages have slightly different methods that allow allocated data chunks to scale to whatever value they're being asked to support.
 
 So what does this have to do with arrays?
 
-When you initialize an array, with values, the array allocates space in memory consistent with those values.  
-If you have ten integers in your array, there will be ten integer-sized chunks allocated in memory.  
+When you initialize an array, with values, the array allocates space in memory consistent with those values. 
+If you have ten integers in your array, there will be ten integer-sized chunks allocated in memory. 
 With all of these different data types in a single place, how does a computer know what the "next" data value is?  
 If a given value is a one-bit boolean number, how far away is the next value in memory?  
 Is it one byte away from the last?  
 Four?  
 Eight?
 
-This is where pointers come into play.  
-A programming language will allocate a pointer for each item in an array, and instead of incrementing data values by some fixed number, it will increment by the size of the pointer representing that value.  
-Strongly-typed languages will even allow programmers to do what's called "pointer arithmetic," which can be used to create complex data-access algorithms, like the kind used in databases.  
+This is where pointers come into play. 
+A programming language will allocate a pointer for each item in an array, and instead of incrementing data values by some fixed number, it will increment by the size of the pointer representing that value. 
+Strongly-typed languages will even allow programmers to do what's called "pointer arithmetic," which can be used to create complex data-access algorithms, like the kind used in databases. 
 
-In Python and Javascript though, while you can use pointers if you want to, kinda, you really don't have to and probably shouldn't.  
-Arrays in these languages should be left to the language, and even though it's using pointers behind the scene you usually don't have to worry about managing them directly.  
+In Python and Javascript though, while you can use pointers if you want to, kinda, you really don't have to and probably shouldn't. 
+Arrays in these languages should be left to the language, and even though it's using pointers behind the scene you usually don't have to worry about managing them directly. 
 
-Having said all of that, we will be returning to the concept of pointers as we progress through this book, with an expanded explanation coming in the very next chapter.  
+Having said all of that, we will be returning to the concept of pointers as we progress through this book, with an expanded explanation coming in the very next chapter. 
 
 
 ==== Modifying (or not Modifying) Arrays
@@ -233,7 +233,7 @@ print(len(demoArray)) # returns '5'
 
 `for` loops
 Every programming language contains a function that allows for simple iteration, or "counting."
-Iteration is a process that has been available in programming languages from the very beginning, as it's essential to making computers work.  
+Iteration is a process that has been available in programming languages from the very beginning, as it's essential to making computers work. 
 
 
 `for/in` Some programming languages -- usually the weakly-typed ones -- support `for/in` operations, which automatically consider the length of an array in iteration. 
@@ -268,9 +268,9 @@ So download the source, dig through the source code, read the spec, reverse engi
 While most of the arrays programmers work with are one-dimensional, there are many times when a two-, three- or more dimensional array may be needed to solve a problem.
 These arrays are commonly called "nested arrays" because they contain arrays within arrays.
 For instance, the multiplication table example, above, is a two-dimensional array, and arrays with multiple (x, y, z) values are used extensively in creating 3D models for games or visualization.
-In this case the array becomes _nested_, with sub-arrays, each of which represents the values along a given dimension.  
-A multidimensional array might also be called a "matrix," a concept we'll return to in the problems at the end of this chapter.  
-Here is a two-dimensional array that could be used to represent the state of a Tic-Tac-Toe board.  
+In this case the array becomes _nested_, with sub-arrays, each of which represents the values along a given dimension. 
+A multidimensional array might also be called a "matrix," a concept we'll return to in the problems at the end of this chapter. 
+Here is a two-dimensional array that could be used to represent the state of a Tic-Tac-Toe board. 
 
 [source, python]
 ----
@@ -282,7 +282,7 @@ tic_tac_toe_2d = [
 ----
 
 This bit of pseudocode contains an array containing three arrays, each of which contain three values.
-The number at each position represent the (row, column) that each position occupies in the two dimensional array.  
+The number at each position represent the (row, column) that each position occupies in the two dimensional array. 
 To access the value at any position, you have to pass two numbers to the array, like so:
 
 [source, python]
@@ -292,7 +292,7 @@ square = tic_tac_toe_2d[0][2]
 
 ==== Spread Operator
 
-The spread operator is one of those things to know that really shows you've been paying attention.  
+The spread operator is one of those things to know that really shows you've been paying attention. 
 You can use the spread operator in a few different ways, but it's invaluable for combining arrays and passing array data into functions:
 
 Here a Python example of a simple use of the spread operator to pass an array into a function:
@@ -306,11 +306,11 @@ values = [10, 11, 12]
 print(sum(*values))
 ----
 
-This code sample will output the value `33`.  Notice the (overloaded) star operator in the function call:
+This code sample will output the value `33`. Notice the (overloaded) star operator in the function call:
 
 `sum(*values)`
 
-The * operator used in the this fashion will "spread" the values into the function call.  
+The * operator used in the this fashion will "spread" the values into the function call. 
 
 Here's an example of a kind of reverse use, splitting a single piece of data into individual parts -- in this case converting a string into a list of each individual character: 
 
@@ -338,7 +338,7 @@ This code will output the value `{'a': 1, 'b': 2, 'c': 3, 'd': 4}`.
 Are there other ways to do this?  
 Yes.
 Are there cooler ways to do this?
-I just don't think so.  
+I just don't think so. 
 
 JavaScript also supports the spread operator, and it can be used in a similar way to Python.
 Instead of the `*` operator, JavaScript uses the `...` operator.
@@ -404,10 +404,10 @@ This spread operator in this instance "spreads" the props object into the functi
 ==== `argv` and `argc`, the Prime Directive of arrays
 
 If you're a frontend programmer you might go your whole career without ever once encountering "argv" and "argc," but if you're a backend programmer you're going to see them all the time.
-"argv" stands for "argument vector," and it is a list of arguments that can be passed into a program at runtime.  
+"argv" stands for "argument vector," and it is a list of arguments that can be passed into a program at runtime. 
 "argc" stands for "argument count," or a count of the number of arguments that have been passed to the argument vector.
 
-While they're commonly used in C and C++, they're available in Python and JavaScript, and can be a valuable too for passing data to a program at runtime.  
+While they're commonly used in C and C++, they're available in Python and JavaScript, and can be a valuable too for passing data to a program at runtime. 
 Node.js, for example, supports the use of `process.argv` to pass data into a a program "on the fly" at runtime:
 
 [source, javascript]
@@ -415,11 +415,11 @@ Node.js, for example, supports the use of `process.argv` to pass data into a a p
 console.log(process.argv);
 ----
 
-It's unlikely you'll ever be asked about `argv` and `argc` in a programming interview, but they're great tools to have in the box.  
+It's unlikely you'll ever be asked about `argv` and `argc` in a programming interview, but they're great tools to have in the box. 
 
 ==== JSON (JavaScript Object Notation)
 
-JavaScript Object Notation, or JSON, is being used more and more often these days across all programming languages.  
+JavaScript Object Notation, or JSON, is being used more and more often these days across all programming languages. 
 It a great way to represent data that's easy to read and immediately understand because it follows a form not too dissimilar from an outline.
 
 [source, json]
@@ -447,7 +447,7 @@ It a great way to represent data that's easy to read and immediately understand 
 
 JSON is often used an an intermediate data representation, because of the way in which is can readily be converted between platforms -- data in a database, and data on a webpage, for example.
 
-This chapter won't go too deeply into it, but JSON can be considered as a form of a nested array.  
+This chapter won't go too deeply into it, but JSON can be considered as a form of a nested array. 
 We'll look at JSON more closely in the next chapter, when we talk about hashes.
 
 
@@ -461,7 +461,7 @@ Even if you aren't directly asked questions about these algorithms, they are inc
 
 Sorting is just what it sounds like: sorting data according to a given criteria.
 
-Yes, most programming languages have a function named `sort()`, but in the context of an interview this is something you might be asked to do.  
+Yes, most programming languages have a function named `sort()`, but in the context of an interview this is something you might be asked to do. 
 
 .The AlgoRhythmics
 ----
@@ -477,14 +477,14 @@ If the element on the left is larger than the element on the right, the elements
 
 [IMAGE OF ARRAY AT START OF BUBBLE SORT]
 
-This only sorts the largest element in one pass though.  
+This only sorts the largest element in one pass though. 
 
 [IMAGE OF ARRAY IN MIDDLE OF BUBBLE SORT]
 
-So the algorithm returns to the beginning of the array and starts again, this time stopping one element before the end of the array.  
-It repeats this process until the array is sorted.  
+So the algorithm returns to the beginning of the array and starts again, this time stopping one element before the end of the array. 
+It repeats this process until the array is sorted. 
 
-Hopefully you see this requires nested for loops, and that the runtime of the algorithm is O(n^2).  
+Hopefully you see this requires nested for loops, and that the runtime of the algorithm is O(n^2). 
 For example:
 
 [source, python]
@@ -526,10 +526,10 @@ print("Sorted array:", arr)
 # Output: Sorted array: [11, 12, 22, 25, 34, 64, 90]
 ----
 
-Bubble Sort is so inefficient that it's rarely used in practice, but we have to start the conversation somewhere.  
+Bubble Sort is so inefficient that it's rarely used in practice, but we have to start the conversation somewhere. 
 Let's look at a slightly more practical algorithm, the Insertion Sort algorithm.
 
-Insertion Sort has the advantage over Bubble Sort in that it sorts the array in a single pass, placing elements into position as it goes along.  
+Insertion Sort has the advantage over Bubble Sort in that it sorts the array in a single pass, placing elements into position as it goes along. 
 It does taking elements one at a time and moving them to the left until they are in the correct position.
 
 [Illustration of Insertion Sort]
@@ -586,7 +586,7 @@ Stop and consider these questions for a moment before moving on.
 
 Let's start with a simple search: the binary search.
 You may have used this one before if you've ever played "Guess the Number."
-Someone says to you, "I'm thinking of a number between one and 100 and if you can guess the number in 6 guesses or fewer, I'll give you $5.  After every guess I'll tell you if my number is higher or lower than the one you choose."
+Someone says to you, "I'm thinking of a number between one and 100 and if you can guess the number in 6 guesses or fewer, I'll give you $5. After every guess I'll tell you if my number is higher or lower than the one you choose."
 Does it matter that you're told whether or not the number is higher or lower after every guess?
 Why?
 How would you go about solving this problem?
@@ -613,16 +613,16 @@ The response you get is "lower" and so you cut the space between 1 and 25 right 
 That might have seemed like a lot of guesses, but you couldn't have done any better without luck.
 (And I deliberately chose a number that would take several guesses to find.)
 
-In fact, 7 guesses is the maximum number of guesses you'll need to guess any number between 1 and 100 using binary search.  
+In fact, 7 guesses is the maximum number of guesses you'll need to guess any number between 1 and 100 using binary search. 
 
 The great think about binary search is it scales logarithmically. 
 Go back and look at the O(log n) graph in Chapter 2 if you don't remember what it looks like. 
-Because it grows logarithmically, every time the number of inputs doubles, the number of guesses required to get the answer only increases by one.  
-If someone wants to play this game with you using a number between 1 and 1,000,000, you are guaranteed to guess the number in 20 guesses of fewer using binary search.  
+Because it grows logarithmically, every time the number of inputs doubles, the number of guesses required to get the answer only increases by one. 
+If someone wants to play this game with you using a number between 1 and 1,000,000, you are guaranteed to guess the number in 20 guesses of fewer using binary search. 
 
 [IMAGE OF O(log n) GRAPH PLOTTING VALUES V. NUM GUESSES]
 
-Here is a simple implementation binary search to guess a number between 1-100.  This is not meant to be a complete application, just some basic code to illustrated the big idea.
+Here is a simple implementation binary search to guess a number between 1-100. This is not meant to be a complete application, just some basic code to illustrated the big idea.
 [source, python]
 ----
 def binary_search(arr, target):
@@ -641,9 +641,9 @@ def binary_search(arr, target):
             right = guess - 1
 ----
 
-Now that I've covered the basics, let's see how this could be used to find the position of a value in an array.  
-The numbers 1-100 have a property that makes them perfect for binary search, in that they're already sorted in order.  
-Given a number between 1-100, I can be assured that every number to the "left"  of that number on the number line is smaller, and every number to the right is larger.  
+Now that I've covered the basics, let's see how this could be used to find the position of a value in an array. 
+The numbers 1-100 have a property that makes them perfect for binary search, in that they're already sorted in order. 
+Given a number between 1-100, I can be assured that every number to the "left"  of that number on the number line is smaller, and every number to the right is larger. 
 The leads to an important consideration when using binary search: the data must be _sorted_ for the algorithm to work.
 
 Consider this array:
@@ -657,7 +657,7 @@ What would your first guess be?
 If you guess position three, the number 47, then the binary search answer would be "lower", but the number 10 is not lower than 47.
 
 This is something to keep in mind when choosing the right algorithm for an interview response. 
-If the data is not sorted, then binary search will not work.  
+If the data is not sorted, then binary search will not work. 
 If the data must first be sorted, then the Big O of the sorting algorithm becomes as much of a factor as the Big O of the searching algorithm.
 
 There are algorithms that work with unsorted data and, as mentioned above, we'll be taking a look at some of these in Chapter 12. 
@@ -672,16 +672,16 @@ Just like it sounds, the technique involves moving a data "window" over a string
 
 In languages that support them, the sliding window technique is implemented using data pointers. 
 In languages that don't support pointers the technique requires the coder to create their own pointers, but fortunately that's not a terribly difficult thing to do. 
-A pointer is just a variable that contains the location of another variable.  
-You can think of it like this: imagine you're looking at a row of lockers.  
-You can't see what's in the lockers, but you can see the numbers on the front of the lockers.  
+A pointer is just a variable that contains the location of another variable. 
+You can think of it like this: imagine you're looking at a row of lockers. 
+You can't see what's in the lockers, but you can see the numbers on the front of the lockers. 
 In front of the lockers stands a robot who knows what's in each locker.
 You ask can ask the robot two questions: 
   "What's in locker x?"
   "Which locker contains item x."
-In this analogy, the robot is the pointer, the lockers are the array, and the contents of the lockers are data.  
+In this analogy, the robot is the pointer, the lockers are the array, and the contents of the lockers are data. 
 
-You use a type of pointer when iterating over a for loop, with a variable that is usually named `i`.  
+You use a type of pointer when iterating over a for loop, with a variable that is usually named `i`. 
 
 [source, python]
 ----
@@ -689,9 +689,9 @@ for i in range(len(arr)):
   print(arr[i])
 ----
 
-In this case, `i` is the pointer that will go down the line of "lockers" represented by the array `arr`, and "open" (also called "dereference") each locker to see what's inside, returning the contents to the "print" function.  
-Keep this analogy in mind as you go over the sliding window problem.  
-The sliding window is literally a window -- or multiple windows -- that allow us to see what's in the lockers.  
+In this case, `i` is the pointer that will go down the line of "lockers" represented by the array `arr`, and "open" (also called "dereference") each locker to see what's inside, returning the contents to the "print" function. 
+Keep this analogy in mind as you go over the sliding window problem. 
+The sliding window is literally a window -- or multiple windows -- that allow us to see what's in the lockers. 
 You can assign logical conditions to these windows, and use them to solve problems that involve subsets of strings.
 
 Example Sliding Window Problem:
@@ -817,9 +817,9 @@ print(longest_unique_substring(test_var))  # Output: "abdc"
 ==== Python List Comprehensions
 
 Python has a feature called "list comprehensions" that allows you to create lists in a single line of code.
-It combines a for loop and a conditional statement into a single line of code.  
-JavaScript can also do this using the `map`, `reduce`, and `filter` functions, but it's hard to beat Python's approach for simplicity.  
-While list comprehension problems will not show up in LeetCode questions, using it to solve problems in an interview is a great way to show that you have a good grasp of the Python language.  
+It combines a for loop and a conditional statement into a single line of code. 
+JavaScript can also do this using the `map`, `reduce`, and `filter` functions, but it's hard to beat Python's approach for simplicity. 
+While list comprehension problems will not show up in LeetCode questions, using it to solve problems in an interview is a great way to show that you have a good grasp of the Python language. 
 
 The basic syntax of a list comprehension is:
   
@@ -837,7 +837,7 @@ This code will output:
 
 `[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]`
 
-Let's say we want to go back over that list and cube any even number.  
+Let's say we want to go back over that list and cube any even number. 
 That can be done with a list comprehension as well:
 
 [source, python]
@@ -875,12 +875,12 @@ This will output:
 
 ===== Container With Most Water (2 Pointer Solution)
 
-This problem comes in a few different forms, but the idea is that you're given an array of integers that represent the height of a series of walls.  
+This problem comes in a few different forms, but the idea is that you're given an array of integers that represent the height of a series of walls. 
 Which two walls can be used to create the container that holds the most water?
 
-As always, spend a moment trying to reason this problem out before attempting to answer.  You can't solve a problem you don't understand.  
+As always, spend a moment trying to reason this problem out before attempting to answer. You can't solve a problem you don't understand. 
 
-You have two axis that determine the shape of the container.  
+You have two axis that determine the shape of the container. 
 The x-axis is the distance between the two walls, and the y-axis is the height of the shorter of the two walls that make up the sides.
 Why shorter?
 Because if the water was the same height as the taller wall, it would simply spill over the top of the shorter wall.
@@ -889,11 +889,11 @@ So the x-axis, the distance, is determined by the distance between the two "wall
 
 [IMAGE OF CONTAINER QUESTION]
 
-Clearly this question has little to do with walls and water.  
+Clearly this question has little to do with walls and water. 
 It's really about finding the maximum area of a rectangle -- width times height -- that can be formed by two lines on a graph.
 This is the kind of reasoning you can do out-loud during the interview to show your thought process.
 
-From here the brute force solution should suggest itself: check the area of the rectangle formed by every "wall" in the array against every other rectangle and return the biggest one.  
+From here the brute force solution should suggest itself: check the area of the rectangle formed by every "wall" in the array against every other rectangle and return the biggest one. 
 That approach would look something like this:
 
 [source, python]
@@ -929,17 +929,17 @@ Two things are immediately apparent about this solution:
  1. It gives the area, but not the two walls that make up the container.
  2. It's a brute force solution, with a runtime of O(n^2), which can likely be improved.
 
-I'll leave the solution to #1 up to you, but let's think for a moment about the solution to #2.   
+I'll leave the solution to #1 up to you, but let's think for a moment about the solution to #2.  
 At this point the interviewer might even give you a hint: "Since the maximum width is the leftmost and rightmost wall, maybe you can optimize by working from the outside in."
 
 In other words, you don't have to compare every wall to every other wall.
 You can start with the outermost walls and work your way in, comparing the area of the container formed by the two walls.
-This can be determined by using the "two pointer" technique, which is commonly used on certain array problems.  
+This can be determined by using the "two pointer" technique, which is commonly used on certain array problems. 
 
 [PICTURE OF TWO POINTERS CLOSING IN ON THE CENTER TK]
 
 For "pointers" we can use two variables called "left" and "right" that start at the beginning and end of the array, respectively.
-By incrementing the left pointer while decrementing the right pointer, we can bring the two walls together until we have found our solution.  
+By incrementing the left pointer while decrementing the right pointer, we can bring the two walls together until we have found our solution. 
 
 The code for our new and improved approach might look something like this:
 
@@ -977,9 +977,9 @@ print(max_area(heights))  # Output: 80
 
 This solution is much more efficient, bringing our runtime down from O(n^2) to O(n).
 (Reason through why this is the case if it's not obvious to you already.)
-It also makes it report on the values chosen, since that only requires printing the values for "left" and "right," should you be asked to do so.  
+It also makes it report on the values chosen, since that only requires printing the values for "left" and "right," should you be asked to do so. 
 
-The two-pointer technique is a valuable technique for solving array-based problems, and we will see it again later in this book.  
+The two-pointer technique is a valuable technique for solving array-based problems, and we will see it again later in this book. 
 
 
 
@@ -1019,8 +1019,8 @@ def two_sum(array, target):
     return None
 ----
 
-This algorithm loops through the array twice, comparing each number to every other number in the array.  
-Notice in line 3 that the second loop starts at `i + 1`, because there's no need to check the same number against itself.  
+This algorithm loops through the array twice, comparing each number to every other number in the array. 
+Notice in line 3 that the second loop starts at `i + 1`, because there's no need to check the same number against itself. 
 Hopefully it doesn't come as much of a surprise to find this code runs in O(n^2) time, or that nested for loops is not the most efficient way to solve this problem.
 
 So how can we do better?
@@ -1041,11 +1041,11 @@ def two_sum(array, target):
 
 ===== Array Rotation
 
-Array rotation questions are good ways to test how a candidate approaches the logic of a problem, as there are many different ways in which an array rotation can be accomplished.  
-"Rotation" in the context of arrays simply means moving all of the values to the left or right by a certain number of spaces.  
-As items move to the right or end of the array, they wrap around to the left or beginning of the array.  
+Array rotation questions are good ways to test how a candidate approaches the logic of a problem, as there are many different ways in which an array rotation can be accomplished. 
+"Rotation" in the context of arrays simply means moving all of the values to the left or right by a certain number of spaces. 
+As items move to the right or end of the array, they wrap around to the left or beginning of the array. 
 "Rotation" can also be referred to as "shifting" of "cycling" items in an array. 
-For a very basic example of why it's useful, shifting all of the digits of a binary number to the left multiples the number by two, while shifting to the right divides by two.  
+For a very basic example of why it's useful, shifting all of the digits of a binary number to the left multiples the number by two, while shifting to the right divides by two. 
 Many programming languages have built-in operators for shifting bits, such as the `<<` and `>>` operators in Python.
 
 `128 << 1 = 256`
@@ -1061,17 +1061,17 @@ For instance, an interview question might read,
 You should be given a positive integer for k.
 If you are given a negative integer, that should be a clear signal that it's time to ask questions. 
 Don't just make the assumption that a negative integer means rotating the array to the left.
-It could also mean adding zeroes to the array, or have some other significance that is not readily apparent.  
+It could also mean adding zeroes to the array, or have some other significance that is not readily apparent. 
 
-As usual, start by reasoning through the problem before you start coding.  
-Python contains several built-in functions for pushing items into and returning items from an array, several of which we covered earlier in this chapter.  
+As usual, start by reasoning through the problem before you start coding. 
+Python contains several built-in functions for pushing items into and returning items from an array, several of which we covered earlier in this chapter. 
 
-You may even know that Python has a built-in function for rotating an array, and if you're familiar with it, you can ask the interviewer if it's appropriate to use it for the answer.  
-But that's not what we're here to learn.  
+You may even know that Python has a built-in function for rotating an array, and if you're familiar with it, you can ask the interviewer if it's appropriate to use it for the answer. 
+But that's not what we're here to learn. 
 
 The challenge with moving items in an array is that you have to be careful not to lose any of them.
-The items that go off to the right have to be accounted for in a way that makes it possible to move them back to the left.  
-You might immediately be tempted to create an additional array to "hold" the values that are pushed off the end of the array, but this is a problem that can absolutely be solved "in place," which means not creating additional space to hold data in memory.  
+The items that go off to the right have to be accounted for in a way that makes it possible to move them back to the left. 
+You might immediately be tempted to create an additional array to "hold" the values that are pushed off the end of the array, but this is a problem that can absolutely be solved "in place," which means not creating additional space to hold data in memory. 
 
 [source, python]
 ----
@@ -1156,7 +1156,7 @@ All you need to do is focus on the modulo -- remainder -- of `k % n` and rotate 
 In this case were n is 5 and k is 17, `k % n` = `2` and so the array only needs to be rotated twice.
 
 Additionally, we can use a more "pythonic" approach by using slicing to solve the problem. 
-As you may know (or recall from earlier in the book) in python we can slice items in an array by including the array index range in brackets.  
+As you may know (or recall from earlier in the book) in python we can slice items in an array by including the array index range in brackets. 
 This brings us to the following solution:
 
 [source, python]
@@ -1167,7 +1167,7 @@ def rotate_array(arr, k):
     return arr[-k:] + arr[:-k]
 ----
 
-Of course, as with most things involving computers, there is more than one way to solve the shifting problem.  
+Of course, as with most things involving computers, there is more than one way to solve the shifting problem. 
 In addition to using slicing to solve the problem, we can also use an approach based on reversing the entire array, splitting into two pieces, and then reversing each piece.
 
 [source, python]
@@ -1189,13 +1189,13 @@ def rotate_array(arr, k):
 ----
 
 There's not really an advantage to reversing over slicing, as both run in O(n) time.
-But both approaches are worth knowing about as they may come up as solutions to other problems as well.  
+But both approaches are worth knowing about as they may come up as solutions to other problems as well. 
 
 
 
 ===== Permutations
 
-"Permutations" involves putting every item in a set of items into every possible combination in relation to other items.  
+"Permutations" involves putting every item in a set of items into every possible combination in relation to other items. 
 For instance, here are all of the permutations of the array ["cat", "dog", "mouse"]:
 
 ["cat", "dog", "mouse"]
@@ -1211,7 +1211,7 @@ When if comes to permutations there are two primary questions involved:
   1. Given a starting set of data, how many permutations can be created?
   2. How can you generate all of the permutations?
 
-There may be additional questions involving the creation of permutations given certain conditions (like, you can't put the cake into the oven before you mix the batter), or considering a reduced set of items (if you have six pairs of sneakers, how many combinations can you make only using three of them at a time) but in this section we're going to focus only the two questions above.  
+There may be additional questions involving the creation of permutations given certain conditions (like, you can't put the cake into the oven before you mix the batter), or considering a reduced set of items (if you have six pairs of sneakers, how many combinations can you make only using three of them at a time) but in this section we're going to focus only the two questions above. 
 
 The answer to the first question is simple: it's the factorial of the number if items in the set.
 You might remember factorials from high-school math class, but if you don't, a factorial of 5 is written as:
@@ -1222,10 +1222,10 @@ And represents the product of all of the positive integers from 1 to 5:
 
 1 x 2 x 3 x 4 x 5 = 120
 
-So if you have a set of 5 items, there are 120 possible permutations -- combinations -- of those items.  
+So if you have a set of 5 items, there are 120 possible permutations -- combinations -- of those items. 
 
 So how can we generate permutations?
-This is a problem that I'll return to throughout the book, as the solutions will become both more sophisticated and easier to implement as we further explore data structures and algorithms.  
+This is a problem that I'll return to throughout the book, as the solutions will become both more sophisticated and easier to implement as we further explore data structures and algorithms. 
 
 In the mean time, let's start with this awfully iterative approach:
 
@@ -1269,26 +1269,26 @@ TODO: Finish Permutations
 The last three examples in this chapter are going to cover games.
 Everyday games are useful for testing algorithmic knowledge because they can be used to cover a discrete problem set with rules that are usually well known. 
 
-We're going to cover three games in these last examples: Tic-Tac-Toe, Chess, and Sudoku.  
+We're going to cover three games in these last examples: Tic-Tac-Toe, Chess, and Sudoku. 
 In this section I'm going to talk through the reasoning of building from simpler principles to a bigger idea, breaking each problem down into smaller and smaller steps until it consists of a number of relatively simple problems.
 
-It's my hope that you can follow my reasoning in a way that shows you how you can build up your ideas during an interview, and the kinds of things you'll need to take into consideration as you do.  
+It's my hope that you can follow my reasoning in a way that shows you how you can build up your ideas during an interview, and the kinds of things you'll need to take into consideration as you do. 
 While it's fairly unlikely that you will be asked to complete one of these takes in total during an in-person interview, you might be asked to complete a portion of one of them as a test of your reasoning and problem-solving skills, and the ways in which you respond to feedback.
-Or you might be asked to solve a similar complex task, and hopefully these examples give you an idea of how to proceed with confidence.  
+Or you might be asked to solve a similar complex task, and hopefully these examples give you an idea of how to proceed with confidence. 
 
 
 ===== Winning Tic-Tac-Toe
 
-Tic-Tac-Toe (also called "Noughts and Crosses") is a great game for improving your knowledge of programming concepts because it has simple rules and a limited number of outcomes.  
+Tic-Tac-Toe (also called "Noughts and Crosses") is a great game for improving your knowledge of programming concepts because it has simple rules and a limited number of outcomes. 
 There are only two players, and the game can go no more than nine moves long. 
 xkcd, the best computer programming comic ever, [has mandatory coverage of the subject](https://xkcd.com/832/).
 
-Depending on how you choose to count, there are roughly a quarter-million possible games of Tic-Tac-Toe, which isn't really a lot for a computer.  
+Depending on how you choose to count, there are roughly a quarter-million possible games of Tic-Tac-Toe, which isn't really a lot for a computer. 
 It's even less when you consider that most of those games are duplicates of each other, since nearly 90% of them are rotations or reflections of the same game board.
-This section will give some ideas on how to get started, but it won't cover the logic of the game in its entirety.  
+This section will give some ideas on how to get started, but it won't cover the logic of the game in its entirety. 
 That exercise is left up to the reader!
 
-It's easy to create a simple turn-based game of Tic-Tac-Toe in pretty much any programming language.  
+It's easy to create a simple turn-based game of Tic-Tac-Toe in pretty much any programming language. 
 Once you've got the basic game play set up, then next problem is to determine the four states of the game:
   1. Player Turn
   2. Player X wins
@@ -1306,13 +1306,13 @@ For this question we're going to focus on four basic parts of play:
   2. Determining how to play a blocking move
   3. Determining how to play a winning move
 
-Tic-Tac-Toe is often used to ask array questions in interviews because the game board can be represented in two primary ways: as a one-dimensional, 9-element array, or as a two-dimensional, 3x3 array.  
+Tic-Tac-Toe is often used to ask array questions in interviews because the game board can be represented in two primary ways: as a one-dimensional, 9-element array, or as a two-dimensional, 3x3 array. 
 The 1-D array is easier to work with, but the 2-D array is more intuitive for humans to understand, so we'll stick with that representation in this question.
 
 
 [pictures of Tic-Tac-Toe games]
 
-Let's consider this game only from the point of view of player "X", the first player to play.  
+Let's consider this game only from the point of view of player "X", the first player to play. 
 
 
 
@@ -1333,7 +1333,7 @@ tic_tac_toe_2d = [
 ]
 ----
 
-A computer has no way of knowing how to play Tic-Tac-Toe, of course, and so doesn't know what a winning move looks like.  
+A computer has no way of knowing how to play Tic-Tac-Toe, of course, and so doesn't know what a winning move looks like. 
 Here is a two-dimensional list of the winning moves by list, column, and diagonal.
 By checking against this list, the computer can determine whether or not it's won or is about to win (or lose!) a game of Tic-Tac-Toe, or if the game has resulted in a draw:
 
@@ -1369,7 +1369,7 @@ def check_winner(board, player):
     return False
 ----
 
-This code takes the representation of the board, and the letter of the player to evaluate.  
+This code takes the representation of the board, and the letter of the player to evaluate. 
 It then sets the boolean `all_match` to True, changing it to False if no match is found among the winning combinations.
 
 
@@ -1389,12 +1389,12 @@ def check_winner(board, player):
 
 ===== N-Queens
 
-The queen is the most powerful piece in chess.  
+The queen is the most powerful piece in chess. 
 She can move across the board in a single bound down any rank, file, or diagonal. 
 
 [Illustration of how the queen moves in chess]
 
-The N-Queens problem is a classic of computer science that involves placing N queens on an N x N chess board in a way that no queen can attack any other on her rank, file, or diagonal.  
+The N-Queens problem is a classic of computer science that involves placing N queens on an N x N chess board in a way that no queen can attack any other on her rank, file, or diagonal. 
 So of course, there's an algorithm for it!  
 
 I'll start by designing the board as a two-dimensional array, or matrix, with a "1" to represent a queen and a "0" to represent an empty space.
@@ -1418,7 +1418,7 @@ chess_board = [
 
 From here it's simple, right?
 Just check every array to make sure it only contains a single "1", then some check every column to make sure of the same and then check every diagonal.
-Those first two seem pretty straightforward, but the third might not be quite so easy.  
+Those first two seem pretty straightforward, but the third might not be quite so easy. 
 Take a moment to think about it before you read on. 
 
 Let's start with the easy one, checking each row to make sure it only contains a single "1."
@@ -1455,9 +1455,9 @@ also_valid_matrix = [
 ]
 ----
 
-...but what you may have noticed is that while this matrix works well for the row checks, it is an invalid solution to the N-Queens problem because two "1's" appear in the first column.  
+...but what you may have noticed is that while this matrix works well for the row checks, it is an invalid solution to the N-Queens problem because two "1's" appear in the first column. 
 
-Let's try now to add column checks.  First we'll start by just checking the columns for a single "1", as we did with the rows.  
+Let's try now to add column checks. First we'll start by just checking the columns for a single "1", as we did with the rows. 
 
 [source, python]
 ----
@@ -1487,8 +1487,8 @@ def check_columns(matrix):
     return True
 ----
 
-I'll let you test this one on your own.  
-Again, we run into a similar problem as with the row solution.  
+I'll let you test this one on your own. 
+Again, we run into a similar problem as with the row solution. 
 The matrix:
 
 [source, python]
@@ -1501,7 +1501,7 @@ also_valid_matrix = [
 ]
 ----
 
-...will pass the column test, but is not a valid solution to the N-Queens problem because there are two queens in the first row that can attack each other.  
+...will pass the column test, but is not a valid solution to the N-Queens problem because there are two queens in the first row that can attack each other. 
 
 At this point you can proceed in one of two ways. 
 You can try to bring the row and column checks together into a single function, or you can try to solve the diagonal problem first.
@@ -1534,7 +1534,7 @@ It might help to first draw a picture that helps you see the seven diagonals tha
 [PICTURE OF TOP LEFT TO BOTTOM RIGHT DIAGONALS]
 
 From there, perhaps it's useful to use a coordinate system to see what the position of each diagonal is in the matrix.
-You may have already noticed that the single-digit diagonals -- the one in the top-left corner and the one in the bottom-right corner -- don't need to be checked.  
+You may have already noticed that the single-digit diagonals -- the one in the top-left corner and the one in the bottom-right corner -- don't need to be checked. 
 Let's write out the list of the five remaining diagonals:
 
     [1, 0, 0, 0],
@@ -1550,7 +1550,7 @@ From [2, 0] to [3, 1]
 
 Now that we have the coordinates of the diagonals, we can write a function to check them.
 
-# TODO: Break this down into the pattern represented in the loop.
+TODO: Break this down into the pattern represented in the loop.
 
 [source, python]
 ----
@@ -1574,19 +1574,263 @@ def check_diagonals(board):
 TODO: Finish N-Queens
 
 ===== Valid Sudoku
-TODO: Finish valid sudoku question
 Sudoku is a popular numbers game that you can find in newspapers, puzzle books, and online.
-It's a simple idea with many variations.  
+It's a simple idea with many variations. 
 The player is given a 9x9 grid of squares that is further subdivided into 9 3x3 grids of squares.
 Into each grid square the player can place a number from 1 to 9.
-The player must complete the grid from a set of starting hint numbers such that no number is repeated in any row, column, or 3x3 grid in the 9x9 grid of squares.  
+The player must complete the grid from a set of starting hint numbers such that no number is repeated in any row, column, or 3x3 grid in the 9x9 grid of squares. 
 
 [picture of a sudoku puzzle]
 
-This leads to a number of potential interview questions, but let's start with an easy one: Given a 9x9 grid with some or all of the squares filled in, is the grid valid per the rules of Sudoku.
+This leads to a number of potential interview questions, but let's start with an easy one: Given a 9x9 grid with some or all of the squares filled in, is the grid valid per the rules of Sudoku?
 In other words, does the grid contain any repeated numbers in any row, column, or 3x3 grid?
 
 [picture of valid and invalid sudoku grids]
 
 Note that the question does not ask if the solution is the correct solution or a unique solution or a preferred solution, nor does it ask you to solve the puzzle.
 It just asks for an algorithm that determines if the presented grid is valid.
+
+When presented with this question, it's likely that you will be given a grid to check, so in this particular case you probably won't have to create your own data structure to represent the grid. 
+
+I'm gonna take a second to reason through it though. 
+What is your idea of how the data can be structured?
+Three ideas come to mind immediately:
+    1. An array/list of all 81 numbers in the grid.
+    2. Representing each puzzle section with a 3x3 matrix of 3x3 matrices, or 3 lists of 3 lists of 3 numbers.
+    3. A 9x9 matrix of numbers, or 9 lists of 9 numbers.
+
+Looking at the pros and cons for each, we can "goldilocks" the solution. 
+The first solution is easy to think about as a line, but you have to put some work in to converting the values of a 1D array into those of the 2D array that represents the Sudoku board. 
+It's good to know how to turn 1D into 2D and 2D into 1D, so I'm going to take this golden (see what I did there?) opportunity to provide an example.
+It's a fairly common operation in graphics programming, or perhaps programming large amounts of tabular data. For the purposes of this particular exercise I'm going to start by shrinking the problem space down to a 4x4 grid.
+
+1D: 
+`[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]`
+
+2D: 
+`[[1, 2, 3, 4],
+[5, 6, 7, 8],
+[9, 10, 11, 12],
+[13, 14, 15, 16]]`
+
+Let's start with converting a position in 1D into a position in 2D. 
+For starters, consider that as with most things array we will count from zero.
+So the 4x4 grids rows and columns are numbered 0-3, and not 1-4 as they might be in tablular form or a newspaper puzzle. 
+Don't forget this little discrepancy, as it can cause some peculiar problems.
+
+If the goal is to turn this one-dimensional array into a two-dimensional, 4x4 array, how can we select the number 11, which would be the third number in the third row of the 4x4 grid?
+All it takes is a little modulo arithmetic.
+
+`11 // 4 = 2` and `11 % 4 = 2`
+
+So the number 11 is in the second row and third column of the 4x4 grid, counting from zero, or the third row and third column counting from 1.
+
+To convert from 2d to 1d, we can use the formula `row * num_cols + col`, where `row` is the row number (counting from zero), `num_cols` is the total number of columns, and `col` is the column number (again, counting from zero).
+
+So in this case, `2 * 4 + 2 = 10`, which is the correct index for the number 11 in the 1D grid.
+
+Having to account for all of this math to convert a 1D array into rows and columns and back again probably rules out the first solution as the best one for this problem. 
+
+The second solution neatly aligns with the layout of the Sudoku board, which usually includes heavy lines around the nine 3x3 grids that make up the puzzle. 
+So what are the pros and cons of this solution?
+
+That data structure might look like this:
+
+[source, python]
+----
+board = [
+    # Grid 0 (top left)
+    [[5,3,0],
+     [6,0,0],
+     [0,9,8]],
+    
+    # Grid 1 (top middle)
+    [[0,7,0],
+     [1,9,5],
+     [0,0,0]],
+    
+    # Grid 2 (top right)
+    [[0,0,0],
+     [0,0,0],
+     [0,6,0]],
+    
+    # Grid 3 (middle left)
+    [[8,0,0],
+     [4,0,0],
+     [7,0,0]],
+    
+    # Grid 4 (center)
+    [[0,6,0],
+     [8,0,3],
+     [0,2,0]],
+    
+    # Grid 5 (middle right)
+    [[0,0,3],
+     [0,0,1],
+     [0,0,6]],
+    
+    # Grid 6 (bottom left)
+    [[0,6,0],
+     [0,0,0],
+     [0,0,0]],
+    
+    # Grid 7 (bottom middle)
+    [[0,0,0],
+     [4,1,9],
+     [0,8,0]],
+    
+    # Grid 8 (bottom right)
+    [[2,8,0],
+     [0,0,5],
+     [0,7,9]]
+]
+----
+
+This is actually a 3D data structure, or a list of lists of lists.
+It might be a little easier to work with in terms of rows and columns, but it's not really ideal for checking whole rows or columns, as you would have to pull from each grid element individually.
+It's great for handing the internal structure of a 3x3 grid, but that's that's only one of the things that makes up a Sudoku board. 
+Here is, for example, the amount of code required to read the second column of the 9x9 Sudoku board:
+
+[source, python]
+----
+def get_column(board, col_num):
+    column = []
+    grid_col = col_num // 3  # (0 for cols 0-2, 1 for 3-5, 2 for 6-8)
+    internal_col = col_num % 3  # Which column within each grid?
+    
+    for grid_row in range(3):
+        for row in range(3):
+            grid_index = grid_row * 3 + grid_col
+            column.append(board[grid_index][row][internal_col])
+    
+    return column
+----
+
+Ok, so that works, but it's a lot of code to return a single column, and also it's a but confusing.
+In fact, when I was writing this code I wrote the algorithm the way I was pretty sure I needed to, and watched my computer spit out the wrong answer. 
+Except it hadn't.
+What had happened is I had got confused about what the "column" looked like given the data structure, I'd created, and I was reading the wrong line of numbers. 
+I had to get my head around that in order to continue which I take as proof that even if this data structure offers some advantages -- and I'm not sure it does -- it can be confusing to reason about and so it's likely the wrong tool for the job.
+
+Ok so the first idea was too much math and the second idea was too much code, can we find a data structure that's just right?
+Let's try the 9x9 matrix.
+
+[source, python]
+----
+board = [
+    [5,3,0,0,7,0,0,0,0],
+    [6,0,0,1,9,5,0,0,0],
+    [0,9,8,0,0,0,0,6,0],
+    [8,0,0,0,6,0,0,0,3],
+    [4,0,0,8,0,3,0,0,1],
+    [7,0,0,0,2,0,0,0,6],
+    [0,6,0,0,0,0,2,8,0],
+    [0,0,0,4,1,9,0,0,5],
+    [0,0,0,0,8,0,0,7,9]
+]
+----
+
+This looks promising.
+It keeps the rows in the same order they'll be in on the Sudoku board. 
+The columns can be chosen by iterating via the appropriate index. 
+This one is just right!  
+
+Again, I'd imagine that if you were given this as an interview question you'd be given the data structure, but it's always good to think about these kinds of things because it can help you reason through the problem.
+And there are valid reasons to consider the 1D and 3D data structures, just not for this particular problem. 
+
+Back to the interview question itself: is this a valid Sudoku board?
+
+From the instructions you've been given, you have three distinct things to consider:
+  1. No number can be repeated in a row.
+  2. No number can be repeated in a column.
+  3. No number can be repeated in a 3x3 grid.
+
+You might want to try coding this on your own before looking at the solution, but I'm going to work on these one function at a time. Here is my first attempt at checking for repeated numbers in a row. 
+As always, I ask you to think about how you might solve this problem before looking at the solution:
+
+[source, python]
+----
+def check_row(board, row_num):
+    row = board[row_num]
+    seen = []
+    for num in row:
+        if num != 0:
+            if num in seen:
+                return False
+            seen.append(num)
+    return True
+----
+
+This is a fairly straightforward solution. 
+Go down the row, put numbers into a list, and if a number repeats, return False because the board is invalid. 
+Remember that you have to account for the 0, because a 0 means a value that is not yet present in the row. 
+If the program sees it as a number in a row, it will return False, even though it's not a repeated number.
+
+It's not hard to build this up into a similar solution for checking a column. 
+The column just needs a little help from a helper function since the data structure is not in a natural column format:
+
+[source, python]
+----
+def get_column(board, col_num):
+    column = []
+    for row in board:
+        column.append(row[col_num])
+    return column
+
+def check_column(board, col_num):
+    column = get_column(board, col_num)
+    seen = []
+    for num in column:
+        if num != 0:
+            if num in seen:
+                return False
+            seen.append(num)
+    return True
+----
+
+Last of all, each 3x3 grid needs to be checked. 
+Unsurprisingly, this check is pretty similar to the row and column checks, but with a little more math to get the right numbers in the right places.
+In fact, it uses the same math we looked at earlier when we were considering a one-dimensional array:
+
+[source, python]
+----
+def check_grid(board, grid_num):
+    grid = []
+    start_row = (grid_num // 3) * 3
+    start_col = (grid_num % 3) * 3
+    for i in range(3):
+        for j in range(3):
+            grid.append(board[start_row + i][start_col + j])
+    
+    seen = []
+    for num in grid:
+        if num != 0:
+            if num in seen:
+                return False
+            seen.append(num)
+    return True
+----
+
+This would be a pretty good interview answer, but there are three exercises to consider from here:
+    1. Combine these three functions into a single function that checks the whole board.
+    2. Earlier in the chapter I talked about the "set" data structure in Python. Remember that a Python set is a collection of unique elements. Rewrite the loop that checks for repeated numbers with a set. Does this change the time complexity of the function?
+    3. Can you write a function that actually solves the Sudoku board? That's a degree of difference harder than simply considering a valid board, but just think about it for now. I will be returning to this problem later in the book.
+
+==== AI Exercise
+
+As I explained earlier, games are great for coming up with algorithmic problems because they have known rules and a finite number of outcomes.
+AI assistants are good with specific solutions, but they're not always so good with the broader picture. 
+Modelling a game using ChatGPT, Claude, or Github Copilot will give you a pretty good sense of the ways human programmers can leverage AI to solve problems. 
+
+Pick a game you're familiar with that hasn't been mentioned in this chapter and use a programming assistant to create a playable version of it in Python.
+Work through the considerations of not only the gameplay, but also how to represent the elements of the game.
+This might require the use of a Python graphics library, like Pygame, or some clever ASCII art that represents the game board.
+You can also try to create a game with a computer opponent, a game that can be played over a network, or a game that can be played on a web page. 
+Make sure your AI is knowledgeable about any libraries you use, which you can usually find out by just asking it questions like "Do you know about Pygame?" or "Are you familiar with the Python socket library?"
+You can also ask it for suggestions for better ways to do things, and maybe you'll gain some knowledge of a library you've never used before along the way.
+The most important part: have fun! 
+
+
+
+
+
