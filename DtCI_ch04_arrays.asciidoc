@@ -989,7 +989,6 @@ The two-pointer technique is a valuable technique for solving array-based proble
 
 ===== Two Sum / Three Sum
 
-TODO: Finish Two Sum / Three Sum
 The Two Sum problem is a _classic_ interview question where you are given a target number and an array of numbers, and asked to find the two numbers in the array that add up to the target number.
 
 The Three Sum problem is a variation of the Two Sum problem where you are given a target number and an array of numbers, and asked to find the three numbers in the array that add up to the target number.
@@ -1001,7 +1000,7 @@ Target Number: 9
 
 The solution to this number is [0, 4], because 2 + 7 = 9.
 
-Before you start answering this problem, you will want to be sure to ask the interviewer is there are any specific constraints on the problem.
+Before you start answering this problem, you will want to be sure to ask the interviewer if there are any specific constraints on the problem.
 For instance, are there multiple answers to the problem?
 Is the problem guaranteed to have a solution?  
 Does the order of the solution matter?
@@ -1036,7 +1035,83 @@ def two_sum(array, target):
     return None
 ----
 
+Python contains a built-in function called `enumerate()` that can be used to loop over an array and return both the index and the value of each item in the array.
+If you're familiar with Javascript, `enumerate()` is similar to using the `map()` function with an index parameter.
 
+A similar implementation in JavaScript might look like this:
+
+[source, javascript]
+----
+function twoSum(array, target) {
+    const numIndex = {};
+    let result = null;
+
+    array.map((num, i) => {
+        const complement = target - num;
+        if (complement in numIndex) {
+            result = [numIndex[complement], i];
+        }
+        numIndex[num] = i;
+    });
+
+    return result;
+}
+----
+
+In both cases the code sets up a "compliment," which is the difference between the target number and the current number in the array.
+The Python version uses a dictionary to store the index of the compliment, while the JavaScript version uses an object.
+In both cases the code checks to see if the compliment is in the dictionary or object, and if it is, returns the index of the compliment and the current index.
+If the compliment is already in the dictionary (or object), the current number is a match, and the function returns the indexes of the two numbers that add up to the target number.
+Pretty straightforward, right?
+
+By working with a running compliment, the function can find the answer in a single pass thorough the array, which I hope you immediately recognize as O(n) time.
+
+The Three Sum problem is a little tricker, but it can be solved using a similar approach.  
+I'm going to skip the brute-force method because it will involve three nested for loops, or O(n^3) time, and since we've already seen an improvement we will never go back.  
+
+Here is a Python solution to the Three Sum problem:
+
+[source, python]
+----
+def three_sum(array, target):
+    for i in range(len(array)):
+        num_index = {}
+        new_target = target - array[i]
+        for j in range(i + 1, len(array)):
+            if new_target - array[j] in num_index:
+                return [i, num_index[new_target - array[j]], j]
+            num_index[array[j]] = j
+    return None
+----
+
+This works similar to the solution for Two Sum, but there is an additional loop thrown in to account for the third number in the array.
+This bumps the runtime up to O(n^2), which is still faster than O(n^3), but not as fast as O(n) time.
+
+Think about it: can the Three Sum problem be solved in O(n) time?
+
+There's one additional way to solve this problem using pointers, called the two-pointer technique that I discussed in the container problem.
+Since you've already seen that technique, I'll provide you with the code and allow you to reason through it on your own:
+
+[source, python]
+----
+def three_sum(array, target):
+    array.sort()
+    for i in range(len(array) - 2):
+        left = i + 1
+        right = len(array) - 1
+        while left < right:
+            current_sum = array[i] + array[left] + array[right]
+            if current_sum == target:
+                return [i, left, right]
+            elif current_sum < target:
+                left += 1
+            else:
+                right -= 1
+    return None
+----
+
+Think it through: What is the runtime of this solution?
+What advantages does it have over using nested for loops?
 
 
 ===== Array Rotation
@@ -1207,7 +1282,7 @@ For instance, here are all of the permutations of the array ["cat", "dog", "mous
 
 Exciting stuff, no?  
 
-When if comes to permutations there are two primary questions involved:
+When it comes to permutations there are two primary questions involved:
   1. Given a starting set of data, how many permutations can be created?
   2. How can you generate all of the permutations?
 
@@ -1225,11 +1300,9 @@ And represents the product of all of the positive integers from 1 to 5:
 So if you have a set of 5 items, there are 120 possible permutations -- combinations -- of those items. 
 
 So how can we generate permutations?
-This is a problem that I'll return to throughout the book, as the solutions will become both more sophisticated and easier to implement as we further explore data structures and algorithms. 
+Permutations is a problem that I'll return to throughout the book, as the solutions will become both more sophisticated and easier to implement as we further explore data structures and algorithms. 
 
-In the mean time, let's start with this awfully iterative approach:
-
-We can 
+In the mean time, let's start with this awfully iterative approach: 
 
 [source, python]
 ----
@@ -1262,9 +1335,30 @@ for perm in permutations:
     print(perm)
 ----
 
+This will print out:
 
+['lion', 'tiger', 'bear', 'dog', 'guppy']
+['tiger', 'lion', 'bear', 'dog', 'guppy']
+['bear', 'lion', 'tiger', 'dog', 'guppy']
+['lion', 'bear', 'tiger', 'dog', 'guppy']
+['tiger', 'bear', 'lion', 'dog', 'guppy'] ... etc ...
 
-TODO: Finish Permutations
+These permutations are generated by an algorithm known as Heap's algorithm. 
+(Believe it or not, that's a persons name that has nothing to do with the heaps we'll discuss in chapter 7.
+A computer programmer named Heap?
+What's next, a poker player named Moneymaker?) 
+I've provided a simple and non-recursive implementation of this algorithm which works by using an array index and a "counter" array to keep track of the permutations.  
+
+At the start of the program the counter array is initialized to all zeroes, and first permutation -- the array we start out with -- is added to the results array.  
+The algorithm then iterates through the candidate array using the index `i` and the counter index `c[i]`.
+For each iteration, the algorithm checks if the counter is less than the index, and if it is, it swaps the first element of the array with the element at the index, based on whether the index is even or odd.
+The counter index is then incremented, and the algorithm starts over at the beginning of the array.
+If the counter is greater than the index, the counter is reset to zero and the index is incremented.
+That's a lot to understand, but if you code it in and play with it for a bit it's pretty easy to see what it's doing.
+
+What is the running time of this algorithm? (Hint, I've already told you, above.)
+
+If you don't understand don't worry too much as I'll come back to this question again in later chapters and with a more efficient solution.
 
 The last three examples in this chapter are going to cover games.
 Everyday games are useful for testing algorithmic knowledge because they can be used to cover a discrete problem set with rules that are usually well known. 
@@ -1392,7 +1486,7 @@ def check_winner(board, player):
 The queen is the most powerful piece in chess. 
 She can move across the board in a single bound down any rank, file, or diagonal. 
 
-[Illustration of how the queen moves in chess]
+[Illustration of how the queen moves in chess TK]
 
 The N-Queens problem is a classic of computer science that involves placing N queens on an N x N chess board in a way that no queen can attack any other on her rank, file, or diagonal. 
 So of course, there's an algorithm for it!  
@@ -1520,13 +1614,13 @@ For instance:
 ----
 invalid_diagonal_matrix = [
     [1, 0, 0, 0],
+    [0, 0, 0, 1],
     [0, 0, 1, 0],
-    [0, 1, 0, 0],
-    [0, 0, 0, 1]
+    [0, 1, 0, 0]
 ]
 ----
 
-If I'm only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second and third rows clearly make this an invalid solution. 
+If I'm only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second, third, and fourth rows clearly make this an invalid solution. 
 
 With that in mind, let's start by checking top-left to bottom right diagonals first.
 It might help to first draw a picture that helps you see the seven diagonals that run from top-left to bottom-right on a 4x4 matrix.
