@@ -133,6 +133,89 @@ Some (mostly older) programming languages also have a method called PEEK, which 
 Why might you want to do this?
 ****
 
+=== Implementing stacks and queues
+
+So far I've used list operations to describe stack functionality, but you might be asked in an interview to implement a stack from scratch.  
+Before I show how to do that, I'm going to do the same old boring teacher thing (eye roll, please) and beg you to think about it on your own.  
+If we create a custom "stack" class, what data and methods does it need to contain?  
+What about a queue?
+Can a stack be implemented as a linked list?
+Can a queue be implemented as a stack?
+
+While there is more than one way to solve the problem, this is certainly the bare minimum that you would need to implement a stack:
+
+[source, python]
+----
+class Stack:
+    def __init__(self):
+        self.items = []
+        
+    def push(self, item):
+        self.items.append(item)
+        
+    def pop(self):
+            return self.items.pop()
+----
+
+This might seem like doing more work than is needed, especially since there's nothing here you can't already do with a list, but it's good to understand this kind of basic implementation.
+
+So what's here?  
+There's in __init__ method that initializes the stack with an empty list, waiting to be filled.
+There are two methods, `push` and `pop`, that add and remove items from the stack.
+What's missing?
+Again, think about it for a moment.
+
+One thing that's missing is a method to check if the stack is empty.
+This is a big deal because if you try to pop an empty list your program will throw `IndexError: pop from empty list`. 
+There are a few ways this can be addressed, but it's as easy as adding an `is_empty` method to the class.
+
+[source, python]
+----
+class Stack:
+    def __init__(self):
+        self.items = []
+        
+    def push(self, item):
+        self.items.append(item)
+        
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+        return None
+        
+    def is_empty(self):
+        return len(self.items) == 0
+----
+
+Knowing how to implement a stack really helps see what's going on in the Python list implementation.
+You can also easily extend this basic idea to add other methods, like `peek`, `size`, or `clear`. 
+You can have a stack size limit by including a method to see if the stack is full.  
+You can also add data-checking to allow only certain types of data into the stack.  
+This very basic implementation gives access to a wide range of possibilities. 
+
+For instance, how can you use what you know about a stack to implement a queue?
+You can start with the basic stack class provided, but you'll have to replace "push" and "pop" with "enqueue" and "dequeue" methods which will work a little differently.
+
+[source, python]
+----
+class Queue:
+    def __init__(self):
+        self.items = []
+        
+    def enqueue(self, item):
+        self.items.append(item)
+        
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+        return None
+        
+    def is_empty(self):
+        return len(self.items) == 0
+----
+
+Same basic functions, but they add and remove data to the `items` list in a different order than a stack.
+
 
 === Developing Intuition: What are stacks and queues used for?
 
@@ -171,20 +254,18 @@ There are many ways to implement a priority queue, but one simplistic way to do 
 [source, python]
 ----
 priority_queue = []
-priority_queue.append([3, "low priority"])
-priority_queue.append([1, "high priority"])
-priority_queue.append([2, "medium priority"])
+priority_queue.append([3, "low priority item"])
+priority_queue.append([1, "high priority item"])
+priority_queue.append([2, "medium priority item"])
 ----
 
 In this example, the high priority item will be removed first, followed by the medium priority item, and finally the low priority item.
-This might lead you to wonder what the point is of using a queue at all, since we're not following the FIFO order.  
+This might lead you to wonder what the point is of using a queue at all, since we're not following the FIFO order?  
 Imagine this being a much larger set of data, like a network across which data packets are sent.  
 This network might contain three levels of priority, but thousands, or even millions of packets.  
 Assigning one of three priorities to each of these packets allows for more important packets like packets containing text to be sent before less important packages like packets containing images.
 You may have even been on a slow network and notice that text loads before images, or added priority to an image as a web developer to make sure it's loaded no matter what.  
 This allows programmers to impose at least a little bit of order on the chaos of all of the data flying hither and yon down the information superhighway.
-
-
 
 
 === Example Questions
@@ -258,29 +339,42 @@ print(is_balanced("((()))")) # True
 print(is_balanced("(()))")) # False
 ----
 
-
-
-  
+Can you generalize this example to other types of brackets?
+How can it be used to check not only parentheses `()`, but also brackets `[]` and curly-braces `{}`?
+Once you've got them properly "balanced", with the same numbers of openers and closers, how can you check that they are properly nested -- brackets opened first are closed first?
 
 .The Terminal
 ****
-This may be another one of my unpopular opinions, but I'm always truly amazed when I find a programmer who doesn't know how to use the terminal, and doesn't care.
-It's not used anywhere near as much as it used to be (yes, I used to check my email in the terminal), but it's still an absolutely necessary thing to know.
-While you certainly don't have to read the Unix MAN pages from beginning to end, any programmer should know how to navigate through a file system, create and delete files and directories, and run programs from the command line.
+This may be another one of my unpopular opinions, but I'm always truly amazed when I find a programmer who doesn't know how to use the terminal, and doesn't seem to care.
+It's not used anywhere near as much as it used to be (I once used to check my email in the terminal), but it's still an absolutely necessary thing to know.
+While you certainly don't have to read the Unix MAN pages from beginning to end or become a VIM ninja, any programmer should know how to navigate through a file system, create and delete files and directories, and run programs from the command line.
 It's invaluable for not having to "context switch" between your editor and your terminal, and using it will give you lots of really, really boring stories to tell your grandkids.
 Also: it will absolutely make you a better programmer.
 ****
 
-==== Find the second smallest item
+==== Find items in order in a stack
+
+Using an implementation of the basic stack class already discussed, create an algorithm that returns all of the items of a stack in order, without changing the stack itself.
+For instance, if you have a stack with the items [2, 5, 1, 4, 3], the algorithm should return [1, 2, 3, 4, 5] without modifying the original stack.
+You should only need to add a "peek" method to the basic stack class provided to accomplish this.
+
+==== Implement a queue using two stacks
+
+Earlier in this chapter I suggested modifying the basic stack class to implement a queue.
+But a queue can also be implemented using two stacks.
+Again, you will only need to add a "peek" method to the basic stack class to accomplish this.
+
+==== String operations with stacks
+
+This chapter may have suggested to you some way in which stacks can be used to manipulate strings.
+Can you think of how to use a stack to reverse a string?
+A palindrome checking question was given in Chapter 3.  
+Can you think of a way to use a stack to check if a string is a palindrome?
+
+==== Implement a priority queue
+
+Earlier I gave a description of a priority queue.  
+Try mixing together a stack and a queue to create a priority queue.
 
 
-
-Find the second-smallest number in an array of integers.
-Can you scale this to the third smallest?
-Third largest?
-Can you scale this to other sorts of ordering, like alphabetical order?
-
-==== Implement x using a stack
-
-How to implement x
 

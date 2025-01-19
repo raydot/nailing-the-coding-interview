@@ -572,6 +572,7 @@ And just like arrays and for loops, some algorithms are better suited to some da
 ==== Merging linked lists
 
 Now let's try a more complex operation, merging two singly linked lists.  
+Try reasoning through the logic of this code on your own.
 
 [source, python]
 ----
@@ -618,6 +619,9 @@ Honestly, you're the odds of your getting a linked list question in an interview
 The odds of being asked a question that knowledge of linked lists would help you answer are much higher.
 So this time there won't be sample interview questions, but here are some exercises you should consider to consider to get your head around the idea of linked lists, nodes, pointers, and data.
 
+* Consider all of the error-checking you might need to do in the CRUD operations for a linked list.
+For example, what if you try to delete a node that doesn't exist?
+Combine the examples from this chapter into a generalized linked-list class that can handle everything you throw at it without crashing.
 * Write a function that takes a linked list and returns the length of the list.
 * Write a function that takes a linked list and returns the last node in the list.
 * Re-write the data swapping version of the bubble sort algorithm to swap the nodes themselves instead of the data.
