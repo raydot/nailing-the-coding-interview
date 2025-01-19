@@ -20,6 +20,8 @@ Low-level languages tend to make more sense to computers than humans, though, an
 
 Arrays are close in equivalence to what is known in mathematics as a "set." 
 A set is a list of items that have some relation to one another, that can be represented by a single notation. 
+(Why I say "close" is because in mathematics a set cannot contain duplicate items, while in programming an array can.)
+
 In strongly typed languages, arrays can only contain the same type of data, but in weakly typed languages, arrays can contain mixed data types. 
 Arrays have some special terminology related to their specific use:
 
@@ -763,11 +765,13 @@ someVar = "abbcaabdcbb"
 print(longest_unique_substring(someVar))
 ----
 
-This might be an example of where the brute force solution is a little more brutal than it needs to be, but I wanted to take a moment to talk about the `set()` function.
-A "set" in math and logic is a group of related but distinct items, be they words, number, objects, etc. 
-The days of the week are a set, as are the months of the year. 
+This might be an example of where the brute force solution is a little more brutal than it needs to be, but I wanted to take a moment to talk about the `set()` data type.
+A "set" in math and logic is a group of related but _distinct_ items, be they words, number, objects, etc. 
+The days of the week are a set, as are the months of the year.
+Notice that the days of the week are distinct, there aren't two Tuesdays, thank goodness. 
 
-`set()` (or `new Set()` in JavaScript) is a function that takes an array and returns one of each unique element in that array.
+`set()` (or `new Set()` in JavaScript) is a function that creates an empty set.  
+If you pass it an array, it takes the array and returns one of each unique element in that array.
 What's returned is probably not going to be in any kind of determined order.
 For instance, here's what happened when I just ran the line of code:
 
@@ -781,11 +785,35 @@ For instance, here's what happened when I just ran the line of code:
 Correct!
 But why in that order?  
 I don't really know, and I don't think it matters. 
-Why I'm discussing it is because you might be asked about using `set()` to solve problems related to uniqueness, and sometimes it absolutely is the right tool for the job. 
+
+Additionally, you cannot add duplicate values to a set.
+For instance:
+
+[source, python]
+----
+# Create an empty set
+numbers = set()
+
+# Add a number
+numbers.add(1)
+print(numbers)  # Output: {1}
+
+numbers.add(2)
+print(numbers)  # Output: {1, 2}
+
+# Try to add an existing number again
+numbers.add(1)
+print(numbers)  # Output: {1, 2} (no change!)
+
+# Check if number exists
+print(1 in numbers)  # Output: True
+----
+
+Why I'm discussing this is because you might be asked about using `set()` to solve problems related to uniqueness, and sometimes it absolutely is the right tool for the job. 
 In this case, however, it's not.
 Can you see why?
 
-Consider the run time of the function above. 
+Consider the run time of the `longest_unique_substring()` function above. 
 Using `set()` to iterate repeatedly over chunks of items in the string can be considered a third nested loop, and so the runtime of the function is now O(n^3), which is a shape I didn't even mention in the section on Big O because hopefully you won't come across it all that often.
 So if you're asked "Why didn't you use `set()`," be careful, it's a trick question!
 Let's see how sliding windows can help solve this problem more effectively.
@@ -816,7 +844,7 @@ print(longest_unique_substring(test_var))  # Output: "abdc"
 
 ==== Python List Comprehensions
 
-Python has a feature called "list comprehensions" that allows you to create lists in a single line of code.
+Python has an insanely useful paradigm called "list comprehension" that allows you to create lists in a single line of code.
 It combines a for loop and a conditional statement into a single line of code. 
 JavaScript can also do this using the `map`, `reduce`, and `filter` functions, but it's hard to beat Python's approach for simplicity. 
 While list comprehension problems will not show up in LeetCode questions, using it to solve problems in an interview is a great way to show that you have a good grasp of the Python language. 
@@ -1583,7 +1611,7 @@ def check_columns(matrix):
 
 I'll let you test this one on your own. 
 Again, we run into a similar problem as with the row solution. 
-The matrix:
+The matrix...
 
 [source, python]
 ----
@@ -1620,31 +1648,26 @@ invalid_diagonal_matrix = [
 ]
 ----
 
-If I'm only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second, third, and fourth rows clearly make this an invalid solution. 
+If I'm only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second, third, and fourth rows clearly make this an invalid solution, forming a diagonal that goes from column 2 in the fourth row to column 4 in the second. 
 
 With that in mind, let's start by checking top-left to bottom right diagonals first.
 It might help to first draw a picture that helps you see the seven diagonals that run from top-left to bottom-right on a 4x4 matrix.
 
-[PICTURE OF TOP LEFT TO BOTTOM RIGHT DIAGONALS]
+[PICTURE OF TOP LEFT TO BOTTOM RIGHT DIAGONALS TK]
 
 From there, perhaps it's useful to use a coordinate system to see what the position of each diagonal is in the matrix.
 You may have already noticed that the single-digit diagonals -- the one in the top-left corner and the one in the bottom-right corner -- don't need to be checked. 
-Let's write out the list of the five remaining diagonals:
-
-    [1, 0, 0, 0],
-    [0, 0, 1, 0],
-    [0, 1, 0, 0],
-    [0, 0, 0, 1]
+Let's write out the list of the five remaining left-to-right diagonals:
 
 From [0, 2] to [1, 3]
 From [0, 1] to [2, 3]
-From [0, 0] to [3, 3] # <-- the longest!
+From [0, 0] to [3, 3] # -- the longest!
 From [1, 0] to [3, 2]
 From [2, 0] to [3, 1]
 
-Now that we have the coordinates of the diagonals, we can write a function to check them.
+<IMAGE TK>
 
-TODO: Break this down into the pattern represented in the loop.
+Now that we have the coordinates of the diagonals, we can use this to establish a pattern that allows us to write a function to check them.
 
 [source, python]
 ----
@@ -1662,10 +1685,74 @@ def check_diagonals(board):
             return False
 ----
 
+What about top-right to bottom-left, the so-called "anti-diagonals?"
+It's a little tricker, but the idea is the same, just in reverse.
 
+[source, python]
+----
+def check_anti_diagonals(board):
+    num_rows = len(board)
+    num_cols = len(board[0])
+    
+    for start in range(num_rows + num_cols - 1):
+        count = 0
+        for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
+            # Change column index calculation for right-to-left traversal
+            j = num_cols - 1 - (start - i)
+            if 0 <= j < num_cols and board[i][j] == 1:
+                count += 1
+        if count != 1:
+            return False
+    return True
+----
 
+At this point can you see how you could combine the diagonal and anti-diagonal checks into a single function?
+It's an intermediate step but I encourage you to try to figure it out.  
 
-TODO: Finish N-Queens
+Now that it's possible to check in all three directions, here is an algorithm that combines all three checks into a single function:
+
+[source, python]
+----
+def check_board(board):
+    return check_rows(board) and check_columns(board) and check_diagonals(board) and check_anti_diagonals(board)
+
+def check_rows(board):
+    for row in board:
+        if row.count(1) != 1:
+            return False
+    return True
+
+def check_columns(board):
+    num_rows = len(board)
+    num_cols = len(board[0])
+    
+    for col in range(num_cols):
+        count = 0
+        for row in range(num_rows):
+            if board[row][col] == 1:
+                count += 1
+        if count != 1:
+            return False
+    return True
+
+def check_diagonals(board):
+    num_rows = len(board)
+    num_cols = len(board[0])
+    
+    for start in range(num_rows + num_cols - 1):
+        count = 0
+        for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
+            if board[i][start - i] == 1:
+                count += 1
+        if count != 1:
+            return False
+    return True
+----
+
+That's a longish piece of code, but it solves the problem.  
+It was reasoned from the first basic problem to the last and more complex, and solved by breaking the larger problem into a series of smaller steps.  
+Which is great way to reason through and answer an interview question.  
+
 
 ===== Valid Sudoku
 Sudoku is a popular numbers game that you can find in newspapers, puzzle books, and online.
@@ -1709,7 +1796,7 @@ It's a fairly common operation in graphics programming, or perhaps programming l
 
 Let's start with converting a position in 1D into a position in 2D. 
 For starters, consider that as with most things array we will count from zero.
-So the 4x4 grids rows and columns are numbered 0-3, and not 1-4 as they might be in tablular form or a newspaper puzzle. 
+So the 4x4 grids rows and columns are numbered 0-3, and not 1-4 as they might be in tabular form or a newspaper puzzle. 
 Don't forget this little discrepancy, as it can cause some peculiar problems.
 
 If the goal is to turn this one-dimensional array into a two-dimensional, 4x4 array, how can we select the number 11, which would be the third number in the third row of the 4x4 grid?
@@ -1907,7 +1994,7 @@ def check_grid(board, grid_num):
 
 This would be a pretty good interview answer, but there are three exercises to consider from here:
     1. Combine these three functions into a single function that checks the whole board.
-    2. Earlier in the chapter I talked about the "set" data structure in Python. Remember that a Python set is a collection of unique elements. Rewrite the loop that checks for repeated numbers with a set. Does this change the time complexity of the function?
+    2. Earlier in the chapter I talked about the "set" data structure in Python. Remember that a Python set is a collection of unique elements. Rewrite the loop that checks for repeated numbers using a Python set. Break it down into two tasks -- 1) see what happens when you try to add repeated numbers to a set and 2) Use a set to check for duplicates in a row.  Does this change the time complexity of the function?
     3. Can you write a function that actually solves the Sudoku board? That's a degree of difference harder than simply considering a valid board, but just think about it for now. I will be returning to this problem later in the book.
 
 ==== AI Exercise
