@@ -1675,14 +1675,14 @@ def check_diagonals(board):
     num_rows = len(board)
     num_cols = len(board[0])
     
-    # Check main diagonals (top-left to bottom-right)
     for start in range(num_rows + num_cols - 1):
         count = 0
         for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
-            if matrix[i][start - i] == 1:
+            if board[i][start - i] == 1:
                 count += 1
-        if count != 1:
+        if count > 1: # There's more than one queen in the diagonal!
             return False
+    return True
 ----
 
 What about top-right to bottom-left, the so-called "anti-diagonals?"
@@ -1697,17 +1697,17 @@ def check_anti_diagonals(board):
     for start in range(num_rows + num_cols - 1):
         count = 0
         for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
-            # Change column index calculation for right-to-left traversal
             j = num_cols - 1 - (start - i)
             if 0 <= j < num_cols and board[i][j] == 1:
                 count += 1
-        if count != 1:
+        if count > 1: 
             return False
     return True
 ----
 
 At this point can you see how you could combine the diagonal and anti-diagonal checks into a single function?
-It's an intermediate step but I encourage you to try to figure it out.  
+It's an intermediate step but I encourage you to try to figure it out.
+Is it "better" to combine the two functions into one, or to keep them separate?  
 
 Now that it's possible to check in all three directions, here is an algorithm that combines all three checks into a single function:
 
@@ -1747,11 +1747,25 @@ def check_diagonals(board):
         if count != 1:
             return False
     return True
+
+def check_anti_diagonals(board):
+    num_rows = len(board)
+    num_cols = len(board[0])
+    
+    for start in range(num_rows + num_cols - 1):
+        count = 0
+        for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
+            j = num_cols - 1 - (start - i)
+            if 0 <= j < num_cols and board[i][j] == 1:
+                count += 1
+        if count > 1: 
+            return False
+    return True
 ----
 
 That's a longish piece of code, but it solves the problem.  
 It was reasoned from the first basic problem to the last and more complex, and solved by breaking the larger problem into a series of smaller steps.  
-Which is great way to reason through and answer an interview question.  
+This is great way to reason through and answer an interview question.  
 
 
 ===== Valid Sudoku
