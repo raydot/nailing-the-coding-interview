@@ -1,9 +1,5 @@
 [[DtCI_ch08]]
 
-= Part II: Algorithms
-
-[partintro]
-Part II:  excepteur veniam quis velit enim sint aliquip.
 
 == Hashes
 
