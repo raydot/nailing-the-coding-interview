@@ -485,11 +485,11 @@ Sorting is just what it sounds like: sorting data according to a given criteria.
 Yes, most programming languages have a function named `sort()`, but in the context of an interview this is something you might be asked to do. 
 
 .The AlgoRhythmics
-----
+****
 Only on YouTube: There is a collection of videos featuring Hungarian folk dancer computer scientists demonstrating common algorithms, including the Bubble Sort this chapter is about to cover.
 
 You can see for yourself at: https://www.youtube.com/@AlgoRythmics 
-----
+****
 
 Let's start with the most straightforward sort algorithm to understand, Bubble Sort.
 We'll assume we have an array of integers that we wish to sort in ascending order. 
