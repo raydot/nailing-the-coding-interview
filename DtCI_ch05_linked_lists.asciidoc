@@ -2,10 +2,10 @@
 
 == Linked Lists
 
-This chapter is kind of an "in-between" chapter as we turn from the simple, one-dimensional data structures most languages already provide us to the more complex, multi-part, multi dimensional data structures.
+This chapter is an "in-between" chapter as we turn from the simple, one-dimensional data structures most languages already provide us to the more complex, multi-part, multi dimensional data structures.
 These data structures allow you to both tackle more complex problems as well as allowing you to tackle simpler problems in more efficient ways.  
 
-I will start with a little bit of review of pointers, and then we'll see how pointers can be used to build a sort of custom data structure called a linked list.  
+I will start with a quick review of pointers, and then we'll see how pointers can be used to build a data structure called a linked list.  
 Then I'll move on to talking a bit about object-oriented programming in Python, and how classes and objects can be used to build linked lists.
 We'll also talk about what linked lists can be used for and the types of problems they can be used to solve.  
 Linked lists are a gateway data structure, as the concepts you learn in building linked lists are common to many other more advanced data structures.
@@ -17,6 +17,25 @@ Well you might not, but because, again, they build a strong foundation for more 
 Slow down and take your time with any concepts you don't understand.  
 Type in the code examples an run them, and try to answer all of the end-of-chapter exercises.
 I promise you, it will be worth it.
+
+=== Pointers Refresher
+
+As mentioned in Chapter 4, pointers "point" to objects stored in memory.  
+They do so by storing the memory address of the object they point to.
+Pointers are a powerful tool in programming, but they can be a bit tricky to work with and understand. 
+
+A pointer is like a sign post on a road. 
+A sign with a gas tank on it and an arrow pointing to the right can be used to indicate that the nearest gas station is in that direction.
+Notice that the sign is not the gas station, or the gas, or even the direction, but simply a representative indication of these concepts.
+
+<diagram of pointers TK>
+
+While pointer manipulation is definitely something to worry about in programming languages that directly manipulate a computers memory, like C or :cpp:, languages like Python and Javascript take care of memory management on their own, and so pointer manipulation is not something you have to worry about.
+In this chapter, like in the last chapter, I'm using the term "pointer" to refer to a reference to an object in memory.
+Linked lists are so called because they are comprised of a list of "nodes" that are "linked" to one another by references.
+Print out the `next` attribute of a node, and you'll see something like `<__main__.Node object at 0x7f8e3c7b4b50>`.
+This is the memory address of the next node in the list.
+You don't have to account for this, you don't have to reference this, you don't have to store this or manage this, but it's good to understand that this is what's going on behind the scenes in Python.
 
 === Python Classes and Objects
 
@@ -109,15 +128,7 @@ In the case of the Dog class, the __init__ method is used to set the name, age, 
 Again, this is an _incredibly_ simplistic view of object-oriented programming, but it should be enough to get you through this chapter.  
 
 
-
-=== Pointers Refresher
-
-As mentioned in chapter 4, pointers "point" to objects stored in memory.  
-They do so by storing the memory address of the object they point to.
-Pointers are a powerful tool in programming, but they can be a bit tricky to work with and understand.  
-
-
-=== Linked Lists
+=== The Basics of Linked Lists
 
 A linked list is a data structure where data is stored in "nodes."  
 Each node contains two things, a data element, and a pointer reference to the next node in the list.  
@@ -159,15 +170,6 @@ node2.next = node3
 
 In this example, we create three node objects, each created from the `Node` class with a data element and a pointer to the next node in the list.
 Having an object representing each element of data is a pattern we'll see often as we continue to dig into data structures.
-
-.Pointers
-****
-In this chapter, like in the last chapter, I'm using the term "pointer" to refer to a reference to an object in memory.
-You don't have to literally understand what happens under the hood, but the `next` attribute of the `Node` class is literally a reference to another object in memory.
-Print out the `next` attribute of a node, and you'll see something like `<__main__.Node object at 0x7f8e3c7b4b50>`.
-This is the memory address of the next node in the list.
-You don't have to account for this, you don't have to reference this, you don't have to store this or manage this, but it's good to understand that this is what's going on behind the scenes in Python.
-****
 
 Having created each of the nodes with its accompanying data, we then set the `next` pointer of each node to the next node in the list.
 It's not necessary to set the `next` pointer of the last node in the list to `None`, as it is already set to `None` in the `__init__` method of the `Node` class.
@@ -615,7 +617,7 @@ def merge_lists(head1, head2):
 
 === Example Interview Questions
 
-Honestly, you're the odds of your getting a linked list question in an interview are pretty low.  
+Honestly, the odds of your getting a linked list question in an interview are pretty low.  
 The odds of being asked a question that knowledge of linked lists would help you answer are much higher.
 So this time there won't be sample interview questions, but here are some exercises you should consider to consider to get your head around the idea of linked lists, nodes, pointers, and data.
 
@@ -633,3 +635,21 @@ Bonus points for using recursion.
 * Write a function that takes a linked list and sorts the list in reverse order.
 * A "circular" linked list is a linked list where the last node in the list points to the first node in the list.  
 Can you think of a potential use for a circular linked list?
+
+=== AI Questions
+
+In electrical or network engineering, signals are connected by wires that run to switches (like routers) or components (like lightbulbs).
+These can be considered as a kind of linked list, where the wires are the pointers and the switches and components are the nodes.  
+
+Using AI, build a game or simulation using linked lists that requires a progressive series of choices to be made.  
+This can be like a "choose your own adventure" game, a "lemonade stand" type game, or a "build a city" kind of game.  
+Whatever you choose, the idea must be that the player's current state is directly influenced by all of the choices they've made up to that point.
+
+Consider the path through the choices as a kind of "network," where the nodes are the choices and the pointers are the connections between the choices.
+Represent the path as a linked list.
+Explore the advantages and disadvantages of representing the data in this fashion.
+One of the advantages might be the creation of a path choice history, where the player can access all of the choices made up to that point.  
+the history can even be used to allow the user to backtrack through the choices and choose different paths.
+One of the disadvantages might be the complexity involved in the maintaining the data structure, which will scale exponentially as the number of available choices grows.
+
+Can you (and the AI) find a faster, more efficient way to represent the data?

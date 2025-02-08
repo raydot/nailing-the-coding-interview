@@ -2,15 +2,30 @@
 
 == Arrays
 
-Chapter into here
+Arrays are usually the first data structure that programmers learn about, sometimes well before coming to the concept of data structures.
+Widely used in some form or another in just about every programming language, arrays are a vital data structure for any programmer to understand.
+
+In interviews a firm knowledge of arrays is essential.  
+It's important not only to be aware of the built in array functions in a given languages, but to understand the ideas behind them and how to replicate that functionality in your own code.
+
+This chapter will explain how to do all of that, and hopefully by the end there will be a firm understanding of arrays at a level that makes them an invaluable tool in your interview toolbox.
+
+An array can simply be thought of as a linear list of items, a vector addition to a sole variable.  
+Now instead of `x` and `y` and `z` existing as the sole entities in the variable universe, arrays add indexes to variables, and allow for the storage of multiple values in a single variable.
+This grouping allows for relationship to form between pieces of data, much like amino acids form proteins, notes form a melody, ingredients form a recipe, or words form a sentence.  
+
+In this chapter we'll cover the basics of arrays, from the foundational computer science behind them to how to access and manipulate their elements.
 
 === Arrays
 
-Let's begin with the simplest linear data structure, the array. In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array's "index."  I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you're about to encounter. 
+Arrays are the simplest linear data structure. 
+In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. 
+For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array's "index."  
+I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you're about to encounter. 
 
 .Levels of Abstraction
 ****
-Programming languages can be categorized by levels (or layers) of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" languages, like assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer's hardware directly using what is known as "machine code." 
+Programming languages can be categorized by levels (or layers) of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" programming languages, like Assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer's hardware directly using what is known as "machine code." 
 
 Low-level languages tend to make more sense to computers than humans, though, and it was realized long ago that abstractions were needed to connect human thinking and language to computer actions. "High-level" languages, like C++, take human-readable language and compile it into machine code instructions that can be used to manipulate a computer's chipset directly. There's a higher abstraction than this though. "Interpreted" languages, sometimes referred to as "scripting languages", contain an even higher level of abstraction, as these languages don't interact with the computer chipset at all. Scripting languages are instead fed to an application, like a web browser, that attempts to "interpret" their instructions into machine code. It's well worth your time to understand layers of abstraction as a programmer, and it goes far beyond what can be explained in a single side note.
 ****
@@ -20,7 +35,7 @@ Low-level languages tend to make more sense to computers than humans, though, an
 
 Arrays are close in equivalence to what is known in mathematics as a "set." 
 A set is a list of items that have some relation to one another, that can be represented by a single notation. 
-(Why I say "close" is because in mathematics a set cannot contain duplicate items, while in programming an array can.)
+(Arrays are "close" to sets because in mathematics a set cannot contain duplicate items, while in programming an array can.)
 
 In strongly typed languages, arrays can only contain the same type of data, but in weakly typed languages, arrays can contain mixed data types. 
 Arrays have some special terminology related to their specific use:
@@ -28,7 +43,8 @@ Arrays have some special terminology related to their specific use:
 Element, index, set
 
 <diagram of an array TK.>
-We looked at a simple example of an array in the last chapter, with an image showing how an array is a string of characters.
+
+We looked at a simple example of an array in Chapter 3, "Strings," with an image showing how string is an array of characters.
 
 GRAPHIC:
 ['H', 'e', 'l', 'l', 'o', '\s', 'w', 'o', 'r', 'l', 'd', '!', '\n']
@@ -45,15 +61,15 @@ In {cpp}, for instance, an integer usually (but not always!) occupies four bytes
 
 The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array's "scope," or length. 
 
-.Weakly vs. Strongly Typed Languages
+.Weakly- vs. Strongly-Typed Languages
 ****
-The difference between weakly typed and strongly typed languages comes down to how strict the language requires programmers to be when mixing data. 
-In strongly typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing. 
+The difference between weakly-typed and strongly-typed languages comes down to how strict the language requires programmers to be when creating, passing, and mixing data. 
+In strongly-typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing. 
 In weakly typed languages, this mixing is allowed, accepted, and even encouraged!
 
 If you've used Typescript you're used to a hybrid of both, with Typescript being a language that adds strong data typing to Javascript.
 There's some controversy over whether this is desirable or should even be allowed. 
-Is Typescript a useful tool or simply meant to make Javascript more palatable for coders coming from more strongly typed languages, like Java?
+Is Typescript a useful tool or simply meant to make Javascript more palatable for coders coming from more strongly-typed languages, like Java?
 
 In {cpp} an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in {cpp}. It can only be used to hold five integer values, no more, and no other type of data is allowed. 
 
@@ -68,9 +84,9 @@ The reasons for these differences are logical, of course, and mostly have to do 
 
 ==== Array Indexing/Numbering
 
-In most programming languages, arrays are numbered from zero. This is because arrays are meant to be thought of as contiguous elements in a computer's memory, as explained in the section on pointers, above. If arrays started counting from 1, there would be space unaccounted for in that first position in the memory that exists between 0 and 1. It's the same reason why the 19th century starts in 1800. You have to account for the First Century somehow, and no one wants to be from the "Zeroeth Century."  
+In most programming languages, arrays are numbered -- or "indexed" from zero. This is because arrays are meant to be thought of as contiguous elements in a computer's memory, as explained in the section on pointers, above. If arrays started counting from 1, there would be space unaccounted for in that first position in the memory that exists between 0 and 1. It's the same reason why the 19th century starts in 1800. You have to account for the First Century somehow, and no one wants to be from the "Zeroeth Century."  
 
-That means the first element in the array `testArray` is located at array position 0. If `testArray = [21, 31, 41, ...]` then `testArray[0]` is where to find 21, `testArray[1]` is where to find 31, `testArray[2]` is where to find 41, etc. 
+That means the first element in the array `testArray` is located at array index 0. If `testArray = [21, 31, 41, ...]` then `testArray[0]` is where to find 21, `testArray[1]` is where to find 31, `testArray[2]` is where to find 41, etc. 
 
 [source, python]
 ----
@@ -140,9 +156,9 @@ The point is if you have to iterate over an array (peanut butter), use a for loo
 It's a little beyond the scope of the book, but I'm going to spend just a moment on how arrays work under-the-hood, to give you a better sense of what's actually going on.
 
 An array is actually composed of not one but TWO pieces of data, the one you have control over and the one managed by the programming language. 
-As I mentioned in "Weak vs. Strongly Typed Languages," above, in strongly-typed languages data is allocated by type, and the type determines the size of the data in memory. 
+As I mentioned in "Weakly- vs. Strongly-Typed Languages," above, in strongly-typed languages data is allocated by type, and the type determines the size of the data in memory. 
 
-In C, a strongly typed language, an `int` data type allocates four bytes, or 32 bits, to hold an integer value. 
+In C, a strongly-typed language, an `int` data type allocates four bytes, or 32 bits, to hold an integer value. 
 This idea behind this is to allow programmers to use only the amount of memory they need, and no more. 
 If you have a variable that will never go above the value 10, for instance, you might prefer using a `short` data type, which is comprised of 2 bytes, or 16 bits.
 The obvious disadvantage to this approach is that while you might be able to control your program you can't control its users, and if a user enters a number that exceeds the size of the data block allocated to it, unexpected results can occur. 
@@ -175,9 +191,12 @@ Having said all of that, we will be returning to the concept of pointers as we p
 
 ==== Modifying (or not Modifying) Arrays
 
-In strongly typed languages, arrays can't be modified in length or data type once created. 
-This leads to the desired outcome of an array always being what the programmer says they are. 
-For a short time in the history of computer programming, this became an undesirable thing, as the rise of web programming created a generation of programmers that didn't need or want to worry about data types in their arrays since it was the browser's problem.
+In strongly-typed languages, arrays can't be modified in length or data type once created. 
+This constraint leads to the desired outcome of an array always being exactly what the programmer says they are. 
+On the other hand, this constraint leads to a certain inflexibility in managing the data in a program, because once an array is set in size and type it can't be further modified.
+The rise of web programming created a generation of programmers that didn't need or want to worry about data types in their arrays since their code was meant to run in browsers and might contain wild mixtures of user input, api calls, pieces of HTML and/or CSS, and unicorns and ice cream.  
+So shouldn't the management of data be the browser's problem?
+And if the browser can handle it, shouldn't browser programming languages be able to handle it too?
 
 In that way where all old things become new again in computer programming, there has been a recent shift towards "functional programming," which insists that programmers regain control of arrays and not simply modify them according to their moods. 
 The last chapter talked about "side effects," which is modifying original copies of data in a way that can't be easily reversed.
@@ -468,6 +487,7 @@ Yes, most programming languages have a function named `sort()`, but in the conte
 .The AlgoRhythmics
 ----
 Only on YouTube: There is a collection of videos featuring Hungarian folk dancer computer scientists demonstrating common algorithms, including the Bubble Sort this chapter is about to cover.
+
 You can see for yourself at: https://www.youtube.com/@AlgoRythmics 
 ----
 
@@ -901,6 +921,10 @@ This will output:
 
 ==== Sample Questions
 
+Here are some questions about arrays that are commonly asked in interviews.
+The same problem might come with a different description, so make sure you focus on the general idea without getting too bogged down in the specific problem.  
+These questions can be found as exercises on most programming interview websites, so get in some practice if you can.
+
 ===== Container With Most Water (2 Pointer Solution)
 
 This problem comes in a few different forms, but the idea is that you're given an array of integers that represent the height of a series of walls. 
@@ -1308,7 +1332,9 @@ For instance, here are all of the permutations of the array ["cat", "dog", "mous
 ["mouse", "cat", "dog"]
 ["mouse", "dog", "cat"]
 
-Exciting stuff, no?  
+Exciting stuff, no?
+I've given a simple example here, but permutations can be used to solve many types of programming problems. 
+They're especially useful when you're looking for an optimal solution to a problem, as they can quickly generate all possible combinations which can then be quickly used to determine which solution is best.
 
 When it comes to permutations there are two primary questions involved:
   1. Given a starting set of data, how many permutations can be created?
@@ -2007,9 +2033,12 @@ def check_grid(board, grid_num):
 ----
 
 This would be a pretty good interview answer, but there are three exercises to consider from here:
-    1. Combine these three functions into a single function that checks the whole board.
-    2. Earlier in the chapter I talked about the "set" data structure in Python. Remember that a Python set is a collection of unique elements. Rewrite the loop that checks for repeated numbers using a Python set. Break it down into two tasks -- 1) see what happens when you try to add repeated numbers to a set and 2) Use a set to check for duplicates in a row.  Does this change the time complexity of the function?
-    3. Can you write a function that actually solves the Sudoku board? That's a degree of difference harder than simply considering a valid board, but just think about it for now. I will be returning to this problem later in the book.
+
+    . Combine these three functions into a single function that checks the whole board.
+
+    . Earlier in the chapter I talked about the "set" data structure in Python. Remember that a Python set is a collection of unique elements. Rewrite the loop that checks for repeated numbers using a Python set. Break it down into two tasks -- first see what happens when you try to add repeated numbers to a set and then use a set data structure to check for duplicates in a row.  Does this change the time complexity of the function?
+
+    . Can you write a function that actually solves the Sudoku board? That's a degree of difference harder than simply considering a valid board, but just think about it for now. I will be returning to this problem later in the book.
 
 ==== AI Exercise
 

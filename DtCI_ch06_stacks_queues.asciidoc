@@ -2,12 +2,11 @@
 
 == Stacks and Queues
 
-Having built on the concept of linked lists in Chapter 5, we can now move on to two more advanced and widely used data structures: stacks and queues. 
+Building on the concept of linked lists explored in Chapter 5, we can now move on to two more advanced and widely used data structures: stacks and queues. 
 By the end of this chapter you will understand the difference between the two, the applications of each, how to implement them both from their native versions and in code and how to answer questions about them in interviews.
 
-=== Stacks and Queues
 
-Stacks and queues are two kinds of data structures that keep things in a kind of order.
+Stacks and queues are two kinds of data structures that keep things in a certain order.
 They are both similar to arrays, but with a few key differences.
 In an array, you can add things pretty much wherever you want.  
 In stacks and queues you only add things to one end or the other, and usually always from the same end.
@@ -246,9 +245,13 @@ What about the browser event loop?
 
 A priority queue is a data structure that is a combination of a queue and a heap which I'll talk about in the next chapter.  
 In addition to having a FIFO order, a priority queue also has a priority order.
-You can think of a priority queue like people who have TSA PreCheck at the airport.
-They get to go to the front of the line, regardless of when they arrive.
-Once they've gone through, everyone else goes through the line in the order they arrived.  
+You can think of a priority queue like people in the Emergency Room at the hospital. 
+During intake, patients are assigned a priority based on the severity of their condition.
+People who arrive in ambulances get to go to the front of the line, regardless of when they arrive.
+People who walk in the door with severe pain will be seen sooner than people who lost a Q-Tip in their ear.
+An order is still maintained though.  
+The people who walk in with the in-ear Q-Tip first will be seen by the people who walk in with the in-ear Q-Tip later.  
+
 There are many ways to implement a priority queue, but one simplistic way to do it is to use a nested array (or Python list) where the first element is the priority and the second element is the data.
 
 [source, python]
@@ -274,9 +277,8 @@ This allows programmers to impose at least a little bit of order on the chaos of
 
 Back in Chapter 4 we discussed permutations, and I showed you a simple iterative solution for coming up with all the combinations of a set of items in an array.  
 
-Now that we've discussed stacks and queues, I'd like to show you how you can use one to more effectively solve the permutations problem:
+Now that we've discussed stacks and queues, I'd like to show you how you can use a stack to more effectively solve the permutations problem:
 
-Let's try doing it in a way that explores another concept called the _stack_.
 
 [source, python]
 ----
@@ -345,7 +347,7 @@ Once you've got them properly "balanced", with the same numbers of openers and c
 
 .The Terminal
 ****
-This may be another one of my unpopular opinions, but I'm always truly amazed when I find a programmer who doesn't know how to use the terminal, and doesn't seem to care.
+This may be another one of my unpopular opinions, but I'm always truly amazed when I find a programmer who doesn't know how to use a command-line terminal, and doesn't seem to care.
 It's not used anywhere near as much as it used to be (I once used to check my email in the terminal), but it's still an absolutely necessary thing to know.
 While you certainly don't have to read the Unix MAN pages from beginning to end or become a VIM ninja, any programmer should know how to navigate through a file system, create and delete files and directories, and run programs from the command line.
 It's invaluable for not having to "context switch" between your editor and your terminal, and using it will give you lots of really, really boring stories to tell your grandkids.
@@ -362,6 +364,9 @@ You should only need to add a "peek" method to the basic stack class provided to
 
 Earlier in this chapter I suggested modifying the basic stack class to implement a queue.
 But a queue can also be implemented using two stacks.
+Can you think of what this would look like?
+It doesn't need to be coded.
+Consider just drawing it out on paper, with a list of the methods required to accomplish the task.
 Again, you will only need to add a "peek" method to the basic stack class to accomplish this.
 
 ==== String operations with stacks
@@ -375,6 +380,17 @@ Can you think of a way to use a stack to check if a string is a palindrome?
 
 Earlier I gave a description of a priority queue.  
 Try mixing together a stack and a queue to create a priority queue.
+
+==== Using AI to think about Stacks and Queues
+
+Now that you've (hopefully) used the code in this chapter to implement stacks and queues from scratch, consider going back and using the Python standard methods (`push()`, `pop()`, `peek()`, etc.) as well as the collections.deque and queue.LifoQueue classes to rebuild the examples in this chapter.
+Use AI to determine the advantages and disadvantages of each approach.
+Which runs faster?
+Which use more memory?
+Which is the most efficient?
+Which form is the most readable?
+Are there other reasons why you might prefer one approach over another?  
+AI can help you reason through these questions, which will provide you with an understanding you can draw on should you be asked about them in an interview.  
 
 
 

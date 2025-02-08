@@ -308,8 +308,15 @@ Just so there's no confusion, I kept using words like "must" and "cannot" and "a
 What I mean are, these are the rules that must be followed for a data structure to be considered a heap.  
 If you don't follow these rules your code probably won't crash or throw an error, but you'll get some unwanted results.  
 
-The basic rules are, one, that a parent must always be larger than its children in a max heap, and smaller than its children in a min heap.  Two, that the heap must be filled in from left to right, and three, that the heap must be filled in without any gaps.  
-As long as these rules are followed the heap will always stay heapy...I mean happy.
+The basic rules are:
+
+ 1. A parent must always be larger than its children in a max heap, and smaller than its children in a min heap.  
+
+ 2. The heap must be filled in from left to right (or right to left if that fits the solution better, but in some consistent order).
+ 
+ 3. The heap must be filled in without any gaps.  
+
+As long as these rules are followed the heap will always stay heapy -- I mean happy -- and in proper (min or max) heap order.
 
 With all of that now firmly in mind, hopefully, let's consider the process of removing a value from a heap.
 A heap is a first-in, first-out data structure, and as such the first value in a array representing a max heap -- the top item in the heap tree -- always represents the largest value in the heap.
@@ -325,7 +332,8 @@ If this sounds to you a lot like the "pop" method for a stack or a queue, that's
 The only difference is that a heap needs to make sure it maintains its items in heap order, which is why the pop here comes with a "bubble down."
 (It might also lead you to wonder if early computer scientists chewed an awful lot of gum, but I digress.)
 
-Here's an example of a class that only has one purpose: to remove the top value from a max heap.  
+Here's an example of a class that only has one purpose: to remove the top value from a max heap.
+In other words, to use the heap as a queue.
 It does so while using "bubble down"  to maintain the heap order property:
 
 [source,python]
@@ -354,32 +362,9 @@ class MaxHeapPopper:
 
 
 
-
-
-
 === Building Intuition: What are heaps used for?
 
 Between the math that's used to keep a heap organized and the methods th
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
 
 
 
