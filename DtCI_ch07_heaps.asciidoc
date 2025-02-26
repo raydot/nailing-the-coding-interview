@@ -270,10 +270,26 @@ def _bubble_up(self, index):
 ----
 
 This incredibly useful five lines of code does all the work of bubbling up a value in the heap. 
-It does this by comparing an item to its parent, and swapping the two if the item is larger than it's parent.  
-I'm not sure how I could suddenly become by own mother, so the family metaphor breaks down a bit here, but you get the idea.
+It does this by comparing an item to its parent, and swapping the two if the item is larger than its parent.  
+I'm not sure how I could suddenly become my own mother, so the family metaphor breaks down a bit here, but you get the idea.
 
-Earlier I said a property of a heap is that it maintains "heapified."  Also called "heap order," this refers to the property that each parent contains a value that is larger than its children.  
+.recursion
+****
+This book doesn't get to recursion until Chapter 11, but you're encountering it here in the `_bubble_up` method.
+Recursion is a programming technique where a function calls itself. 
+That might sound like crazy talk, but that's what happens.
+The function "recurses" down the tree of calls until it (hopefully) finds a stopping point, at which point it "unwinds" back up the tree and returns the results.  
+
+An analogy I heard a long time ago is like newscasters on the news.  
+There will be a news anchor who will read off a news story and then maybe call on a reporter in the field.
+That reporter will begin to report the story and then call out for a video to be played that was taken earlier.  
+When the video ends, the scene goes back to the reporter, who ties up the story and then sends the broadcast back to the anchor.  
+
+There's a lot more to it than that, but keep that basic idea in mind when you see a function calling itself.  
+In the case of `_bubble_up`, it will keep calling itself with the parent of the current index until `index > 0 and self.heap[index] > self.heap[parent]` is no longer true which means the element is in its proper place in the heap.
+****
+
+Earlier I said a property of a heap is that it stays "heapified."  Also called "heap order," this refers to the property that each parent contains a value that is larger than its children.  
 This simultaneously keeps the largest value at the top of the heap and makes it possible to find the largest value in the heap in constant time.
 So while a heap is a data structure, it's comprised of a collection of algorithms that maintain the heap order property.
 
@@ -322,7 +338,7 @@ With all of that now firmly in mind, hopefully, let's consider the process of re
 A heap is a first-in, first-out data structure, and as such the first value in a array representing a max heap -- the top item in the heap tree -- always represents the largest value in the heap.
 (In a max heap, anyway.  In a min heap it's the other way around.  The first item in the array and/or the top item in the tree is always the smallest value in the heap.)
 
-This leads to a straight-foward process for removing a value from a heap in first-in, first-out order:
+This leads to a straight-forward process for removing a value from a heap in first-in, first-out order:
 
 1. Remove the first value in the heap.
 2. Replace the first value with the last value in the heap.
@@ -360,35 +376,174 @@ class MaxHeapPopper:
             self._bubble_down(largest)
 ----
 
-
-
-=== Building Intuition: What are heaps used for?
-
-Between the math that's used to keep a heap organized and the methods th
-
-
-
-
 === Developing Intuition: What are heaps used for?
 
-Thhink and grow heaps
+Between the math that's used to keep a heap organized and the clever methods that have been developed to access and manipulate the data in a heap, it's an incredibly useful data structure.  
+Heaps can be used to create the priority queues that were discussed in Chapter 6.
+They are the basic foundation of Dijkstra's algorithm, which is used to find the shortest path between two nodes in a graph (think, cities on a map) that will be discussed in Chapter 10.  
+They can also be used for sorting, as will be discussed in Chapter 12.
+There will be other examples later in this chapter.
+As you go though these examples, always try to see how the heap is working, and maintaining order "behind the scenes" of the problem at hand.  
 
-=== Max heaps and min heaps
+=== Heaps and Heaps of Heaps
 
-MINIMAX and heap
+Hopefully it's clear that a min heap is just a max heap with the values reversed.  
+There are other ways to create heaps.
+One example is a "min-max heap," which is a heap that alternates between min and max heaps.
+Two heaps can be combined to create a heap that maintains a median value, which is useful to know in doing statistical analysis. 
+There are binomial heaps, fibonacci heaps, heaps with more than two children per node, and heaps that are used to manage other heaps.  
+All of these have the same thing in common and that is that they maintain the heap order as items are added to them.  
 
-=== Example questions
+=== Example Interview Questions
 
-Before you get your heap on here's what you need to know. 
+Here are some example interview questions involving heaps.
+Try to look at these questions from two perspectives.  
+The first perspective is the idea of problems that are specifically about heaps.  
+The second perspective is the idea of problems that can be solved with or without heaps, but where knowledge of how heaps work might be used to either better solve the problem or to expand the answer. 
 
-==== Is heap a max or min heap?
+If you need to, be sure and review some of the simple math ideas behind the heap that were provided in the "Heaps and Trees" section earlier in this chapter.
 
-IS IT MAX OR MIN
+==== Is it a heap?
 
-=== Convert max heap to min heap
+_Given an array, determine if it is a heap._
 
-Min is max and max is min
+There are a few ways this question might be asked in an interview.  
+The question might additionally require a determination to be made about the type of heap -- is it a max or min heap?
+There also might be some version of converting a max heap into a min heap, or vice versa.  
 
-5. Top k elements.  "Find k largest elements in an array"  Input is linear data structure. Solve using heap.
+While these are easy tasks to do by sight, how could an algorithm be used to make this determination?  
+
+Instead of jumping into code, let's take a look at "what is a heap" in plain English:
+
+. Start at the first element in the array.
+. Compare the element to its parent.
+. If the element is larger than its parent, return false.
+. If the element is smaller than its parent, move to the next element.
+. If the end of the array is reached, return true.
+
+(Does this specific algorithm determine whether the item is a max heap or a min heap?  Think about it for a moment before reading on.)
+
+Remember, the question starts with an array, so the first element in the array is the root of the heap.
+After that, each element can find its parent by using the formula `parent = (child - 1) // 2`, as mentioned earlier in the chapter.  
+
+Here is a Python function that implements this algorithm:
+
+[source,python]
+----
+def is_heap(arr):
+    for i in range(1, len(arr)):
+        parent = (i - 1) // 2
+        if arr[i] > arr[parent]:
+            return False
+    return True
+----
+
+==== Is it a max heap or a min heap?
+
+Building on the previous idea (the algorithm given above is for a max heap), how could you determine whether a heap is a min heap or a max heap?
+The idea is simply to flip the comparison around.  
+If the element is _smaller_ than its parent, return `false`.
+
+There could be a trick involved with this question though.  
+What does it mean if the some elements are larger than their parents and some are smaller?
+This could mean that it's one of the special flavors of heap I mentioned above, or it could mean that the heap is not a heap at all.
+
+
+==== Convert max heap to min heap
+
+_Given a max heap, convert it to a min heap._
+
+This question takes a little bit of thinking about how a heap is organized.  
+The largest value in a max heap is always at the top of the heap, but now it must be moved down to the leaves.  
+Similarly and conversely, the smallest value in a max heap is down in the leaves, but now it must be moved to the top.  
+Extending this logic, it's quite possible that any number of heap values could already be exactly where they need to be.
+
+Don't overthink it though.
+(Actually it was me who did the overthinking, so never mind.) 
+It's an easy conversion once you know the trick that stems from these observations.  
+Here is the code that converts a max heap to a min heap:
+
+[source,python]
+----
+def max_to_min(arr):
+    for i in range(1, len(arr)):
+        parent = (i - 1) // 2
+        if arr[i] < arr[parent]:
+            arr[i], arr[parent] = arr[parent], arr[i]
+    return arr
+----
+
+==== Here's an array, make it a heap
+
+This is a fairly straightforward thing to do.
+Take the elements in the array one at a time and keep swapping them until everything is in the right place.  
+It's fairly similar to the approach to converting a max heap to a min heap covered in the last section, in fact.  
+
+[source,python]
+----
+def heapify(arr):
+    needs_heapifying = True
+    while needs_heapifying:
+        needs_heapifying = False
+        for i in range(1, len(arr)):
+            parent = (i - 1) // 2
+            if arr[i] > arr[parent]:
+                arr[i], arr[parent] = arr[parent], arr[i]
+                needs_heapifying = True
+    return arr
+----
+
+There is also a recursive way to do this, but I want to keep things simple for now.  
+Feel free to see if you can come up with the recursive solution on your own!
+
+==== Top k Elements in an Array
+
+_Given an array in heap form, find the k largest (or smallest) elements in the array_  
+
+This is a perfect question for a heap, as the items are already sorted in order.
+In fact, the code is pretty much a one-liner:
+
+[source,python]
+----
+def get_k_largest(heap_array, k):
+    return heap_array[:min(k, len(heap_array))]
+----
+
+If you're a little confused by `[:min(k, len(heap_array))]`, remember from Chapter 4 that `:` is the slice operator in Python.   
+`[:3]` is the same as `[0:3]` and will return the first three elements in a list.  
+So this line of code says "return all of the items from the beginning of the array to which ever is smaller: k or the length of the array."
+
+That doesn't seem like much of an interview question does it?
+Of course you know how to slice an array.
+You read Chapter 4!  
+So let's look at a few of the wrinkles involved. 
+
+Wrinkle #1: What if the array is not in heap form?
+
+If the array is not already in heap form you'll have to "heapify" it first, using the "heapify" method discussed above.
+
+Wrinkle #2: What if the array is a min heap?
+
+If the array is a min heap, you'll have to convert it into a max heap first, also using the code described above.
+
+Wrinkle #3: Instead of returning the values, how can you remove the values while keeping the rest of the array in heap form?
+
+That's an easy one, just use the "MaxHeapFunction" class discussed above, and call the "pop" method k times.
+
+Wrinkle #4: What else is there to know about heaps?
+
+Not much!
+We've covered a lot of ground in this chapter.
+Please take this code, type it into a computer, a play with it.  
+Try to get a feel for how heaps come together, and stay together. 
+Draw a few heaps as trees, and trees as heaps.  
+Try to come up with some interesting variations of things you can hurl into the heap hopper.  
+With a little curiosity and intrepidness you'll be on top of the heap in no time!  
+
+
+
+
+
+
 
 

@@ -614,7 +614,7 @@ Why?
 How would you go about solving this problem?
 
 Even people who have never played the game before will quickly come up with winning strategies.
-It doesn't make a lot of sense to guess numbers in order because that would give you only about a 5% chance to guess the number before running out of guesses.
+It doesn't make a lot of sense to guess numbers in ascending order from 1 because that would give you only about a 5% chance to guess the number before running out of guesses.
 You're also only going to guess numbers based on the clues provided to you by the person who makes the offer.
 If you guess 71, and she tells you it's going to be higher than 71, it makes no sense to guess 20 on the next turn.
 
