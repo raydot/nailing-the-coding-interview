@@ -1,14 +1,14 @@
 import random
 
 def heapify(arr):
-    swapped = True
-    while swapped:
-        swapped = False
+    needs_heapifying = True
+    while needs_heapifying:
+        needs_heapifying = False
         for i in range(1, len(arr)):
             parent = (i - 1) // 2
             if arr[i] > arr[parent]:
                 arr[i], arr[parent] = arr[parent], arr[i]
-                swapped = True
+                needs_heapifying = True
     return arr
   
 # Test the function
