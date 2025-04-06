@@ -2,12 +2,26 @@
 
 == Trees
 
-After reading this chapter, the reader should understand the definition of a tree...ipsum
+Trees is a concept that can make some coder's heads spin; especially those who did not go through a computer science program.  
+To some extent I think the reason why is that trees (and graphs, which we'll cover in the next chapter) are usually introduced in the context of other courses a future programmer might be taking that involves mathematical or set-theory-like definitions.
 
+Given how useful trees are, and the extent to which they can separate the sheep from the wolves in the programming world, I'm taking it as a personal challenge to make trees accessible in this chapter.
 
 === Trees Definition
 
+We've already come across trees in two different contexts in this book.
+I discussed them in chapter 4 when I introduces the binary search algorithm, and I discussed them in 7 in the context of heaps.
+
 === Building Intuition: What are trees used for?
+
+An example of a tree you use every single day, and you might even be using it right now, is the document object model (DOM) in your web browser.
+The DOM represents every single element on an HTML page as a node in a tree.
+If you've done any HTML programming this will make intuitive sense to you.
+For instance, in HTML every tag that is "opened" must eventually be "closed" with a corresponding tag.  
+That's the tree structure in a nutshell.
+
+PICTURE OF DOM AS TREE TK
+
 === Trees and heaps
 
 === Reasoning about trees

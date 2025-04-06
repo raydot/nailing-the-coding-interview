@@ -299,7 +299,7 @@ For instance, the Rabin-Karp algorithm discussed briefly in Chapter 3 changes a 
 ==== Logarithmic Time (log n, n log n)
 
 Logarithmic time usually describes algorithms that split the data set in half with each iteration.
-For example Binary Search algorithm, discussed in Chapter 12, works by splitting the data set in half every time loop through the data is performed.
+For example, the Binary Search algorithm, discussed in Chapter 12, works by splitting the data set in half every time loop through the data is performed.
 The height of binary trees, discussed in Chapter 9, can also be derived logarithmically.
 Most (but not all) of the time we're dealing with a base-2 logarithm, as is expected from a repeated reduction by half.
 

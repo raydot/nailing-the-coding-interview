@@ -2,9 +2,90 @@
 
 == Functions and Recursion
 
-After reading this chapter the reader should know how to use both recursive and non-recursive functions, how to reason about functions, and what type of functions problems to expect on a coding test.
+Now that you've made it through 2/3 of the book, it's time to talk about functions!
+"But wait," you say, "Haven't we been talking about functions this entire time?"
+Indeed we have been using them, and I've even mentioned some things about them, but I think it's very easy to be a programmer and use functions all the time without ever really understand some of the the more advanced concepts behind them.
+Indeed, one of the reasons this chapter is so far into the book is because with the understanding you've (hopefully) gained from previous chapters you are now ready and willing to look at functions in a whole new light.
+So let's get down to it!
 
 === Functions 101
+
+Here comes the dry, boring part of what a function is:
+
+[stem]
+++++
+f(x) = 2x
+++++
+
+If x = 1, then f(x) = 2 * 1 = 2.
+If x = 2, then f(x) = 2 * 2 = 4.
+If x = 3, then f(x) = 2 * 3 = 6...etc.
+
+At least, that's how you first may have learned about them in your high school algebra class.
+In one of those funny ways about how my particular brain works, I could not understand that concept at all in high school.
+In understood what `x` was, but what was `f`?
+What I failed to understand is that `f` was not a variable but the notation for a function, which is something that takes a value (or multiple values) and returns a result (or results) based on a computation (or computations) applied to that value (or values).
+
+I'm being a bit smug with the pluralization, expecially since the way you probably worked with mathematical functions was with a single value, but as a programmer, one value usually just doesn't get the job done.  
+
+So let me expand my definition to now include programming.
+In programming a function is a block of code that takes a value (or values), transforms them according to a set of rules, and returns the result.
+Usually, but certainly not always, what's returned is a single value.
+
+Here is the same f(x) = 2x function in Python:
+
+[source, python]
+----
+def two_x(value):
+  return (2 * value)
+----
+
+In this case, `two_x` is the function name, `value` is the value being passed in, and `2 * value` is the computation being applied to that value.
+The function then "returns" that value to the place from whence it was called.
+Because of this "return," a function can used to set a variable:
+
+`double_value = two_x(value)`
+
+=== Black Boxes
+
+In addition to the functions you write yourself, most programming languages come with a built in set of functions.
+For instance, throughout this book I've repeatedly used the "print" function in Python.
+
+`print("Functions are fun!")`
+
+In many languages, a print function has special characters that can be used to add in other types of information, dynamically, to the string being printed.
+
+`print("The value of x is", x)`
+`print("The value of x is %d" % x)`
+`print(f"The value of x is {x}")`
+
+Or, for a little JavaScript:
+
+`print("The value of x is " + x)`
+`print(`The value of x is ${x}`)`
+`console.log("The value of x is", x)`
+`console.log(`The value of x is ${x}`)`
+
+Wait, `console.log()`?
+That's another function!
+A lot of people know how to use `console.log(),` but don't realize that it is but one in a library of `console` functions which includes:
+
+`console.error()`
+`console.warn()`
+`console.info()`
+`console.debug()`
+`console.table()`
+
+Returning to the `print()` (or `log()` or `write()` or `output()` functions, they are real workhorses in many programming languages, as they're the primary way for programmers to see what's going on in their programs.
+All modern browsers and IDE's contain robust debugging tools, but without looking it up I'm absolutely certain the #1 debugging tool used by programmers is `console.log()`.
+
+So what's going on in `console.log()`?
+I'll tell you: who cares?
+I put a value, expression, string, function into it, and I get a result out.
+I have never looked at the source code that explains it, because I don't need to.  
+The majority of functions we use are like this, and they can collectively be thought of as "black box" functions.
+You put something in, you get something out, and you don't need to know what's going on inside.
+Which is great, because it's one less thing to worry about.
 
 === You will be asked a question about functions
 
@@ -49,7 +130,6 @@ They take a value (or values), transform them according to a set of rules, and r
 
 === Building Intuition: Reasoning about functions
 
-=== Functions basics
 
 === Function prototypes
 In strongly typed languages, functions are usually defined by a _prototype_, a block of code that defines the function in terms of the data it can expect to receive and return. 
@@ -79,21 +159,567 @@ If your language doesn't support function prototyping, how can data checks in fu
 
 === Returning function data
 
+=== Arrow functions
+
+The first time I saw a JavaScript arrow function I was sure it would be a passing fad.
+For one thing, how could you even have an operator that was an arrow comprised of two different characters?
+(You might be thinking of `==` but I did say "two different.")
+
+Now, I find arrow functions to be absolutely invaluable, especially as they can be used with the classic "functional programming" functions, `map()`, `filter()`, and `reduce()`.
+
+A JavaScript arrow function -- and I'll get to Python in a moment -- is a way to write a function that immediately returns a value.
+For instance, going back to the earlier math example I gave of `f(x) = 2x`, you could write that as an arrow function in JavaScript like this:
+
+`const doubler = (x) => 2 * x`
+
+The arrow says "return" and keeps you from having to type it.
+
+In Python, the (kinda, sorta) equivalent of an arrow function is a lambda function, which doesn't have a fancy arrow but requires you to type out the word "lambda."
+Nowhere near as cool, but certainly equally useful:
+
+`doubler = lambda x: 2 * x`
+
+Arrow functions absolutely can be multi-line functions, simply by adding some curly braces:
+
+[source, javascript]
+----
+const doubler_plus_two = (x) => {
+  const result = 2 * x
+  return result + 2
+}
+----
+
+All equally valid, but now you've lost the need not to type return, and you have a function doing two things (doubling x and adding 2) which is fine, but not really any different from what a function can already do.
+
+
+
 === Closures
+
+For the longest time you could not go on a programming interview without being asked, "What's a closure?"
+Something funny about that, though, I'm not so sure a lot of interviewers knew either.  
+One of the greatest texts on closures comes from the _You Don't Know JavaScript_ series by Kyle Simpson, and I highly recommended reading all of his books once you're done with this one.
+
+The problem with the question "What is a closure?" is that there's not really a single correct answer.
+I mean there is, but it's not a simple one.
+Because of this, I suspect a lot of people were told they were "wrong" in their response, when actually, they likely weren't, not exactly.
+
+Closures have to do with both the scope of data in an application, the way in which that data is defined in terms of that scope, and the way in which that data is used.
+It borrows ideas from both object-oriented and functional programming.
+
+Object-oriented programming, for instance, is reliant on a concept called "encapsulation," which is the idea that object data should be kept "private," and only accessed through "public" methods.
+
+In fact, Java (again, never to be confused with JavaScript) contains three different keywords to define the scope of data: `public`, `private`, and `protected`.
+
+`public` means that the data can be accessed from anywhere in the program, very similar to so-called "global" variables.
+`private` means that the data can only be accessed from within the object, and not from outside.
+`protected` means that the data can be accessed from within the object, but also from any object that "inherits" from that object.
+
+To give a real world example, let's talk about money!
+Let's pretend we are standing in a store and looking at an infinitely desirable item that costs $1000.
+That's a decent -- but not unattainable -- amount of money.
+The fact that the item costs $1000 is "public," information available to everyone.
+You, me, the store clerk, people shopping online, banks, credit card companies, Square, whatever.  
+
+Ah, but then you say to me, "At that item is infinitely desirable, you should buy it!"
+Maybe we know each other well enough for me to say, "Eh, I'm sure I could use one, but I just can't afford it."
+If I don't know you so well but I want to impress you, I might say something like "I have two at home!"
+If we're really trying to flex on one another, maybe I'll say something like, "You know what, I think you should buy it for me!"
+Implicit in all of this deceit is the very simple idea that the amount of money in my wallet is "private" information.
+I might have $1000 in my wallet, I might have $5000 in my wallet.
+I might have no money at all.  
+It's private though. 
+You don't know, the clerk doesn't know, the bank doesn't know, and my mom doesn't know.
+
+The third case, "protected," works like this.  
+Let's say I've brought my son with me to the store, and he really, really wants the infinitely desirable object.
+He's been saving his allowance, and he's managed to save up $800 for it, but before we left I promised him I would give him the last $200.  
+He's ready to buy, but my arms are full because I've been shopping all day, so I say to him, "Why don't you go into my pocket, take out my wallet, and grab $200."
+This data is "protected."
+My son, my offspring, can go into my pocket to grab it, and now it's his to use and in his pocket.  (The analogy breaks down a little bit because if it's computer data there's no actual "transfer" and we can both have the $200, but you get the idea.)
+He can go in and get it, but you can't.  
+The clerk can't.
+The bank can't.
+And, sorry Mom, but my mom can't.
+It's "protected," and only available to those who inherit from me.
+
+With these ideas in mind you have a pretty good idea of what is meant by "encapsulation."  
+The idea that data should only go to the places where it belongs, and that's it.  
+The idea behind this is that it makes it easier to reason about the code, and also that it makes it easier to avoid unintended consequences in your code, from functions unintentionally or intentionally changing data in an undesired fashion.  
+
+With all of that in mind, I do believe we were talking about closures.
+
+Let's start with this simple closure example in JavaScript::
+
+[source, javascript]
+----
+function outerFunction() {
+  const outerValue = "I'm the outer value"
+  function innerFunction() {
+    console.log(outerValue)
+  }
+  return innerFunction
+}
+----
+
+It's been said that in JavaScript functions are "first-class", which means they can be passed around like any other data type.  
+In this example, `outerFunction` is a function that returns `innerFunction`, which is a function that logs the value of `outerValue` to the console.
+
+I don't think the following will come as a surprise, none of the data inside this function is available from outside the function.
+
+[source, javascript]
+----
+console.log(outerValue)
+// Output: ReferenceError: outerValue is not defined
+innerFunction()
+// Output: ReferenceError: innerFunction is not defined
+----
+
+Encapsulation at work! 
+Neither of these values are available outside of `OuterFunction`.
+This is scope defined with the curly braces that surround the data.  
+The data inside the function is "private," and can only be accessed from within the function.
+
+[source, javascript]
+----
+const closure = outerFunction()
+closure()
+// Output: I'm the outer value
+----
+
+That's the cool, closure part right there.
+If you look back at the `outerFunction` you'll see that `innerFunction` is returning `outerValue`, which is a value that is no longer in scope.
+In addition to that, the `outerFunction` has finished executing, and yet the value of `outerValue` is still available to `innerFunction`.
+
+This is a closure.
+
+It allows you to do some interesting things like this:
+
+[source, javascript]
+----
+function outerFunction() {
+    let counter = 0
+    function innerFunction() {
+        counter++
+        console.log(`Counter value: ${counter}`)
+    }
+    return innerFunction
+}
+
+const incrementCounter1 = outerFunction()
+const incrementCounter2 = outerFunction()
+incrementCounter1() // Output: Counter value: 1
+incrementCounter1() // Output: Counter value: 2
+incrementCounter2() // Output: Counter value: 1
+----
+
+It also allows you to use JavaScript key-value pairs to create objects consisting of "name":"function" pairs, each one of which is encapsulated using a closure into a single object that maintains its own state.
+
+[source, javascript]
+----
+function createCounter() {
+  let count = 0 // Private variable
+  return {
+    increment: function () {
+      count += 1
+      return count
+    },
+    decrement: function () {
+      count -= 1
+      return count
+    },
+    getValue: function () {
+      return count
+    },
+  }
+}
+
+const counter1 = createCounter()
+console.log(counter1.increment()) // 1
+console.log(counter1.increment()) // 2
+const counter2 = createCounter()
+console.log(counter2.increment()) // 1
+console.log(counter2.decrement()) // 0
+----
+
+Lots of closure stuff happening here! 
+First "count" is a private variable that is only available to the "increment," "decrement," and "getValue" functions inside the object.
+Second, the "inner" functions in the "name:function" object are returned from the function, and the functions inside the object are able to access the "count" variable even though the `createCounter` function that created it has finished executing.
+Third, once these objects are created they maintain their own state, so that each object created by the function has its own "count" variable that is separate from the others. 
+And I didn't have to use a single line of Redux!
+
+It is of course possible to do a similar thing in Python using dictionaries:
+
+[source, python]
+----
+def create_counter():
+    count = 0
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+    def decrement():
+        nonlocal count
+        count -= 1
+        return count
+    def get_value():
+        return count
+    return {
+        "increment": increment,
+        "decrement": decrement,
+        "getValue": get_value
+    }
+----
+
+The answer to "what is a closure?"
+All of the above.
+Specifically, a closure is a function that maintains a reference to the variables in the scope in which it was created, even after that scope has finished executing.
+
+If you say, "A closure is an example of scope created using encapsulation," you're not wrong.
+If you say, "The (lexical) scope is defined by the (functional boundaries) curly braces (indents in Python)," you're not wrong.
+If you say, "It's a way to maintain state in a functional programming paradigm," you're not wrong.
+You might need to do a little more explaining along the lines of what's really going on, but you're not wrong, and don't let anyone tell you otherwise.  
+
+=== Anonymous functions
+
+It is possible to define a function without a name, which is then called an "anonymous function."
+This is not meant to be mysterious, it's just that sometimes the name doesn't really add anything useful to the code.
+For instance you interact with strangers all the time without knowing their names.  
+And they don't know yours either.  
+But that stranger likely knows how to do something that you need done, like "Do you have this in red?" or "Can you tell me how to get back on to the highway?"
+
+It's arrow functions and closures that make anonymous functions possible in JavaScript.
+For instance, you may have done something like this in JavaScript:
+
+[source, javascript]
+----
+const myArray = [1, 2, 3, 4, 5]
+
+const doubledArray = myArray.map(function (num) {
+  return num * 2
+})
+console.log(doubledArray) // Output: [2, 4, 6, 8, 10]
+----
+
+That mystery `function` is the anonymous function.  
+It's needed because you have to pass in and return the number you're trying to double.  
+This can also be done with an arrow function:
+
+[source, javascript]
+----
+const myArray = [1, 2, 3, 4, 5]
+const doubledArray = myArray.map((num) => num * 2)
+console.log(doubledArray) // Output: [2, 4, 6, 8, 10]
+----
+
+Be aware of the portability between the one-line and multi-line anonymous functions, which has tripped me up more than once.
+If the arrow function is used without curly braces, the return is implicit, and does not need to be stated.
+You can see that above in `map((num) => num * 2)`, where the return is implicit.
+
+But what if you need to do something a little more complex?
+
+[source, javascript]
+----
+const numArray = [1, 2, 3, 4, 5]
+const nameArray = ["Arlo", "Bao", "Carlos", "Diana", "Eli"]
+
+const result = numArray.map((num, index) => {
+  return {
+    number: num,
+    name: nameArray[index]
+  }
+})
+----
+
+This example still uses an arrow function, but there are now curly braces added because more than one line of code is needed to accomplish the task.  
+Because the curly braces have been added, the implicit `return` goes away, and you will have to explicitly use the `return` keyword to return whatever it is you want to return.  
+
+=== Passing functions to functions
+
+Passing variables to a function is a a pretty simple thing to grasp, but some languages allow you to pass functions to functions.  
+JavaScript treats functions as "first-class citizens" and this is yet another example.  
+
+There are a few reasons you might want to do this, and some of them will be explored further later in this chapter.
+For now I'm just going to cover the basic idea.
+
+Here's an example of passing a function to a function in Python:
+
+[source, python]
+----
+def function_taking_function(func, value):
+    return func(value)
+
+def double(x):
+    return x * 2
+
+def triple(x):
+    return x * 3
+
+result = function_taking_function(double, 5)
+print(result)  # Output: 10
+result = function_taking_function(triple, 5)
+print(result)  # Output: 15
+----
+
+That's hardly the end of it.
+In any language that treats functions as "first-class" you can pass them anywhere you like.
+Building on the example above, here are functions that are stored in an array and then passed to a function.
+
+[source, python]
+----
+def function_taking_function(func, value):
+    return func(value)
+
+def double(x):
+    return x * 2
+
+def triple(x):
+    return x * 3
+
+def quadruple(x):
+    return x * 4
+
+def quintuple(x):
+    return x * 5
+
+function_array = [double, triple, quadruple, quintuple]
+
+for func in function_array:
+    result = function_taking_function(func, 5)
+    print(result)  # Output: 10, 15, 20, 25
+----
+
+If you've never considered this it can be fun to play around with it as an idea.  
+But this is one more of those things where just because you can, doesn't necessarily mean you should.
+Piling functions up and passing them around can quickly make your code tricky to reason about, especially if those functions are returning things.  
+If you adhere to the rule where each function should only be responsible for one thing, if you start storing functions in arrays, passing them to other functions, passing those functions to functions, it sounds like a memory leak waiting to happen.
+
+Play with it at home, absolutely.  
+If you want to do it at work, make sure it's something that is well planned out and has the approval of at least one other developer -- preferably the team lead.
+Don't do it in a interview, unless you're specifically asked to.  
+
 
 === Functions Advanced
 
 === The mystical “this”
 
+`this` really has more to do with object-oriented programming specifically and less with functions in general, but it is a related concept.
+In JavaScript, especially, the two blend together quite a bit.  
+
+In most object-oriented language, `this` can generically be thought of as what a function calls itself.
+Unless you're one of those people that is cool enough to refer to yourself in the third person, ("Dave needs to go get some more coffee...", nah) you likely refer to yourself as "I" or "me."
+And so do I (see what I did there?) refer to myself as "I" or "me."
+That's what `this` is, an objects way of saying "I."
+
+In JavaScript it gets a little bit tricker.
+Because of the way JavaScript handles object-orientatedness, `this` can mean an object calling itself, but it can also refer to the object that is calling the function.
+
+
+
+In the following example, the function is a method of an object, so `this` refers to that same object -- the one that is calling the function:
+
+[source, javascript]
+----
+const obj = {
+  name: "Dave",
+  greet: function() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+};
+obj.greet(); // Output: Hello, my name is Dave
+----
+
+But if a function is created outside of an object, then `this` refers to JavaScripts global object (or `undefined` in strict mode, because, don't do that):
+
+[source, javascript]
+----
+function greet() {
+  console.log(`Hello, my name is ${this.name}`);
+}
+----
+
 === Constructor functions
 
+Like `this,` a constructor also has more to do with OOP than functions in particular, but is also a related concept.  
+A constructor function is a function that helps to set up a class or object in OOP.  
+Here's an example in Java, where the syntax is more clear than it is in most languages:
+
+[source, java]
+----
+public class Robot {
+    private String name;
+    private int age;
+
+    public Robot(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+----
+
+That funny looking function that has the same name as the class definition, `Robot`, is the constructor function.  
+When the class is created, the variables passed in to the constructor function help set up the class variables.
+Multiple robots can be generated like this:
+
+[source, java]
+----
+Robot robot1 = new Robot("Lala", 5);
+Robot robot2 = new Robot("Barney", 10);
+Robot robot3 = new Robot("Peppa", 15);
+----
+
+This works in much the same way as passing variables to a function does, but it only works if a constructor is defined in the first place.
+
 === Generator functions
+
+Generators and iterators are some fancy advanced theory that I have to be honest in saying I have yet to find a use case for.
+That probably has more to do with my own experience than their actual usefulness, and I'm sure they're important in some corner of the programming world.
+
+
+
+You can think of a generator function as a fancy for-loop:
+
+[source, javascript]
+----
+function* generatorFunction() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+const generator = generatorFunction();
+
+console.log(generator.next().value); // Output: 1
+console.log(generator.next().value); // Output: 2
+console.log(generator.next().value); // Output: 3
+----
+
+This generic generator function example tells you pretty much everything you need to know.  
+The syntax involves adding a `*` to the function definition.
+The `yield` keyword is used to store the list of values in the function. 
+The `next()` method is used to get the next value in the list, and the `value` property is used to get the value itself.
+
+The analogy is that of a deli counter at a grocery store, where people take tickets to hold their place in line. 
+The set of glowing red numbers on the wall is the iterator, and the ticket in your hand is the value.
+The `next()` method is the person behind the counter either pulling a string or clicking a remote to increase the number being called.
+
+I'm not trying to throw shade at generators, but I don't really see anything there that can't be done with a `for` or `while` loop.  
+I don't work in big data or with large event streams, which is clearly my own personal failing and nothing a generator function has ever done to me or anyone else.  
+
+If you are asked about these in an interview, I'm going to guess you're there because you already know exactly what they are.  
+
+=== Factory functions
+
+What's better than a function?
+A function that can create other functions!  
+This is the purpose of a factory function.
+Passing different variables to a function is a great way to tweak a function to your liking, but you can also create a function that creates other functions.
+
+You might have a pickle factory, and all pickles are made the same way.
+You wanna pickle?  
+Start with a cucumber, add some vinegar, wait a few months, and you gotta pickle!
+But after a while eating the same pickle is boring, and you might want to branch out.  
+You might want a sweet pickle, a dill pickle, or a spicy pickle.
+
+Here's an example of how you can do this with a factory function in JavaScript:
+
+[source, javascript]
+----
+function createPickle(type) {
+  return {
+    pickleType: type,
+    makePickle: function() {
+      console.log(`Making a ${this.type} pickle!`);
+    }
+  };
+}
+
+const dillPickle = createPickle("dill");
+const sweetPickle = createPickle("sweet");
+const spicyPickle = createPickle("spicy");
+
+dillPickle.makePickle(); // Output: Making a dill pickle!
+sweetPickle.makePickle(); // Output: Making a sweet pickle!
+spicyPickle.makePickle(); // Output: Making a spicy pickle!
+----
+
+
+=== Callback functions
+
+Some functions are meant to be 
 
 === Function chaining
 
 === Side effects and functional programming
 
 === Currying
+
+There's a great photo of me reading Douglas Crockford's "JavaScript: The Good Parts" to my 8-year-old son in a hotel room.
+I was trying to understand all of the new features of JavaScript that all of a sudden made it a "real" programming language, was also called "ECMAScript," contained new and exciting features like "closures," and was being used to build "single-page applications" that were "responsive" and "dynamic."
+Because of this I had taken the book with me on vacation, and my son asked me to read it to him.  
+
+I said, "It's a grown-up book buddy, I really don't think you're gonna like it," but 1) We hadn't brought anything else with us to read and 2) I'm not so sure he cared.  
+The part I was reading was about "currying," which is a way to take a function that takes multiple arguments and turn it into a series of functions that each take a single argument.
+And for a good long time he was able to explain that -- I suspect more because he remembered the exact words without understanding the concept.  
+
+Let's see if I can do a better job this time around, and if you're reading this book and you're 8 you probably don't need my help.  
+
+Currying (named after Haskell Curry, not the spice) is an idea that comes from functional programming and is a way to take a function that takes multiple arguments and turn it into a series of functions that each take a single argument.
+Another way to put that is to take a single function that might perform a lot of tasks and break it down in to a lot of smaller functions that each perform a single task.
+Which is actually a pretty good idea, and for a long time I adhered religiously to to idea that a single function should perform a single task, and only a single task.  
+
+Here's a simple example of currying in Python, same simple example that's given in many other places:
+
+[source, python]
+----
+def add(x, y):
+  return x + y
+
+def add10(x):
+    return add(x, 10)
+
+print(add10(5))
+# Output: 15
+----
+
+In this example, `add10` is a curried function that takes a single argument, `x`, and returns the result of `add(x, 10)`.
+Which makes no sense whatsoever, because why couldn't you just do (x + 10) and be done with it.  
+
+Let me see if I can come up with a more exemplary example, as all good examples are.
+
+////
+https://claude.site/artifacts/158e3a9b-af40-4087-9ac0-8d1a52015e90
+////
+
+.Functional Programming
+****
+Functional programming is a term that was quite trendy for a while, and it's a very useful concept to understand.
+It's yet another programming paradigm, like "object-oriented," and while it's certainly not the only way to program or the only thing you should ever consider, it has some useful ideas that will definitely make you a better coder.  
+
+The idea of functional programming is simply that everything is a function.
+All of the code in your program is either data, or a function to act on that data.
+Nothing is "imperative," meaning that you don't tell the computer what to do, you tell it what you want done and it figures out how to do it.
+The challenge is while that's an easy concept to (pretend to) understand, it's quite a bit more challenging to actually put in into practice.  
+
+At the heart of the functions in functional programming is the idea that functions should be "pure," meaning that they don't have side effects. 
+A side effect is code that changes something outside of the function -- which should not be possible because there should be no "outside" of the function.
+
+This takes a lot of tools out of the box, specifically: global variables, data mutation, and loops.
+It also means that you can't use recursion, because recursion is a side effect.
+
+The idea caught on when it was realized that JavaScript had a largish state management problem, and lead to the implementation of things like Redux.  
+Over the past few years, however, we've all become a lot more sensible about state, and new libraries like React Hooks and Jotai have made it a lot easier to manage state more sensibly.
+
+It's worth reading about and trying to get your head around at least the basics, and trying to solve programming problems like "FizzBuzz" in a purely functional programming language like Lisp or Haskell will certainly give you a whole new perspective on problem solving in programming -- and I mean that in a good way.
+****
+
+
 
 === Higher Order Functions
 
