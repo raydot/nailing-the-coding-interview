@@ -10,7 +10,7 @@ Given how useful trees are, and the extent to which they can separate the sheep 
 === Trees Definition
 
 We've already come across trees in two different contexts in this book.
-I discussed them in chapter 4 when I introduces the binary search algorithm, and I discussed them in 7 in the context of heaps.
+I discussed them in chapter 4 when I introduced the binary search algorithm, and I discussed them in 7 in the context of heaps.
 
 === Building Intuition: What are trees used for?
 
@@ -22,9 +22,23 @@ That's the tree structure in a nutshell.
 
 PICTURE OF DOM AS TREE TK
 
-=== Trees and heaps
 
-=== Reasoning about trees
+=== Reasoning about Trees
+
+A tree most people are familiar with is a tournament bracket.  
+A tournament bracket lists all of the teams (or players) in a tournament and their match-ups.
+When each round is completed the winner moves on the the next round.
+
+// IMAGE OF TOURNAMENT BRACKET TK
+
+The reason I mention a tournament bracket is because it makes it easy to see the relationship between trees and logarithms.
+Assuming the tournament is "single-elimination", meaning each team has to win its match or be eliminated, the number of rounds in the tournament is equal to the logarithm of the number of teams.  
+
+If you take the "sweet sixteen" round of a tournament, a round where there are 16 teams left, the logarithm of 16 is 4.
+This means there are 4 rounds left in the tournament.
+This is illustrated by following the path from the "Happy Crocodiles" all the way to the championship game.
+
+// IMAGE OF TOURNAMENT WITH HIGHLIGHTED PATH TK
 
 === Tree Operations
 

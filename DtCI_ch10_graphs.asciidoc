@@ -2,17 +2,194 @@
 
 == Graphs
 
-After reading this chapter, the reader should understand the definition of a hash, a tree, and a graph, and what each is used for in programming.   The reader will be given some idea of what kinds of questions to expect on a coding test about these data structures and strategies for solving them.
+The graph is the data structure most single-handedly responsible for the creation of tech billionaires.  
+Graphs lie the core of social networks, search engines, map applications, dating apps, recommendation engines, and even the web itself.
+Graphs are a simple concept with myriad uses.
+In fact, when I was a boy, my grandmother embroidered me a pillow that said "Master graphs, and you'll never want for work."
+And she didn't even own a computer!
 
 === Graph Definition
 
-=== Building Intuition: What are graphs used for?
+Graphs are used to represent relationships between things.  
+In computer science, a graph is represented by nodes and edges, sometimes also called vertices (singular: vertex) and arcs.
+Nodes are the points in the graphs, the things that are related.
+Edges are the connections between the nodes, the thing that brings them together.  
+
+The simplest example is that everyone has a mother and a father.
+But they done become mothers or fathers until they have children.  
+In a human family tree, the nodes are the people and the edges are what unites the people.  
+People can be connected in many ways, some temporary and some permanent.  
+
+Outside of immediate family, people can alway be connected as friends, classmates, or co-workers.
+Some people might have strong connections in this regard, strong enough that they be "married" or even "bffs."
+Some people might even have negative connections, like an enemy or an ex.
+
+I was born, so I have a mother and a father.
+(As of the time of this writing, there's not really any other way to do that.)
+But I was also adopted at birth.
+I would not recognize my birth mother if she came to the door and tried to sell me a vacuum cleaner.  
+I do know the mother and father who raised me, and I have a very close connection to them, but not a biological one. 
+In fact, the only biological relative of mine that I have ever met is my son.
+
+Here is what all of that crazy inter-personal complication might look like as a graph:
+
+// IMAGE OF CRAZY INTER-PERSONAL COMPLICATION AS GRAPH TK
+
+Notice that some of these relationships two way, and some are one-way.  
+My son is my son, but I'm not also his son.
+My BFF is my BFF, but I'm not his BFF (how sad!).
+But my brother is my brother, and I'm his brother.
+My wife is my spouse, and I'm also her spouse.
+
+Also notice that some connections are stronger than others.  
+My connection to my son is inviolable, but my connection to my BFF is not.
+My connection to my brother is strong, but not as strong as my connection to my son.
+My connection to my birth mother is pretty weak.
+
+In a graph, the strength of the connection is called the "weight" of the edge, which is a very important concept to which I shall return. 
+
+=== Building Intuition: When to use a graph?
+
+At the level for which this book is intended, if you are asked about using a graph during a coding interview, it's going to be for a very specific reason.  
+You're either going to be interviewing for a job where graphs are used a lot, or the interviewer is going to be testing the high-end of your knowledge.
+If it's the former, you're likely not learning anything new in this chapter.
+It it's the latter, expect that the interviewer is not going to expect a deep dive.  
+I can't guarantee any of that, of course, but I'd be willing to give you odds I'm right.  
+
+One suggestion I have: stick to the general.
+Unless you're absolutely confident about your knowledge of graphs, paint the picture with a very broad brushstroke.  
+Start with the definitions and show understanding.
+
+Of course, if there's a coding problem that comes up and you know the answer is a graph and the code is dancing before your eyes as you respond, hey, go for it!
 
 === Graph data structures
 
-=== Arrays
+This next section will cover the representation of graphs in code.
+Most languages do not come with a built-in "graph" keyword or data structure, and so they have to be built using other data structures.
+Graphs are primarily represented in code in one of two ways, as a matrix, or as an adjacency list.  
+I'm going to start with the matrix first because even though it can present more of a challenge to manipulate, it's a lot more intuitive to look at.
 
-=== Matrices	
+.Back to math class
+****
+Matrices are another subject I slept right through in my high-school math classes.
+I could not, for the life of me, figure out why it mattered at all for me to understand them.
+A matrix is nothing more than a rectangular array of numbers.  
+A spreadsheet is a matrix. 
+For that matter, so is a tic-tac-toe board.
+Mathematicians have come up with very clever ways to manipulate matrices, and that's all the boring stuff I slept through.  
+
+Never fear, because now that I'm older and at least a little bit wiser, I can see matrix addition and multiplication for what it is: a series of algorithms that can be used to manipulate matrices.
+
+You might be programming a game that features a cool alien space ship that needs to move around the screen.  
+The graphic representation is a matrix of pixels.  
+You could come up with graphic representations of the ship at every potential angle of representation, but if you know how to move matrices around, you can just rotate the matrix of pixels instead.
+
+For a programmer, just learning some basic matrix math can take you a long way in terms of manipulating matrices, which means manipulating graphics, graphs, data, and all kinds of other things.  
+
+Knowing matrix math also brings all kinds of interesting algorithmic treatments into play.
+If you are trying to figure out whether it's possible in a graph to move from point A to point B, you can use matrix math to do that.
+You don't have to just put a finger down and trace the path.  
+
+****
+
+Matrices (plural for matrix) are commonly represented as two-dimensional arrays.
+The should not come as too much of a surprise.  
+
+// DIAGRAM OF MATRIX TK
+
+A two-dimensional array is a collection of arrays.
+all of the values that run across are called "rows" and all of the values that run down are called "columns."
+For example, consider this matrix:
+
+[source, python]
+----
+mystery_matrix = [
+    [    0,     1,    1,    0,    0,    0  ],  
+    [    0,     0,    1,    0,    0,    0  ],  
+    [    0,     0,    0,    1,    1,    0  ],  
+    [    0,     0,    0,    0,    1,    1  ],  
+    [    0,     0,    0,    0,    0,    0  ],  
+    [    0,     0,    0,    0,    0,    0  ]  
+]
+----
+
+Think for a moment about wha this matrix might represent.
+It could be the walls to a maze in a video game.  
+It could be a graphic representation of a bolt of lightning. 
+It could be a social media or recommendation graph.
+
+It's actually food web, or a diagram of "who eats whom" in an arctic food chain.
+Here is is again with some comments added:
+
+[source, python]
+----
+# Food Web Matrix (Binary Relationships)
+# 1 = Species A (row) is eaten by Species B (column) 
+# 0 = No direct predation
+food_web = [
+    #  Algae  Krill  Fish  Seal  Orca  Bear
+    [    0,     1,    1,    0,    0,    0  ],  # Algae    - Primary producer 
+    [    0,     0,    1,    0,    0,    0  ],  # Krill    - Primary consumer
+    [    0,     0,    0,    1,    1,    0  ],  # Fish     - Secondary consumer
+    [    0,     0,    0,    0,    1,    1  ],  # Seal     - Tertiary consumer
+    [    0,     0,    0,    0,    0,    0  ],  # Orca     - Apex predator
+    [    0,     0,    0,    0,    0,    0  ]   # Bear     - Competes with orcas for seals
+]
+----
+
+Rows in a matrix are what goes across, from left to right.  
+The first row in this matrix is also the first array, `[0, 1, 1, 0, 0, 0]`.
+The row represents algae, or, more specifically, what eats algae.
+
+Columns in a matrix are what go up and down, from top to bottom.  
+The first column in this matrix is the value of the first item in each array in the matrix, `[0, 0, 0, 0, 0, 0]`.  This row also represents algae, or, more specifically, what algae eats.
+
+Don't forget that this is a representation of a matrix in code form.  
+If this was being used in a math class or on a spreadsheet, there would be no "arrays" or comma separation involved.  
+This is what is known as "matrix notation" of a graph, in code form.
+Yep, it's a graph and a matrix and a 2d array and a representation of a food web.  
+All of that, all at the same time.
+Spend a moment pondering that, let it wash over you in waves, enjoy it.
+
+That's the matrix and more intuitive representation of a graph, but if you've ever worked with 2D arrays you know they can quickly become unwieldy.
+The adjacency list is a more efficient way to represent a graph, and it is the most common way to do so in code.
+Here is an example of the food web matrix as an adjacency list:
+
+[source, python]
+----
+# Food Web Adjacency List
+food_web = {
+    'Algae': ['Krill', 'Fish'],
+    'Krill': ['Fish'],
+    'Fish': ['Seal', 'Orca'],
+    'Seal': ['Orca', 'Bear'],
+    'Orca': [],
+    'Bear': []
+}
+----
+
+Instead of a 2D array, the adjacency list is a dictionary, or hash table.  
+All of the species are listed as keys, with the values being an array of the species that eat them.  
+This form provides two immediate advantages over the matrix form:
+
+1. It's easier to work with, since items can be accessed by keys instead of grid coordinates.
+
+2. It's more efficient, since it only stores the relationships that exist.  No need for a "0" value -- if there is no relationship then it's simply not on the list.  
+
+For the rest of this chapter we will only be dealing with adjacency lists.
+The matrix form is still important and I will still reference it, but all of the code will be written for adjacency lists.
+
++=== Arrays+
+
++=== Matrices+
+
+=== Graph Properties
+
+==== Graph Directedness
+
+==== Ordinality
+
+==== Cyclicity
 
 === Reasoning about graphs
 
@@ -26,10 +203,14 @@ After reading this chapter, the reader should understand the definition of a has
 
 === Example Questions
 
-=== Closest path
+==== The Traveling Salesman Problem
 
-=== Furthest path
+==== Shortest path
 
-=== Knight walk
+==== Longest path
 
-=== Flood fill
+==== Fastest Path
+
+==== Knight walk
+
+==== Flood fill

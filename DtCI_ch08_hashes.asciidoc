@@ -4,7 +4,7 @@
 == Hashes
 
 Welcome to the hashes chapter!
-In this chapter we will talk about hashes and their two primary uses: data storage and encryption.
+In this chapter I will talk about hashes, especially how to construct them with some examples of their primary uses.
 We will also discuss some common interview questions, of course!
 I'll begin the discussion of hashes with an examination of something most programmers are already familiar with, and that's key-value pairs.
 
@@ -488,8 +488,8 @@ print(hex_dig)
 ----
 
 I keep saying "hash!" and "hashing algorithm!" but what does that mean in the context of MD5, exactly?
-Recently I came across a clever example of it.
-Someone posted a advertisement claiming they found a lost wallet.
+Recently I came across a clever example of it online.
+Someone posted a photo of a flyer trying to return a lost wallet.
 The advertisement said "If this is your wallet, please call the following number:"
 
 Add this ->             81562314
