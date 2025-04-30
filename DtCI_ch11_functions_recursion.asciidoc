@@ -26,7 +26,7 @@ In one of those funny ways about how my particular brain works, I could not unde
 In understood what `x` was, but what was `f`?
 What I failed to understand is that `f` was not a variable but the notation for a function, which is something that takes a value (or multiple values) and returns a result (or results) based on a computation (or computations) applied to that value (or values).
 
-I'm being a bit smug with the pluralization, expecially since the way you probably worked with mathematical functions was with a single value, but as a programmer, one value usually just doesn't get the job done.  
+I'm being a bit smug with the pluralization, especially since the way you probably worked with mathematical functions was with a single value, but as a programmer, one value usually just doesn't get the job done.  
 
 So let me expand my definition to now include programming.
 In programming a function is a block of code that takes a value (or values), transforms them according to a set of rules, and returns the result.
@@ -652,11 +652,127 @@ spicyPickle.makePickle(); // Output: Making a spicy pickle!
 
 === Callback functions
 
-Some functions are meant to be 
+Some functions are meant to be called specifically when other functions complete.
+Functions called "callback functions" are passed in to functions to be called when that function is complete.
+
+One of the most prevalent examples of this is the one used to illustrate `setTimeout()` in JavaScript.  
+`setTimeout()` is a function that takes two arguments: a function to be called, and a value of how long to wait to call it.  
+
+[source, javascript]
+----
+function myCallback() {
+  console.log("Another ten seconds gone!");
+}
+
+setTimeout(myCallback, 10000);
+----
+
+This code will print the phrase "Another ten seconds gone!" to the console after 10 seconds.
+
+Callback functions are very useful for timing events, but they are also an invaluable tool for asynchronous programming.  
+Here is a JavaScript example of using a callback function to wait until data is returned from an API.  
+This is great because instead of having to "poll" repeatedly to see if data has been returned from an API, you can just hand the task over to JavaScript and count on it to let you know either when something's complete or when it's never going to complete.
+
+[source, javascript]
+----
+async function fetchData() {
+  // Replace this with your actual API call
+  const response = await fetch('https://some.api.com/stuff-you-want');
+  const data = await response.json();
+  return data;
+}
+
+// Use fetchData as a callback
+async function main() {
+  try {
+    const result = await fetchData();
+    console.log(result);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+main();
+----
 
 === Function chaining
 
+
+
+
 === Side effects and functional programming
+
+Entire books have been written on functional programming, and I suggest you read some of them.
+The main idea of functional programming is that there are only two things that belong in a program: data, and functions to act on that data.
+In functional programming functions should be "pure," meaning that they don't have side effects.
+
+This is a relatively easy paradigm to understand, but it's a bit more of a challenge to master.
+
+A "side effect" is data that is changed outside of the function.  
+All a function should be expected to do is take data, modify data, and return the result.  
+If a function is changing data in the global scope, for instance, that's a side effect.
+Here is an example of what that means:
+
+[source, javascript]
+----
+let globalVariable = 0
+function incrementGlobal() {
+  globalVariable += 1
+}
+incrementGlobal()
+----
+
+Of course that would never happen because EVERYONE knows global variables are bad, right?  
+I mean, my gosh, I wouldn't be caught dead coding with one.  
+Now that my secret is safe, `incrementGlobal()` is function that creates a side effect by changing the value of `globalVariable`, which is scoped outside of the function.
+
+What's the big deal?  
+What if another function comes along and decides to do this:
+
+[source, javascript]
+----
+let globalVariable = 0
+function incrementGlobalMore() {
+  globalVariable += 2
+}
+----
+
+Good luck keeping track of which function is changing the value of `globalVariable`, and when.  
+
+In functional programming the only way to change the value of a variable is to pass that variable to a function, and then return the result, like so:
+
+[source, javascript]
+----
+let globalVariable = 0
+function incrementGlobal(value) {
+  return value + 1
+}
+globalVariable = incrementGlobal(globalVariable)
+----
+
+The difference in this example is that `globalVariable` is not changed inside the function.  
+When `incrementGlobal()` is called, there's no worry that something somewhere else is going to be going the same thing to `globalVariable` at the same time.
+
+One great thing about functional programming is it's embrace of three incredibly useful functions: `map()`, `filter()`, and `reduce()`.
+All three of these functions take a function as an argument, and return new data -- usually in the form of an array -- after running the passed function against the data that's passed in with it.  
+
+For instance, here is a use of filter to remove all of the green M&M's from a bowl...um...array.
+
+[source, javascript]
+----
+const mAndMs = [
+  "red", "brown", "green", "yellow", "blue", "green", "red", "brown", "green"
+]
+const noGreens = mAndMs.filter((m) => m !== "green")
+
+console.log(noGreens)
+// Output: ["red", "brown", "yellow", "blue", "red", "brown"]
+----
+
+In this example the function is passed in as an arrow function, the function being the logical condition `m !== "green"`.
+
+
+
 
 === Currying
 
@@ -723,6 +839,28 @@ It's worth reading about and trying to get your head around at least the basics,
 
 === Higher Order Functions
 
+Higher order functions are functions that return other functions as their result.  
+Higher order functions were all the rage in React until the introduction of React Hooks, which just encapsulated what people were doing already with higher order functions.
+
+Here's a simple example of a higher order function in JavaScript:
+[source, javascript]
+----
+function higherOrderFunction() {
+  return function innerFunction() {
+    console.log("Hello from the inner function!");
+  };
+}
+const innerFunc = higherOrderFunction();
+----
+
+This is an incredibly useful concept because it can be used to create functions "on the fly," that are much more flexible and usable than single purpose functions.  
+
+Like most things in programming, this should be used in moderation.  
+
+If you find yourself building a 100 line function that returns a 1000 line function, it's probably a good time to question both your life and architecture choices.
+
+
+
 === Building Intuition: Functions Ideas
 
 === Functions and state
@@ -731,11 +869,9 @@ It's worth reading about and trying to get your head around at least the basics,
 
 === Function composition
 
-=== Example Questions
 
-==== Swap two numbers in place
 
-==== Refactor this function
+
 
 ==== “Program to an interface, not an implementation”
 
@@ -768,22 +904,122 @@ Understanding how to break a problem down in the way that's required to come up 
 That's _why_ it's focused on so much in academia and in coding interviews -- it's a way to show an advanced understanding of ways to reason about code.
 
 
-
-
 === Introduction to Recursion
 
-=== The Elements of Recursion
+Like functional programming, recursion is another programming paradigm that takes a moment to learn, and a lifetime to master. 
+The idea of recursion is simple.
+A recursive function is a function that calls itself.  
+That's all there is to it.  
+Why would a function want to call itself?
+Believe it or not there are lots of reasons, the primary one being that recursion can be used to break a larger problem down into smaller, more manageable pieces.
 
-=== Base Case	
+An example I read somewhere a while ago was that of the TV news, if it even still exists by the time this book comes out.
+On the news there will usually be an "anchor" who sits in the studio and reports all of the main news stories at a high level.
 
-=== Recursive Case
+When it comes time to report the weather, the anchor will turn over reporting duties to the weather reporter, whose job is only to report on the weather-related stories of the day.  
+But wait, a terrible tornado has blown over the town's most prominent landmark! 
+The weather reporter pulls up the doppler radar that shows a terrible storm passing over the center of town, but because a newscaster can't be in two places at once the reporting function is then passed to an on scene reporter who has all of the details.  
+But wait again! The on scene reporter found a teenager who captured the whole thing with an iPhone five minutes before the broadcast started, and so now the reporting is passed to the control room that then plays back video of the event as it was happening live.
+
+When the video concludes, the control "stack" can be said to "unwind."
+The control room will turn back to the on-scene reporter, who will make some sensational comments and then end with, "And now back to the weather room."
+The weather reporter will make some goofy comment that includes a pun and clear skies ahead and then say, "And now back to the anchor desk."
+The anchor will thank everyone for their amazing work and then turn to the next story.   
+
+The large problem of providing real-time information that covers various aspect of a single subject, is broken down into smaller and smaller chunks by passing control down the hierarchy of reporters, until the most detailed, essential piece of information is shown, and then control passed back up the hierarchy.
+
+Same basic idea as recursion, as will be examined.  
+
+
+==== The Elements of Recursion
+
+There are a few basic elements to recursion that are important to understand.  
+They're important to understand because they will help to reason about whether or not a problem can be solved using recursion.  
+
+These three elements are:
+1. Base case
+2. Recursive case
+3. Termination / Unwinding the stack
+
+Each case will be defined here, but might not make sense without an example, so just focus on the general idea for now.
+
+==== Base Case	
+
+The base case is the simplest case of the overall problem that can be solved without recursion.
+In the example of the TV news, the base case is the anchor desk.
+The anchor desk can report the news without cutting away to anyone else further down the hierarchy.
+
+==== Recursive Case
+
+The recursive case the aspect of the problem that can be repeatedly broken down.
+In the example of the TV news, the recursive case is the reporting.  
+This can be handed off to other reporters with different areas of expertise or found in different locations.
+
+==== Termination / Unwinding the Stack
+
+The termination case is the recursion reaching the end of the road.
+In the TV news example once the video was shown, there was nothing left to report.  
+The end of the line was reached, and the hierarchy of reporters was unwound back to the anchor desk.
+In programming terms, unwinding the stack means terminating each recursive call and returning to the previous function in the stack until the original function is reached and the result returned.
+
+
+==== Example
+
+The example everyone always ever gives with discussing recursion is the Fibonacci sequence.  
+The Fibonacci sequence is a series of numbers in which each number is the sum of the two that proceeded it, starting with 0 and 1.
+
+The first numbers in the Fibonacci sequence are:
+
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...etc.
+
+The Fibonacci sequence might seem silly, but it has the magical ability to show up pretty much everywhere in nature, and can be used to describe the growth of anything that grows in a spiral.  
+This includes such wonderful things as pinecones, conch shells, romesco broccoli, and even parts of the human body.
+
+Why the Fibonacci sequence is relevant to recursion is because the Fibonacci numbers can be calculated recursively.  
+The Fibonacci sequence can be defined recursively as follows:
+
+1. The first number in the sequence is 0
+2. The second number in the sequence is 1
+3. The nth number in the sequence is the sum of the (n-1)th and (n-2)th numbers in the sequence.
+
+Steps one and two are straightforward.
+What step three means is simply that any number in the Fibonacci sequence is the sum of the number before it and the number before that.  
+This leads us to the recursive case of computing the Fibonacci sequence.  
+In the above snippet, 55 is the sum of the two numbers before it, 34 and 21.
+But how did we get to 35?  
+It was the sum of two numbers before it, 21 and 13.
+13 is the sum of 8 and 5, and so on, which brings us all the way back to the base case of 0 and 1.  
+0 and 1 are not defined with recursion, they're the two original numbers that helped to generate everything that follows.
+Once the base case it hit, the stack unwinds, and the next sequence in the Fibonacci sequence is returned.
+
+This is what it looks like in Python:
+
+[source, python]
+----
+def fibonacci(n):
+    if n <= 0: # There are no negative fibonacci numbers
+        return 0
+    elif n == 1: # First number in sequence, no recursion needed
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2) # Recursion!
+
+print(fibonacci(10))  # Output: 55
+----
+
+This straightforward example hides an awful lot of complexity, but it's a great place to get started.
+One thing to consider is that because every number in the Fibonacci stack has to be calculated fresh each time it's run through, generating the Fibonacci sequence recursively runs in O(2^n) time.
+Slow!  
+
 
 === Reasoning about Recursion
 
 Back in chapter 4, we discussed permutations, and I showed you a simple iterative solution for coming up with all the combinations of a set of items in an array.
 Then in chapter 6, we discussed stacks and queues, and I showed you how you can use one to more effectively solve the permutations problem.
 Now we're in chapter 11, and it's time to discuss how to use recursion to generate every combination of items in an array.
+
 First, the code:
+
 [source, python]
 ----
 def permute(arr):
@@ -818,9 +1054,8 @@ def _bubble_up(self, index):
         parent = self.get_parent(current)
 ----
 
-
-
-It stands to reason that once an item has been bubbled up, if it's larger than it's parent it can simply be bubbled up again.  
+It stands to reason that once an item has been bubbled up, if it's larger than its parent it can simply be bubbled up again.
+That sounds like a job for recursion!  
 In this example, the while loop is replaced by a recursive call to `_bubble_up`:
 
 [source,python]
@@ -836,9 +1071,22 @@ def _bubble_up(self, index):
 
 ==== When you (might) have a recursive pattern
 
-==== When is it time to use recursion
+The best way to determine if a problem can be solved recursively is to figure whether the problem can be broken down into smaller problems.
+That's good advice for any problem, but when it comes to recursion if you can't see that bigger picture, all the code in the world is not going to get you across the finish line.  
+
+Another note: it takes practice.
+When I first learned about recursion I saw it everywhere.
+This dog's wagging tail?
+Recursion!
+This bowl of soup?
+Recursion!
+Except it wasn't true in either case.  
+
+As I began to work more with recursion I began to get a better sense of what the pattern entailed, but it took practice and really trying to get a sense of all of the pieces of the puzzle.
+
 
 ==== Don’t paint yourself into a corner!
+
 
 === Example Questions
 
@@ -849,4 +1097,10 @@ def _bubble_up(self, index):
 ==== Making Change
 
 ==== Reversing a String
+
+=== Example Questions
+
+==== Swap two numbers in place
+
+==== Refactor this function
 

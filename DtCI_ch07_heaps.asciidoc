@@ -176,7 +176,7 @@ As always, the new value is added to the end of the heap, but now the heap is cl
 
 Fortunately, there is a simple way to fix this.
 After adding a value to the end of a heap it is necessary to "bubble up" the value to its correct position.
-(I didn't make up the term "bubble up," but I drank a lot of it when I was a kid.)
+(I didn't make up the term "Bubble Up," but I drank a lot of it when I was a kid.)
 
 The steps involved in bubbling up a value are:
 
