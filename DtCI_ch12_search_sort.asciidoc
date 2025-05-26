@@ -2,25 +2,30 @@
 
 == Search and Sort
 
-
-
 After reading this chapter, the reader should know the basics of search and sort algorithms, how to reason about search and algorithms, and general guidelines for choosing the right search and/or sort algorithm to use to solve the problems that might arise in a coding interview.  This chapter will build on ideas presented in earlier chapters.
+
+While there will be some new concepts introduced in this chapter, my goal here is to help you build intuition about search and sort as concepts.  
+There are really a lot of problems that can be solved with search and sort and understand both as a concept will make you a more skilled problem solver in general.
+
+// Or maybe not.  That might be a bit much for the book.
 
 
 
 === Search
 
-=== What does “search” mean?
 
-=== How is search used
 
-=== Why is search important
+==== What does “search” mean?
 
-=== Building Intuition: Reasoning about Search 
+==== How is search used?
+
+==== Why is search important?
+
+==== Building Intuition: Reasoning about Search 
 
 === Types of search
 
-=== Linear search
+==== Linear search
 
 ==== Binary Search
 
@@ -38,15 +43,15 @@ After reading this chapter, the reader should know the basics of search and sort
 
 === Sort
 
-=== What does “sort” mean?
+==== What does “sort” mean?
 
-=== How is sort used?
+==== How is sort used?
 
-=== Why sort is important to understand
+==== Why sort is important to understand
 
-=== Building Intuition: Reasoning about Sort
+==== Building Intuition: Reasoning about Sort
 
-==== Types of sort
+=== Types of sort
 
 ==== Insertion sort
 

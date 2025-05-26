@@ -179,31 +179,109 @@ This form provides two immediate advantages over the matrix form:
 For the rest of this chapter we will only be dealing with adjacency lists.
 The matrix form is still important and I will still reference it, but all of the code will be written for adjacency lists.
 
-+=== Arrays+
-
-+=== Matrices+
 
 === Graph Properties
 
+There are a few basic terms that will be used throughout this chapter to describe the properties of graphs.  
+There are more, but these are the most common and the most important.  
+
 ==== Graph Directedness
+
+Graphs can be described as either "directed" or "undirected."
+In a directed graph the edges have a direction, and in an undirected graph, they don't.  
+That's a distinction with a very big difference, and it's important to understand.
+
+<Image of directed vs undirected graph TK>
+
+The family tree graph is a directed graph.  
+In a family tree graph the edges are directed from older generations to younger, from parents to children, from ancestors to descendants.
+It's literally impossible for the graph to flow the other way.  
+The son will never be the father of his father, and the daughter will never be the mother of her mother.
+It just can't happen.  
+
+An example of an undirected graph is a social network.  
+Frank will be friends with Ben, and Ben will be friends with Frank.
+There is no "direction" to this friendship, it can go either way.  
+In a social network, therefore, the edges are undirected.  
+(Yes, there are certainly such things as "one-sided" friendships, and we'll talk about that a little later in the chapter, but for now we're talking about normal, healthy, bi-directional friendships.)
 
 ==== Ordinality
 
+Graph ordinality is a measure of how many edges are connected to a node.  
+While most graphs will have some kind of very high upper limit on the number of edges that can be connected to a single node, in some graphs the limit might be small.  
+It's unusual, for instance, for a single intersection a city to be connected to more than four roads.  
+It's unusual (although not impossible) for a child to have more than two parents.
+Most people have only one spouse, one best friend, and one mother.  
+
+<Diagram of graph with ordinality TK>
+
+Ordinality might also be called "degree," and it's an important concept that we will return to later in the chapter.
+
 ==== Cyclicity
+
+In a graph a "cycle" is a path that starts and ends at the same node.  
+This could be as simple as a node that points back to itself, like an escalator or a revolving door, or it could be a complex path through hundreds or even thousands of nodes, but it always ends up at the same node where it started.
+
+A graph that contains a cycle is called a "cyclic graph," and a graph that does not contain a cycle is called an "acyclic graph."
+A tree is an example of an acyclic graph, and a family tree is a good example of such a tree.
+Children do not return back to become their parents, for instance.
+
+(Image of cyclic vs acyclic graph TK)
+
+==== Weight
+
+Remember when I mentioned "one-sided" friendships?
+In a social network, some friendships are stronger than others.
+I have some people who have been my friends for decades, and I have some friends who I have never even met in person.
+To indicated the strength of a friendship I might assign a "weight" to the edge that connects the two nodes.
+The weight of an edge is a measure of the strength of the relationship between the two nodes.
+
+In a family tree, the weight of the edge might indicate whether a connection is by blood or by marriage.  
+Or maybe how close one relative is to another by blood.
+In a city map, the weight of an edge might be used to indicate traffic conditions, the number of lanes or speed limits on a road, or even the number of traffic lights.
+In a social network the weight of an edge might indicate the strength of a friendship.
+You might be friends with a celebrity, and maybe you've seen all of their movies and have their poster on your wall, but that doesn't make you their friend in real life.  
+The weight of the edge between you and the celebrity might be very high, but the weight of the edge between the celebrity and you will almost certainly be low.
 
 === Reasoning about graphs
 
-=== Depth First Graph
+=== Types of graphs
 
-=== Breadth First Graph
+==== Depth First Graph
 
-=== Weighted Graph
+==== Breadth First Graph
+
+==== Weighted Graph
 
 === Dijkstra’s algorithm
 
+I have to open this chapter by pointing out that Dijkstra's algorithm was not invented by Lenny Dykstra.  
+He may have batted .355 for the Phillies in 1990 but he was certainly no Moe Berg.  
+(I included that joke for the ten people who will get it and I will stand by it for as long as I draw breath.)
+
+He also spelled his last name different than Esther Dijkstra, the Dutch computer scientist who actually did invent the algorithm.
+
+
 === Example Questions
 
-==== The Traveling Salesman Problem
+==== The Königsberg Bridge / Traveling Salesman Problems
+
+While these are unlikely to come up in a coding interview, The Königsberg Bridge and Traveling Salesman problems are graph theory classics, and can be used to explain a lot of graph theory concepts.
+
+The Königsberg Bridge problem was of particular interest to Leonhard Euler (rhymes with "boiler," and not "ruler"), a Swiss mathematician who lived in the 18th century.  Euler was one of these mathematicians who was so brilliant that he was able to solve problems that no one else could even understand, and in some cases many people still can't understand.
+
+<Image of the Königsberg Bridge problem TK>
+
+It's a simple problem, really.  
+Given this map of the city of Königsberg, can you find a path across all seven of Köenigsberg's bridges without crossing any of them more than once?
+
+You can't, but explaining exactly why, mathematically, is a little more difficult.
+
+
+
+
+
+
 
 ==== Shortest path
 

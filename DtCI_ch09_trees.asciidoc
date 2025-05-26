@@ -634,16 +634,60 @@ If you want to build your own custom auto-complete algorithm for your web site, 
 
 === Example Questions
 
+==== Balancing trees
+
+I said earlier in the chapter that binary search trees are self-balancing, but that's a bit of an oversimplification two reasons.
+First of all, binary search trees are only self-balancing if they're constructed in a way that maintains the self-balancing properties.
+This construction has to extend to the insertion and deletion of nodes, and all that might entail in terms of moving nodes around.
+The second reason is that I chose binary search trees because they're both widely used and also because they're among the easiest trees to construct and understand.  
+
+While not only binary search trees but other types of trees like red and black trees and AVL trees are self-balancing, there are other types of trees that are not.
+My first question for you is: Why? 
+What could the possible advantage be to using a tree that is not self-balancing?
+
+My second question is: How would you go about balancing a tree that is not self-balancing, should it be required?
+This is a concept that's been covered in one way way or another  in earlier chapters, and so I'm going not going to provide the answer here.  
+
+The hint I'll give it to consider the chapter on heaps and the upcoming chapter on graphs.  
+If you're still stuck, have a look at the AI section at the end of this chapter and see if what's suggested there can help you come up with a solution.
+
+
 ==== Finding height of tree
 
 Write an algorithm to find the height of a binary tree.
+This one sounds complicated, but it's actually pretty simple.  
+Remember that the height of a tree is the number of edges from the root node to the furthest leaf node.
+I recommend you try to write it yourself before looking at the solution below, but I'll give you a hint: the solution uses recursion.
+
+[source,python]
+----
+def find_height(node):
+    if node is None:
+        return -1  # Return -1 for null nodes to count edges correctly
+    left_height = find_height(node.left)
+    right_height = find_height(node.right)
+    return 1 + max(left_height, right_height)
+----
 
 ==== Tree longest path
 
 Write an algorithm to find the longest path in a binary tree.
+If you've found the height of a tree then you're not too far off from finding the longest path.  
 
 
 ==== Merging trees
 
 Write an algorithm to merge two binary trees.
 Hint: We did this in chapter 7 with heaps, and the same principles apply here.
+
+=== Using AI to Study Trees
+
+Not so long ago, or so it seems, I was following a computer science tutorial on a fairly well-known online learning platform that  primarily specializes in mathematics.  
+I already knew a decent amount about trees, but I'm a big fan at getting multiple takes on the same topic, so I followed the tutorial.  
+At the end, as a "stretch goal," the chapter question was "Write an algorithm that can draw a tree."
+
+In these days of AI that seems a lot easier than it was when I was asked.
+My suggestion is to use AI to explore trees visually.  
+Start with a single tree visualization algorithm, but expand from there to explore some of the algorithms laid out in this chapter.  
+Create illustrations of insertion, deletion, traversal, etc., etc.
+Try to do this in a way that allows you to play around with the algorithms as discussed, and see if you can talk AI into helping you come up with some ideas of your own.  

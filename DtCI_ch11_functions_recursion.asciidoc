@@ -697,7 +697,150 @@ main();
 
 === Function chaining
 
+Ah jQuery, who remembers jQuery?
+For a brief, shining moment in the history of web development, jQuery was tha Alpha and the Omega, the All and the Everything, the only true way to write JavaScript.  
+It looked a little funny at first, but once you got used to it you could bask in the glory of function chaining.  
 
+Function chaining is a way to call multiple functions from a single line of code in a way that allows each function to operate on the result of the function or functions that came before it.  
+
+For instance, in jQuery you could do something like this:
+[source, javascript]
+----
+$('#coolElement')
+  .addClass('active')
+  .css('color', 'salmon')
+  .css('padding', '12px 20px')
+  .css('border-radius', '8px')
+  .css('transition', 'all 0.3s ease-in-out')
+  .fadeIn(1000);
+----
+
+In this example the first line, `$('#coolElement')` is a jQuery "selector" that grabs the element from the DOM that has the ID of `coolElement`.
+
+After that, manipulate away!  
+Add a class, change the css, even add a fade in.
+There it is in one simple, elegant block of code.  
+
+This is function chaining, and it can be a useful way to write code -- or, more precisely, code libraries.
+If you can come up with a discrete set of functions that can be applied in a consistent way to some hierarchy of data, function chaining is a great way to go.  
+
+The problem with this approach to creating a library is, like so many code fads, it becomes the hammer that turns everything into a nail.
+It was not uncommon to HTML pages containing hundreds of lines of jQuery all chained together.  
+This made for a lot of "spaghetti code," that was not easy to change, scale, reason about.
+Let me be clear in saying that I loved jQuery, and I place the blame for its demise more on programmers who didn't take the time to understand how to effectively use than on its otherwise good intentions.  
+It was a fantastic way to get a lot of great stuff done in a hurry.
+In fact, it's still maintained and used in projects today, and while I haven't had a chance to use them the latest versions have had positive reviews.
+
+What's behind the magic of function chaining?
+There are a few related ways to do it, but the simplest way is to create a single piece of data, like an object, and then pass that object with its modification applied from function to function.  
+
+While I can't claim to have ever peeked inside the jQuery source code, I imagine its basic operation looks something like this under the hood:
+[source, javascript]
+----
+function getElement(selector) {
+  const element = document.getElementById(selector);
+  
+  // Return an object containing only functions
+  return {
+    addClass: function(className) {
+      element.classList.add(className);
+      return this; // Return the object for chaining
+    },
+    
+    css: function(property, value) {
+      element.style[property] = value;
+      return this; // Return the object for chaining
+    },
+    
+    fadeIn: function(duration) {
+      element.style.transition = `opacity ${duration}ms`;
+      element.style.opacity = '1';
+      return this; // Return the object for chaining
+    }
+  };
+}
+
+// Usage:
+const $ = getElement; // Create a familiar alias
+
+$('coolElement')
+  .addClass('active')
+  .css('color', 'salmon')
+  .css('padding', '12px 20px')
+  .css('border-radius', '8px')
+  .css('transition', 'all 0.3s ease-in-out')
+  .fadeIn(1000);
+----
+
+Or, to pass on the class-based approach and go with something entirely functional:
+
+[source, javascript]
+----
+// Create pure functions that transform a value and return a new value
+const addClass = (className) => (element) => {
+  const newElement = { ...element };
+  newElement.classList = [...(element.classList || []), className];
+  return newElement;
+};
+
+const css = (property, value) => (element) => {
+  const newElement = { ...element };
+  newElement.style = { ...(element.style || {}), [property]: value };
+  return newElement;
+};
+
+const fadeIn = (duration) => (element) => {
+  const newElement = { ...element };
+  newElement.style = { 
+    ...(element.style || {}), 
+    transition: `opacity ${duration}ms`,
+    opacity: '1'
+  };
+  return newElement;
+};
+
+// Helper function to start the chain with the element
+const getElement = (selector) => {
+  // Mock representation of a DOM element, 
+  // But it gets the point across
+  return { id: selector, classList: [], style: {} };
+};
+
+// Compose functions (right to left)
+const compose = (...fns) => (x) => fns.reduceRight((acc, fn) => fn(acc), x);
+
+// Pipe functions (left to right) - more intuitive for chaining
+const pipe = (...fns) => (x) => fns.reduce((acc, fn) => fn(acc), x);
+
+// Usage:
+const elementTransformation = pipe(
+  addClass('active'),
+  css('color', 'salmon'),
+  css('padding', '12px 20px'),
+  css('border-radius', '8px'),
+  css('transition', 'all 0.3s ease-in-out'),
+  fadeIn(1000)
+);
+
+const transformedElement = elementTransformation(getElement('coolElement'));
+console.log(transformedElement);
+----
+
+Pretty cool, right?  
+But you can see how it could easily get unwieldy.  
+Now that you've been shown, use it wisely.  
+
+.[Piping]
+----
+Piping has been around since the earliest days of Unix, which was created at Bell Labs in the 1960's.  
+I've mentioned earlier in the book the importance of knowing at least a little bit of Unix and I'm not going to repeat that here other than to say that if you ignored that advice the first time, here it is again.  
+
+In Unix, the output of any command-line operation can be passed or "piped" to the input of another.  
+This is done using the "pipe" operator, which is the vertical bar `|` that can be found under the delete/backspace key on most keyboards.
+
+In my earliest days working as an Apache developer, it wasn't always easy to locate large files that may have been generated or placed on a server, perhaps causing it to run out of disk space.
+One of my favorite fellow programmers showing me how to use the unix `find` command to locate files by size, and then to pipe the output of that c
+----
 
 
 === Side effects and functional programming
@@ -859,7 +1002,156 @@ Like most things in programming, this should be used in moderation.
 
 If you find yourself building a 100 line function that returns a 1000 line function, it's probably a good time to question both your life and architecture choices.
 
+That last example was pretty simple, but higher order functions can solve a lot of complex problems.  
+One problem that I've had more than once is needing to create a functions where the things that will be passed to it will mostly be the same, but not always.  
+For instance, you might want to create in inventory system that has to account for very different items, some of which will have very different properties.  
+Consider a shoe catalog where most of the shoes come in different colors and sizes, but some might come with custom laces, some might come with engraving, some might have customizable sole colors, and some might have two or more of these features available.  
 
+One very stilted approach that I've taken more than once is to create a single function that takes in every possible property, along with flag values to indicate whether or not that property is available for that item.
+This can lead to some funky function signatures, can make it difficult to reason about the code, can make it difficult to scale the code, and yeah, I will confess to having done something like this at least once in my career.  
+
+[source, javascript]
+----
+function createShoeFactory(defaultOptions = {}) {
+  // Base defaults for all shoes
+  const baseDefaults = {
+    customLaces: false,
+    laceStyle: '',
+    engraving: false,
+    engravingInitials: '',
+    customSole: false,
+    customSoleColor: ''
+  };
+
+  // Return a function that creates shoes with those defaults
+  return function createShoe(name, color, size, options = {}) {
+    // Create the basic shoe with required properties
+    const shoe = {
+      name,
+      color,
+      size
+    };
+    
+    // Apply customizations only if they exist
+    const fullOptions = { ...baseDefaults, ...defaultOptions, ...options };
+    
+    // Only add custom properties that have been explicitly set
+    Object.entries(fullOptions).forEach(([key, value]) => {
+      // Only include non-default properties
+      if (value !== baseDefaults[key]) {
+        // For related properties, group them logically
+        if (key === 'customLaces' && value === true) {
+          shoe.laces = {
+            custom: true,
+            style: fullOptions.laceStyle
+          };
+        } else if (key === 'engraving' && value === true) {
+          shoe.engraving = {
+            enabled: true,
+            initials: fullOptions.engravingInitials
+          };
+        } else if (key === 'customSole' && value === true) {
+          shoe.sole = {
+            custom: true,
+            color: fullOptions.customSoleColor
+          };
+        } else if (!['laceStyle', 'engravingInitials', 'customSoleColor'].includes(key)) {
+          // Add other non-related properties directly
+          shoe[key] = value;
+        }
+      }
+    });
+    
+    return shoe;
+  };
+}
+
+// Usage examples
+const standardShoe = createShoeFactory();
+const nike = standardShoe('Air Max', 'black', 10);
+console.log(nike); // Just name, color, size
+
+const customShoe = standardShoe('Air Jordan', 'red', 11, {
+  customLaces: true,
+  laceStyle: 'round',
+  engraving: true,
+  engravingInitials: 'JBD'
+});
+console.log(customShoe); 
+// Has name, color, size, plus laces and engraving properties
+----
+
+Add a few more styles, options, and features and this can get pretty out of control in a hurry.
+And remember, most of the shoes will only have a name, a color, and a size.
+
+This can be dealt with by using a higher-order function that can "scale" as needed to accommodate the different properties of the shoes.
+Such a function might look a little more like this:
+
+[source, javascript]
+----
+function createShoeFactory(defaultOptions = {}) {
+  // Return a function that creates shoes with those defaults
+  return function createShoe(name, color, size, options = {}) {
+    // Create the basic shoe with required properties
+    const shoe = {
+      name,
+      color,
+      size
+    };
+    
+    // Combine factory defaults with specific options
+    const customizations = { ...defaultOptions, ...options };
+    
+    // Add laces if style is specified
+    if (customizations.laceStyle) {
+      shoe.laces = {
+        style: customizations.laceStyle
+      };
+    }
+    
+    // Add engraving if initials are specified
+    if (customizations.engravingInitials) {
+      shoe.engraving = {
+        initials: customizations.engravingInitials
+      };
+    }
+    
+    // Add custom sole if color is specified
+    if (customizations.customSoleColor) {
+      shoe.sole = {
+        color: customizations.customSoleColor
+      };
+    }
+    
+    return shoe;
+  };
+}
+
+// Usage examples
+const standardShoe = createShoeFactory();
+
+// Basic shoe
+const basicNike = standardShoe('Air Max', 'black', 10);
+
+// Custom shoe with special laces
+const lacedShoe = standardShoe('Air Jordan', 'red', 11, {
+  laceStyle: 'round'
+});
+
+// Custom shoe with engraving
+const giftShoe = standardShoe('Dress Shoe', 'brown', 9, {
+  engravingInitials: 'CLDK'
+});
+
+// Custom shoe with multiple features
+const fullCustomShoe = standardShoe('Custom Elite', 'white', 10, {
+  laceStyle: 'flat',
+  engravingInitials: 'MVP',
+  customSoleColor: 'gold'
+});
+----
+
+If you're familiar with object-oriented programming this kind of resembles extending a bae class, which it kinda is.
 
 === Building Intuition: Functions Ideas
 

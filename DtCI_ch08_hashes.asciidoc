@@ -402,9 +402,82 @@ hash_table.insert("name", "Wimpy")
 print(hash_table.get("name")) # "Popeye the Sailor"
 ----
 
+=== More Hash Collisions
+
+Sometimes as a coder you have to be careful about your variable naming.
+Just this past week I was working on coding a footer for a client web page, and I named the CSS class that I was using to lay it out `.footer`.
+That doesn't seem like it would be the end of the world except for the fact that HTML also contains a '<footer>' tag, which was being used on the page as well.  
+My CSS class was being applied somewhere I didn't intend, and that caused me a few problems before I finally figured it out.  
+
+The same thing can happen with a hash.  
+Two different keys can be hashed to the same hash value, which then causes a "collision."
+
+Before we get to two different keys being hashed to the same value, let's stop and consider the reverse case for a moment.  Can two different values hash to the same key?  
+
+Take this simple example:  
+[source,python]
+----
+happy_family = {
+    "Dad": "Bob",
+    "Mom": "Ming",
+    "Child1": "Bob", #YES!
+    "Child2": "Sally",
+    "Child3": "Gunther",
+    "Child3": "Bartholomew" #NO!
+}
+----
+
+I hope the answer that shot immediately to your head is "no."
+If it didn't, just think about it for a moment.  
+One person can live in a house, and then maybe that person gets married and has children and dogs and goldfish and they can all live at the same address, no problem.
+But the reverse case would cause pandemonium: if two different houses had the exact same address, the mail would never come, the sun would fall from the sky, and the world would slowly decline into an eternal nightmare.  
+
+In the example above, it's perfectly fine for Bob to have a son and name him Bob too.  
+A little confusing, and I'm sure this would quickly give rise to shortcuts like "Big Bob" and "Little Bob," but it's not a problem.
+
+But what the two instances of `Child3`?  
+It just won't work.  
+Even between identical twins there's usually some awareness of which one is "older," even if the difference is only a few seconds.
+Still and all, there's one child born first (`Child3`) and one child born second (`Child4`, or, at least not `Child3`).
+
+Python and JavaScript will both handle this example in the same way, they will simply overwrite the first instance of `Child3` with the second instance, and it will be like Gunther never existed.
+This is not simply because the language creators were trying to be helpful, it's because this is simply how hashes work.  
+Each key must be unique.  
+
+What does this have to do with collisions?
+
+Say you have a hash that is based on character ascii character values.  
+It will generate a unique value for most strings, but two strings like "lake" and "kale" will hash to the same value because they contain the same characters, just in a different order.
+This doesn't make that hash functions useless though, because at the end of the day it comes down to how a hash function is implemented.
+
+A widely used algorithm used to handle collisions is called "chaining," which is what I used in the `SimpleHashTable` example above.
+
+
 
 
 === But I thought a hash was...
+
+Wait wait wait.  
+Data storage?  
+Cryptography?
+Shredded potatoes?  
+How can all of these things be called a hash?
+
+Think about it like this: a hash is a way to take some data, a little or a lot, and then use a little math to turn it in to a fixed size value.  
+In the examples I've given so far I'm storing strings, and it's a little bit of a disingenuous example because those examples might not give the greatest sense of the real power of hashes.  
+
+This is something to keep in mind when reading about coding examples.  
+Because no author can possibly anticipate every single possible way in which a concept might conceivable be used, the examples can sometimes mislead in their simplicity.
+
+Fortunately for me, the author, and you, the reader, we both have an imagination.  
+Let's use that to scale up the hash example:
+
+Imagine building a hash able for DNA sequences.  
+You could take a DNA sequence, like "ATCGGCTA", and then use a hash function to convert it into a fixed-size value, like 123456789.
+If there are a billion DNA sequences, you could store them all in a hash table with a size of 1,000,000, and then use the hash function to determine where to store each sequence.
+In doing so you can store more data in less space, retrieve it quickly, and check for duplicates.
+
+
 
 
 === Building Intuition: What are hashes used for?
@@ -646,5 +719,15 @@ I encourage you to think of examples of each of these and try to implement them 
 
 
 ==== Using AI to Study for Hash Problems
+
+While most of what I've talked about in this chapter is very fundamental, hashing is pretty widely used and important to understand.  
+
+Using AI, determine a few different widely used hashing algorithms, and then write simple programs that implement each of them.  
+Feed all of the program the same input.  
+Can you come up with a way, using AI, to determine which algorithm is the best for a given input? 
+Can you come up with a way to measure speed?  
+Space?
+Collisions?
+Can you come up with a visual representation of a given hash algorithm that allows you to compare every one you've chosen?
 
 

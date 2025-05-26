@@ -263,4 +263,33 @@ I also suggest you "grow before you know," which means working on problems that 
 The more you push yourself, the faster you'll learn.
 It's an uncomfortable feeling, and I suggest you get used to it!
 
+=== What about AI?
+
+When I started this book, ChatGPT was on version 3 and newspapers were predicting it was going to mean the end of everything from work to joy to humanity.  
+That hasn't happened, but it absolutely has changed the way coders work.
+When I started I proposed to my editor that I would make sure to add a little blurb about AI to the end of every chapter.  
+Less than a year later, and that would not serve the purpose of this book at all.  
+I have gone back through the book and added plenty of information to this book that can help with with coding interviews.  
+This information takes one of three forms:
+
+. How to use AI for problem solving, much in the same way you would use it at work
+
+. How to use AI to help you learn the concepts in this book
+
+. How to use AI to help you prepare for coding interviews
+
+The end of chapter sections still remain, but they have mostly been rewritten to fit with these goals.  
+
+There is one thing I absolutely must stress.
+If this book is in your hands and you have not yet figured out how to integrate AI into your coding workflow, you're not getting your next job.  
+It's being used pretty much everywhere, and I have several LLM's at my fingertips throughout the day that I switch between depending on the problem I'm trying to solve.  
+
+If you don't know how to get started, do an online search, find a tutorial, read on O'Reilly book, or watch a YouTube video.  
+Once you've got your AI set up, go ahead and ask it how it can help you with the content of this book.  
+But don't put it off.
+
+While there is a lot of great information out there about AI there is also a lot of very, very bad information.  
+It's not a fad, and it's not going to go away.  
+It's only by starting to use it that you can see for yourself how it can help you, and how to put it to work in moving your career forward.
+
 

@@ -1,7 +1,15 @@
+CLUT
 Cyclicity
+dataframes
 deque
 elif
+headshot
+heapified
+heapify
+heapifying
 Karp
+Köenigsberg's
+Königsberg
 Palo
 partintro
 Passaic

@@ -4,6 +4,7 @@ dictionaryDefinitions: []
 dictionaries: []
 words:
   - Directedness
+  - headshots
   - Ordinality
 ignoreWords:
   - latexmath
