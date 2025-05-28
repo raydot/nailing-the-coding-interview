@@ -830,7 +830,7 @@ Pretty cool, right?
 But you can see how it could easily get unwieldy.  
 Now that you've been shown, use it wisely.  
 
-.[Piping]
+.Piping
 ----
 Piping has been around since the earliest days of Unix, which was created at Bell Labs in the 1960's.  
 I've mentioned earlier in the book the importance of knowing at least a little bit of Unix and I'm not going to repeat that here other than to say that if you ignored that advice the first time, here it is again.  
@@ -838,8 +838,20 @@ I've mentioned earlier in the book the importance of knowing at least a little b
 In Unix, the output of any command-line operation can be passed or "piped" to the input of another.  
 This is done using the "pipe" operator, which is the vertical bar `|` that can be found under the delete/backspace key on most keyboards.
 
-In my earliest days working as an Apache developer, it wasn't always easy to locate large files that may have been generated or placed on a server, perhaps causing it to run out of disk space.
-One of my favorite fellow programmers showing me how to use the unix `find` command to locate files by size, and then to pipe the output of that c
+In my earliest days working as a web developer, one of the hats you had to wear was interacting with a server directly. 
+The most widely used server software then and now was Apache, and the only way to interact with a server was via command line without a Graphical User Interface or "GUI" (think Windows, Mac OS, Ubuntu, etc...) it wasn't always easy to locate large files that may have been generated or placed on a server, perhaps causing it to run out of disk space.
+
+One of my favorite fellow programmers showed me how to use the unix `find` command to locate files by size, and then to pipe the output of that command to the Unix `wc` command, which counts the number of lines, words, and characters in a file.
+Because `find` returns each file matching a given criteria a line at a time, by piping the result to `wc` and focusing on the number of lines returned you could see the number of files that matched the criteria. 
+
+For instance:
+[source, bash]
+----
+find /var/log -type f -size +100M | wc -l
+----
+
+This will search the `var/log` directory for files that are larger than 100 megabytes, and then pipe the output to `wc -l`, which will count the number of lines returned by the `find` command.
+My favorite fellow progammer was just giving me a one-off command to solve a specific problem, but he unknowingly introduced me to the idea of piping at the same time, which is a fantasic way to make all kinds of magical things happen in Unix.
 ----
 
 
@@ -1379,6 +1391,27 @@ As I began to work more with recursion I began to get a better sense of what the
 
 ==== Don’t paint yourself into a corner!
 
+After years of losing at chess I decided to finally follow a piece of advice I'd ignored for as long as I've been losing: "In order to get better at chess you have to do tactics puzzles."
+A tactics puzzle is a chess problem that has a very specific solution, and might be marked something like "mate in three moves" or "find a way to capture the knight."
+I started doing tactics puzzles and if there's one thing I definitely started to get better at it was...tactics puzzles.  
+
+The only problem with that is, when you're actually playing a game of chess, the odds that the game will somehow spontaneously go in the exact direction of a tactics puzzle that you've already studied are pretty slim. 
+Try telling that to the guy who's been studying nothing but tactics puzzles! 
+I began to believe that every move was "mate in two," or "win the knight," and as long as my opponent remained calm and didn't go along with my plan, well, I continued to lose at chess.  
+It was only by expanding my focus to other phases of the game -- the opening, the middlegame, the endgame -- that I could deploy my tactical knowledge in the service of larger ideas.  
+Without the larger ideas, I wasn't going to be winning too many games of chess.
+
+The same can happen with recursion.  
+The first time I worked with recursion I thought it was so fantastically brilliant that every problem absolutely must be able to be solved recursively.  
+Well, it can't.  
+Not only is that not possible, but in many cases recursion isn't even the best solution to the problem.  
+
+Write your code out first.  
+Get it working as quickly and as simple as you can.
+But don't paint yourself into a corner by trying to start with a recursive implementation, even if you can see one.  
+Start by developing working code that allows you to explore the problem in a deep, complex way and then if recursion still suggests itself -- go for it!  
+I will return to this idea again in the discussion of Dynamic Programming in Chapter 13.
+
 
 === Example Questions
 
@@ -1395,4 +1428,9 @@ As I began to work more with recursion I began to get a better sense of what the
 ==== Swap two numbers in place
 
 ==== Refactor this function
+
+"Refactor this function" is a very, very common interview question as it can really show and interviewer exactly how you think about code.  
+The problem will take one of two forms: Either a function isn't working and you have to get it to work, or a function is working but can surely be improved.
+
+
 

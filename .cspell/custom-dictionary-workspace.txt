@@ -3,10 +3,12 @@ Cyclicity
 dataframes
 deque
 elif
+Farid
 headshot
 heapified
 heapify
 heapifying
+Hiroshi
 Karp
 Köenigsberg's
 Königsberg
