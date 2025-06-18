@@ -292,4 +292,15 @@ While there is a lot of great information out there about AI there is also a lot
 It's not a fad, and it's not going to go away.  
 It's only by starting to use it that you can see for yourself how it can help you, and how to put it to work in moving your career forward.
 
+You might be wondering whether to bother learning data structures and algorithms at all, given that AI can do so much of the work for you.
+Every six months since 2022 or so I've seen a new article about how AI is going to replace programmers.  
+Then I think back to how many no-code solutions I've seen come and go.  
+FrontPage was going to replace developers, Dreamweaver was going to replace developers, WordPress was going to replace developers...and throughout it all we have yet to be replaced.  
+
+If nothing else, learning DSA will give you an advantage.
+Even if the computer writes all the code for you, AI still does not have an advantage when it comes to understanding the problem space.
+While it can come up with appropriate solutions it's not always so good at coming up with optimal solutions.  
+And, it can hallucinate.
+Developers these days are taking an approach to AI I've best heard summed up as "Trust, but verify."
+So, yes, you should still learn data structures and algorithms, so you can be trusted to verify.  
 

@@ -422,7 +422,21 @@ Here are some basic steps to follow to optimize your code, whether you're sittin
 
 . _Put the problem into plain language._  It does not matter how you do this. Write it down, say it out loud, draw a picture, whatever, but you need to say the problem in a way that allows you to comprehend what it is you're trying to accomplish. In a work environment there might be time allocated to this, but in an interview you might have to just get this done on the side or in your head. 
 
+. _Start small._ I started my career as a writer, and whenever I needed test data I would write very, very complicated test data sets.
+I thought it was genius because if the computer could handle a large, complicated data set, then surely the smaller, simpler sets would be no problem at all.  
+Later I came to realize I was actually exactly wrong about this.  
+I came to realize that I was making it harder for myself to just write good code, because I was always trying to solve a very specific, complicated, and unlikely problem.  
+Instead of doing that, start with a small data set, and then build on that.
+
+. _Do the smallest thing that could possibly work._  This bullet is the same as the last one, except it applies less to the data and more to the code itself.  The Agile software methodology suggests you start to "Do the smallest thing that could possibly work," and that's great advice.  
+A lot of what developers spend their days doing is breaking large, intractable problems down into smaller, more manageable problems and then solving those.  
+Take this same approach in a coding interview.
+Don't try to knock the whole problem out of the park in one swing.  
+You'll likely end up with a large tangle of code that doesn't work and is hard to understand and either you or the person hired to replace you will have to spend a lot of time either debugging it or throwing it out and rewriting it.
+
 . _Start with a brute force solution._ Start writing some code that solves the problem in the most straightforward way you can come up with. Do not try to start with optimization. Unless you see the optimization immediately, you're much better off getting something down that works and then going back through the optimization process with the interviewer. 
+Again, the trick is to start small.
+Get the code working first, and then the optimizations will suggest themselves.
 
 . _Look for improvements._  An important part of being successful in a coding interview is "pattern recognition," a theme that will be returned to throughout this book. Nested for loops? That can probably be improved. Repeatedly calculating the same information? You can definitely get the time down on that. Once you've got the basic code down it's a lot easier to see where the things are that can be done better. If you're not sure, your can always ask the interviewer if there's a way to improve the code. Plenty of examples of moving from brute force to a more optimized solution will be given in the algorithms section of this book.
 
@@ -443,6 +457,16 @@ Can you find an optimization?
 
 In an interview, you might be asked to analyze an algorithm in terms of Big O, be it your own or one that's given to you, and asked for ways to improve it. 
 You might also be asked to compare two algorithms in terms of Big O and asked which is more efficient, and why.
+
+==== Food for Thought
+
+Big O is the kind of topic people either love or hate.
+Some coders like to get down in the weeds on what the subject has to offer, and some avoid it like poison oak.  
+If you really want to understand Big O, there are a lot of great resources out the starting with the Wikipedia page on Big O Notation.  
+If math is your thing, the course that got me to really see the Big O "big picture" is MIT's "Mathematics for Computer Science" course, which is available for free online in the MIT OpenCourseWare series on YouTube.
+That's not a beginner course and some prior knowledge of math -- specifically algebra and basic calculus -- is assumed, but if your goal is to "go there" on Big O, this is just where to go.  
+
+
 
 
 
