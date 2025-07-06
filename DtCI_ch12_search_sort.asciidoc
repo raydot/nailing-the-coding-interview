@@ -2,44 +2,716 @@
 
 == Search and Sort
 
-After reading this chapter, the reader should know the basics of search and sort algorithms, how to reason about search and algorithms, and general guidelines for choosing the right search and/or sort algorithm to use to solve the problems that might arise in a coding interview.  This chapter will build on ideas presented in earlier chapters.
+After reading this chapter, the reader should know the basics of search and sort algorithms, how to reason about search and algorithms, and general guidelines for choosing the right search and/or sort algorithm to use to solve the problems that might arise in a coding interview. This chapter will build on ideas presented in earlier chapters.
 
-While there will be some new concepts introduced in this chapter, my goal here is to help you build intuition about search and sort as concepts.  
+While there will be some new concepts introduced in this chapter, my goal here is to help you build intuition about search and sort as concepts. 
 There are really a lot of problems that can be solved with search and sort and understand both as a concept will make you a more skilled problem solver in general.
 
-// Or maybe not.  That might be a bit much for the book.
+I was a programmer for a long time before I came across Jon Bentley's excellent 1986 book _Programming Pearls_ in a thread on Reddit. 
+It was the first book that got me to see computer science as way of thinking, rather than just a set of tools. 
+This was a real eye opener for me, and put everything I'd learned about programming into a very new context -- one that lead straight to the writing of this very book. 
 
+This chapter is heavily influenced by Bentley's book, and I hope I can inspire someone even just a fraction of the way in which Bentley has inspired me. 
+If inspiration isn't your thing, and you're more about just the facts, man, then this section will still be useful to you, as it serves as a kind of "capstone" to all of the previous chapters.
+It will attempt to tie them together in a way that hopefully makes them less abstract and more useful, and gives you a framework in which to consider your problem solving skill both in interviews and in your work as a programmer.
+
+Search and sort are to very elemental concepts in computer science, and they are used in a wide variety of problems. 
+This chapter will walk through two examples of where they might be found in the wild, and show the advantages and disadvantages of the various search and sort algorithms you might have at your disposal. 
+Hopefully this chapter also serves as a decent foundation for reasoning through the problems you're likely to encounter in interviews.
 
 
 === Search
 
+You have have heard the (mostly true) story that modern computer science was invented by Alan Turning while he was trying to break the German Enigma code during World War II.
+While Turing wasn't using "computers" in the way we think of them today, but he was engaged in a methodical search for a key to break the German code. 
+He saw that the search could be greatly simplified by automating the process of iteratively trying different keys until the right one was found, and so he build a machine that did exactly that.
+Check out "The Imitation Game" for a dramatized version of this story, one of the few movies about computer science that doesn't fictionalize computers to the point of absurdity. 
+("Sneakers" is another good one, email me for the rest of the list.)
+
+Since then, search has remained a fundamental concept in computer science, which should be no surprise to any regular computer user.
 
 
 ==== What does “search” mean?
 
+Just to be crystal clear about what is meant by "search," search specifically means finding a specific item in a collection of items. 
+The item could be a number or a string or some other data type, but we are searching for one definite thing in a collection of those things.
+
 ==== How is search used?
+
+For a long time most people's only experience with search was through word processing software, like Microsoft Word, where you could search for all instances of a word or phrase in a document. 
+More advanced uses could like for files in the file system, or maybe for something like specific emails in an email inbox. 
+
+Once the world wide web came along search because a very important concept, as there was not literally a world of information to search through. 
+I remember reading an early description of the web that described as "a vast library with no librarian, and all the books are on the floor."
+There were some interesting attempts at early search engines like Lycos and AltaVista. 
+Not long afterwards, however, this little upstart company named "Google" came along and added the concept of "PageRank" to search, which was a way of ranking search results by their relevance to the query. 
 
 ==== Why is search important?
 
+While we tend to think of search as what happens when you hit "Ctrl-F" or type a search term into your browser bar, search is used to solve a wide variety of problems in computer science.
+While that might seem obvious, understanding search is not just about knowing how to find something but about knowing the _best way_ to find something. 
+You don't want to use a hammer when you need a screwdriver (and vice versa), so knowing how to think about search in an effective manner is important. 
+You might not directly be asked a search question in an interview, but you will likely be asked a question that will require you to reason about search in some way. 
+
 ==== Building Intuition: Reasoning about Search 
 
-=== Types of search
+The rest of this section will present a "case study" of search, based on the complicated idea of a simple search. 
+It will blend in many ideas from earlier chapters with the intent of building a solid framework for thinking about search in general.
+
+Let's start with the basic idea: finding a word in a document. 
+You are applying for a job at a data science company, and one of their products is based around the idea of fast document search. 
+The good news is, there's only one document!
+And it only has one sentence in it!
+How can you search this document?  
+Well just sit down and read the sentence, right?
+
+I'm not trying to be glib.
+Unless it's a very long sentence, that's going to be optimal. 
+That's starting with the simplest and most effective solution.
+But then, of course, the document will grow and so yes, you will need to find a more effective method for searching it. 
+
+Just to set one more expectation before we get into the details: we're going to be agnostic about where the data is stored.
+Maybe it's in a database, or a text file, or on a web page, or in an email, or on a spreadsheet...etc.
+For the purposes of this example, we're not going to worry about that.
+
+We're also going to be agnostic about the environment in which the search is being performed.
+Maybe it's a document in a GUI, maybe it's a web page, maybe it's a command line interface. 
+We're not going to worry about that either. 
+We're just going to focus on the baseline algorithmic "mechanics" of search itself. 
 
 ==== Linear search
 
-==== Binary Search
+Now the client has expanded the document to include multiple sentences, and you still need to find that specific word.
+Given the scale of text to be searched has grown very little, you can probably at this point just work with a simple linear search.
+All this means is going through the document word by word and checking each word to see if it's a match. 
 
-==== Other types of search
+[source, python]
+----
+def linear_search(document, word):
+    for w in document.split():
+        if w == word:
+            return True
+    return False
+----
 
-=== Example Questions
+This will work just fine for a small document, and by "small" it could be a document of several hundred words or even a few thousand words.
+Notice also that you're just looking for a match.
+You're not looking for all of the instances of the word, just whether or not it's in the document.
 
-==== Partitioning
+What is the time complexity of this search?
+Take a moment to think about it before reading on....
+The time complexity of this search is O(n), where n is the number of words in the document.
+Of course, this is only O(n) if the word is at the very end of the document. 
+If the word is at the beginning of the document then the time complexity is O(1) because there's only one word to check. 
+But O(n) is the worst case scenario, and so we use that as the time complexity for this search.
+As has been mentioned repeatedly in this book, that means that while this might be great for a small document, it will not scale well to larger documents.
 
-==== Solve x problem using y search
+What is the space complexity of this search? 
+There hasn't been much discussion of space complexity in this book, but it absolutely is a useful concept to understand. 
+Space complexity is the amount of memory that needs to be allocated in order to perform the search. 
+Space is a lot less important than it used to be because additional computer memory has come way, way down in cost from the earliest days of computing, but that doesn't mean it doesn't matter. 
 
-==== Search optimization
+On a desktop or cloud server you're probably going to have all of the the memory you could ever need. 
+On mobile or embedded devices, however, memory is still at a premium, and likely will be for quite some time. 
+What you don't want to do is all of a sudden run out of memory because you haven't accounted for the space complexity of your search algorithm.
 
-==== Searching and data structures
+Space complexity notation is similar to time complexity notation, and is also expressed in terms of Big O notation.
+For linear search no additional memory is needed, so the space complexity is O(1). 
+As we progress through the examples in this chapter we absolutely will see cases where the space complexity needs to be taken into account. 
+In a programming interview if you are asked about the space complexity of your algorithm you're likely working on specialized hardware (like the chipset in a mobile phone or toaster) and you should be prepared to discuss it.
+
+So now, of course, the client has come back to you and with the document  expanded to include several million words, and you need to find a better way to search it.
+
+==== Binary search
+
+We discussed binary search in chapter 4 in the context of searching through a sorted array. 
+Binary search is a very efficient way to search through a sorted array, and it has a time complexity of O(log n).
+We're making a bit of a jump in data structures here, since a document is not an array, nor will the words in a document be sorted, nor are you likely to gain much of an advantage by sorting them first. 
+But binary search is the next most complicated form of search after linear search, so let's imagine that the client has moved from documents to lists of words, for whatever reason. 
+
+As mentioned in Chapter 4, binary search works by dividing the search space in half on each pass through the data.
+The split in then reasoned about in terms of the element where the data is split. 
+If you're looking for a word that begins with the letter "c," and you split the list of words in half at the letter "m," then you know the word you're looking for is in the a-m half of the list.
+You might then split in half at letter "g," and then again at letter "d," finally arriving at the letter "c" and finding the word you're looking for. 
+
+[source, python]
+----
+def binary_search(words, word):
+    low = 0
+    high = len(words) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if words[mid] == word:
+            return True
+        elif words[mid] < word:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return False
+----
+
+The tradeoff between linear and binary search is hopefully clear: binary seach is faster, but requires that the data be sorted first. 
+Does it make sense to sort the data in a document before searching it?
+Probably not.
+Breaking the data down into an alphabetical list of words might give a small advantage, but trying to keep the sorted list related to the original document -- especially one that is constantly changing -- would kill any advantage you might initially gain from sorting it in the first place.
+But for data that is already sorted, or can easily be sorted, binary search is a great option. 
+
+The time complexity of binary search is O(log n), which should not be a surprise because, as mentioned in Chapter 9, whenever you're constantly splitting the search space in half repeatedly you're likely looking at a logarithmic time complexity.
+This is a huge improvement over linear search in and of itself, but again, the form of the data matters. 
+
+The space complexity of binary search is the same as linear search, O(1), again because no additional memory is needed to perform the search.
+
+
+==== Jump/Block Search
+
+Jump search is a search algorithm that also works on sorted arrays.
+Jump search attempts to split the difference between linear and binary search by jumping ahead to a specific point in an array and then from there performing a linear search.
+The blocks are usually based around some kind of fixed size, and can be based either on the size of the array or by the partitioning of the data.
+It's slower than binary search but faster than linear, and is useful when the data is not sorted but can be delineated into blocks.
+It might be useful, for instance, in searching through data that is broken down into "pages" of "chapters."
+Linked lists is another example of data in blocks. 
+It's not a commonly search algorithm, but it's worth thinking about in terms of building intuition about search algorithms in general.
+
+If the data is not already logically divided into blocks, one easy way to create block sizes is by using the square root of the size of the entire array. 
+In the following example we'll use the square root of the size of the array to determine the block size, and then perform a linear search within that block.
+This makes the time complexity of jump search O(√n), which, again, is better than linear search but not as good as binary search.
+It really comes down to whether or not sorting the data further is worth the time you'll save.
+
+
+[source, python]
+----
+def jump_search(arr, x):
+    n = len(arr)
+    step = int(math.sqrt(n))  # Block size
+    prev = 0
+
+    while arr[min(step, n)-1] < x:
+        prev = step
+        step += int(n**0.5)
+        if prev >= n:
+            return False
+
+    while arr[prev] < x:
+        prev += 1
+        if prev == min(step, n):
+            return False
+
+    return arr[prev] == x
+----
+
+==== Tokenization / Normalization / Filtering
+
+Tokenization, normalization, and filtering are all techniques that can be used to improve search performance, especially when dealing with text data.
+All three techniques are about converting existing data into a more manageable form so that it can be searched more efficiently. 
+
+===== Tokenization
+
+Tokenization is a process of breaking up data into its most elemental pieces, or "tokens."  
+In the case of text data that usually means individual words.
+You're already familiar with the concept of tokenization from the basic math problems you did in elementary school.
+
+23 + 41 = 64
+
+One way to look at this problem is by saying it is made up of three tokens and two operators. 
+The tokens are "23", "41", and "64", and the operators are "+" and "=".
+You understand that the operators are used to manipulate the tokens, and that the tokens are the data that is being manipulated.
+It's the same case with tokenizing digital data.
+You are breaking it down into it's most elemental chunks. 
+In looking at the above example, even though the number 23 is comprised of two digits, one representing "twenty" and the other representing "three," there is no confusion about the number 23 as a token. 
+You will not confuse it for 2+3, or 32, or 2.3, or 2^3 or any other such nonsense. 
+It's the number 23 -- a single token that represents a specific value that is ready to be manipulated by the operators.
+
+===== Normalization
+
+Normalization is a process of standardizing data to remove ambiguities and inconsistencies.
+One common example that you still see programmers struggle with is the difference between the order of numbers and the order of letters in a string. 
+I worked on a recent project where the files were ordered by the names of the numbers they represented, "one", "two", "three", etc.
+The problem there is that the order of the letters in the string is not the same as the order of the numbers they represent.
+So "one" comes before "two" in this order, but "three" also comes before "two."
+Alphabetically the number "20" comes after "2" but before "30."
+What about the name "Cooper" and the word "cooper"?
+Which comes first?
+
+English grammar has its own set of rules, mathematics another, and computer science yet a third, but at the end of the day the answer is, of course, that "it depends."
+It depends on the context in which the data is being used.
+
+What normalization does is standardize data to remove any such questions. 
+Commonly in terms of documents this will mean converting all text to lowercase and removing punctuation. 
+This might also involved combining words that stem from the same root, such as "run", "running", and "ran" into a single token, "run".
+With this process programmers can ensure that data is in a consistent format, which makes it easier to search and compare.
+
+===== Filtering
+
+Filtering is a process of removing unnecessary or irrelevant data from a dataset.
+Usually this at least means removing "noise" from the data. 
+For instance, I went to middle school back in the days where they taught typing classes on actual typewriters, and we were taught after ending a sentence to hit the space bar twice before starting the next.
+The only reason this was done was to make the text more readable. 
+In modern typography, however, this is simply "noise."
+Web browsers and even some text editors will simply collapse multiple spaces into a single space.
+(Try typesetting an HTML document using the space bar and you'll quickly see exactly what I mean.)
+
+When it comes to data, filtering is about removing any data that is not likely to be useful in terms of a search. 
+This might include the removal of words that are too common to be useful, such as "the", "and", "is."  (Apologies to the rock band The The.)
+
+There might be more specific filtering that is done based on context, like removing common nouns or verbs that are not relevant to the search.
+In addition to spaces there might be other "invisible" characters such as line breaks or tabs that might be in the document but should not be considered in a search. 
+Filtering removes all of these which, again, makes the data easier to search.
+
+==== Hash-based search
+
+The earlier search algorithms are great if the data benefits from first being sorted.
+But what if you have a large amount of unsorted data to search through?  
+Sorting is not the only way to improve search performance. 
+Sometimes all it takes is organizing things a little bit differently. 
+This is where hash-based search comes in.
+
+Hash-based search is a way of organizing data so that it can be searched very quickly, without the need for sorting it first.
+Hashing, as was covered in Chapter 8, is analogous to the "Jump/Block Search" covered in the previous section.
+The difference is that while with Jump/Block Search the data is already mapped in some logical fashion, hash-based search creates a mapping between the data and a hash table. 
+
+This is done by taking the data and applying a hash function to it, which produces a unique hash value for each piece of data.
+The hash value can then be used to quickly look up the data in a hash table.
+This process is similar to an index in a book, where the index -- usually found at the back in alphabetical order -- allows readers to quickly find the page number for a specific topic.
+Hashing is usually done to a document after it has been tokenized, normalized, and filtered, as mentioned in the previous section.
+
+Hashing is a very efficient way to search through large datasets, given the expense of hashing them first can be afforded.
+The time complexity of hash-based search is O(1) on average, which is awfully hard to beat, but of course there's a tradeoff.  
+You have to first be able to index the available data.  
+
+Does this sound absolutely crazy?  
+Fantastical?
+Unpossible?
+Well it's pretty much how Google search works.  
+Google sends out "bots" to crawl the web, and the bots index the data they find.
+When you go to search for a web page on Google it looks up documents that match your search terms in its index, and then quickly returns the results to you.
+Some of this becomes complicated when you add in things like sponsored search and AI results, but that's the basic idea.
+
+The rest of this section will focus on some of the more advanced and nuanced ideas behind search, and how they can be applied to the kinds of problems computer programmers regularly face.  
+Hopefully this will help you develop your own ideas about how to apply some of the more abstract knowledge around search to solving real-world problems.  
+If you are asked in an interview a question along the lines of "how would you solve this problem?" this chapter should provide a strong basis for how you answer that question.
+
+But first, we need data!
+I've created this Python Fruits-of-the-World dataset generator that you can use to follow along with the examples.
+The fruit names are real but the rest of the data is generated at random, so don't be surprised if you find black strawberries or yellow grapes. Keep in mind that any data will do.  If fruit doesn't feel right, then please feel free to substitute with data of your own.  
+
+[source, python]
+----
+import random
+
+def generate_fruit_data(num_fruits=100):
+    # Generate a diverse database of fruits from around the world.
+    
+    fruit_names = [
+        # Common fruits
+        "Apple", "Banana", "Orange", "Grape", "Strawberry", "Blueberry", "Raspberry",
+        "Blackberry", "Cherry", "Peach", "Pear", "Plum", "Apricot", "Watermelon",
+        "Cantaloupe", "Honeydew", "Pineapple", "Mango", "Papaya", "Kiwi",
+        
+        # Citrus varieties
+        "Lemon", "Lime", "Grapefruit", "Tangerine", "Clementine", "Blood Orange",
+        "Yuzu", "Bergamot", "Pomelo", "Key Lime",
+        
+        # Tropical fruits
+        "Coconut", "Passion Fruit", "Dragon Fruit", "Star Fruit", "Guava",
+        "Lychee", "Rambutan", "Durian", "Jackfruit", "Breadfruit", "Soursop",
+        "Cherimoya", "Ackee", "Tamarind", "Plantain",
+        
+        # Berries and small fruits
+        "Elderberry", "Gooseberry", "Currant", "Cranberry", "Lingonberry",
+        "Cloudberry", "Mulberry", "Boysenberry", "Loganberry", "Huckleberry",
+        
+        # Stone fruits
+        "Nectarine", "Damson", "Greengage", "Mirabelle", "Pluot", "Aprium",
+        
+        # Exotic and regional fruits
+        "Persimmon", "Pomegranate", "Fig", "Date", "Olive", "Avocado",
+        "Tomato", "Cucumber", "Eggplant", "Pepper", "Squash", "Pumpkin",
+        "Acai", "Goji Berry", "Physalis", "Tomatillo", "Cactus Pear",
+        "Horned Melon", "African Cucumber", "Buddha's Hand", "Finger Lime",
+        
+        # More exotic varieties
+        "Salak", "Longan", "Langsat", "Mangosteen", "Rambai", "Pulasan",
+        "Santol", "Mamey Sapote", "Sapodilla", "Sugar Apple", "Custard Apple",
+        "Sweetsop", "Miracle Fruit", "Jabuticaba", "Pitanga", "Camu Camu",
+        "Acerola", "Cashew Apple", "Marula", "Baobab Fruit", "Kei Apple",
+        
+        # Additional varieties to reach 100
+        "Quince", "Medlar", "Serviceberry", "Pawpaw", "Maypop", "Muscadine",
+        "Chokeberry", "Beautyberry", "Sumac Berry", "Rose Hip", "Hawthorn",
+        "Sea Buckthorn", "Cornelian Cherry", "Jujube", "Loquat", "Feijoa"
+    ]
+    
+    colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Pink", "Brown", "White", "Black"]
+    
+    regions = [
+        "North America", "South America", "Europe", "Asia", "Africa", 
+        "Australia", "Mediterranean", "Caribbean", "Middle East", "Pacific Islands"
+    ]
+    
+    textures = ["Smooth", "Fuzzy", "Bumpy", "Spiky", "Rough", "Waxy", "Soft", "Hard"]
+    
+    seasons = ["Spring", "Summer", "Fall", "Winter", "Year-round"]
+    
+    fruits = []
+    for i in range(min(num_fruits, len(fruit_names))):
+        fruit = {
+            "id": i + 1,
+            "name": fruit_names[i],
+            "color": random.choice(colors),
+            "region": random.choice(regions),
+            "price_per_lb": round(random.uniform(0.99, 12.99), 2),  # $0.99 to $12.99
+            "sweetness": random.randint(1, 10),  # 1-10 scale
+            "texture": random.choice(textures),
+            "season": random.choice(seasons),
+            "vitamin_c": random.randint(5, 200),  # mg per 100g
+            "size": random.choice(["Small", "Medium", "Large", "Extra Large"])
+        }
+        fruits.append(fruit)
+    
+    return fruits
+
+# Usage
+fruits = generate_fruit_data(100)
+print(f"Generated {len(fruits)} fruits from around the world!")
+print(fruits[:5])  # Print first 5 fruits for brevity
+----
+
+Data management is a subject unto itself, and we're not going to get deep into it here.
+This is a flat data table (not a database, data shard, data anything but flat data) containing 100 fruits, all of which contain ten data attributes: id, name, color, region, price_per_lb, sweetness, texture, season, vitamin_c, and size.
+The id is unique for each entry, allowing each piece of data to have its own specific identifier.
+Again, other than the names, all of the data is generated at random, so please do not calibrate your Vitamin C intake based on what this dataset tells you, or get on a plane expecting to find some exotic spiky pink pear variant during winter in Cameroon.
+
+Now that the data has been generated we have to index it to make it searchable.  
+Here's how a hash table can be used to accomplish this next step:
+
+[source, python]
+----
+def create_searchable_fruit_index(fruits):
+
+    name_index = {}
+    color_index = {}
+    region_index = {}
+    
+    for fruit in fruits:
+        # Index by name
+        name_index[fruit['name'].lower()] = fruit
+        
+        # Index by color
+        color = fruit['color'].lower()
+        if color not in color_index:
+            color_index[color] = []
+        color_index[color].append(fruit)
+        
+        # Index by region
+        region = fruit['region'].lower()
+        if region not in region_index:
+            region_index[region] = []
+        region_index[region].append(fruit)
+    
+    return name_index, color_index, region_index
+----
+
+All this code is doing is creating three separate indices, one that allows for search by name, one that allows to search by color, and one that allows to search by index.  
+Each of these indicies (indexes?  indicum?) is a Python dictionary that maps the search term to the appropriate fruit data.
+
+[code, python]
+----
+name_index = {
+    'apple': {'id': 1, 'name': 'Apple', 'color': 'Red', 'region': 'North America', ...},
+    'banana': {'id': 2, 'name': 'Banana', 'color': 'Yellow', 'region': 'South America', ...},
+    'orange': {'id': 3, 'name': 'Orange', 'color': 'Orange', 'region': 'Mediterranean', ...},
+    'grape': {'id': 4, 'name': 'Grape', 'color': 'Purple', 'region': 'Europe', ...},
+    # ... etc
+}
+----
+
+[code, python]
+----
+color_index = {
+    'red': [{'id': 1, 'name': 'Apple', 'color': 'Red', 'region': 'North America', ...}],
+    'yellow': [{'id': 2, 'name': 'Banana', 'color': 'Yellow', 'region': 'South America', ...}],
+    'orange': [{'id': 3, 'name': 'Orange', 'color': 'Orange', 'region': 'Mediterranean', ...}],
+    # ... etc
+}
+----
+
+[code, python]
+----
+region_index = {
+    'north america': [{'id': 1, 'name': 'Apple', 'color': 'Red', 'region': 'North America', ...}],
+    'south america': [{'id': 2, 'name': 'Banana', 'color': 'Yellow', 'region': 'South America', ...}],
+    'mediterranean': [{'id': 3, 'name': 'Orange', 'color': 'Orange', 'region': 'Mediterranean', ...}],
+    # ... etc
+}
+----
+
+Notice the data relationships are a little different between each of the groups although, again, we're not going to get into data theory.
+Just try to see the relationships in exactly the straightforward manner in which they're intended.  
+
+What's "hash" about this is that all of the data is stored in Python dictionaries, which automatically covert string values into hash values.
+This allows for much faster lookups, as will become more evident as we proceed through the examples.  
+This is particularly a Python feature, and I mentioned in Chapter 8 that a Python dictionary is a kind of hash table.  
+If you're using other programming languages the same basic concept applies but the implementation will be different.
+In Javascript, for instance, objects can only use strings as keys and so no hashing occurs.
+In order to gain the benefits of hashing, one solution is to use a Javascript `Map()`.
+Make sure you are aware of the implementation differences before heading in to an interview!  
+
+
+.So How Fast Is It?
+----
+This book has focused solely on Big-O notation, because Big-O is an objective measure of speed that discounts differences between things like system architecture, operating systems, chip sets, internet speed, etc., etc.
+Even if you have a great imagination unmatched only by your sense of relative proportions, the difference between O(n) and O(1) might not seem particularly earth-shattering without some real numbers behind it.  
+
+So here is code that will return the difference, in the universally understood concept of "Earth seconds," between searching un-indexed and indexed code.
+After you've got your code generator set-up and running, go ahead and try it!
+
+[code, python]
+----
+import time
+
+def search_without_index(fruits, search_term, search_type="name"):
+    """Linear search through all fruits - O(n) time complexity"""
+    results = []
+    for fruit in fruits:
+        if search_type == "name" and search_term.lower() in fruit['name'].lower():
+            results.append(fruit)
+        elif search_type == "color" and search_term.lower() == fruit['color'].lower():
+            results.append(fruit)
+        elif search_type == "region" and search_term.lower() == fruit['region'].lower():
+            results.append(fruit)
+    return results
+
+def search_with_index(search_term, search_type, name_index, color_index, region_index):
+    """Hash-based search using indexes - O(1) time complexity"""
+    if search_type == "name":
+        result = name_index.get(search_term.lower())
+        return [result] if result else []
+    elif search_type == "color":
+        return color_index.get(search_term.lower(), [])
+    elif search_type == "region":
+        return region_index.get(search_term.lower(), [])
+    return []
+  
+  
+def create_searchable_fruit_index(fruits):
+    """Create multiple indexes for different search types"""
+    name_index = {}
+    color_index = {}
+    region_index = {}
+    
+    for fruit in fruits:
+        # Index by name
+        name_index[fruit['name'].lower()] = fruit
+        
+        # Index by color
+        color = fruit['color'].lower()
+        if color not in color_index:
+            color_index[color] = []
+        color_index[color].append(fruit)
+        
+        # Index by region
+        region = fruit['region'].lower()
+        if region not in region_index:
+            region_index[region] = []
+        region_index[region].append(fruit)
+    
+    return name_index, color_index, region_index
+
+def demonstrate_search_performance():
+    """Show the dramatic difference between indexed and non-indexed search"""
+    
+    # Generate test data
+    fruits = generate_fruit_data(100)
+    name_index, color_index, region_index = create_searchable_fruit_index(fruits)
+    
+    # Test searches
+    test_searches = [
+        ("Apple", "name"),
+        ("Red", "color"),
+        ("Asia", "region")
+    ]
+    
+    print("Search Performance Comparison")
+    print("=" * 50)
+    
+    for search_term, search_type in test_searches:
+        print(f"\nSearching for {search_type}: '{search_term}'")
+        
+        # Linear search timing
+        start_time = time.time()
+        linear_results = search_without_index(fruits, search_term, search_type)
+        linear_time = time.time() - start_time
+        
+        # Indexed search timing
+        start_time = time.time()
+        indexed_results = search_with_index(search_term, search_type, name_index, color_index, region_index)
+        indexed_time = time.time() - start_time
+        
+        # Results
+        print(f"  Linear search: {len(linear_results)} results in {linear_time:.6f} seconds")
+        print(f"  Indexed search: {len(indexed_results)} results in {indexed_time:.6f} seconds")
+        
+        if indexed_time > 0:
+            speedup = linear_time / indexed_time
+            print(f"  Speed improvement: {speedup:.1f}x faster")
+        else:
+            print(f"  Speed improvement: Too fast to measure!")
+
+demonstrate_search_performance()
+----
+
+----
+
+==== Inverted Index Search
+
+Now that data can be converted into hash tables, we're ready to explore the more advanced concept of an inverted index.  
+An inverted index is an index that's inverted (obvs) in the sense that the data is matched to search terms, instead of search terms to data.  
+In other words, it's an index that maps each item to the terms that it contains, rather than the other way around.  
+If we're search for all fruits that are red, we can do that quickly because the inverted index contains an entry that contains all fruits that are red.
+It's not necessary to go through every single piece of data one-by-one at O(n) speed to pull out all of the red ones.
+That work has already been done when the index was created. 
+
+Again, this is exactly how Google search works -- or how it works in the over-simplified world of book examples.
+Google special insight was not only to index pages in order to search them, but to equally add "relevance" rankings.  
+If you do a Google search for a word, Google has not only indexed all of the pages its bot crawlers have found that contain that word, but it has also ranked them in terms of relevance.  
+"Relevance" is comprised of a number of factors, including how many times the word appears on a page, its importance to the surrounding text, how many other pages with similar terms link to it, how often people looking for the term click on that page, and so on. 
+That might seem like an obvious thing to do now, but at the time it was a brilliant insight that revolutionized the way in which the web was searched.
+
+
+==== Trie-based Search
+
+Ok, the basic search is working, it's fast, the fruits of the world are available to all at a moment's notice.  
+Let's look deeper into the world of search to see what other problems it can solve.  
+Chapter 9 briefly touched upon the idea of tries, a tree-based data structure that could break strings down into smaller chunks.
+What this allows for in the search world is auto-complete features.  
+
+Each node in a trie represents a character in a string, and a path from the root to a leaf node represents a complete string.  
+This allows for "prefix search," where all strings that start with a given prefix can quickly be found.  
+
+.Apache Solr
+----
+The ideas in this chapter are mostly meant to provide a context against which to solidify readers' knowledge of search and sort, but there are actually jobs that involve expertise in searching and sorting.  
+
+One widely used open source search platform is Apache Solr, which is built on top of the Apache Lucene search library.
+Solr is a powerful tool for enterprise-level search applications, and it comes with a wide range of very useful features.
+I once worked for a client that had put all of their marketing materials into a "data lake," and Solr search coupled with GraphQL allowed us to grab marketing materials in real time based on a given set of search terms.  
+We bolted on the user interface using React and created a very powerful tool for creating custom web experiences.
+
+If search is really, truly touching you in the deepest parts of your soul, look up "Java Solr Developer" jobs and see if you can find a position that will allow you to work with it.
+----
+
+For instance, if you're a fruit poet and you're looking for all fruits that begin with the better "b," you can use a trie-based search to quickly find all fruits that start with "b" without having to search through the entire dataset.
+The basic methods for creating tries from data was covered in Chapter 9, so go back and have a look there if you need a refresher and to see the `TrieNode` class that is used to build the Trie.
+
+[source, python]
+----
+class FruitTrie:
+    def __init__(self):
+        self.root = TrieNode()
+        self.fruit_suggestions = {}  # Maps complete words to fruit objects
+    
+    def insert_fruit(self, fruit):
+        """Insert a fruit into the trie for autocomplete"""
+        name = fruit['name'].lower()
+        self.fruit_suggestions[name] = fruit
+        
+        # Insert into trie
+        current = self.root
+        for char in name:
+            if char not in current.children:
+                current.children[char] = TrieNode()
+            current = current.children[char]
+        current.is_end_of_word = True
+    
+    def get_autocomplete_suggestions(self, prefix):
+        """Get fruit suggestions for autocomplete"""
+        prefix_lower = prefix.lower()
+        
+        # Navigate to prefix node
+        current = self.root
+        for char in prefix_lower:
+            if char not in current.children:
+                return []
+            current = current.children[char]
+        
+        # Collect all complete words from this prefix
+        suggestions = []
+        self._collect_suggestions(current, prefix_lower, suggestions)
+        
+        # Return corresponding fruit objects
+        return [self.fruit_suggestions[word] for word in suggestions if word in self.fruit_suggestions]
+    
+    def _collect_suggestions(self, node, prefix, suggestions):
+        if node.is_end_of_word:
+            suggestions.append(prefix)
+        
+        for char, child_node in node.children.items():
+            self._collect_suggestions(child_node, prefix + char, suggestions)
+
+def demonstrate_trie_autocomplete():
+    """Show trie-based autocomplete in action"""
+    fruits = generate_fruit_data(100)
+    fruit_trie = FruitTrie()
+    
+    # Build the trie
+    for fruit in fruits:
+        fruit_trie.insert_fruit(fruit)
+    
+    # Test autocomplete
+    test_prefixes = ["ap", "ban", "cher", "man"]
+    
+    print("Trie-based Autocomplete Demo:")
+    print("=" * 40)
+    
+    for prefix in test_prefixes:
+        suggestions = fruit_trie.get_autocomplete_suggestions(prefix)
+        fruit_names = [fruit['name'] for fruit in suggestions]
+        print(f"'{prefix}' → {fruit_names}")
+----
+
+
+==== Multi-term and Ranked Search
+
+Remember that the real power of our fruit data is the way in which it can be searched.  
+Perhaps there's a client who is a fruit photographer who wants to do an expose on all of the purple fruits grown in South America.  
+Or maybe a fruit chef who wants to create a recipe that uses all of the fruits that are yellow and in season in the Mediterranean.
+
+By combining inverted indexes with trie-based search, multi-term and ranked searches become possible.  
+Color and season, or region and size, or texture and vitamin C content can all be combined to break our fruit data down into tasty, useful morsels.  
+Here's an example of how that might happen:
+
+[code, python]
+----
+def multi_term_search(fruits, search_terms):
+    """Search for fruits matching multiple criteria"""
+    results = []
+    for fruit in fruits:
+        if all(term.lower() in fruit['name'].lower() or term.lower() == fruit['color'].lower() or term.lower() == fruit['region'].lower() for term in search_terms):
+            results.append(fruit)
+    return results
+----
+
+==== Real-world Considerations
+
+===== Fuzzy Search and Typo Tolerance
+
+In real-world applications, users make typos. A search for "Jhon Smith" should probably return "John Smith" results. Fuzzy search handles this by:
+
+* **Edit Distance**: Measuring how many character changes needed to transform one string into another
+* **Approximate Matching**: Using algorithms like Levenshtein distance to find "close enough" matches
+* **Candidate Generation**: Using tries or n-grams to quickly generate possible matches before scoring them
+
+===== Performance at Scale
+
+===== Distributed Search
+
+===== Caching and Optimization
+
+===== User Experience Considerations
+
+
 
 === Sort
 

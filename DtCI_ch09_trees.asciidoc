@@ -366,11 +366,6 @@ def in_order_traversal(tree):
 I'm just gonna leave that there and let you ponder it, but we'll come back to this idea in chapter 11.
 
 
-
-
-
-
-
 ==== Insertion
 
 Inserting a node into a tree involves first finding the correct location an a new node and then adding it to the tree.  
@@ -590,6 +585,122 @@ It just means that if you get to the point where you're sure you need a tree, it
 Good thing the rules for creating trees are so simple!
 ****
 
+=== Tries
+
+Tries (rhymes with "fries") are a type of tree that is used to store strings.
+They are used in applications like spell checkers and autocomplete, and are a great way to store a large number of strings in a way that is easy to search.
+
+Unlike all of the trees we've discussed so far, tries are not binary trees.  
+A single node in a trie can have multiple children, and the nodes are not necessarily ordered in any specific way.  
+
+<Image of trie TK>
+
+The structure of a trie is determined by the strings that are stored in it. 
+This makes them great for creating relationships between small pieces of data, like letters in a word.  
+This makes them highly applicable to problems like spell checking and autocomplete, and they are also used extensively in natural language processing.
+The same things that make tries great for string manipulation make them not-so-great for larger types of data, and you would certainly not want to use them for databases or graphics processing.
+
+If you want to build your own custom auto-complete algorithm for your web site, surely a trie library will be involved.
+Here is a very basic example of a trie in Python:
+
+[code,python]
+----
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+----
+
+In this example each "node" of the tree is represented by a `TrieNode` object.
+This object contains a dictionary of children, which allows for multiple children for node.  
+It also contains a boolean value that indicates whether or not the node is the end of a word.  
+In this way it bears some resemblance to a linked list, but with multiple children for each node. 
+This allows for the strings stored in a trie to be easily searched and manipulated.
+
+[code, python]
+----
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, word):
+        current = self.root
+        
+        # Traverse the trie character by character
+        for char in word:
+            if char not in current.children:
+                current.children[char] = TrieNode()
+            current = current.children[char]
+        
+        # Mark the end of the word
+        current.is_end_of_word = True
+    
+    def search(self, word):
+        current = self.root
+        
+        # Traverse the trie character by character
+        # If character doesn't exist, word is not in trie
+        for char in word: 
+            if char not in current.children:
+                return False
+            current = current.children[char]
+        
+        # Return True if we've reached the end of a word
+        return current.is_end_of_word
+----
+
+Here each word is inserted into the tree one character at a time, with each character being a node in the tree.  
+Bear in mind that the variable names "char," "word," and "children" are just variable names.
+They could be anything.
+There's no special reserved trie magic in Python.
+
+<Image of trie node TK>
+
+Tries will store words one character at a time, with words that share starting characters sharing nodes in the tree.
+The words "stamp," "stand," and "start" would all share the same starting nodes of "st."  "Stamp" and "stand" would share the "sta" node, and "start" would have its own "star" node -- which it would share with "stare" and "startle," should they be added to the trie.
+
+Here are some helper functions that can be added to the already defined `Trie` class that it can use to find words based on their starting characters:
+
+[source,python]
+----
+    def starts_with(self, prefix):
+        current = self.root
+        
+        # Traverse the trie character by character
+        for char in prefix:
+            if char not in current.children:
+                return False
+            current = current.children[char]
+        
+        return True
+    
+    def get_suggestions(self, prefix):
+        suggestions = []
+        current = self.root
+        
+        for char in prefix:
+            if char not in current.children:
+                return suggestions 
+            current = current.children[char]
+        
+        # Collect all words starting from this node
+        self._collect_words(current, prefix, suggestions)
+        return suggestions
+    
+    def _collect_words(self, node, prefix, suggestions):
+        if node.is_end_of_word:
+            suggestions.append(prefix)
+        
+        for char, child_node in node.children.items():
+            self._collect_words(child_node, prefix + char, suggestions)
+----
+
+Play around with this code and add some print statements and see if you can get it to work as an autocomplete algorithm.  
+This code is most of the way there, and shouldn't require too much tinkering to get it to work.
+Another idea is to add a function that visualizes the trie, so you can see how it works.
+Last of all, how would you delete a word from a trie?
+We will return to tries in Chapter 12, so it will be worth your time to play around with them now.
+ 
 === Other Types of Trees
 
 The intended target audience for this book is likely either only going to be asked about trees in the more general way in which I've already described then, or they'll already have domain-specific knowledge of the trees that can be used to solve specific problems.  
@@ -615,21 +726,6 @@ AVL trees are another type of self-balancing binary search tree.
 The work similarly to red and black trees and are also used with data that requires a lot of addition and deletion, but contain a different set of rules that balance them.  
 AVL trees are primarily concerned with the height of the tree, and will balance by spreading out nodes to keep the tree from getting too tall. 
 This might seem like a silly thing, but because trees can generally be searched in O(log n) time, the smaller the n, the faster the search.
-
-==== Tries
-
-Tries are a type of tree that is used to store strings.
-They are used in applications like spell checkers and autocomplete, and are a great way to store a large number of strings in a way that is easy to search.
-
-Unlike all of the trees we've discussed so far, tries are not binary trees.  
-A single node in a trie can have multiple children, and the nodes are not necessarily ordered in any specific way.  
-
-The structure of a trie is determined by the strings that are stored in it. 
-This makes them great for creating relationships between small pieces of data, like letters in a word.  
-This makes them highly applicable to problems like spell checking and autocomplete, and they are also used extensively in natural language processing.
-The same things that make tries great for string manipulation make them not-so-great for larger types of data, and you would certainly not want to use them for databases or graphics processing.
-
-If you want to build your own custom auto-complete algorithm for your web site, surely a trie library will be involved.  
 
 
 === Example Questions

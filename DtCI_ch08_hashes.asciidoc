@@ -623,7 +623,7 @@ for word, count in result.items():
     print(f"'{word}': {count}")
 ----
 
-Notice the initialization of the python dictionary (a type of hash table) named `word_count`.
+Notice the initialization of the Python dictionary (a type of hash table) named `word_count`.
 This function is simple: it checks to see if the word is in the dictionary. 
 If it isn't, it adds it with a count of 1.  
 If it is, it increments the count by 1.

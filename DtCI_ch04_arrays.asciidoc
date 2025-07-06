@@ -637,14 +637,14 @@ That might have seemed like a lot of guesses, but you couldn't have done any bet
 
 In fact, 7 guesses is the maximum number of guesses you'll need to guess any number between 1 and 100 using binary search. 
 
-The great think about binary search is it scales logarithmically. 
+The great thing about binary search is it scales logarithmically. 
 Go back and look at the O(log n) graph in Chapter 2 if you don't remember what it looks like. 
 Because it grows logarithmically, every time the number of inputs doubles, the number of guesses required to get the answer only increases by one. 
 If someone wants to play this game with you using a number between 1 and 1,000,000, you are guaranteed to guess the number in 20 guesses of fewer using binary search. 
 
 [IMAGE OF O(log n) GRAPH PLOTTING VALUES V. NUM GUESSES]
 
-Here is a simple implementation binary search to guess a number between 1-100. This is not meant to be a complete application, just some basic code to illustrated the big idea.
+Here is a simple implementation of binary search to guess a number between 1-100. This is not meant to be a complete application, just some basic code to illustrated the big idea.
 [source, python]
 ----
 def binary_search(arr, target):
