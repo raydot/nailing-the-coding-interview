@@ -416,6 +416,10 @@ def create_searchable_fruit_index(fruits):
 All this code is doing is creating three separate indices, one that allows for search by name, one that allows to search by color, and one that allows to search by index.  
 Each of these indicies (indexes?  indicum?) is a Python dictionary that maps the search term to the appropriate fruit data.
 
+You may have noticed the copious use of the `lower()` function, which in Python converts a word to lower case.  
+This falls right in line with the idea of "normalization" discussed earlier.  It's a good way to make sure that all instances of data conform, as closely as possible, to the same format.
+
+
 [code, python]
 ----
 name_index = {
@@ -455,17 +459,17 @@ This allows for much faster lookups, as will become more evident as we proceed t
 This is particularly a Python feature, and I mentioned in Chapter 8 that a Python dictionary is a kind of hash table.  
 If you're using other programming languages the same basic concept applies but the implementation will be different.
 In Javascript, for instance, objects can only use strings as keys and so no hashing occurs.
-In order to gain the benefits of hashing, one solution is to use a Javascript `Map()`.
+In order to gain the benefits of hashing in Javascript, one solution is to use a Javascript `Map()`.
 Make sure you are aware of the implementation differences before heading in to an interview!  
 
 
 .So How Fast Is It?
-----
-This book has focused solely on Big-O notation, because Big-O is an objective measure of speed that discounts differences between things like system architecture, operating systems, chip sets, internet speed, etc., etc.
+****
+This book has focused solely on Big-O notation for speed comparison, because Big-O is an objective measure of speed that discounts differences between things like system architecture, operating systems, chip sets, internet speed, etc., etc.
 Even if you have a great imagination unmatched only by your sense of relative proportions, the difference between O(n) and O(1) might not seem particularly earth-shattering without some real numbers behind it.  
 
 So here is code that will return the difference, in the universally understood concept of "Earth seconds," between searching un-indexed and indexed code.
-After you've got your code generator set-up and running, go ahead and try it!
+After you've got your fruit generator set-up and running, go ahead and try it!
 
 [code, python]
 ----
@@ -562,7 +566,7 @@ def demonstrate_search_performance():
 demonstrate_search_performance()
 ----
 
-----
+****
 
 ==== Inverted Index Search
 
@@ -603,10 +607,15 @@ If search is really, truly touching you in the deepest parts of your soul, look 
 ----
 
 For instance, if you're a fruit poet and you're looking for all fruits that begin with the better "b," you can use a trie-based search to quickly find all fruits that start with "b" without having to search through the entire dataset.
-The basic methods for creating tries from data was covered in Chapter 9, so go back and have a look there if you need a refresher and to see the `TrieNode` class that is used to build the Trie.
+The basic methods for creating tries from data was covered in Chapter 9, so go back and have a look there if you need a refresher and to see an explanation of the `TrieNode` class that is used to build the Trie. 
 
 [source, python]
 ----
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+        
 class FruitTrie:
     def __init__(self):
         self.root = TrieNode()
@@ -650,26 +659,50 @@ class FruitTrie:
         for char, child_node in node.children.items():
             self._collect_suggestions(child_node, prefix + char, suggestions)
 
-def demonstrate_trie_autocomplete():
-    """Show trie-based autocomplete in action"""
-    fruits = generate_fruit_data(100)
+def autocomplete_demo():
+    """Show exactly how the trie builds suggestions step by step"""
+    
+    # Create a small, controlled dataset for clear demonstration
+    sample_fruits = [
+        {"name": "Apple", "color": "Red", "region": "North America"},
+        {"name": "Apricot", "color": "Orange", "region": "Europe"},
+        {"name": "Banana", "color": "Yellow", "region": "South America"},
+        {"name": "Cherry", "color": "Red", "region": "Europe"},
+        {"name": "Coconut", "color": "Brown", "region": "Pacific Islands"}
+    ]
+    
     fruit_trie = FruitTrie()
     
-    # Build the trie
-    for fruit in fruits:
-        fruit_trie.insert_fruit(fruit)
-    
-    # Test autocomplete
-    test_prefixes = ["ap", "ban", "cher", "man"]
-    
-    print("Trie-based Autocomplete Demo:")
+    print("Building Trie with Sample Fruits:")
     print("=" * 40)
     
-    for prefix in test_prefixes:
+    for fruit in sample_fruits:
+        fruit_trie.insert_fruit(fruit)
+        print(f"Added: {fruit['name']}")
+    
+    print("\nTesting Autocomplete:")
+    print("=" * 40)
+    
+    # Test various prefixes
+    test_cases = [
+        ("a", "Should find Apple and Apricot"),
+        ("ap", "Should find Apple and Apricot"),
+        ("app", "Should find only Apple"),
+        ("c", "Should find Cherry and Coconut"),
+        ("co", "Should find only Coconut"),
+        ("z", "Should find nothing")
+    ]
+    
+    for prefix, explanation in test_cases:
         suggestions = fruit_trie.get_autocomplete_suggestions(prefix)
-        fruit_names = [fruit['name'] for fruit in suggestions]
-        print(f"'{prefix}' → {fruit_names}")
+        names = [fruit['name'] for fruit in suggestions]
+        print(f"'{prefix}' → {names} ({explanation})")
+
+autocomplete_demo()
 ----
+
+Keep in mind this is an educational, fits-in-a-book example, so consider it a starting place for your own futher explorations. 
+Try integrating it with the c
 
 
 ==== Multi-term and Ranked Search
@@ -680,18 +713,178 @@ Or maybe a fruit chef who wants to create a recipe that uses all of the fruits t
 
 By combining inverted indexes with trie-based search, multi-term and ranked searches become possible.  
 Color and season, or region and size, or texture and vitamin C content can all be combined to break our fruit data down into tasty, useful morsels.  
-Here's an example of how that might happen:
+
+What do you think such a result might look like?  
+Give it some thought before reading on. 
+Here's an initial idea of how that might happen:
 
 [code, python]
 ----
 def multi_term_search(fruits, search_terms):
-    """Search for fruits matching multiple criteria"""
     results = []
     for fruit in fruits:
         if all(term.lower() in fruit['name'].lower() or term.lower() == fruit['color'].lower() or term.lower() == fruit['region'].lower() for term in search_terms):
             results.append(fruit)
     return results
 ----
+
+Ok, not a bad start.
+We'll go through all the fruits and find the ones that match all the terms.
+Should be great, especially since we've already done the indexing, right?
+
+That was a gotcha question.  
+While it solves the problems, this is not at all a good start.  
+First of all, it's a linear search, using a chain of conditions.
+We're right back to `O(n)` time.  
+Second of all, we're not using the inverted index we worked to construct.  
+Most interviewers will not try to trick you like this, but it's easy in the fog of being interviewed and the exhaustion that comes with nervous energy to un-optimize your code.  
+Be careful of this.  
+
+Here's a much more carefully considered example:
+
+----
+def multi_term_search_with_inverted_index(search_terms, inverted_index):
+    """Use inverted index for fast multi-term search"""
+    if not search_terms:
+        return []
+    
+    # Get fruits matching the first term
+    first_term = search_terms[0].lower()
+    if first_term not in inverted_index:
+        return []
+    
+    # Start with all fruits matching the first term
+    results = set(fruit['id'] for fruit in inverted_index[first_term])
+    
+    # For each additional term, intersect with matching fruits
+    for term in search_terms[1:]:
+        term_lower = term.lower()
+        if term_lower not in inverted_index:
+            return []  # No fruits match this term
+        
+        term_fruit_ids = set(fruit['id'] for fruit in inverted_index[term_lower])
+        results = results.intersection(term_fruit_ids)
+    
+    # Convert back to fruit objects
+    return [fruit for fruit in inverted_index.values() if fruit['id'] in results]
+----
+
+Now we're cooking with fruit!  
+This modified code uses the inverted index to quickly find fruits that match all of the search terms.
+It starts with the first term, finds all fruits that match it, and then intersects that set with the sets of fruits that match each subsequent term.
+This is much faster than the previous linear search, especially as the number of search terms increases.
+
+But still, we're only using boolean search.  Something matches the criteria or it doesn't.
+Fruits don't pick sides and we shouldn't either, so how can the search be improved to account for "close" search?
+It's as simple as adding a weight, as discussed in the graphs chapter.
+
+[code, python]
+----
+def ranked_multi_term_search(search_terms, inverted_index, all_fruits):
+    """Ranked search that scores and orders results by relevance"""
+    
+    fruit_scores = {}  # fruit_id -> relevance score
+    
+    for term in search_terms:
+        term_lower = term.lower()
+        if term_lower in inverted_index:
+            for fruit in inverted_index[term_lower]:
+                fruit_id = fruit['id']
+                
+                # Score based on multiple factors
+                score = 0
+                
+                # Exact name match gets highest score
+                if term_lower == fruit['name'].lower():
+                    score += 10
+                elif term_lower in fruit['name'].lower():
+                    score += 5
+                
+                # Color match gets medium score
+                if term_lower == fruit['color'].lower():
+                    score += 3
+                
+                # Region match gets lower score
+                if term_lower == fruit['region'].lower():
+                    score += 2
+                
+                # Accumulate scores for this fruit
+                if fruit_id not in fruit_scores:
+                    fruit_scores[fruit_id] = 0
+                fruit_scores[fruit_id] += score
+    
+    # Sort by score (highest first) and return top results
+    sorted_results = sorted(fruit_scores.items(), key=lambda x: x[1], reverse=True)
+    
+    # Convert back to fruit objects
+    fruit_lookup = {fruit['id']: fruit for fruit in all_fruits}
+    return [(fruit_lookup[fruit_id], score) for fruit_id, score in sorted_results[:10]]
+
+# Usage example
+def demonstrate_ranked_search():
+    fruits = generate_fruit_data(100)
+    inverted_index = create_comprehensive_inverted_index(fruits)
+    
+    search_terms = ["red", "apple", "sweet"]
+    results = ranked_multi_term_search(search_terms, inverted_index, fruits)
+    
+    print("Ranked Search Results:")
+    print("=" * 40)
+    for i, (fruit, score) in enumerate(results, 1):
+        print(f"{i}. {fruit['name']} ({fruit['color']}, {fruit['region']}) - Score: {score}")def ranked_multi_term_search(search_terms, inverted_index, all_fruits):
+    """Ranked search that scores and orders results by relevance"""
+    
+    fruit_scores = {}  # fruit_id -> relevance score
+    
+    for term in search_terms:
+        term_lower = term.lower()
+        if term_lower in inverted_index:
+            for fruit in inverted_index[term_lower]:
+                fruit_id = fruit['id']
+                
+                # Score based on multiple factors
+                score = 0
+                
+                # Exact name match gets highest score
+                if term_lower == fruit['name'].lower():
+                    score += 10
+                elif term_lower in fruit['name'].lower():
+                    score += 5
+                
+                # Color match gets medium score
+                if term_lower == fruit['color'].lower():
+                    score += 3
+                
+                # Region match gets lower score
+                if term_lower == fruit['region'].lower():
+                    score += 2
+                
+                # Accumulate scores for this fruit
+                if fruit_id not in fruit_scores:
+                    fruit_scores[fruit_id] = 0
+                fruit_scores[fruit_id] += score
+    
+    # Sort by score (highest first) and return top results
+    sorted_results = sorted(fruit_scores.items(), key=lambda x: x[1], reverse=True)
+    
+    # Convert back to fruit objects
+    fruit_lookup = {fruit['id']: fruit for fruit in all_fruits}
+    return [(fruit_lookup[fruit_id], score) for fruit_id, score in sorted_results[:10]]
+
+# Usage example
+def demonstrate_ranked_search():
+    fruits = generate_fruit_data(100)
+    inverted_index = create_comprehensive_inverted_index(fruits)
+    
+    search_terms = ["red", "apple", "sweet"]
+    results = ranked_multi_term_search(search_terms, inverted_index, fruits)
+    
+    print("Ranked Search Results:")
+    print("=" * 40)
+    for i, (fruit, score) in enumerate(results, 1):
+        print(f"{i}. {fruit['name']} ({fruit['color']}, {fruit['region']}) - Score: {score}")
+----
+
 
 ==== Real-world Considerations
 

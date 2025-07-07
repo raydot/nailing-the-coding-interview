@@ -197,5 +197,103 @@ def demonstrate_search_performance():
         else:
             print(f"  Speed improvement: Too fast to measure!")
             
-if __name__ == "__main__":
-    demonstrate_search_performance()
+# if __name__ == "__main__":
+#     demonstrate_search_performance()
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end_of_word = False
+class FruitTrie:
+    def __init__(self):
+        self.root = TrieNode()
+        self.fruit_suggestions = {}  # Maps complete words to fruit objects
+    
+    def insert_fruit(self, fruit):
+        """Insert a fruit into the trie for autocomplete"""
+        name = fruit['name'].lower()
+        self.fruit_suggestions[name] = fruit
+        
+        # Insert into trie
+        current = self.root
+        for char in name:
+            if char not in current.children:
+                current.children[char] = TrieNode()
+            current = current.children[char]
+        current.is_end_of_word = True
+    
+    def get_autocomplete_suggestions(self, prefix, max_results=5):
+        """Get fruit suggestions for autocomplete"""
+        prefix_lower = prefix.lower()
+        
+        # Navigate to prefix node
+        current = self.root
+        for char in prefix_lower:
+            if char not in current.children:
+                return []
+            current = current.children[char]
+        
+        # Collect all complete words from this prefix
+        suggestions = []
+        self._collect_suggestions(current, prefix_lower, suggestions, max_results)
+        
+        # Return corresponding fruit objects
+        return [self.fruit_suggestions[word] for word in suggestions if word in self.fruit_suggestions]
+    
+    def _collect_suggestions(self, node, prefix, suggestions, max_results):
+      """Collect suggestions with max limit"""
+      if len(suggestions) >= max_results:
+          return
+          
+      if node.is_end_of_word:
+          suggestions.append(prefix)
+
+      for char, child_node in node.children.items():
+          if len(suggestions) >= max_results:
+              break
+          self._collect_suggestions(child_node, prefix + char, suggestions, max_results)
+        
+def demonstrate_autocomplete_cli():
+    """Interactive command-line autocomplete demo"""
+    fruits = generate_fruit_data(100)
+    fruit_trie = FruitTrie()
+    
+    # Build the trie
+    for fruit in fruits:
+        fruit_trie.insert_fruit(fruit)
+    
+    print("Fruit Autocomplete Demo")
+    print("=" * 40)
+    print("Type a few letters to see autocomplete suggestions")
+    print("Type 'quit' to exit")
+    print()
+    
+    while True:
+        try:
+            user_input = input("Search: ").strip()
+            
+            if user_input.lower() == 'quit':
+                break
+            
+            if not user_input:
+                continue
+                
+            # Get suggestions
+            suggestions = fruit_trie.get_autocomplete_suggestions(user_input, max_results=5)
+            
+            if suggestions:
+                print(f"Suggestions for '{user_input}':")
+                for i, fruit in enumerate(suggestions, 1):
+                    print(f"  {i}. {fruit['name']} ({fruit['color']}, {fruit['region']})")
+            else:
+                print(f"No suggestions found for '{user_input}'")
+            
+            print()  # Empty line for readability
+            
+        except KeyboardInterrupt:
+            print("\nGoodbye!")
+            break
+
+# Run the demo
+demonstrate_autocomplete_cli()
+
