@@ -701,8 +701,9 @@ def autocomplete_demo():
 autocomplete_demo()
 ----
 
-Keep in mind this is an educational, fits-in-a-book example, so consider it a starting place for your own futher explorations. 
-Try integrating it with the c
+Keep in mind this is an educational, fits-in-a-book example, so consider it a starting place for your own further explorations. 
+Try integrating it with the code that generates all of the fruit data or consider making a GUI using Python/Flask or migrate it to a language of your choice.  
+I really do encouage you to play with it to get a feel for search.
 
 
 ==== Multi-term and Ranked Search
@@ -886,11 +887,9 @@ def demonstrate_ranked_search():
 ----
 
 
-==== Real-world Considerations
-
 ===== Fuzzy Search and Typo Tolerance
 
-In real-world applications, users make typos. A search for "Jhon Smith" should probably return "John Smith" results. Fuzzy search handles this by:
+In real-world applications, users make typos. A search for "Abnana" should probably return "banana" results. Fuzzy search handles this by:
 
 * **Edit Distance**: Measuring how many character changes needed to transform one string into another
 * **Approximate Matching**: Using algorithms like Levenshtein distance to find "close enough" matches
@@ -908,19 +907,137 @@ In real-world applications, users make typos. A search for "Jhon Smith" should p
 
 === Sort
 
+Now that we've bit off that large chunk of search we're ready to move on to sort.  
+We'll consider sort both on its own and as it relates to search, with the goal, as always, towards building an intuitive understanding that can be used to solve problems in interviews.
+
 ==== What does “sort” mean?
+
+Sort means putting things in some kind of order, usually either ascending or descending.
+The order can be determined by many things but usually involves some kind of sequence of information.  
+For instance, a list of sports players can be sorted in a variety of names given a specific sequence.  
+The players could be sorted by name, age, a given statistic, eye color, distance from home to stadium, pet type, number of children, favorite candy, etc.
+When we talk about sort we're talking about putting things in order to create a context for comparison.
+
+.Things Used to Come With Instructions
+====
+Not so long ago, computers actually came with instruction manuals.
+There was a time when not everyone just grew up knowing how to use a mouse.  
+In fact, games like Minesweeper and Solitare were included with Windows for that exact purpose -- teaching people how to use a mouse.
+
+The earliest versions of the Java Development Kit (JDK) that came out in the mid 1990's used to come with an applet called "SortDemo."  
+Running this demo would allow the user to choose between different sorting algorithms, such as bubble sort, insertion sort, and quick sort, and then watch as the applet sorted a list of numbers in real time.
+
+In the days before AI and YouTube, Java was a great way to get started with programming.
+It was readily accessible and could run pretty much anywhere.  
+Applets are now sadly a thing of the past, but the legacy of the SortDemo lives on.  
+Check out "algs4.jar,"" Princeton University's library of Java and Python apps aimed at teaching algorithms.
+It can be found at `https://algs4.cs.princeton.edu/code/`.  
+====
 
 ==== How is sort used?
 
+Sort can be used either simply to put information in order on its own, or in service of another process.  
+Some search algorithms benefit from the information first being sorted, as was discussed in the last section on search.
+
 ==== Why sort is important to understand
+
+Like search, sort isn't one specific thing but a range of solutions to various problems.  
+Understanding sort is important because it allows you to choose the right algorithm for the right problem, and to understand the tradeoffs involved in each choice.
 
 ==== Building Intuition: Reasoning about Sort
 
+The basic truth about sort is a simple one: can a set of data be organized in a way that makes it easier to reason about.
+If the answer is yes, then it's time to sort.  
+Like with search, there is a tradeoff between speed and size, as well as a difference between sorting small sets of data and larger ones.  
+
+This section will teach the basic concepts, but it's important to download and play with the code, try it out on different sets of data, run it against a timing algorithm, and really understand the key differences between different approaches.  
+
 === Types of sort
+
+During the 1970's and 1980's when computer science was preparing for the days ahead when computers could actually do all of the things computer scientists dreamed about, a lot of thought was put into the most effective ways to search.
+There are a lot of different sorting algorithms out there, some very general and some hyper-specialized.  
+
+I'm pretty sure an entire book could be written about sort alone.  
+Since this is of course not that book, I'm going to start with an overview of some of the more commonly used and easy-to-understand versions of sort.
+Again, and as with search, I invite you to play with these examples, use them with your own data, and gain a real understanding of the differences.  
+Also again and as with search, your job interview coding test might not contain a question that is specifically about search, but the reasoning skill you will gain from understanding search might help you solve the problem.
+
+The algorithms selected in this chapter are meant to cover an array of sorting strategies, culminating in merge sort.  
+Merge sort is really a culmination of many ideas presented elsewhere in this book.  
+If there's one thing you take away from this chapter, focus on understanding merge sort.  
+
+Insertion and bubble sort were covered in Chapter 4 in the context of arrays.  
+But sort is data structure agnostic, to some extent.  
+Whether the data is stored in a flat file, array, object, dictionary or database, these sorting methods can all be applied.  
 
 ==== Insertion sort
 
+In Chapter 4 we covered bubble sort and insertion sort in that order.
+In this chapter I'm going to reverse the order to make a slightly different point.
+Let's start with insertion sort this time because it's fairly intuitive.  
+The idea behind insertion sort is that you move things around until they're sorted.
+
+Let's start with the intuition: say you collect sneakers.  
+You want to come up with a way to organize your sneakers in your closet.
+You do this but putting your favorite sneaker on the left side of the closet because it "feels" like it goes first.  
+Then, one-by-one, you put each remaining pair of sneakers into the line.  
+If it feels like it goes second, you put it to the right of the first pair.  
+Or maybe you don't like it so much, and so you put it at the end of the line of sneakers.  
+
+Every sneaker that comes in has to fit somewhere in this schema.  
+Nothing will go to the left of your first sneaker, because that's your favorite.  
+But everything else will go between the pair of sneakers that's a little bit better, and a little bit worse.  
+By the time you get to the bottom of the pile your sneakers are now sorted in a line from best to worst.  
+(You also could have done this with any other criterion including color, price, drip, height, etc.)
+
+Going back to our fruit example, let's look at how insertion sort can be used to sort all of the fruits alphabetically:
+
+[code, python]
+----
+def insertion_sort_catalog(fruits):
+    """Sort fruits alphabetically"""
+    for i in range(1, len(fruits)):
+        current_fruit = fruits[i]
+        j = i - 1
+        # Find the right spot and insert
+        while j >= 0 and fruits[j]['name'] > current_fruit['name']:
+            fruits[j + 1] = fruits[j]
+            j -= 1
+        fruits[j + 1] = current_fruit
+----
+
+This good, intuitive way to build a search, and probably what most of us would do if we were asked to come up with our own search algorithm. 
+The idea is right down the line and stick each fruit exactly where it belongs.
+You should notice either from looking at the code or from remembering Chapter 4 that this of course comes with a O(n^2) time complexity, because you have a loop nested inside a loop.  
+If you have just a little bit of data, you could do a lot worse than to use insertion sort.  
+Which brings us to...  
+
 ==== Bubble sort
+
+Bubble sort definitely looks like an improvement over insertion sort.
+In bubble sort you go right down the line and compare every item with the item right next to it.  
+If they're out of order, you swap them.
+Quite the optimization, eh?
+
+[code, python]
+----
+def bubble_sort_prices(fruits):
+    """Sort fruit by price"""
+    n = len(fruits)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            # Compare every adjacent pair
+            if fruits[j]['price_per_lb'] > fruits[j + 1]['price_per_lb']:
+                fruits[j], fruits[j + 1] = fruits[j + 1], fruits[j]
+----
+
+Bubble sort is less code (by two lines) and easier to comprehend and remember.
+Sure it's O(n^2), but that's the same as insertion sort, right?
+You're probably used to my style by now, so when I ask if something's right, you've probably figured the answer is no, it's not right.  
+
+Even though bubble sort is a slightly more "obvious" solution, and even though the compari
+
+==== Selection sort
 
 ==== Quick sort
 
