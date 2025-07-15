@@ -851,7 +851,7 @@ find /var/log -type f -size +100M | wc -l
 ----
 
 This will search the `var/log` directory for files that are larger than 100 megabytes, and then pipe the output to `wc -l`, which will count the number of lines returned by the `find` command.
-My favorite fellow progammer was just giving me a one-off command to solve a specific problem, but he unknowingly introduced me to the idea of piping at the same time, which is a fantasic way to make all kinds of magical things happen in Unix.
+My favorite fellow programmer was just giving me a one-off command to solve a specific problem, but he unknowingly introduced me to the idea of piping at the same time, which is a fantastic way to make all kinds of magical things happen in Unix.
 ----
 
 
@@ -1223,14 +1223,15 @@ On the news there will usually be an "anchor" who sits in the studio and reports
 When it comes time to report the weather, the anchor will turn over reporting duties to the weather reporter, whose job is only to report on the weather-related stories of the day. 
 But wait, a terrible tornado has blown over the town's most prominent landmark! 
 The weather reporter pulls up the doppler radar that shows a terrible storm passing over the center of town, but because a newscaster can't be in two places at once the reporting function is then passed to an on scene reporter who has all of the details. 
-But wait again! The on scene reporter found a teenager who captured the whole thing with an iPhone five minutes before the broadcast started, and so now the reporting is passed to the control room that then plays back video of the event as it was happening live.
+But wait again! 
+The on-scene reporter found an eyewitness who captured the whole thing with their phone five minutes before the broadcast started, and so now the reporting is passed to the control room that then plays back video of the event as it was happening live.
 
 When the video concludes, the control "stack" can be said to "unwind."
 The control room will turn back to the on-scene reporter, who will make some sensational comments and then end with, "And now back to the weather room."
 The weather reporter will make some goofy comment that includes a pun and clear skies ahead and then say, "And now back to the anchor desk."
 The anchor will thank everyone for their amazing work and then turn to the next story.  
 
-The large problem of providing real-time information that covers various aspect of a single subject, is broken down into smaller and smaller chunks by passing control down the hierarchy of reporters, until the most detailed, essential piece of information is shown, and then control passed back up the hierarchy.
+To put is simply: the large problem of providing real-time information that covers various aspects of a single subject is broken down into smaller and smaller chunks by passing control down the hierarchy of reporters until the most detailed, essential piece of information is shown, and then control passed back up the hierarchy.
 
 Same basic idea as recursion, as will be examined. 
 
