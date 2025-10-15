@@ -36,7 +36,7 @@ There are some general principles you have to understand, and once you understan
 
 === What is Big O Notation?
 
-Big O (short for "Big omega" or the Greek letter Ω) is a topic that can make developers tremble in their stylish sneakers.
+Big O (short for "Big omnicron" or the Greek letter O) is a topic that can make developers tremble in their stylish sneakers.
 While the phrase "Big O" itself means something specific, which we'll get to in a moment, what I mean by "Big O Notation" as used so far in this chapter is a set of equations that form curves on a graph. 
 These curves usually represent time on the horizontal axis and the number of inputs to an operation -- or set of operations -- on the vertical axis.
 The "shapes" of these curves give developers a way to compare the efficiency of algorithms.
