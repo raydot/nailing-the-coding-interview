@@ -1,5 +1,9 @@
 # Using Generative AI to Study
 
-*This chapter will be converted from the corresponding AsciiDoc file*
+Put some introductory text here.
 
-Coming soon...
+## Reasoning Questions
+
+## Active Listening Questions
+
+## Logic Questions
