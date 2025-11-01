@@ -1,0 +1,21 @@
+[[DtCI_Part_II]]
+[part]
+== Algorithms
+
+[partintro]
+--
+"Great fleas have little fleas upon their backs to bite 'em,
+
+And little fleas have lesser fleas, and so ad infinitum.
+
+And the great fleas themselves, in turn, have greater fleas to go on;
+
+While these again have greater still, and greater still, and so on."
+
+- Augustus De Morgan, _A Budget of Paradoxes_
+
+Having nailed down data structures in Part I, we turn to algorithms in Part II.
+Algorithms are the rules, recipes, and procedures that work with data structures to transform values and logic into useful results.  
+
+Algorithms are the procedures that software uses to manipulate data structures. They are the recipes that take in data and return a result. By the end of this part you will have a good understanding of the most commonly used algorithms, and a strong foundation for solving algorithmic problems in coding interviews.
+--

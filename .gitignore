@@ -11,3 +11,27 @@ drafts/
 .vscode
 .yaml
 .pdf
+
+# Sauce
+docs/
+
+# Test book (can be regenerated)
+test-book/
+
+# Jupyter Book build output
+_build/
+.jupyter_cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# macOS
+.DS_Store

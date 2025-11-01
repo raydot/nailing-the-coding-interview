@@ -1,0 +1,16 @@
+name: coding-interview-book
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - jupyter-book
+  - jupyterlab
+  - numpy
+  - matplotlib
+  - pandas
+  # For code examples in the book
+  - ipywidgets
+  - pip
+  - pip:
+    - ghp-import  # For deploying to GitHub Pages

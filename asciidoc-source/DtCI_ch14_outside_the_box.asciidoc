@@ -1,0 +1,25 @@
+[[DtCI_ch14]]
+
+== "Parallel Thinking" Questions
+
+If there's one thing I don't love about the direction in which programmer interviews seem to be headed, it's that often considering the "individual" comes last.
+It's not great to be on a team where a member just isn't a good fit for the organizations culture -- usually worst of all for the person who is doing the not fitting.
+Some organizations are all about "close the tickets," while some orgaizations are more about coming up with creative and effective solutions.
+I once gave an interview where one of my primary considerations was the interviewee's sense of humor, because the organization was full of quirks and anyone who couldn't roll with that was just going to burn out in a hurry.
+
+In this chapter the goal is to cover some questions that can't really be explained in the context of "algorithmically."
+All of them will require you to slow down, open your mind, and explain your thinking.
+There might not be a right solution, but there will definitely be a right approach to the problem at hand.
+
+=== Reasoning Questions
+
+How many ping-pong balls can fit in a 747?
+
+
+
+=== Active Listening Questions
+
+
+
+=== Logic Questions
+
