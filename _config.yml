@@ -1,13 +1,13 @@
 # Book settings
 title: Nailing the Coding Interview
 author: Dave Kanter
-copyright: "2025"
-logo: images/logo.png  # You can add a logo later
+copyright: '© Dave Kanter 2025. All rights reserved.'
+logo: images/logo.png # You can add a logo later
 
 # Execution settings
 execute:
-  execute_notebooks: auto  # Execute notebooks that haven't been run
-  cache: ""
+  execute_notebooks: auto # Execute notebooks that haven't been run
+  cache: ''
   exclude_patterns:
     - 'test-book/*'
 
@@ -24,33 +24,33 @@ bibtex_bibfiles:
 # Repository information
 repository:
   url: https://github.com/raydot/nailing-the-coding-interview
-  path_to_book: ""
+  path_to_book: ''
   branch: main
 
 # HTML settings
 html:
-  favicon: ""
+  favicon: ''
   use_edit_page_button: false
   use_repository_button: true
   use_issues_button: true
   use_multitoc_numbering: true
-  extra_navbar: ""
+  extra_navbar: ''
   extra_footer: |
-    <p>© 2025 Dave Kanter. All rights reserved.</p>
-  google_analytics_id: ""
+    <p>© 2025 <a href="https://davekanter.com">Dave Kanter</a>. All rights reserved.</p>
+  google_analytics_id: ''
   home_page_in_navbar: true
-  baseurl: ""
+  baseurl: ''
   comments:
     hypothesis: false
     utterances: false
 
 # Launch buttons (for interactive code)
 launch_buttons:
-  notebook_interface: "jupyterlab"
-  binderhub_url: ""
-  jupyterhub_url: ""
+  notebook_interface: 'jupyterlab'
+  binderhub_url: ''
+  jupyterhub_url: ''
   thebe: false
-  colab_url: ""
+  colab_url: ''
 
 # Sphinx configuration
 sphinx:
@@ -60,9 +60,9 @@ sphinx:
       use_repository_button: true
       use_issues_button: true
       use_edit_page_button: false
-      path_to_docs: ""
+      path_to_docs: ''
       repository_branch: main
       launch_buttons:
-        binderhub_url: ""
-        colab_url: ""
-        notebook_interface: "jupyterlab"
+        binderhub_url: ''
+        colab_url: ''
+        notebook_interface: 'jupyterlab'

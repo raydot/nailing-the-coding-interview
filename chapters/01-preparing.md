@@ -20,9 +20,9 @@ Some companies will give longer tests that you can complete on your own time, bu
 
 If it’s just you and a coding test and a clock then spend a moment thinking about how to maximize your time. The questions will be of different difficulties. Oftentimes you will not be able to answer all of the questions in the time given. Do you feel more comfortable answering several hard questions or a single easy one? If it’s a group exercise, would you like to spend more time talking or more time coding?
 
-> > 💡 **TIP**
+> 💡 **TIP**
 >
-> > Don’t stay silent during your interview! It’s ok to ask questions of the interviewer. If you’re not sure what the question is asking, ask for a clarification. If you’re stuck, ask for a hint. If you’re not sure whether or not something is allowed, ask. Communicating your thoughts out loud gives the interviewer a chance to see how you reason through a problem, and how you respond to feedback. Speaking is not only allowed, it’s encouraged!
+> Don’t stay silent during your interview! It’s ok to ask questions of the interviewer. If you’re not sure what the question is asking, ask for a clarification. If you’re stuck, ask for a hint. If you’re not sure whether or not something is allowed, ask. Communicating your thoughts out loud gives the interviewer a chance to see how you reason through a problem, and how you respond to feedback. Speaking is not only allowed, it’s encouraged!
 
 ## What Interviewers Are Looking For
 
@@ -54,10 +54,10 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > You: "Ok, I’m going to use JavaScript to write a function that returns a number."
 >
-> ``` javascript
+> ```javascript
 > function returnNumber() {
->   var number = 23;
->   return number;
+>   var number = 23
+>   return number
 > }
 > ```
 >
@@ -65,10 +65,10 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > You: "Ok, number plus ten, got it."
 >
-> ``` javascript
+> ```javascript
 > function returnNumber(number) {
->   var myNumber = number + 10;
->   return myNumber;
+>   var myNumber = number + 10
+>   return myNumber
 > }
 > ```
 >
@@ -78,12 +78,12 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > Interviewer: "Sure, any two numbers you want."
 >
-> *you type*
+> _you type_
 >
-> ``` javascript
+> ```javascript
 > function returnSum(num1, num2) {
->   var sum = num1 + num2;
->   return sum;
+>   var sum = num1 + num2
+>   return sum
 > }
 > ```
 >
@@ -95,15 +95,15 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > You: "Ok. I’m going to write a function that takes in an array of five numbers and returns the sum."
 >
-> *you type*
+> _you type_
 >
-> ``` javascript
+> ```javascript
 > function returnSumOfArray(array) {
->   var sum = 0;
+>   var sum = 0
 >   for (var i = 0; i < 5; i++) {
->     sum += array[i];
+>     sum += array[i]
 >   }
->   return sum;
+>   return sum
 > }
 > ```
 >
@@ -111,7 +111,7 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > You: "Hmm…​oh man, I always forget that the `var` keyword is no longer used in JavaScript. I can remove that. I’m also going to get rid of those semicolons. They’re optional."
 >
-> ``` javascript
+> ```javascript
 > function returnSumOfArray(array) {
 >   var sum = 0
 >   for (let i = 0; i < 5; i++) {
@@ -135,9 +135,9 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > Interviewer: "Where would JavaScript programmers be without MDN? Sure, go ahead."
 >
-> ``` javascript
+> ```javascript
 > function returnSumOfArray(array) {
->   return array.reduce((acc, curr) => acc + curr);
+>   return array.reduce((acc, curr) => acc + curr)
 > }
 > ```
 >
@@ -157,14 +157,14 @@ The best way to show your interviewer that you’re a good candidate is to be yo
 >
 > You: "I don’t need to spend a lot of time doing this, but here’s just a simple check. Normally I might do something using Jest, but why don’t I just write write a simple test function that checks if the function returns the sum of the array `[1, 2, 3, 4, 5]`?"
 >
-> ``` javascript
+> ```javascript
 > function testReturnSumOfArray() {
->   var testArray = [1, 2, 3, 4, 5];
->   var result = returnSumOfArray(testArray);
+>   var testArray = [1, 2, 3, 4, 5]
+>   var result = returnSumOfArray(testArray)
 >   if (result === 15) {
->     console.log('Test passed!');
+>     console.log('Test passed!')
 >   } else {
->     console.log('Test failed!');
+>     console.log('Test failed!')
 >   }
 > }
 > ```
