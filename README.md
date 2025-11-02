@@ -25,6 +25,7 @@ All code examples are available in the [`code/`](code/) directory, organized by 
 ## 🛠️ Development
 
 This book is built using [Jupyter Book](https://jupyterbook.org/), which allows for:
+
 - Beautiful, searchable documentation
 - Executable code examples
 - Interactive learning experiences
@@ -81,11 +82,12 @@ Found an error? Have a suggestion? Contributions are welcome!
 
 ## 📄 License
 
-© 2025 Dave Kanter
+© 2025 Dave Kanter. MIT License.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 This means you're free to:
+
 - ✅ Use the content for learning
 - ✅ Share with others
 - ✅ Modify and adapt
