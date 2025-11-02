@@ -19,7 +19,7 @@ Or is it 11 characters? 13? Something else? To understand how to manipulate stri
 In most programming languages a string is nothing more than an array with a character at each position. Often, but not always, the final character will be a "null" character, which is a character that represents the end of the string. Dating back to the days of the teletype (if you’ve ever seen an old movie where a machine is typing out a message on a piece of paper, that’s a teletype), the null character was used to indicate the end of a line in the message or the end of the message. The tradition remains in some modern programming languages, and sometimes in manipulating strings not accounting for the null characters can cause problems. For the remainder of this book that you don’t have to worry about it, but you’ve been warned.
 
 <figure>
-<img src="./images/ch_03/string_as_array.png" alt="String as Array of Characters" />
+<img src="../images/ch_03/string_as_array.png" alt="String as Array of Characters" />
 <figcaption>A string as an array of characters</figcaption>
 </figure>
 
@@ -50,7 +50,7 @@ These are all things to keep in mind when you hear the word "character." When yo
 Here’s another look at that image above one more time:
 
 <figure>
-<img src="./images/ch_03/string_as_array.png" alt="String as Array of Characters" />
+<img src="../images/ch_03/string_as_array.png" alt="String as Array of Characters" />
 </figure>
 
 ### Accessing a String

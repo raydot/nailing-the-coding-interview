@@ -27,7 +27,7 @@ What does the curve look like? For each person at the table the waitperson has t
 We’re going get to the terminology later, but this operation is in "O(n)" time, where "n" is the number of people at the table. The shape of the curve is a straight line at a 45º angle. Kind of steep!
 
 <figure>
-<img src="./images/ch_02/oh_of_en.png" alt="O(n)" />
+<img src="../images/ch_02/oh_of_en.png" alt="O(n)" />
 <figcaption aria-hidden="true">O(n)</figcaption>
 </figure>
 
@@ -36,7 +36,7 @@ Can we make this more efficient, and in so doing flatten the curve? Of course! I
 Again, holding off on the terminology, this operation is in "O(1)" time, where "1" is the number of operations. This is also known as "contant time" because the number of inputs — people sitting at the table — doesn’t affect the number of operations required to place the order.
 
 <figure>
-<img src="./images/ch_02/oh_of_one.png" alt="O(1)" />
+<img src="../images/ch_02/oh_of_one.png" alt="O(1)" />
 <figcaption aria-hidden="true">O(1)</figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ In each of these graphs, the Y or vertical axis is the number of inputs. The X o
 ### O(1)
 
 <figure>
-<img src="./images/ch_02/oh_of_one.png" alt="O(1)" />
+<img src="../images/ch_02/oh_of_one.png" alt="O(1)" />
 <figcaption aria-hidden="true">O(1)</figcaption>
 </figure>
 
@@ -70,7 +70,7 @@ With O(1), no matter how many inputs you have, there’s only one operation that
 ### O(n)
 
 <figure>
-<img src="./images/ch_02/oh_of_en.png" alt="O(n)" />
+<img src="../images/ch_02/oh_of_en.png" alt="O(n)" />
 <figcaption aria-hidden="true">O(n)</figcaption>
 </figure>
 
@@ -81,7 +81,7 @@ O(n) can be very efficient if there are only a few inputs. That’s a great plac
 ### O($`n^2`$)
 
 <figure>
-<img src="./images/ch_02/oh_of_en_squared.png" alt="O(latexmath:[n^2])" />
+<img src="../images/ch_02/oh_of_en_squared.png" alt="O(latexmath:[n^2])" />
 <figcaption>O(<span class="math inline"><em>n</em><sup>2</sup></span>)</figcaption>
 </figure>
 
@@ -90,7 +90,7 @@ O($`n^2`$) is the least efficient of all of the "shapes" discussed in this secti
 ### O(log n)
 
 <figure>
-<img src="./images/ch_02/oh_of_log_en.png" alt="O(log n)" />
+<img src="../images/ch_02/oh_of_log_en.png" alt="O(log n)" />
 <figcaption aria-hidden="true">O(log n)</figcaption>
 </figure>
 
@@ -103,7 +103,7 @@ Closely related to O(log n) is O(n log n), which is less desirable than O(n) but
 ### All of the shapes together
 
 <figure>
-<img src="./images/ch_02/oh_of_all_shapes.png" alt="O of all shapes" />
+<img src="../images/ch_02/oh_of_all_shapes.png" alt="O of all shapes" />
 <figcaption>All Big O Shapes Together</figcaption>
 </figure>
 
@@ -136,7 +136,7 @@ For the purposes of Big O, operations are the things that have to happen for the
 As an example, consider the multiplication table you may have learned in grade school:
 
 <figure>
-<img src="./images/ch_02/multiplication_table.png" alt="Multiplication Table" />
+<img src="../images/ch_02/multiplication_table.png" alt="Multiplication Table" />
 <figcaption aria-hidden="true">Multiplication Table</figcaption>
 </figure>
 
