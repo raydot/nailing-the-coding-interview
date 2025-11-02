@@ -1,0 +1,133 @@
+# Nailing the Coding Interview
+
+A comprehensive guide to mastering technical coding interviews, covering data structures, algorithms, and problem-solving strategies.
+
+## 📚 About This Book
+
+This book is designed to help developers at all levels prepare for coding interviews. Whether you're a recent graduate or an experienced developer, you'll find practical examples, clear explanations, and actionable strategies to succeed in technical interviews.
+
+### What You'll Learn
+
+- **Fundamentals:** Big O notation, time and space complexity
+- **Data Structures:** Arrays, strings, linked lists, stacks, queues, heaps, hash tables, trees, and graphs
+- **Algorithms:** Searching, sorting, recursion, dynamic programming, and greedy algorithms
+- **Interview Strategies:** How to approach problems, communicate your thinking, and handle different interview formats
+- **Practice:** Real interview questions with detailed solutions
+
+## 🚀 Read Online
+
+Visit the book website: [Coming Soon]
+
+## 💻 Code Examples
+
+All code examples are available in the [`code/`](code/) directory, organized by chapter. Examples are provided in Python, with some additional examples in JavaScript and Java.
+
+## 🛠️ Development
+
+This book is built using [Jupyter Book](https://jupyterbook.org/), which allows for:
+- Beautiful, searchable documentation
+- Executable code examples
+- Interactive learning experiences
+- Multiple output formats (HTML, PDF, EPUB)
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/raydot/nailing-the-coding-interview.git
+cd nailing-the-coding-interview
+
+# Create conda environment
+conda env create -f environment.yml
+
+# Activate environment
+conda activate coding-interview-book
+
+# Build the book
+jupyter-book build .
+
+# Open in browser
+open _build/html/index.html
+```
+
+See [SETUP.md](SETUP.md) for detailed setup instructions.
+
+## 📖 Table of Contents
+
+- **Preface**
+- **Chapter 1:** Preparing for the Coding Interview
+- **Chapter 2:** Big O Notation
+- **Chapter 3:** Strings
+- **Chapter 4:** Arrays
+- **Chapter 5:** Linked Lists
+- **Chapter 6:** Stacks and Queues
+- **Chapter 7:** Heaps
+- **Chapter 8:** Hashes
+- **Chapter 9:** Trees
+- **Chapter 10:** Graphs
+- **Chapter 11:** Functions and Recursion
+- **Chapter 12:** Search and Sort
+- **Chapter 13:** Dynamic Programming and Greedy Algorithms
+- **Chapter 14:** Parallel Thinking Questions
+- **Chapter 15:** Using Generative AI to Study
+
+## 🤝 Contributing
+
+Found an error? Have a suggestion? Contributions are welcome!
+
+- **Report Issues:** [GitHub Issues](https://github.com/raydot/nailing-the-coding-interview/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/raydot/nailing-the-coding-interview/discussions)
+- **Pull Requests:** Feel free to submit PRs for typos, corrections, or improvements
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+This means you're free to:
+- ✅ Use the content for learning
+- ✅ Share with others
+- ✅ Modify and adapt
+- ✅ Use commercially
+
+Just include the original copyright notice.
+
+## ✍️ Author
+
+**Dave Kanter**
+
+- GitHub: [@raydot](https://github.com/raydot)
+
+## 🙏 Acknowledgments
+
+To Momma and the Boy, because they know why. Also thanks Dad, for getting me on the plinth in the first place.
+
+## 🔧 Technical Stack
+
+- **Content:** Markdown with MyST extensions
+- **Build System:** Jupyter Book
+- **Hosting:** GitHub Pages
+- **Version Control:** Git/GitHub
+- **Environment:** Python 3.11 + Conda
+
+## 📊 Project Status
+
+- ✅ Content converted from AsciiDoc to Markdown
+- ✅ All chapters available
+- ✅ Code examples included
+- 🚧 Website deployment in progress
+- 🚧 Interactive code examples coming soon
+
+## 🗺️ Roadmap
+
+- [x] Convert content to Markdown
+- [x] Remove O'Reilly branding
+- [x] Set up Jupyter Book
+- [ ] Deploy to GitHub Pages
+- [ ] Add interactive code examples
+- [ ] Create practice problems
+- [ ] Add video tutorials (maybe)
+- [ ] Publish PDF/EPUB versions
+
+---
+
+**Star this repo** ⭐ if you find it helpful!
