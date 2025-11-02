@@ -81,6 +81,8 @@ Found an error? Have a suggestion? Contributions are welcome!
 
 ## 📄 License
 
+© 2025 Dave Kanter
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 This means you're free to:

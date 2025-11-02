@@ -1,7 +1,7 @@
 # Book settings
 title: Nailing the Coding Interview
 author: Dave Kanter
-copyright: '© Dave Kanter 2025. All rights reserved.'
+copyright: '© Dave Kanter 2025. MIT License.'
 logo: images/logo.png # You can add a logo later
 
 # Execution settings
