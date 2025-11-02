@@ -120,61 +120,39 @@ Shows commands or other text that should be typed literally by the user.
 *Constant width italic*  
 Shows text that should be replaced with user-supplied values or by values determined by context.
 
-> [!TIP]
-> This element signifies a tip or suggestion.
+> > 💡 **TIP**
+>
+> > This element signifies a tip or suggestion.
 
-> [!NOTE]
-> This element signifies a general note.
+> > 📝 **NOTE**
+>
+> > This element signifies a general note.
 
-> [!WARNING]
-> This element indicates a warning or caution.
+> > ⚠️ **WARNING**
+>
+> > This element indicates a warning or caution.
 
 # Using Code Examples
 
-Supplemental material (code examples, exercises, etc.) is available for download at <https://github.com/oreillymedia/title_title>.
+All code examples from this book are available in the GitHub repository:
 
-If you have a technical question or a problem using the code examples, please send email to support@oreilly.com.
+<https://github.com/raydot/nailing-the-coding-interview>
 
-This book is here to help you get your job done. In general, if example code is offered with this book, you may use it in your programs and documentation. You do not need to contact us for permission unless you’re reproducing a significant portion of the code. For example, writing a program that uses several chunks of code from this book does not require permission. Selling or distributing examples from O’Reilly books does require permission. Answering a question by citing this book and quoting example code does not require permission. Incorporating a significant amount of example code from this book into your product’s documentation does require permission.
+The code examples are organized by chapter and are free to use for learning and practice. You're encouraged to experiment with them, modify them, and use them as a foundation for your own projects.
 
-We appreciate, but generally do not require, attribution. An attribution usually includes the title, author, publisher, and ISBN. For example: “*Book Title* by Some Author (O’Reilly). Copyright 2012 Some Copyright Holder, 978-0-596-xxxx-x.”
+This book is here to help you succeed in coding interviews. The code examples are provided under an open license - feel free to use them in your learning, practice problems, and interview preparation. Attribution is appreciated but not required.
 
-If you feel your use of code examples falls outside fair use or the permission given above, feel free to contact us at permissions@oreilly.com.
+# How to Contact the Author
 
-# O’Reilly Online Learning
+Have questions, found an error, or want to provide feedback? Here's how to reach out:
 
-> [!NOTE]
-> For more than 40 years, O’Reilly Media has provided technology and business training, knowledge, and insight to help companies succeed.
+- **GitHub Issues**: Report errors or suggest improvements at <https://github.com/raydot/nailing-the-coding-interview/issues>
 
-Our unique network of experts and innovators share their knowledge and expertise through books, articles, and our online learning platform. O’Reilly’s online learning platform gives you on-demand access to live training courses, in-depth learning paths, interactive coding environments, and a vast collection of text and video from O’Reilly and 200+ other publishers. For more information, visit https://oreilly.com.
+- **GitHub Discussions**: Ask questions or discuss topics at <https://github.com/raydot/nailing-the-coding-interview/discussions>
 
-# How to Contact Us
+- **Website**: Visit the book's website for updates and additional resources
 
-Please address comments and questions concerning this book to the publisher:
-
-O’Reilly Media, Inc.
-
-1005 Gravenstein Highway North
-
-Sebastopol, CA 95472
-
-800-889-8969 (in the United States or Canada)
-
-707-827-7019 (international or local)
-
-707-829-0104 (fax)
-
-support@oreilly.com
-
-https://www.oreilly.com/about/contact.html
-
-We have a web page for this book, where we list errata, examples, and any additional information. You can access this page at <https://www.oreilly.com/catalog/catalog_page>.
-
-For news and information about our books and courses, visit <https://oreilly.com>.
-
-Find us on LinkedIn: <https://linkedin.com/company/oreilly-media>
-
-Watch us on YouTube: <https://youtube.com/oreillymedia>
+Your feedback helps make this book better for everyone!
 
 # Acknowledgments
 

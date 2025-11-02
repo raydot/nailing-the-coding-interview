@@ -92,8 +92,9 @@ The right side of the tree is similar to the left side, but it contains the righ
 
 The left child of the root node is 60, and the right child is 93. Following the tree down to the bottom the children of 60 are 43 and 67, and the children of 43 are 10 and 22.
 
-> [!NOTE]
-> What’s with all the quotes?
+> > 📝 **NOTE**
+>
+> > What’s with all the quotes?
 >
 > I threw quotes around a lot of the terms up above the first time they appeared in text to remind us all that trees are the able-to-be-understood-by-humans representation of the underlying data structure.
 >
@@ -285,7 +286,7 @@ def in_order_traversal(tree):
     if tree is None:
         return []
     return in_order_traversal(tree.left) + [tree.value] + in_order_traversal(tree.right)
-```
+```javascript
 
 I’m just gonna leave that there and let you ponder it, but we’ll come back to this idea in chapter 11.
 
@@ -401,7 +402,7 @@ def delete_leaf_node(node):
     if node.left is None and node.right is None:
         return None
     return node
-```
+```javascript
 
 Case two is a wee bit trickier, but not by much. If the node to be deleted only has one child, then the child can simple be moved up to take the place of the parent. All of the other children will remain in place, and balance will be restored to the kingdom. This can be accomplished with a function like this:
 
@@ -414,7 +415,7 @@ def delete_node_with_one_child(node):
     if node.right is None:
         return node.left
     return node
-```
+```javascript
 
 The third case presents a bit of a challenge. What to do if the node to be deleted has two children. If that’s the case then a lot of nodes need to move up. But there’s a simple trick that can be used to solve the problem easily. When the parent is deleted either the left child or the right child needs to be moved up to take its place. This can be done by either finding the largest value in the left child, or the smallest value in the right child, moving it up to become the parent.
 
@@ -427,7 +428,7 @@ def find_largest_value(node):
     while node.right is not None:
         node = node.right
     return node.value
-```
+```javascript
 
 With that function in place, the node is ready to be swapped out and deleted:
 
@@ -445,7 +446,7 @@ def delete_node_with_two_children(node):
         # Delete the original parent
         node.left = delete_node_with_one_child(node.left)
     return node
-```
+```python
 
 ### Balancing
 
@@ -463,27 +464,19 @@ This is more of a linked list than a tree, right? Maybe 60 should be at the root
 
 The great thing about BSTs is that they are self-balancing. All of the rules that go into creating a BST also ensure that the tree stays balanced. This might not be true for every kind of tree, but it is true for BSTs. So keep calm, and rip trees.
 
-<div class="sidebar">
-
-<div class="title">
-
-If Trees are so great, why don’t programming languages already have them?
-
-</div>
-
-Excellent question!
-
-There are a few "native" trees in some programming languages, like Java’s `TreeSet` and `TreeMap` or `set` and `map` in the C++ Standard Template Library, but most programming languages do not have a native implementation of trees.
-
-The reason, I suspect, is simple. Most trees are created for a very specific purpose, like the DOM in a web browser or the file system on your computer.
-
-Because of the need for such specific functions and data, a more generic tree implementation would likely have to be modified to work with specific sets of data, or would be difficult to optimize for specific use cases.
-
-In other words: pretty useless.
-
-That doesn’t mean they’re not important, though. It just means that if you get to the point where you’re sure you need a tree, it will also be crystal clear to you exactly what it needs and how to build your own. Good thing the rules for creating trees are so simple!
-
-</div>
+> **If Trees are so great, why don’t programming languages already have them?**
+>
+> Excellent question!
+>
+> There are a few "native" trees in some programming languages, like Java’s `TreeSet` and `TreeMap` or `set` and `map` in the C++ Standard Template Library, but most programming languages do not have a native implementation of trees.
+>
+> The reason, I suspect, is simple. Most trees are created for a very specific purpose, like the DOM in a web browser or the file system on your computer.
+>
+> Because of the need for such specific functions and data, a more generic tree implementation would likely have to be modified to work with specific sets of data, or would be difficult to optimize for specific use cases.
+>
+> In other words: pretty useless.
+>
+> That doesn’t mean they’re not important, though. It just means that if you get to the point where you’re sure you need a tree, it will also be crystal clear to you exactly what it needs and how to build your own. Good thing the rules for creating trees are so simple!
 
 ## Tries
 
@@ -572,7 +565,7 @@ Here are some helper functions that can be added to the already defined `Trie` c
 
         for char, child_node in node.children.items():
             self._collect_words(child_node, prefix + char, suggestions)
-```
+```python
 
 Play around with this code and add some print statements and see if you can get it to work as an autocomplete algorithm. This code is most of the way there, and shouldn’t require too much tinkering to get it to work. Another idea is to add a function that visualizes the trie, so you can see how it works. Last of all, how would you delete a word from a trie? We will return to tries in Chapter 12, so it will be worth your time to play around with them now.
 

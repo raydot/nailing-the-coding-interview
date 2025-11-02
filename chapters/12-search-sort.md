@@ -119,7 +119,7 @@ def jump_search(arr, x):
             return False
 
     return arr[prev] == x
-```
+```javascript
 
 ### Tokenization / Normalization / Filtering
 
@@ -274,7 +274,7 @@ def create_searchable_fruit_index(fruits):
         region_index[region].append(fruit)
 
     return name_index, color_index, region_index
-```
+```python
 
 All this code is doing is creating three separate indices, one that allows for search by name, one that allows to search by color, and one that allows to search by index. Each of these indicies (indexes? indicum?) is a Python dictionary that maps the search term to the appropriate fruit data.
 
@@ -306,111 +306,103 @@ Notice the data relationships are a little different between each of the groups 
 
 What’s "hash" about this is that all of the data is stored in Python dictionaries, which automatically covert string values into hash values. This allows for much faster lookups, as will become more evident as we proceed through the examples. This is particularly a Python feature, and I mentioned in Chapter 8 that a Python dictionary is a kind of hash table. If you’re using other programming languages the same basic concept applies but the implementation will be different. In Javascript, for instance, objects can only use strings as keys and so no hashing occurs. In order to gain the benefits of hashing in Javascript, one solution is to use a Javascript `Map()`. Make sure you are aware of the implementation differences before heading in to an interview!
 
-<div class="sidebar">
-
-<div class="title">
-
-So How Fast Is It?
-
-</div>
-
-This book has focused solely on Big-O notation for speed comparison, because Big-O is an objective measure of speed that discounts differences between things like system architecture, operating systems, chip sets, internet speed, etc., etc. Even if you have a great imagination unmatched only by your sense of relative proportions, the difference between O(n) and O(1) might not seem particularly earth-shattering without some real numbers behind it.
-
-So here is code that will return the difference, in the universally understood concept of "Earth seconds," between searching un-indexed and indexed code. After you’ve got your fruit generator set-up and running, go ahead and try it!
-
-    import time
-
-    def search_without_index(fruits, search_term, search_type="name"):
-        """Linear search through all fruits - O(n) time complexity"""
-        results = []
-        for fruit in fruits:
-            if search_type == "name" and search_term.lower() in fruit['name'].lower():
-                results.append(fruit)
-            elif search_type == "color" and search_term.lower() == fruit['color'].lower():
-                results.append(fruit)
-            elif search_type == "region" and search_term.lower() == fruit['region'].lower():
-                results.append(fruit)
-        return results
-
-    def search_with_index(search_term, search_type, name_index, color_index, region_index):
-        """Hash-based search using indexes - O(1) time complexity"""
-        if search_type == "name":
-            result = name_index.get(search_term.lower())
-            return [result] if result else []
-        elif search_type == "color":
-            return color_index.get(search_term.lower(), [])
-        elif search_type == "region":
-            return region_index.get(search_term.lower(), [])
-        return []
-
-
-    def create_searchable_fruit_index(fruits):
-        """Create multiple indexes for different search types"""
-        name_index = {}
-        color_index = {}
-        region_index = {}
-
-        for fruit in fruits:
-            # Index by name
-            name_index[fruit['name'].lower()] = fruit
-
-            # Index by color
-            color = fruit['color'].lower()
-            if color not in color_index:
-                color_index[color] = []
-            color_index[color].append(fruit)
-
-            # Index by region
-            region = fruit['region'].lower()
-            if region not in region_index:
-                region_index[region] = []
-            region_index[region].append(fruit)
-
-        return name_index, color_index, region_index
-
-    def demonstrate_search_performance():
-        """Show the dramatic difference between indexed and non-indexed search"""
-
-        # Generate test data
-        fruits = generate_fruit_data(100)
-        name_index, color_index, region_index = create_searchable_fruit_index(fruits)
-
-        # Test searches
-        test_searches = [
-            ("Apple", "name"),
-            ("Red", "color"),
-            ("Asia", "region")
-        ]
-
-        print("Search Performance Comparison")
-        print("=" * 50)
-
-        for search_term, search_type in test_searches:
-            print(f"\nSearching for {search_type}: '{search_term}'")
-
-            # Linear search timing
-            start_time = time.time()
-            linear_results = search_without_index(fruits, search_term, search_type)
-            linear_time = time.time() - start_time
-
-            # Indexed search timing
-            start_time = time.time()
-            indexed_results = search_with_index(search_term, search_type, name_index, color_index, region_index)
-            indexed_time = time.time() - start_time
-
-            # Results
-            print(f"  Linear search: {len(linear_results)} results in {linear_time:.6f} seconds")
-            print(f"  Indexed search: {len(indexed_results)} results in {indexed_time:.6f} seconds")
-
-            if indexed_time > 0:
-                speedup = linear_time / indexed_time
-                print(f"  Speed improvement: {speedup:.1f}x faster")
-            else:
-                print(f"  Speed improvement: Too fast to measure!")
-
-    demonstrate_search_performance()
-
-</div>
+> **So How Fast Is It?**
+>
+> This book has focused solely on Big-O notation for speed comparison, because Big-O is an objective measure of speed that discounts differences between things like system architecture, operating systems, chip sets, internet speed, etc., etc. Even if you have a great imagination unmatched only by your sense of relative proportions, the difference between O(n) and O(1) might not seem particularly earth-shattering without some real numbers behind it.
+>
+> So here is code that will return the difference, in the universally understood concept of "Earth seconds," between searching un-indexed and indexed code. After you’ve got your fruit generator set-up and running, go ahead and try it!
+>
+>     import time
+>
+>     def search_without_index(fruits, search_term, search_type="name"):
+>         """Linear search through all fruits - O(n) time complexity"""
+>         results = []
+>         for fruit in fruits:
+>             if search_type == "name" and search_term.lower() in fruit['name'].lower():
+>                 results.append(fruit)
+>             elif search_type == "color" and search_term.lower() == fruit['color'].lower():
+>                 results.append(fruit)
+>             elif search_type == "region" and search_term.lower() == fruit['region'].lower():
+>                 results.append(fruit)
+>         return results
+>
+>     def search_with_index(search_term, search_type, name_index, color_index, region_index):
+>         """Hash-based search using indexes - O(1) time complexity"""
+>         if search_type == "name":
+>             result = name_index.get(search_term.lower())
+>             return [result] if result else []
+>         elif search_type == "color":
+>             return color_index.get(search_term.lower(), [])
+>         elif search_type == "region":
+>             return region_index.get(search_term.lower(), [])
+>         return []
+>
+>
+>     def create_searchable_fruit_index(fruits):
+>         """Create multiple indexes for different search types"""
+>         name_index = {}
+>         color_index = {}
+>         region_index = {}
+>
+>         for fruit in fruits:
+>             # Index by name
+>             name_index[fruit['name'].lower()] = fruit
+>
+>             # Index by color
+>             color = fruit['color'].lower()
+>             if color not in color_index:
+>                 color_index[color] = []
+>             color_index[color].append(fruit)
+>
+>             # Index by region
+>             region = fruit['region'].lower()
+>             if region not in region_index:
+>                 region_index[region] = []
+>             region_index[region].append(fruit)
+>
+>         return name_index, color_index, region_index
+>
+>     def demonstrate_search_performance():
+>         """Show the dramatic difference between indexed and non-indexed search"""
+>
+>         # Generate test data
+>         fruits = generate_fruit_data(100)
+>         name_index, color_index, region_index = create_searchable_fruit_index(fruits)
+>
+>         # Test searches
+>         test_searches = [
+>             ("Apple", "name"),
+>             ("Red", "color"),
+>             ("Asia", "region")
+>         ]
+>
+>         print("Search Performance Comparison")
+>         print("=" * 50)
+>
+>         for search_term, search_type in test_searches:
+>             print(f"\nSearching for {search_type}: '{search_term}'")
+>
+>             # Linear search timing
+>             start_time = time.time()
+>             linear_results = search_without_index(fruits, search_term, search_type)
+>             linear_time = time.time() - start_time
+>
+>             # Indexed search timing
+>             start_time = time.time()
+>             indexed_results = search_with_index(search_term, search_type, name_index, color_index, region_index)
+>             indexed_time = time.time() - start_time
+>
+>             # Results
+>             print(f"  Linear search: {len(linear_results)} results in {linear_time:.6f} seconds")
+>             print(f"  Indexed search: {len(indexed_results)} results in {indexed_time:.6f} seconds")
+>
+>             if indexed_time > 0:
+>                 speedup = linear_time / indexed_time
+>                 print(f"  Speed improvement: {speedup:.1f}x faster")
+>             else:
+>                 print(f"  Speed improvement: Too fast to measure!")
+>
+>     demonstrate_search_performance()
 
 ### Inverted Index Search
 
@@ -430,8 +422,6 @@ Each node in a trie represents a character in a string, and a path from the root
 
 Apache Solr
 
-</div>
-
     The ideas in this chapter are mostly meant to provide a context against which to solidify readers' knowledge of search and sort, but there are actually jobs that involve expertise in searching and sorting.
 
     One widely used open source search platform is Apache Solr, which is built on top of the Apache Lucene search library.
@@ -440,8 +430,6 @@ Apache Solr
     We bolted on the user interface using React and created a very powerful tool for creating custom web experiences.
 
     If search is really, truly touching you in the deepest parts of your soul, look up "Java Solr Developer" jobs and see if you can find a position that will allow you to work with it.
-
-</div>
 
 For instance, if you’re a fruit poet and you’re looking for all fruits that begin with the better "b," you can use a trie-based search to quickly find all fruits that start with "b" without having to search through the entire dataset. The basic methods for creating tries from data was covered in Chapter 9, so go back and have a look there if you need a refresher and to see an explanation of the `TrieNode` class that is used to build the Trie.
 
@@ -724,15 +712,11 @@ Sort means putting things in some kind of order, usually either ascending or des
 
 Things Used to Come With Instructions
 
-</div>
-
 Not so long ago, computers actually came with instruction manuals. There was a time when not everyone just grew up knowing how to use a mouse. In fact, games like Minesweeper and Solitare were included with Windows for that exact purpose — teaching people how to use a mouse.
 
 The earliest versions of the Java Development Kit (JDK) that came out in the mid 1990’s used to come with an applet called "SortDemo." Running this demo would allow the user to choose between different sorting algorithms, such as bubble sort, insertion sort, and quick sort, and then watch as the applet sorted a list of numbers in real time.
 
 In the days before AI and YouTube, Java was a great way to get started with programming. It was readily accessible and could run pretty much anywhere. Applets are now sadly a thing of the past, but the legacy of the SortDemo lives on. Check out "algs4.jar,"" Princeton University’s library of Java and Python apps aimed at teaching algorithms. It can be found at `https://algs4.cs.princeton.edu/code/`.
-
-</div>
 
 ### How is sort used?
 

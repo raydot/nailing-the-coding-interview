@@ -70,7 +70,7 @@ queue.append(4)
 print(queue.pop(0))
 print(queue.pop(0))
 print(queue)
-```
+```python
 
 This will output:
 
@@ -86,19 +86,11 @@ In JavaScript you have even more options, as there are no built-in stack or queu
 
 Play around with these methods a bit to get a feel for how they work. You can even open a Python instance in your terminal or JavaScript console in your browser and try them out there.
 
-<div class="sidebar">
-
-<div class="title">
-
-Think about it:
-
-</div>
-
-Why are we only interested in FIFO and LIFO, and not FILO (first-in-last-out) or LILO?
-
-Some (mostly older) programming languages also have a method called PEEK, which allows you to look at the first/top element of a queue or stack without removing it. Why might you want to do this?
-
-</div>
+> **Think about it:**
+>
+> Why are we only interested in FIFO and LIFO, and not FILO (first-in-last-out) or LILO?
+>
+> Some (mostly older) programming languages also have a method called PEEK, which allows you to look at the first/top element of a queue or stack without removing it. Why might you want to do this?
 
 ## Implementing stacks and queues
 
@@ -139,7 +131,7 @@ class Stack:
 
     def is_empty(self):
         return len(self.items) == 0
-```
+```python
 
 Knowing how to implement a stack really helps see what’s going on in the Python list implementation. You can also easily extend this basic idea to add other methods, like `peek`, `size`, or `clear`. You can have a stack size limit by including a method to see if the stack is full. You can also add data-checking to allow only certain types of data into the stack. This very basic implementation gives access to a wide range of possibilities.
 
@@ -250,17 +242,9 @@ print(is_balanced("(()))")) # False
 
 Can you generalize this example to other types of brackets? How can it be used to check not only parentheses `()`, but also brackets `[]` and curly-braces `{}`? Once you’ve got them properly "balanced", with the same numbers of openers and closers, how can you check that they are properly nested — brackets opened first are closed first?
 
-<div class="sidebar">
-
-<div class="title">
-
-The Terminal
-
-</div>
-
-This may be another one of my unpopular opinions, but I’m always truly amazed when I find a programmer who doesn’t know how to use a command-line terminal, and doesn’t seem to care. It’s not used anywhere near as much as it used to be (I once used to check my email in the terminal), but it’s still an absolutely necessary thing to know. While you certainly don’t have to read the Unix MAN pages from beginning to end or become a VIM ninja, any programmer should know how to navigate through a file system, create and delete files and directories, and run programs from the command line. It’s invaluable for not having to "context switch" between your editor and your terminal, and using it will give you lots of really, really boring stories to tell your grandkids. Also: it will absolutely make you a better programmer.
-
-</div>
+> **The Terminal**
+>
+> This may be another one of my unpopular opinions, but I’m always truly amazed when I find a programmer who doesn’t know how to use a command-line terminal, and doesn’t seem to care. It’s not used anywhere near as much as it used to be (I once used to check my email in the terminal), but it’s still an absolutely necessary thing to know. While you certainly don’t have to read the Unix MAN pages from beginning to end or become a VIM ninja, any programmer should know how to navigate through a file system, create and delete files and directories, and run programs from the command line. It’s invaluable for not having to "context switch" between your editor and your terminal, and using it will give you lots of really, really boring stories to tell your grandkids. Also: it will absolutely make you a better programmer.
 
 ### Find items in order in a stack
 

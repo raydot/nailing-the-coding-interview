@@ -109,33 +109,25 @@ superObject = {
 print(superObject["foods"]["itemOne"]) # "pudding"
 superObject.update({"people": "Farmer Jane"})
 print(superObject["people"]) # "Farmer Jane"
-```
+```python
 
 (Python also has a fantastic library for working with "dataframes" called Pandas, and if you’re interested in data science mixing Pandas with JSON is a great way to get started — check it out!)
 
-<div class="sidebar">
-
-<div class="title">
-
-XML, Ya Coulda Been a Contender
-
-</div>
-
-Back in the early 2000s, XML was the future. With its extensibility (the X in XML), its compatibility, its readability (sorta), and its wonderful, wonderful schemas it heralded the way forward in data storage. Everything could be uploaded, categorized, heirarchized, and stored and we were all assured a glitch-free future.
-
-XML was used in all kinds of applications, including rss feeds, web services, and even in web pages. You didn’t have to be a data scientist to use it, and it was easy to learn. There was even "XHTML", which was XML for web pages, a guarantee that any web page you wrote could be read by any browser, anywhere.
-
-So what happened?
-
-Simple: it wasn’t the easiest thing to work with. Sure, anyone could write an XML document, but in order to use it pretty much anywhere you had to parse it, and you could only parse it if everything was exactly right. This could many times require that you add an awful lot of markup to your markup, and it was a great way to slowly go insane.
-
-Meanwhile, good old HTML didn’t really complain much about bad syntax, databases were a lot more powerful while only being a little harder to work with, and polyfills were just a download away.
-
-And then along came JSON, which was easier to work with, pain-free to parse, and worked everywhere.
-
-The reason I bother to mention XML is because in addition to be a good example of a use for key-value pairs, it’s also a great example of how the road to obsolescence is paved with good intentions. Just because it’s "right," just because it’s "better," just because it’s "the future," none of that means anything if it’s not easy to use. It didn’t take long for someone to build a better-than-XML mousetrap, and you should keep such considerations in the back of your mind when you’re building your own data structures and libraries.
-
-</div>
+> **XML, Ya Coulda Been a Contender**
+>
+> Back in the early 2000s, XML was the future. With its extensibility (the X in XML), its compatibility, its readability (sorta), and its wonderful, wonderful schemas it heralded the way forward in data storage. Everything could be uploaded, categorized, heirarchized, and stored and we were all assured a glitch-free future.
+>
+> XML was used in all kinds of applications, including rss feeds, web services, and even in web pages. You didn’t have to be a data scientist to use it, and it was easy to learn. There was even "XHTML", which was XML for web pages, a guarantee that any web page you wrote could be read by any browser, anywhere.
+>
+> So what happened?
+>
+> Simple: it wasn’t the easiest thing to work with. Sure, anyone could write an XML document, but in order to use it pretty much anywhere you had to parse it, and you could only parse it if everything was exactly right. This could many times require that you add an awful lot of markup to your markup, and it was a great way to slowly go insane.
+>
+> Meanwhile, good old HTML didn’t really complain much about bad syntax, databases were a lot more powerful while only being a little harder to work with, and polyfills were just a download away.
+>
+> And then along came JSON, which was easier to work with, pain-free to parse, and worked everywhere.
+>
+> The reason I bother to mention XML is because in addition to be a good example of a use for key-value pairs, it’s also a great example of how the road to obsolescence is paved with good intentions. Just because it’s "right," just because it’s "better," just because it’s "the future," none of that means anything if it’s not easy to use. It didn’t take long for someone to build a better-than-XML mousetrap, and you should keep such considerations in the back of your mind when you’re building your own data structures and libraries.
 
 When it comes to key-value pair there are different names for both the data structures used, and the very concept itself. Key-value pairs are also called "name-value," "associative arrays," "maps", "dictionaries," and "hashes" in various programming languages. I wanted to give another example I suspect most people reading this book will be familiar with, and that’s the HTML attribute.
 
@@ -232,7 +224,7 @@ class SimpleHashTable:
             if item[0] == key:
                 return item[1]
         return None
-```
+```javascript
 
 That’s a bit longer than most examples, so I’m going to go through it a function at a time.
 
@@ -242,7 +234,7 @@ def simple_hash(key, table_size):
     for pos, char in enumerate(str(key)):
         hash_value += (ord(char) * (pos + 1))
     return hash_value % table_size
-```
+```javascript
 
 `simple_hash` is a hashing function that works very similarly to the example I gave above with the only difference being that in addition to being passed the string to be hashed, it’s also passed a `table_size.` The `table_size` is the key (again, no pun intended) to handling collisions and space in a hash table, and I’ll be coming back to it before the end of this section.
 
@@ -266,7 +258,7 @@ The hash table — the thing that actually holds all of the key-value pairs�
                 item[1] = value  # Update existing key
                 return
         self.table[index].append([key, value])
-```
+```python
 
 Now things are starting to get interesting. The `insert` function of the `SimpleHashTable` class takes in a key and a value, and then uses the `simple_hash` function to determine where to store the key-value pair. If I want to insert "Popeye the Sailor" into the hash table I do it by calling the insert function with the values "name" and "Popeye the Sailor."
 
@@ -281,7 +273,7 @@ In this example the table size is only 10, but there’s no limit to how large t
             if item[0] == key:
                 return item[1]
         return None
-```
+```python
 
 What’s going on here in the `get` function of the `SimpleHashTable` class is that it’s doing the same thing as the `insert` function, but in reverse. It takes the key generated by the `simple_hash` function, and then searches through the list of key-value pairs stored at that index. When it finds the key it’s looking for, it returns the value. If it doesn’t find the key, it returns `None`.
 
@@ -294,7 +286,7 @@ hash_table.insert("name", "Olive Oyl")
 hash_table.insert("name", "Bluto")
 hash_table.insert("name", "Wimpy")
 print(hash_table.get("name")) # "Popeye the Sailor"
-```
+```python
 
 ## More Hash Collisions
 
@@ -315,7 +307,7 @@ happy_family = {
     "Child3": "Gunther",
     "Child3": "Bartholomew" #NO!
 }
-```
+```python
 
 I hope the answer that shot immediately to your head is "no." If it didn’t, just think about it for a moment. One person can live in a house, and then maybe that person gets married and has children and dogs and goldfish and they can all live at the same address, no problem. But the reverse case would cause pandemonium: if two different houses had the exact same address, the mail would never come, the sun would fall from the sky, and the world would slowly decline into an eternal nightmare.
 
@@ -347,27 +339,19 @@ Imagine building a hash able for DNA sequences. You could take a DNA sequence, l
 
 ## Reasoning about Hashes
 
-<div class="sidebar">
-
-<div class="title">
-
-I ❤️ Lookup!
-
-</div>
-
-When I first started my career, back in the days when the Earth was still in black and white and had yet to cool, most video monitors were made with the now unfamiliar "cathode ray tube" technology. Most monitors were pretty much the same size: 640x480 pixels, and maybe a little more if you had a decent graphics card.
-
-The cable was a VGA cable, which converted the digital signal from the computer into an analog signal for the monitor. Most monitors were only capable of supporting a fixed number of colors, often no more than 256. You may have even at one point heard the term "web safe" colors, which is a reference to the 216 colors that would (hopefully) look exactly the same on any monitor.
-
-But what if your client had some fantastic new brand campaign, and their web page absolutely had to be in WidgetCo Blue®️? This required that you take the number of available colors and "map" them to the desired values on-screen. This would hopefully cause the monitor to display the colors you wanted as you wanted them, but this was entirely up to the graphics card in the user’s computer. Believe it or not for a short period in time going on a web page with a higher resolution than your computer’s on-board graphics card could actually crash your computer.
-
-The way this color conversion was accomplished was through a CLUT, or Color Look-Up Table. The CLUT was a hash table that took an existing color value and mapped it to a different one. Web-safe blue might be RGB(0, 0, 255), but WidgetCo Blue might be RGB(10, 140, 255). The CLUT would convert from one to the other, and the monitor would attempt to display the color as best it could. Sometimes the CLUT would even fail to unload when the browser was quit, and your monitor would display everything using the WidgetCo palette until the computer was restarted.
-
-While that problem has (thankfully) gone away, I still have a special fondness for lookup tables! Recently on a project we had a bunch of employee headshots that had been named according to several different naming conventions, but we need to associate the employee name with the appropriate headshot.
-
-Rather than re-name all the files, we create a JSON "lookup table" that mapped the employee name to the file name. This way, we could easily look up the employee name and get the file name, and then use that to display the headshot. It could support multiple photos and naming conventions for employee photos, and it was easy to update and maintain.
-
-</div>
+> **I ❤️ Lookup!**
+>
+> When I first started my career, back in the days when the Earth was still in black and white and had yet to cool, most video monitors were made with the now unfamiliar "cathode ray tube" technology. Most monitors were pretty much the same size: 640x480 pixels, and maybe a little more if you had a decent graphics card.
+>
+> The cable was a VGA cable, which converted the digital signal from the computer into an analog signal for the monitor. Most monitors were only capable of supporting a fixed number of colors, often no more than 256. You may have even at one point heard the term "web safe" colors, which is a reference to the 216 colors that would (hopefully) look exactly the same on any monitor.
+>
+> But what if your client had some fantastic new brand campaign, and their web page absolutely had to be in WidgetCo Blue®️? This required that you take the number of available colors and "map" them to the desired values on-screen. This would hopefully cause the monitor to display the colors you wanted as you wanted them, but this was entirely up to the graphics card in the user’s computer. Believe it or not for a short period in time going on a web page with a higher resolution than your computer’s on-board graphics card could actually crash your computer.
+>
+> The way this color conversion was accomplished was through a CLUT, or Color Look-Up Table. The CLUT was a hash table that took an existing color value and mapped it to a different one. Web-safe blue might be RGB(0, 0, 255), but WidgetCo Blue might be RGB(10, 140, 255). The CLUT would convert from one to the other, and the monitor would attempt to display the color as best it could. Sometimes the CLUT would even fail to unload when the browser was quit, and your monitor would display everything using the WidgetCo palette until the computer was restarted.
+>
+> While that problem has (thankfully) gone away, I still have a special fondness for lookup tables! Recently on a project we had a bunch of employee headshots that had been named according to several different naming conventions, but we need to associate the employee name with the appropriate headshot.
+>
+> Rather than re-name all the files, we create a JSON "lookup table" that mapped the employee name to the file name. This way, we could easily look up the employee name and get the file name, and then use that to display the headshot. It could support multiple photos and naming conventions for employee photos, and it was easy to update and maintain.
 
 ## Hashes and Encryption
 
@@ -402,7 +386,7 @@ hash_object.update(b"Hello, world!")
 hex_dig = hash_object.hexdigest()
 
 print(hex_dig)
-```
+```python
 
 I keep saying "hash!" and "hashing algorithm!" but what does that mean in the context of MD5, exactly? Recently I came across a clever example of it online. Someone posted a photo of a flyer trying to return a lost wallet. The advertisement said "If this is your wallet, please call the following number:"
 
@@ -448,7 +432,7 @@ result = word_count(text)
 
 for word, count in result.items():
     print(f"'{word}': {count}")
-```
+```javascript
 
 Notice the initialization of the Python dictionary (a type of hash table) named `word_count`. This function is simple: it checks to see if the word is in the dictionary. If it isn’t, it adds it with a count of 1. If it is, it increments the count by 1.
 
@@ -489,7 +473,7 @@ result = is_anagram("listen", "silent")
 print(result)  # True, because "listen" is an anagram of "silent"
 result = is_anagram("hello", "world")
 print(result)  # False, because "hello" is not an anagram of "world"
-```
+```python
 
 Can you come up with a way to connect Python to a dictionary API and use this code to return anagrams of your name? Or create an app that lets you cheat at "Words With Friends?" (If you get caught just tell your friends it’s a programming exercise. True friends will understand.)
 

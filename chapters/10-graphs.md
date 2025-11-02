@@ -32,25 +32,17 @@ Of course, if there’s a coding problem that comes up and you know the answer i
 
 This next section will cover the representation of graphs in code. Most languages do not come with a built-in "graph" keyword or data structure, and so they have to be built using other data structures. Graphs are primarily represented in code in one of two ways, as a matrix, or as an adjacency list. I’m going to start with the matrix first because even though it can present more of a challenge to manipulate, it’s a lot more intuitive to look at.
 
-<div class="sidebar">
-
-<div class="title">
-
-Back to math class
-
-</div>
-
-Matrices are another subject I slept right through in my high-school math classes. I could not, for the life of me, figure out why it mattered at all for me to understand them. A matrix is nothing more than a rectangular array of numbers. A spreadsheet is a matrix. For that matter, so is a tic-tac-toe board. Mathematicians have come up with very clever ways to manipulate matrices, and that’s all the boring stuff I slept through.
-
-Never fear, because now that I’m older and at least a little bit wiser, I can see matrix addition and multiplication for what it is: a series of algorithms that can be used to manipulate matrices.
-
-You might be programming a game that features a cool alien space ship that needs to move around the screen. The graphic representation is a matrix of pixels. You could come up with graphic representations of the ship at every potential angle of representation, but if you know how to move matrices around, you can just rotate the matrix of pixels instead.
-
-For a programmer, just learning some basic matrix math can take you a long way in terms of manipulating matrices, which means manipulating graphics, graphs, data, and all kinds of other things.
-
-Knowing matrix math also brings all kinds of interesting algorithmic treatments into play. If you are trying to figure out whether it’s possible in a graph to move from point A to point B, you can use matrix math to do that. You don’t have to just put a finger down and trace the path.
-
-</div>
+> **Back to math class**
+>
+> Matrices are another subject I slept right through in my high-school math classes. I could not, for the life of me, figure out why it mattered at all for me to understand them. A matrix is nothing more than a rectangular array of numbers. A spreadsheet is a matrix. For that matter, so is a tic-tac-toe board. Mathematicians have come up with very clever ways to manipulate matrices, and that’s all the boring stuff I slept through.
+>
+> Never fear, because now that I’m older and at least a little bit wiser, I can see matrix addition and multiplication for what it is: a series of algorithms that can be used to manipulate matrices.
+>
+> You might be programming a game that features a cool alien space ship that needs to move around the screen. The graphic representation is a matrix of pixels. You could come up with graphic representations of the ship at every potential angle of representation, but if you know how to move matrices around, you can just rotate the matrix of pixels instead.
+>
+> For a programmer, just learning some basic matrix math can take you a long way in terms of manipulating matrices, which means manipulating graphics, graphs, data, and all kinds of other things.
+>
+> Knowing matrix math also brings all kinds of interesting algorithmic treatments into play. If you are trying to figure out whether it’s possible in a graph to move from point A to point B, you can use matrix math to do that. You don’t have to just put a finger down and trace the path.
 
 Matrices (plural for matrix) are commonly represented as two-dimensional arrays. The should not come as too much of a surprise.
 
@@ -84,7 +76,7 @@ food_web = [
     [    0,     0,    0,    0,    0,    0  ],  # Orca     - Apex predator
     [    0,     0,    0,    0,    0,    0  ]   # Bear     - Competes with orcas for seals
 ]
-```
+```python
 
 Rows in a matrix are what goes across, from left to right. The first row in this matrix is also the first array, `[0, 1, 1, 0, 0, 0]`. The row represents algae, or, more specifically, what eats algae.
 
@@ -104,7 +96,7 @@ food_web = {
     'Orca': [],
     'Bear': []
 }
-```
+```python
 
 Instead of a 2D array, the adjacency list is a dictionary, or hash table. All of the species are listed as keys, with the values being an array of the species that eat them. This form provides two immediate advantages over the matrix form:
 
@@ -303,7 +295,7 @@ Hiroshi -> Diego
 Ian -> Emma
 Jamal -> Farid
 Kyle -> Gina
-```
+```python
 
 Was it what you expected? As you can see, Amir knows everybody. Or, well, if he doesn’t know somebody, then he knows someone who knows them, or he knows someone who knows someone who knows them. Right?
 
@@ -312,8 +304,6 @@ Was it what you expected? As you can see, Amir knows everybody. Or, well, if he 
 <div class="title">
 
 Six Degrees of Separation / Kevin Bacon
-
-</div>
 
     When Friendster / MySpace / Facebook first arrived in the web world, people were absolutely blown away.
     How absolutely amazing it was that the "web" part of the "World Wide Web" was finally being both realized and made visible.
@@ -334,8 +324,6 @@ Six Degrees of Separation / Kevin Bacon
 
     While the thrill of the earliest social networks has faded somewhat, graphs have become a vital part of connecting ideas, interests, and people online.
 
-</div>
-
 Go back to your graph drawing (or mine) and trace out the depth-first traversal. Can you see how it’s working? Notice that each visited node is marked as "visited," which is how the algorithm tracks where it needs to go next.
 
 Let’s add a breadth-first traversal and see what happens there.
@@ -353,7 +341,7 @@ def breadth_first_traversal(self, start):
             queue.extend(neighbor for neighbor in self.graph[vertex] if neighbor not in visited)
 # Example usage
 g.breadth_first_traversal('Amir')
-```
+```python
 
 Adding this function to our graph class and running it provides this output:
 
@@ -370,7 +358,7 @@ Hiroshi
 Ian
 Jamal
 Kyle
-```
+```python
 
 The breadth-first traversal starts at Amir and then, instead of running each connection all the way down to the end, visits each of Amir’s friends first, then their friends, then friends of friends, and so on. You will also notice it returns in a different order than the depth-first traversal, and that order just so happens to be alphabetical. Additionally, breadth-first traversal does not require nodes to be marked as "visited."
 

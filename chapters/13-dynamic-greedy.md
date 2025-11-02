@@ -77,7 +77,7 @@ fibonacci(30) =     832040 | Time:  0.2657s
 fibonacci(35) =    9227465 | Time:  2.9454s
 fibonacci(40) =  102334155 | Time: 31.9365s
 fibonacci(45) = 1134903170 | Time: 360.0277s
-```
+```python
 
 Whoa, growing fast! I stopped at 45 because I didn’t want to miss my next book deadline, but feel free to try it with larger numbers if you’re not into the whole brevity thing.
 
@@ -119,35 +119,27 @@ fibonacci(40) =  102334155 | Time:  0.0000s
 fibonacci(45) = 1134903170 | Time:  0.0000s
 fibonacci(100) = 354224848179261915075 | Time:  0.0001s
 fibonacci(500) = ENORMOUS NUMBER! | Time:  0.0006s
-```
+```javascript
 
 My computer was able to calculate `fibonacci(500)` which resulted in a number slightly less than 14 with 103 zeros after it in just 0.0006 seconds. This is a speedup of about 122,725 times over the naive recursive version. Go memoization!
 
-<div class="sidebar">
-
-<div class="title">
-
-Why So Much Fibonacci?
-
-</div>
-
-I’ve always thought the Fibonacci sequence is cool, never more so than the first time I saw it clearly at work in a head of romanesco cauliflower. You should come to my parties!
-
-At the same time, though, so what? I’m not a botanist or a population biologist, so what do I care about Fibonacci numbers?
-
-The reason the Fibonacci sequence is used so often in computer science is because it’s applicable to a wide array of problems. It’s a fantastic example that can be used to illustrate functions, recursion, dynamic programming, chart making, and, yep, memoization.
-
-The intuition of it is easy to lose though.
-
-Why is matters is because it stands for a kind of programming problem that is very common in coding interviews. That’s the problem where you know something has a kind of boundary, but you don’t know what it is.
-
-If you have siblings you may have wrestled them at some point. When you wrestle your siblings, especially your younger siblings, you know that there is a limit to how much you can overpower them. You might knock them down and sit on them, but you aren’t trying to actually hurt them in any serious way, you’re just goofing around. There’s a limit, right? And you know you’ve hit it when you go too far and your sibling starts crying and you know you’re in trouble and the game isn’t fun any more.
-
-Fibonacci is like that. Have a look at the timing example. Things were going just fine until we got to 40, and then it wasn’t fun any more. I’m sure my computer could handle 50 but I just don’t want to know how long it would take. That’s the "boundary" of the Fibonacci sequence. What dynamic programming can help you do is figure out how to get to that boundary without going past it. It can help you figure out how to solve the problem without going too far and getting into trouble.
-
-How high can you drop an egg without it breaking? How many times can you fold a piece of paper in half? How far out can you build a bridge from one side of a river without additional support? How many times can you call a function before it runs out of memory? These are all problems that can be solved using dynamic programming, and the Fibonacci sequence is the generic example that shares one thing in common with all of them: a boundary.
-
-</div>
+> **Why So Much Fibonacci?**
+>
+> I’ve always thought the Fibonacci sequence is cool, never more so than the first time I saw it clearly at work in a head of romanesco cauliflower. You should come to my parties!
+>
+> At the same time, though, so what? I’m not a botanist or a population biologist, so what do I care about Fibonacci numbers?
+>
+> The reason the Fibonacci sequence is used so often in computer science is because it’s applicable to a wide array of problems. It’s a fantastic example that can be used to illustrate functions, recursion, dynamic programming, chart making, and, yep, memoization.
+>
+> The intuition of it is easy to lose though.
+>
+> Why is matters is because it stands for a kind of programming problem that is very common in coding interviews. That’s the problem where you know something has a kind of boundary, but you don’t know what it is.
+>
+> If you have siblings you may have wrestled them at some point. When you wrestle your siblings, especially your younger siblings, you know that there is a limit to how much you can overpower them. You might knock them down and sit on them, but you aren’t trying to actually hurt them in any serious way, you’re just goofing around. There’s a limit, right? And you know you’ve hit it when you go too far and your sibling starts crying and you know you’re in trouble and the game isn’t fun any more.
+>
+> Fibonacci is like that. Have a look at the timing example. Things were going just fine until we got to 40, and then it wasn’t fun any more. I’m sure my computer could handle 50 but I just don’t want to know how long it would take. That’s the "boundary" of the Fibonacci sequence. What dynamic programming can help you do is figure out how to get to that boundary without going past it. It can help you figure out how to solve the problem without going too far and getting into trouble.
+>
+> How high can you drop an egg without it breaking? How many times can you fold a piece of paper in half? How far out can you build a bridge from one side of a river without additional support? How many times can you call a function before it runs out of memory? These are all problems that can be solved using dynamic programming, and the Fibonacci sequence is the generic example that shares one thing in common with all of them: a boundary.
 
 ## Overlapping Subproblems
 

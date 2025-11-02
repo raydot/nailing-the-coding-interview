@@ -10,9 +10,7 @@ Here comes the dry, boring part of what a function is:
 
 ``` math
 f(x) = 2x
-```
-
-</div>
+```javascript
 
 If x = 1, then f(x) = 2 \* 1 = 2. If x = 2, then f(x) = 2 \* 2 = 4. If x = 3, then f(x) = 2 \* 3 = 6…​etc.
 
@@ -27,7 +25,7 @@ Here is the same f(x) = 2x function in Python:
 ``` python
 def two_x(value):
   return (2 * value)
-```
+```python
 
 In this case, `two_x` is the function name, `value` is the value being passed in, and `2 * value` is the computation being applied to that value. The function then "returns" that value to the place from whence it was called. Because of this "return," a function can used to set a variable:
 
@@ -78,7 +76,7 @@ Functions in programming perform a similar, um, function, allowing data passed i
 ``` python
 def doubler-function(value):
   return (2 * value)
-```
+```python
 
 Function implementations are language-specific, with C++ and Java requiring functions be set to data types, and JavaScript containing several ways to create functions, depending on what you’re trying to accomplish. In every language, however, functions are just like the ones you encountered in high-school algebra. They take a value (or values), transform them according to a set of rules, and return the result.
 
@@ -91,14 +89,15 @@ In strongly typed languages, functions are usually defined by a *prototype*, a b
 ``` c
 // Function prototype
 float multIntAndFloat(int num1, float num2);
-```
+```python
 
 The first `float` in this prototype indicates that it will return a float. The `int` and `float` keywords preceding the two values being passed in means these values *must* be an int and a float. If you pass or return any other type of data, the compiler will return an error — or at least a warning, depending on the C implementation you’re using.
 
 Weakly typed languages don’t require function prototypes, but there are ways to require them, of course. The Typescript programming language is probably the best current example of creating type-checking, for all data and not just functions, in JavaScript.
 
-> [!TIP]
-> Try coming up with examples of situations in which it would be important to check data passed to a function. Are the checks limited to checking data types? If your language doesn’t support function prototyping, how can data checks in functions be enforced?
+> > 💡 **TIP**
+>
+> > Try coming up with examples of situations in which it would be important to check data passed to a function. Are the checks limited to checking data types? If your language doesn’t support function prototyping, how can data checks in functions be enforced?
 
 ## Constructing functions
 
@@ -129,7 +128,7 @@ const doubler_plus_two = (x) => {
   const result = 2 * x
   return result + 2
 }
-```
+```javascript
 
 All equally valid, but now you’ve lost the need not to type return, and you have a function doing two things (doubling x and adding 2) which is fine, but not really any different from what a function can already do.
 
@@ -167,7 +166,7 @@ function outerFunction() {
   }
   return innerFunction
 }
-```
+```javascript
 
 It’s been said that in JavaScript functions are "first-class", which means they can be passed around like any other data type. In this example, `outerFunction` is a function that returns `innerFunction`, which is a function that logs the value of `outerValue` to the console.
 
@@ -178,7 +177,7 @@ console.log(outerValue)
 // Output: ReferenceError: outerValue is not defined
 innerFunction()
 // Output: ReferenceError: innerFunction is not defined
-```
+```javascript
 
 Encapsulation at work! Neither of these values are available outside of `OuterFunction`. This is scope defined with the curly braces that surround the data. The data inside the function is "private," and can only be accessed from within the function.
 
@@ -237,7 +236,7 @@ console.log(counter1.increment()) // 2
 const counter2 = createCounter()
 console.log(counter2.increment()) // 1
 console.log(counter2.decrement()) // 0
-```
+```javascript
 
 Lots of closure stuff happening here! First "count" is a private variable that is only available to the "increment," "decrement," and "getValue" functions inside the object. Second, the "inner" functions in the "name:function" object are returned from the function, and the functions inside the object are able to access the "count" variable even though the `createCounter` function that created it has finished executing. Third, once these objects are created they maintain their own state, so that each object created by the function has its own "count" variable that is separate from the others. And I didn’t have to use a single line of Redux!
 
@@ -261,7 +260,7 @@ def create_counter():
         "decrement": decrement,
         "getValue": get_value
     }
-```
+```javascript
 
 The answer to "what is a closure?" All of the above. Specifically, a closure is a function that maintains a reference to the variables in the scope in which it was created, even after that scope has finished executing.
 
@@ -280,7 +279,7 @@ const doubledArray = myArray.map(function (num) {
   return num * 2
 })
 console.log(doubledArray) // Output: [2, 4, 6, 8, 10]
-```
+```python
 
 That mystery `function` is the anonymous function. It’s needed because you have to pass in and return the number you’re trying to double. This can also be done with an arrow function:
 
@@ -288,7 +287,7 @@ That mystery `function` is the anonymous function. It’s needed because you hav
 const myArray = [1, 2, 3, 4, 5]
 const doubledArray = myArray.map((num) => num * 2)
 console.log(doubledArray) // Output: [2, 4, 6, 8, 10]
-```
+```python
 
 Be aware of the portability between the one-line and multi-line anonymous functions, which has tripped me up more than once. If the arrow function is used without curly braces, the return is implicit, and does not need to be stated. You can see that above in `map((num) ⇒ num * 2)`, where the return is implicit.
 
@@ -304,7 +303,7 @@ const result = numArray.map((num, index) => {
     name: nameArray[index]
   }
 })
-```
+```python
 
 This example still uses an arrow function, but there are now curly braces added because more than one line of code is needed to accomplish the task. Because the curly braces have been added, the implicit `return` goes away, and you will have to explicitly use the `return` keyword to return whatever it is you want to return.
 
@@ -355,7 +354,7 @@ function_array = [double, triple, quadruple, quintuple]
 for func in function_array:
     result = function_taking_function(func, 5)
     print(result)  # Output: 10, 15, 20, 25
-```
+```javascript
 
 If you’ve never considered this it can be fun to play around with it as an idea. But this is one more of those things where just because you can, doesn’t necessarily mean you should. Piling functions up and passing them around can quickly make your code tricky to reason about, especially if those functions are returning things. If you adhere to the rule where each function should only be responsible for one thing, if you start storing functions in arrays, passing them to other functions, passing those functions to functions, it sounds like a memory leak waiting to happen.
 
@@ -381,7 +380,7 @@ const obj = {
   }
 };
 obj.greet(); // Output: Hello, my name is Dave
-```
+```javascript
 
 But if a function is created outside of an object, then `this` refers to JavaScripts global object (or `undefined` in strict mode, because, don’t do that):
 
@@ -389,7 +388,7 @@ But if a function is created outside of an object, then `this` refers to JavaScr
 function greet() {
   console.log(`Hello, my name is ${this.name}`);
 }
-```
+```python
 
 ## Constructor functions
 
@@ -413,7 +412,7 @@ public class Robot {
         return age;
     }
 }
-```
+```python
 
 That funny looking function that has the same name as the class definition, `Robot`, is the constructor function. When the class is created, the variables passed in to the constructor function help set up the class variables. Multiple robots can be generated like this:
 
@@ -421,7 +420,7 @@ That funny looking function that has the same name as the class definition, `Rob
 Robot robot1 = new Robot("Lala", 5);
 Robot robot2 = new Robot("Barney", 10);
 Robot robot3 = new Robot("Peppa", 15);
-```
+```javascript
 
 This works in much the same way as passing variables to a function does, but it only works if a constructor is defined in the first place.
 
@@ -442,7 +441,7 @@ const generator = generatorFunction();
 console.log(generator.next().value); // Output: 1
 console.log(generator.next().value); // Output: 2
 console.log(generator.next().value); // Output: 3
-```
+```javascript
 
 This generic generator function example tells you pretty much everything you need to know. The syntax involves adding a `*` to the function definition. The `yield` keyword is used to store the list of values in the function. The `next()` method is used to get the next value in the list, and the `value` property is used to get the value itself.
 
@@ -477,7 +476,7 @@ const spicyPickle = createPickle("spicy");
 dillPickle.makePickle(); // Output: Making a dill pickle!
 sweetPickle.makePickle(); // Output: Making a sweet pickle!
 spicyPickle.makePickle(); // Output: Making a spicy pickle!
-```
+```javascript
 
 ## Callback functions
 
@@ -491,7 +490,7 @@ function myCallback() {
 }
 
 setTimeout(myCallback, 10000);
-```
+```javascript
 
 This code will print the phrase "Another ten seconds gone!" to the console after 10 seconds.
 
@@ -516,7 +515,7 @@ async function main() {
 }
 
 main();
-```
+```javascript
 
 ## Function chaining
 
@@ -534,7 +533,7 @@ $('#coolElement')
   .css('border-radius', '8px')
   .css('transition', 'all 0.3s ease-in-out')
   .fadeIn(1000);
-```
+```javascript
 
 In this example the first line, `$('#coolElement')` is a jQuery "selector" that grabs the element from the DOM that has the ID of `coolElement`.
 
@@ -635,7 +634,7 @@ const elementTransformation = pipe(
 
 const transformedElement = elementTransformation(getElement('coolElement'));
 console.log(transformedElement);
-```
+```python
 
 Pretty cool, right? But you can see how it could easily get unwieldy. Now that you’ve been shown, use it wisely.
 
@@ -644,8 +643,6 @@ Pretty cool, right? But you can see how it could easily get unwieldy. Now that y
 <div class="title">
 
 Piping
-
-</div>
 
     Piping has been around since the earliest days of Unix, which was created at Bell Labs in the 1960's.
     I've mentioned earlier in the book the importance of knowing at least a little bit of Unix and I'm not going to repeat that here other than to say that if you ignored that advice the first time, here it is again.
@@ -661,8 +658,6 @@ Piping
 
     For instance:
     [source, bash]
-
-</div>
 
 find /var/log -type f -size +100M \| wc -l
 
@@ -683,7 +678,7 @@ function incrementGlobal() {
   globalVariable += 1
 }
 incrementGlobal()
-```
+```javascript
 
 Of course that would never happen because EVERYONE knows global variables are bad, right? I mean, my gosh, I wouldn’t be caught dead coding with one. Now that my secret is safe, `incrementGlobal()` is function that creates a side effect by changing the value of `globalVariable`, which is scoped outside of the function.
 
@@ -694,7 +689,7 @@ let globalVariable = 0
 function incrementGlobalMore() {
   globalVariable += 2
 }
-```
+```python
 
 Good luck keeping track of which function is changing the value of `globalVariable`, and when.
 
@@ -706,7 +701,7 @@ function incrementGlobal(value) {
   return value + 1
 }
 globalVariable = incrementGlobal(globalVariable)
-```
+```python
 
 The difference in this example is that `globalVariable` is not changed inside the function. When `incrementGlobal()` is called, there’s no worry that something somewhere else is going to be going the same thing to `globalVariable` at the same time.
 
@@ -722,7 +717,7 @@ const noGreens = mAndMs.filter((m) => m !== "green")
 
 console.log(noGreens)
 // Output: ["red", "brown", "yellow", "blue", "red", "brown"]
-```
+```javascript
 
 In this example the function is passed in as an arrow function, the function being the logical condition `m !== "green"`.
 
@@ -747,33 +742,25 @@ def add10(x):
 
 print(add10(5))
 # Output: 15
-```
+```python
 
 In this example, `add10` is a curried function that takes a single argument, `x`, and returns the result of `add(x, 10)`. Which makes no sense whatsoever, because why couldn’t you just do (x + 10) and be done with it.
 
 Let me see if I can come up with a more exemplary example, as all good examples are.
 
-<div class="sidebar">
-
-<div class="title">
-
-Functional Programming
-
-</div>
-
-Functional programming is a term that was quite trendy for a while, and it’s a very useful concept to understand. It’s yet another programming paradigm, like "object-oriented," and while it’s certainly not the only way to program or the only thing you should ever consider, it has some useful ideas that will definitely make you a better coder.
-
-The idea of functional programming is simply that everything is a function. All of the code in your program is either data, or a function to act on that data. Nothing is "imperative," meaning that you don’t tell the computer what to do, you tell it what you want done and it figures out how to do it. The challenge is while that’s an easy concept to (pretend to) understand, it’s quite a bit more challenging to actually put in into practice.
-
-At the heart of the functions in functional programming is the idea that functions should be "pure," meaning that they don’t have side effects. A side effect is code that changes something outside of the function — which should not be possible because there should be no "outside" of the function.
-
-This takes a lot of tools out of the box, specifically: global variables, data mutation, and loops. It also means that you can’t use recursion, because recursion is a side effect.
-
-The idea caught on when it was realized that JavaScript had a largish state management problem, and lead to the implementation of things like Redux. Over the past few years, however, we’ve all become a lot more sensible about state, and new libraries like React Hooks and Jotai have made it a lot easier to manage state more sensibly.
-
-It’s worth reading about and trying to get your head around at least the basics, and trying to solve programming problems like "FizzBuzz" in a purely functional programming language like Lisp or Haskell will certainly give you a whole new perspective on problem solving in programming — and I mean that in a good way.
-
-</div>
+> **Functional Programming**
+>
+> Functional programming is a term that was quite trendy for a while, and it’s a very useful concept to understand. It’s yet another programming paradigm, like "object-oriented," and while it’s certainly not the only way to program or the only thing you should ever consider, it has some useful ideas that will definitely make you a better coder.
+>
+> The idea of functional programming is simply that everything is a function. All of the code in your program is either data, or a function to act on that data. Nothing is "imperative," meaning that you don’t tell the computer what to do, you tell it what you want done and it figures out how to do it. The challenge is while that’s an easy concept to (pretend to) understand, it’s quite a bit more challenging to actually put in into practice.
+>
+> At the heart of the functions in functional programming is the idea that functions should be "pure," meaning that they don’t have side effects. A side effect is code that changes something outside of the function — which should not be possible because there should be no "outside" of the function.
+>
+> This takes a lot of tools out of the box, specifically: global variables, data mutation, and loops. It also means that you can’t use recursion, because recursion is a side effect.
+>
+> The idea caught on when it was realized that JavaScript had a largish state management problem, and lead to the implementation of things like Redux. Over the past few years, however, we’ve all become a lot more sensible about state, and new libraries like React Hooks and Jotai have made it a lot easier to manage state more sensibly.
+>
+> It’s worth reading about and trying to get your head around at least the basics, and trying to solve programming problems like "FizzBuzz" in a purely functional programming language like Lisp or Haskell will certainly give you a whole new perspective on problem solving in programming — and I mean that in a good way.
 
 ## Higher Order Functions
 
@@ -788,7 +775,7 @@ function higherOrderFunction() {
   };
 }
 const innerFunc = higherOrderFunction();
-```
+```javascript
 
 This is an incredibly useful concept because it can be used to create functions "on the fly," that are much more flexible and usable than single purpose functions.
 
@@ -868,7 +855,7 @@ const customShoe = standardShoe('Air Jordan', 'red', 11, {
 });
 console.log(customShoe);
 // Has name, color, size, plus laces and engraving properties
-```
+```javascript
 
 Add a few more styles, options, and features and this can get pretty out of control in a hurry. And remember, most of the shoes will only have a name, a color, and a size.
 
@@ -935,7 +922,7 @@ const fullCustomShoe = standardShoe('Custom Elite', 'white', 10, {
   engravingInitials: 'MVP',
   customSoleColor: 'gold'
 });
-```
+```python
 
 If you’re familiar with object-oriented programming this kind of resembles extending a bae class, which it kinda is.
 
@@ -1081,7 +1068,7 @@ def _bubble_up(self, index):
     if index > 0 and self.heap[index] > self.heap[parent]:
         self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
         self._bubble_up(parent)
-```
+```python
 
 ### When you (might) have a recursive pattern
 

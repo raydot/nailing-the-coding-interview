@@ -20,8 +20,9 @@ Some companies will give longer tests that you can complete on your own time, bu
 
 If it’s just you and a coding test and a clock then spend a moment thinking about how to maximize your time. The questions will be of different difficulties. Oftentimes you will not be able to answer all of the questions in the time given. Do you feel more comfortable answering several hard questions or a single easy one? If it’s a group exercise, would you like to spend more time talking or more time coding?
 
-> [!TIP]
-> Don’t stay silent during your interview! It’s ok to ask questions of the interviewer. If you’re not sure what the question is asking, ask for a clarification. If you’re stuck, ask for a hint. If you’re not sure whether or not something is allowed, ask. Communicating your thoughts out loud gives the interviewer a chance to see how you reason through a problem, and how you respond to feedback. Speaking is not only allowed, it’s encouraged!
+> > 💡 **TIP**
+>
+> > Don’t stay silent during your interview! It’s ok to ask questions of the interviewer. If you’re not sure what the question is asking, ask for a clarification. If you’re stuck, ask for a hint. If you’re not sure whether or not something is allowed, ask. Communicating your thoughts out loud gives the interviewer a chance to see how you reason through a problem, and how you respond to feedback. Speaking is not only allowed, it’s encouraged!
 
 ## What Interviewers Are Looking For
 
@@ -37,166 +38,158 @@ I’ve been in interviews where the interviewer wanted me to be a robot who coul
 
 The best way to show your interviewer that you’re a good candidate is to be yourself.
 
-<div class="sidebar">
-
-<div class="title">
-
-Sample Interview
-
-</div>
-
-I’m going to take a moment to demonstrate what might occur during a coding interview. This example is an in-person coding interview. The applicant and the interviewer are sitting at a table, with the applicant seated in front of a computer. The applicant’s code is projected onto a screen on the front of the room
-
-If the interview is done online, it will be given through a platform like CoderPad or HackerRank. You can set up your own free accounts on these platforms to practice. They all come with support for a variety of languages.
-
-Here is how a coding interview might go. This particular example is meant to show how you can communicate with the interviewer and express your ideas in a way that shows you understand the problem:
-
-Interviewer: "Let’s build a function that returns a number."
-
-You: "A function that returns a number. Does it matter what language I use?"
-
-Interviewer: "No, use a language you’re comfortable with."
-
-You: "Ok, I’m going to use JavaScript to write a function that returns a number."
-
-``` javascript
-function returnNumber() {
-  var number = 23;
-  return number;
-}
-```
-
-Interviewer: "You got it! Now let’s try writing a function that returns the number passed to it, plus ten."
-
-You: "Ok, number plus ten, got it."
-
-``` javascript
-function returnNumber(number) {
-  var myNumber = number + 10;
-  return myNumber;
-}
-```
-
-Interviewer: "Great! Now let’s try writing a function that returns the sum of two numbers."
-
-You: "Ok, a sum of two numbers. Any two numbers?"
-
-Interviewer: "Sure, any two numbers you want."
-
-*you type*
-
-``` javascript
-function returnSum(num1, num2) {
-  var sum = num1 + num2;
-  return sum;
-}
-```
-
-Interviewer: "Great! Now can you show me how you write a function that returns the sum of all the numbers in an array?"
-
-You: "Ok. How many numbers in the array?"
-
-Interviewer: "Excellent question! Let’s say there are five numbers in the array."
-
-You: "Ok. I’m going to write a function that takes in an array of five numbers and returns the sum."
-
-*you type*
-
-``` javascript
-function returnSumOfArray(array) {
-  var sum = 0;
-  for (var i = 0; i < 5; i++) {
-    sum += array[i];
-  }
-  return sum;
-}
-```
-
-Interviewer, "Ok, I’ve the idea you know what you’re doing. I’m just wondering, can you think of any improvements to your code?"
-
-You: "Hmm…​oh man, I always forget that the `var` keyword is no longer used in JavaScript. I can remove that. I’m also going to get rid of those semicolons. They’re optional."
-
-``` javascript
-function returnSumOfArray(array) {
-  var sum = 0
-  for (let i = 0; i < 5; i++) {
-    sum += array[i]
-  }
-  return sum
-}
-```
-
-Interviewer: "Oh wow, I didn’t even notice that but you’re right, you were using some older JavaScript syntax. But I was looking for something that makes your code more efficient."
-
-You: "Hm. Well I could make the array work for any length of array, not just five numbers."
-
-Interviewer: "Wow, I didn’t catch that either! But let me give you hint. What I’m looking for is a little more…​functional."
-
-You: "Oh! Got it. You know, I know what you’re talking about but I usually use a `for` loop. But I think you can use a reducer function. I don’t quite remember the syntax, do you mind if I look it up?"
-
-Interviewer: "Not at all! Where would you go to do that?"
-
-You: "For something like this I usually go to MDN. I’m going to do a Google search for 'JavaScript array reduce' and see what I find."
-
-Interviewer: "Where would JavaScript programmers be without MDN? Sure, go ahead."
-
-``` javascript
-function returnSumOfArray(array) {
-  return array.reduce((acc, curr) => acc + curr);
-}
-```
-
-Interviewer: "Ok that’s good…​but you just kinda copied and pasted that. Can you explain what is going on in that function?"
-
-You: "Sure! The function takes in the array. I pass two arguments to the reduce function, `acc` and `curr`. `acc` stands for the accumulator, which holds the sum of all the numbers in the array. `curr` is the current number to be added to the sum. So this function adds the current number to the accumulator and returns the sum."
-
-Interviewer: "Ok, but what’s that funny `⇒` thing you used?"
-
-You: "Oh, that’s an arrow function. I know it’s a way to write a function…​I think it’s just for `reduce` and maybe `map`? Actually, I’m not really sure."
-
-Interviewer: "It’s not just for reduce, but you’re right, it is a way to write a function. It’s kind of a shorthand for JavaScript functions, and you can use it pretty much anywhere you have a function. We have a few minutes left, can you think of anything else you can add?"
-
-"Would it be ok if a added a test for the function?"
-
-Interviewer: "Wow, great idea! Our dev team is very much test-driven so please go right ahead."
-
-You: "I don’t need to spend a lot of time doing this, but here’s just a simple check. Normally I might do something using Jest, but why don’t I just write write a simple test function that checks if the function returns the sum of the array `[1, 2, 3, 4, 5]`?"
-
-``` javascript
-function testReturnSumOfArray() {
-  var testArray = [1, 2, 3, 4, 5];
-  var result = returnSumOfArray(testArray);
-  if (result === 15) {
-    console.log('Test passed!');
-  } else {
-    console.log('Test failed!');
-  }
-}
-```
-
-Interviewer: "Perfect addition, and clever approach. Well, I think I have a pretty good sense of your skills. Thanks so much for coming in today."
-
-You: "Thank you so much for taking the time! I hope to hear back from you soon."
-
-Ok, simple example. But consider all of the ways in which your communication tells the interviewer about your skills.
-
-1.  You repeated the task back to the interviewer
-
-2.  You asked questions to clarify the problem
-
-3.  You asked for feedback on your approach
-
-4.  You demonstrated that you know how to search for a solution
-
-5.  You demonstrated value-added improvements to your code by adding a test
-
-6.  You remained calm and polite
-
-7.  You demonstrated the limits of your knowledge without being defensive or deceitful
-
-If your interview went like this I can’t say you’d get the job for sure, but you’d certainly be in the running!
-
-</div>
+> **Sample Interview**
+>
+> I’m going to take a moment to demonstrate what might occur during a coding interview. This example is an in-person coding interview. The applicant and the interviewer are sitting at a table, with the applicant seated in front of a computer. The applicant’s code is projected onto a screen on the front of the room
+>
+> If the interview is done online, it will be given through a platform like CoderPad or HackerRank. You can set up your own free accounts on these platforms to practice. They all come with support for a variety of languages.
+>
+> Here is how a coding interview might go. This particular example is meant to show how you can communicate with the interviewer and express your ideas in a way that shows you understand the problem:
+>
+> Interviewer: "Let’s build a function that returns a number."
+>
+> You: "A function that returns a number. Does it matter what language I use?"
+>
+> Interviewer: "No, use a language you’re comfortable with."
+>
+> You: "Ok, I’m going to use JavaScript to write a function that returns a number."
+>
+> ``` javascript
+> function returnNumber() {
+>   var number = 23;
+>   return number;
+> }
+> ```
+>
+> Interviewer: "You got it! Now let’s try writing a function that returns the number passed to it, plus ten."
+>
+> You: "Ok, number plus ten, got it."
+>
+> ``` javascript
+> function returnNumber(number) {
+>   var myNumber = number + 10;
+>   return myNumber;
+> }
+> ```
+>
+> Interviewer: "Great! Now let’s try writing a function that returns the sum of two numbers."
+>
+> You: "Ok, a sum of two numbers. Any two numbers?"
+>
+> Interviewer: "Sure, any two numbers you want."
+>
+> *you type*
+>
+> ``` javascript
+> function returnSum(num1, num2) {
+>   var sum = num1 + num2;
+>   return sum;
+> }
+> ```
+>
+> Interviewer: "Great! Now can you show me how you write a function that returns the sum of all the numbers in an array?"
+>
+> You: "Ok. How many numbers in the array?"
+>
+> Interviewer: "Excellent question! Let’s say there are five numbers in the array."
+>
+> You: "Ok. I’m going to write a function that takes in an array of five numbers and returns the sum."
+>
+> *you type*
+>
+> ``` javascript
+> function returnSumOfArray(array) {
+>   var sum = 0;
+>   for (var i = 0; i < 5; i++) {
+>     sum += array[i];
+>   }
+>   return sum;
+> }
+> ```
+>
+> Interviewer, "Ok, I’ve the idea you know what you’re doing. I’m just wondering, can you think of any improvements to your code?"
+>
+> You: "Hmm…​oh man, I always forget that the `var` keyword is no longer used in JavaScript. I can remove that. I’m also going to get rid of those semicolons. They’re optional."
+>
+> ``` javascript
+> function returnSumOfArray(array) {
+>   var sum = 0
+>   for (let i = 0; i < 5; i++) {
+>     sum += array[i]
+>   }
+>   return sum
+> }
+> ```
+>
+> Interviewer: "Oh wow, I didn’t even notice that but you’re right, you were using some older JavaScript syntax. But I was looking for something that makes your code more efficient."
+>
+> You: "Hm. Well I could make the array work for any length of array, not just five numbers."
+>
+> Interviewer: "Wow, I didn’t catch that either! But let me give you hint. What I’m looking for is a little more…​functional."
+>
+> You: "Oh! Got it. You know, I know what you’re talking about but I usually use a `for` loop. But I think you can use a reducer function. I don’t quite remember the syntax, do you mind if I look it up?"
+>
+> Interviewer: "Not at all! Where would you go to do that?"
+>
+> You: "For something like this I usually go to MDN. I’m going to do a Google search for 'JavaScript array reduce' and see what I find."
+>
+> Interviewer: "Where would JavaScript programmers be without MDN? Sure, go ahead."
+>
+> ``` javascript
+> function returnSumOfArray(array) {
+>   return array.reduce((acc, curr) => acc + curr);
+> }
+> ```
+>
+> Interviewer: "Ok that’s good…​but you just kinda copied and pasted that. Can you explain what is going on in that function?"
+>
+> You: "Sure! The function takes in the array. I pass two arguments to the reduce function, `acc` and `curr`. `acc` stands for the accumulator, which holds the sum of all the numbers in the array. `curr` is the current number to be added to the sum. So this function adds the current number to the accumulator and returns the sum."
+>
+> Interviewer: "Ok, but what’s that funny `⇒` thing you used?"
+>
+> You: "Oh, that’s an arrow function. I know it’s a way to write a function…​I think it’s just for `reduce` and maybe `map`? Actually, I’m not really sure."
+>
+> Interviewer: "It’s not just for reduce, but you’re right, it is a way to write a function. It’s kind of a shorthand for JavaScript functions, and you can use it pretty much anywhere you have a function. We have a few minutes left, can you think of anything else you can add?"
+>
+> "Would it be ok if a added a test for the function?"
+>
+> Interviewer: "Wow, great idea! Our dev team is very much test-driven so please go right ahead."
+>
+> You: "I don’t need to spend a lot of time doing this, but here’s just a simple check. Normally I might do something using Jest, but why don’t I just write write a simple test function that checks if the function returns the sum of the array `[1, 2, 3, 4, 5]`?"
+>
+> ``` javascript
+> function testReturnSumOfArray() {
+>   var testArray = [1, 2, 3, 4, 5];
+>   var result = returnSumOfArray(testArray);
+>   if (result === 15) {
+>     console.log('Test passed!');
+>   } else {
+>     console.log('Test failed!');
+>   }
+> }
+> ```
+>
+> Interviewer: "Perfect addition, and clever approach. Well, I think I have a pretty good sense of your skills. Thanks so much for coming in today."
+>
+> You: "Thank you so much for taking the time! I hope to hear back from you soon."
+>
+> Ok, simple example. But consider all of the ways in which your communication tells the interviewer about your skills.
+>
+> 1.  You repeated the task back to the interviewer
+>
+> 2.  You asked questions to clarify the problem
+>
+> 3.  You asked for feedback on your approach
+>
+> 4.  You demonstrated that you know how to search for a solution
+>
+> 5.  You demonstrated value-added improvements to your code by adding a test
+>
+> 6.  You remained calm and polite
+>
+> 7.  You demonstrated the limits of your knowledge without being defensive or deceitful
+>
+> If your interview went like this I can’t say you’d get the job for sure, but you’d certainly be in the running!
 
 There are a lot of resources online about how to present yourself in interviews from how to write a resume to how to dress to how to speak. Spend some time looking at these so you’re not surprised by what you find once you get into the interview room.
 

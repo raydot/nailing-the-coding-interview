@@ -14,19 +14,11 @@ In this chapter we’ll cover the basics of arrays, from the foundational comput
 
 Arrays are the simplest linear data structure. In less abstract languages like C++ or Java, arrays are manipulated directly from their addresses in computer memory by pointers. For our purposes, we will only consider arrays as being manipulated and addressed by the abstraction known as the array’s "index." I mention this abstraction as something to keep in the back of your mind when you consider the original purpose of some of the data structures and operations you’re about to encounter.
 
-<div class="sidebar">
-
-<div class="title">
-
-Levels of Abstraction
-
-</div>
-
-Programming languages can be categorized by levels (or layers) of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" programming languages, like Assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer’s hardware directly using what is known as "machine code."
-
-Low-level languages tend to make more sense to computers than humans, though, and it was realized long ago that abstractions were needed to connect human thinking and language to computer actions. "High-level" languages, like C++, take human-readable language and compile it into machine code instructions that can be used to manipulate a computer’s chipset directly. There’s a higher abstraction than this though. "Interpreted" languages, sometimes referred to as "scripting languages", contain an even higher level of abstraction, as these languages don’t interact with the computer chipset at all. Scripting languages are instead fed to an application, like a web browser, that attempts to "interpret" their instructions into machine code. It’s well worth your time to understand layers of abstraction as a programmer, and it goes far beyond what can be explained in a single side note.
-
-</div>
+> **Levels of Abstraction**
+>
+> Programming languages can be categorized by levels (or layers) of abstraction, which means abstraction away from the underlying hardware and chipset that a computer uses to store data and instructions. "Low-level" programming languages, like Assembly, are only one level of abstraction from the hardware that makes up a computer, and can be used to manipulate a computer’s hardware directly using what is known as "machine code."
+>
+> Low-level languages tend to make more sense to computers than humans, though, and it was realized long ago that abstractions were needed to connect human thinking and language to computer actions. "High-level" languages, like C++, take human-readable language and compile it into machine code instructions that can be used to manipulate a computer’s chipset directly. There’s a higher abstraction than this though. "Interpreted" languages, sometimes referred to as "scripting languages", contain an even higher level of abstraction, as these languages don’t interact with the computer chipset at all. Scripting languages are instead fed to an application, like a web browser, that attempts to "interpret" their instructions into machine code. It’s well worth your time to understand layers of abstraction as a programmer, and it goes far beyond what can be explained in a single side note.
 
 ### Array Terminology
 
@@ -52,29 +44,21 @@ In C++, for instance, an integer usually (but not always!) occupies four bytes o
 
 The length of an array is one of its most important properties. Many array operations take the length of an array into account for their operations. Most programming languages will throw an error if you try to access an element in an array that is beyond the array’s "scope," or length.
 
-<div class="sidebar">
-
-<div class="title">
-
-Weakly- vs. Strongly-Typed Languages
-
-</div>
-
-The difference between weakly-typed and strongly-typed languages comes down to how strict the language requires programmers to be when creating, passing, and mixing data. In strongly-typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing. In weakly typed languages, this mixing is allowed, accepted, and even encouraged!
-
-If you’ve used Typescript you’re used to a hybrid of both, with Typescript being a language that adds strong data typing to Javascript. There’s some controversy over whether this is desirable or should even be allowed. Is Typescript a useful tool or simply meant to make Javascript more palatable for coders coming from more strongly-typed languages, like Java?
-
-In C++ an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in C++. It can only be used to hold five integer values, no more, and no other type of data is allowed.
-
-`int intArray[5] = {33, 22, 11, 18, 96}`
-
-In weakly-typed JavaScript, all different types of data can be mixed together, and the language interpreter doesn’t mind at all:
-
-`mixedArray = [33, 22, 3.15159, "hello", false]`
-
-The reasons for these differences are logical, of course, and mostly have to do with the way memory is allocated by different programming languages.
-
-</div>
+> **Weakly- vs. Strongly-Typed Languages**
+>
+> The difference between weakly-typed and strongly-typed languages comes down to how strict the language requires programmers to be when creating, passing, and mixing data. In strongly-typed languages, like C/C++ or Java, data mixing is not allowed without creating specific data types to support the mixing. In weakly typed languages, this mixing is allowed, accepted, and even encouraged!
+>
+> If you’ve used Typescript you’re used to a hybrid of both, with Typescript being a language that adds strong data typing to Javascript. There’s some controversy over whether this is desirable or should even be allowed. Is Typescript a useful tool or simply meant to make Javascript more palatable for coders coming from more strongly-typed languages, like Java?
+>
+> In C++ an array must be of a specific data type, and only that data type is allowed in the array. Here is an integer array in C++. It can only be used to hold five integer values, no more, and no other type of data is allowed.
+>
+> `int intArray[5] = {33, 22, 11, 18, 96}`
+>
+> In weakly-typed JavaScript, all different types of data can be mixed together, and the language interpreter doesn’t mind at all:
+>
+> `mixedArray = [33, 22, 3.15159, "hello", false]`
+>
+> The reasons for these differences are logical, of course, and mostly have to do with the way memory is allocated by different programming languages.
 
 ### Array Indexing/Numbering
 
@@ -126,7 +110,7 @@ print(arr[-2])
 # prints 6
 print arr[-3:]
 # prints [5, 6, 7]
-```
+```javascript
 
 ### Arrays and For Loops
 
@@ -168,11 +152,7 @@ In the programming interview, make sure you understand what you’re being asked
 
 Deep vs. Shallow Array Copies
 
-</div>
-
 Additionally, in some languages you can’t simply copy an array, because the copy will copy not the array but will only copy its pointers (see section "Arrays and Pointers", above). The pointers in the copy will continue to point to the data to which the original array was told to point. This means that modifying the data in the new array will modify the data in the old array, and vice-versa. This type of copy is called a "shallow" copy, as opposed to a "deep" copy. It’s important to know which type of copying your language supports, and how to get a deep copy if you need a deep copy (or a shallow copy, if that’s what you want instead).
-
-</div>
 
 ### Basic Array Functions
 
@@ -182,27 +162,19 @@ As you read through these examples, keep in mind that these functions — an
 
 Array functions fall into two general categories: modifying array data and retrieving array data. As mentioned earlier, the length of the array is important for making most of these operations work properly.
 
-<div class="sidebar">
-
-<div class="title">
-
-Arrays vs. Objects vs. Tuples vs. ???
-
-</div>
-
-In the beginning was the array, and no other data type could be used for grouping related data.
-
-Recently many programming languages have added "objects" as primitives, which are data types where the information is relational. Items in an object can be indexed by more than just a number, and can actually be specifically named. We will explore this idea more deeply when we get into hashes in the next chapter. In some languages, like JavaScript, there is no "array" primitive data type — all arrays are actually objects!
-
-If that’s not already confusing enough, most modern programming languages, like Python, have realized the need to combine multiple data types in new and more useful ways. In addition to arrays, Python contains lists, tuples, and dicts, all of which are array-like data structures with specific properties for specific uses.
-
-This book uses the term "array" to represent the general concept, but will use language specific terminology (such as Python’s "list") when discussing an array concept from the point of view of a specific language.
-
-This book is not geared toward teaching primitive data types, so make sure you understand the different types and functions available in your specific language.
-
-And remember, if you don’t see an array data type or function you like, you can always create your own!
-
-</div>
+> **Arrays vs. Objects vs. Tuples vs. ???**
+>
+> In the beginning was the array, and no other data type could be used for grouping related data.
+>
+> Recently many programming languages have added "objects" as primitives, which are data types where the information is relational. Items in an object can be indexed by more than just a number, and can actually be specifically named. We will explore this idea more deeply when we get into hashes in the next chapter. In some languages, like JavaScript, there is no "array" primitive data type — all arrays are actually objects!
+>
+> If that’s not already confusing enough, most modern programming languages, like Python, have realized the need to combine multiple data types in new and more useful ways. In addition to arrays, Python contains lists, tuples, and dicts, all of which are array-like data structures with specific properties for specific uses.
+>
+> This book uses the term "array" to represent the general concept, but will use language specific terminology (such as Python’s "list") when discussing an array concept from the point of view of a specific language.
+>
+> This book is not geared toward teaching primitive data types, so make sure you understand the different types and functions available in your specific language.
+>
+> And remember, if you don’t see an array data type or function you like, you can always create your own!
 
 Array modification functions include the following operations:
 
@@ -211,7 +183,7 @@ Array modification functions include the following operations:
 ``` python
 demoArray = [1, 2, 3, 4, 5]
 print(len(demoArray)) # returns '5'
-```
+```javascript
 
 `for` loops Every programming language contains a function that allows for simple iteration, or "counting." Iteration is a process that has been available in programming languages from the very beginning, as it’s essential to making computers work.
 
@@ -221,7 +193,7 @@ print(len(demoArray)) # returns '5'
 items = ["loaf of bread", "container of milk", "stick of butter"]
 for item in items:
     print(item)
-```
+```python
 
 `push() / pop()` These functions are called different things in different languages but they are for pushing an element into the end (or beginning) of an array and for retrieving an element from the beginning (or end) of an array.
 
@@ -233,11 +205,7 @@ for item in items:
 
 Building Your Own Built-In Functions
 
-</div>
-
 Knowing how to program basic built-in functions is useful because you can see how they work and because the techniques in built-in functions usually contain processes that optimize those functions. These functions are often added to programming languages because of how often they’re used, and this means they’re the basis for a lot of programming interview questions. So download the source, dig through the source code, read the spec, reverse engineer, and figure out how to program them yourself!
-
-</div>
 
 ### Multi-dimensional Arrays
 
@@ -269,7 +237,7 @@ def sum(n1, n2, n3):
 
 values = [10, 11, 12]
 print(sum(*values))
-```
+```javascript
 
 This code sample will output the value `33`. Notice the (overloaded) star operator in the function call:
 
@@ -282,7 +250,7 @@ Here’s an example of a kind of reverse use, splitting a single piece of data i
 ``` python
 spread_hello = [*"hello"]
 print(spread_hello)
-```
+```javascript
 
 This code will output the value `['h', 'e', 'l', 'l', 'o']`.
 
@@ -331,7 +299,7 @@ function SpreadComponent({requiredProp1, requiredProp2, ...optionalProps}) {
             <h2>{requiredProp2}</h2>
             <p>{optionalProps.optionalProp1}</p>
             <p>{optionalProps.optionalProp2}</p>
-        </div>
+
     );
 }
 
@@ -345,7 +313,7 @@ let props = {
 
 // Usage:
 <SpreadComponent {...props} />
-```
+```javascript
 
 Note the two different uses of the spread operator in this example. The first is in the function definition, where the spread operator is used with `…​optionalProps` to collect all the optional props into a single object. You can pass in as many optional props as you want, and give them all custom names, and once the function is invoked they will all be collected into the `optionalProps` object.
 
@@ -387,7 +355,7 @@ JavaScript Object Notation, or JSON, is being used more and more often these day
     }
   ]
 }
-```
+```javascript
 
 JSON is often used an an intermediate data representation, because of the way in which is can readily be converted between platforms — data in a database, and data on a webpage, for example.
 
@@ -403,19 +371,11 @@ Sorting is just what it sounds like: sorting data according to a given criteria.
 
 Yes, most programming languages have a function named `sort()`, but in the context of an interview this is something you might be asked to do.
 
-<div class="sidebar">
-
-<div class="title">
-
-The AlgoRhythmics
-
-</div>
-
-Only on YouTube: There is a collection of videos featuring Hungarian folk dancer computer scientists demonstrating common algorithms, including the Bubble Sort this chapter is about to cover.
-
-You can see for yourself at: <https://www.youtube.com/@AlgoRythmics>
-
-</div>
+> **The AlgoRhythmics**
+>
+> Only on YouTube: There is a collection of videos featuring Hungarian folk dancer computer scientists demonstrating common algorithms, including the Bubble Sort this chapter is about to cover.
+>
+> You can see for yourself at: <https://www.youtube.com/@AlgoRythmics>
 
 Let’s start with the most straightforward sort algorithm to understand, Bubble Sort. We’ll assume we have an array of integers that we wish to sort in ascending order.
 
@@ -596,7 +556,7 @@ def largest_sum(arr):
     if arr[i] + arr[i + 1] > largest:
       largest = arr[i] + arr[i + 1]
   return largest
-```
+```javascript
 
 Excellent! We’ve eliminated the nested for loop, and now the runtime of the function is now the preferable "linear" time of O(n).
 
@@ -620,7 +580,7 @@ def longest_unique_substring(s):
 
 someVar = "abbcaabdcbb"
 print(longest_unique_substring(someVar))
-```
+```javascript
 
 This might be an example of where the brute force solution is a little more brutal than it needs to be, but I wanted to take a moment to talk about the `set()` data type. A "set" in math and logic is a group of related but *distinct* items, be they words, number, objects, etc. The days of the week are a set, as are the months of the year. Notice that the days of the week are distinct, there aren’t two Tuesdays, thank goodness.
 
@@ -653,7 +613,7 @@ print(numbers)  # Output: {1, 2} (no change!)
 
 # Check if number exists
 print(1 in numbers)  # Output: True
-```
+```javascript
 
 Why I’m discussing this is because you might be asked about using `set()` to solve problems related to uniqueness, and sometimes it absolutely is the right tool for the job. In this case, however, it’s not. Can you see why?
 
@@ -721,7 +681,7 @@ list2 = ['a', 'b', 'c', 'd', 'e']
 combined_list = [(x, y) for x, y in zip(list1, list2)]
 
 print(combined_list)
-```
+```python
 
 This will output:
 
@@ -855,7 +815,7 @@ def two_sum(array, target):
             return [num_index[target - num], i]
         num_index[num] = i
     return None
-```
+```python
 
 Python contains a built-in function called `enumerate()` that can be used to loop over an array and return both the index and the value of each item in the array. If you’re familiar with Javascript, `enumerate()` is similar to using the `map()` function with an index parameter.
 
@@ -876,7 +836,7 @@ function twoSum(array, target) {
 
     return result;
 }
-```
+```javascript
 
 In both cases the code sets up a "compliment," which is the difference between the target number and the current number in the array. The Python version uses a dictionary to store the index of the compliment, while the JavaScript version uses an object. In both cases the code checks to see if the compliment is in the dictionary or object, and if it is, returns the index of the compliment and the current index. If the compliment is already in the dictionary (or object), the current number is a match, and the function returns the indexes of the two numbers that add up to the target number. Pretty straightforward, right?
 
@@ -919,7 +879,7 @@ def three_sum(array, target):
             else:
                 right -= 1
     return None
-```
+```javascript
 
 Think it through: What is the runtime of this solution? What advantages does it have over using nested for loops?
 
@@ -991,23 +951,15 @@ def rotate_array(arr, k):
         arr.insert(0, last_element)
 
     return arr
-```
+```python
 
-<div class="sidebar">
-
-<div class="title">
-
-Behold, the Modulo Operator!
-
-</div>
-
-If you’ve ever taken a course in computer programming, at some point you were probably introduced to the module operator, or *%*. The modulo operator is used to find the remainder of a division operation. In grade school, for example, you may have learned to write the answer to a long division problem using a remainder. "11 divided by 3 is 3 with a remainder of 2." or "11 *r* 2" Or, in computer terms, `11 % 3` will return `2`.
-
-Everyone learns that…​and then forgets it! Who needs that? When will I need the remainder?
-
-The modulo operation is actually incredibly useful in programming, and can be used to solve many different types of problems. You will see it used more than once in this book, so vow to make friends with it now if you haven’t already.
-
-</div>
+> **Behold, the Modulo Operator!**
+>
+> If you’ve ever taken a course in computer programming, at some point you were probably introduced to the module operator, or *%*. The modulo operator is used to find the remainder of a division operation. In grade school, for example, you may have learned to write the answer to a long division problem using a remainder. "11 divided by 3 is 3 with a remainder of 2." or "11 *r* 2" Or, in computer terms, `11 % 3` will return `2`.
+>
+> Everyone learns that…​and then forgets it! Who needs that? When will I need the remainder?
+>
+> The modulo operation is actually incredibly useful in programming, and can be used to solve many different types of problems. You will see it used more than once in this book, so vow to make friends with it now if you haven’t already.
 
 What is the purpose of the modulo operator in this case? Think of a case where the array is five items long (n), and you’re asked to rotate it 17 times (k). If you think about it, because a rotation always starts again where it ends, rotating an array three times is the same thing as rotating it once. You’ll get the exact same result, right?
 
@@ -1041,7 +993,7 @@ def rotate_array(arr, k):
     reverse(arr, k, n - 1)
 
     return arr
-```
+```python
 
 There’s not really an advantage to reversing over slicing, as both run in O(n) time. But both approaches are worth knowing about as they may come up as solutions to other problems as well.
 
@@ -1223,7 +1175,7 @@ def check_matrix(matrix):
         if row.count(1) != 1:
             return False
     return True
-```
+```python
 
 If you pass in this matrix, it will return True, and so we have a match!
 
@@ -1234,7 +1186,7 @@ valid_matrix = [
     [0, 0, 1, 0],
     [0, 0, 0, 1]
 ]
-```
+```python
 
 If you pass in this matrix it will also return true:
 
@@ -1275,7 +1227,7 @@ def check_columns(matrix):
         if count != 1:
             return False
     return True
-```
+```javascript
 
 I’ll let you test this one on your own. Again, we run into a similar problem as with the row solution. The matrix…​
 
@@ -1303,7 +1255,7 @@ invalid_diagonal_matrix = [
     [0, 0, 1, 0],
     [0, 1, 0, 0]
 ]
-```
+```javascript
 
 If I’m only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second, third, and fourth rows clearly make this an invalid solution, forming a diagonal that goes from column 2 in the fourth row to column 4 in the second.
 
@@ -1506,7 +1458,7 @@ def get_column(board, col_num):
             column.append(board[grid_index][row][internal_col])
 
     return column
-```
+```python
 
 Ok, so that works, but it’s a lot of code to return a single column, and also it’s a but confusing. In fact, when I was writing this code I wrote the algorithm the way I was pretty sure I needed to, and watched my computer spit out the wrong answer. Except it hadn’t. What had happened is I had got confused about what the "column" looked like given the data structure, I’d created, and I was reading the wrong line of numbers. I had to get my head around that in order to continue which I take as proof that even if this data structure offers some advantages — and I’m not sure it does — it can be confusing to reason about and so it’s likely the wrong tool for the job.
 
@@ -1524,7 +1476,7 @@ board = [
     [0,0,0,4,1,9,0,0,5],
     [0,0,0,0,8,0,0,7,9]
 ]
-```
+```javascript
 
 This looks promising. It keeps the rows in the same order they’ll be in on the Sudoku board. The columns can be chosen by iterating via the appropriate index. This one is just right!
 
@@ -1546,7 +1498,7 @@ def check_row(board, row_num):
                 return False
             seen.append(num)
     return True
-```
+```python
 
 This is a fairly straightforward solution. Go down the row, put numbers into a list, and if a number repeats, return False because the board is invalid. Remember that you have to account for the 0, because a 0 means a value that is not yet present in the row. If the program sees it as a number in a row, it will return False, even though it’s not a repeated number.
 

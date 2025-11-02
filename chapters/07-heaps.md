@@ -64,7 +64,7 @@ To find the parent of 15, for instance, start with the index value of 15 which i
 parent = (4 - 1) // 2 # step 1
 parent = 3 // 2 # step 2
 parent = 1 # step 3
-```
+```python
 
 Looking at list element 1, the parent of 15 is 63. Go ahead and try this "trick" with any other element in the list and I think you’ll find that it works. (If it didn’t, I wouldn’t have told you about it.)
 
@@ -112,7 +112,7 @@ Can we find the parent of 1 using the formula we discussed earlier?
 parent = (7 - 1) // 2
 parent = 6 // 2
 parent = 3
-```
+```python
 
 The parent of 1 is 50, which is correct.
 
@@ -197,13 +197,12 @@ class Heap:
             self._bubble_up(parent)
 
 
-
 # Test the implementation
 heap = Heap([75, 63, 60, 50, 15, 10, 5, 1])
 print("Initial heap:", heap.display())
 heap.insert(67)
 print("After inserting 67:", heap.display())
-```
+```javascript
 
 Breaking this code down method by method, the first four are pretty straightforward:
 
@@ -224,25 +223,17 @@ def _bubble_up(self, index):
     if index > 0 and self.heap[index] > self.heap[parent]:
         self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
         self._bubble_up(parent)
-```
+```python
 
 This incredibly useful five lines of code does all the work of bubbling up a value in the heap. It does this by comparing an item to its parent, and swapping the two if the item is larger than its parent. I’m not sure how I could suddenly become my own mother, so the family metaphor breaks down a bit here, but you get the idea.
 
-<div class="sidebar">
-
-<div class="title">
-
-recursion
-
-</div>
-
-This book doesn’t get to recursion until Chapter 11, but you’re encountering it here in the `_bubble_up` method. Recursion is a programming technique where a function calls itself. That might sound like crazy talk, but that’s what happens. The function "recurses" down the tree of calls until it (hopefully) finds a stopping point, at which point it "unwinds" back up the tree and returns the results.
-
-An analogy I heard a long time ago is like newscasters on the news. There will be a news anchor who will read off a news story and then maybe call on a reporter in the field. That reporter will begin to report the story and then call out for a video to be played that was taken earlier. When the video ends, the scene goes back to the reporter, who ties up the story and then sends the broadcast back to the anchor.
-
-There’s a lot more to it than that, but keep that basic idea in mind when you see a function calling itself. In the case of `_bubble_up`, it will keep calling itself with the parent of the current index until `index > 0 and self.heap[index] > self.heap[parent]` is no longer true which means the element is in its proper place in the heap.
-
-</div>
+> **recursion**
+>
+> This book doesn’t get to recursion until Chapter 11, but you’re encountering it here in the `_bubble_up` method. Recursion is a programming technique where a function calls itself. That might sound like crazy talk, but that’s what happens. The function "recurses" down the tree of calls until it (hopefully) finds a stopping point, at which point it "unwinds" back up the tree and returns the results.
+>
+> An analogy I heard a long time ago is like newscasters on the news. There will be a news anchor who will read off a news story and then maybe call on a reporter in the field. That reporter will begin to report the story and then call out for a video to be played that was taken earlier. When the video ends, the scene goes back to the reporter, who ties up the story and then sends the broadcast back to the anchor.
+>
+> There’s a lot more to it than that, but keep that basic idea in mind when you see a function calling itself. In the case of `_bubble_up`, it will keep calling itself with the parent of the current index until `index > 0 and self.heap[index] > self.heap[parent]` is no longer true which means the element is in its proper place in the heap.
 
 Earlier I said a property of a heap is that it stays "heapified." Also called "heap order," this refers to the property that each parent contains a value that is larger than its children. This simultaneously keeps the largest value at the top of the heap and makes it possible to find the largest value in the heap in constant time. So while a heap is a data structure, it’s comprised of a collection of algorithms that maintain the heap order property.
 
@@ -311,7 +302,7 @@ class MaxHeapPopper:
         if largest != index:
             self.heap[index], self.heap[largest] = self.heap[largest], self.heap[index]
             self._bubble_down(largest)
-```
+```python
 
 ## Developing Intuition: What are heaps used for?
 
@@ -360,7 +351,7 @@ def is_heap(arr):
         if arr[i] > arr[parent]:
             return False
     return True
-```
+```python
 
 ### Is it a max heap or a min heap?
 

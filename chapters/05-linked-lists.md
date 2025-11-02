@@ -53,7 +53,7 @@ class Dog:
            print(f"{self.name} says 'I am a {self.breed} and I am {self.age} years old.'")
        else:
            print(f"{self.name} says 'Woof!'")
-```
+```python
 
 Now that the dog class has been defined, we can create as many dogs as we want by "instantiating" the class into an object and asking each object to do things. Notice that, once create, each dog object contains its **own** data and methods that are independent of all of the other dogs' data and methods. This gives you some idea of the power of object-oriented programming.
 
@@ -76,7 +76,7 @@ dog3.speak("talk")
 
 dog3.speak("bark")
 # outputs "Cinder says 'Woof!'"
-```
+```python
 
 Notice the use of the `self` keyword in the methods of the class. `self` can be thought of as a way in which an object refers to itself, as opposed to other object methods, object data, or other objects of the same class. `self` is defined and used a little bit differently in different languages, but in Python, it is always the first argument to a method in a class definition. It might also be called "this" or "me" in other languages, but same basic principle applies. Think about self like this: You have a name, and everyone refers to you by that name, but you (and everyone else) refer to yourself as "me" or "I." You can say "Can you help me figure this out?" to someone else, but you say "I need to figure this out mySELF" to yourself. `self` helps with the ambiguity of functions that might be available to the program as a whole, vs. functions that are kept separate within a given object.
 
@@ -105,7 +105,7 @@ class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
-```
+```python
 
 This is a simple class that defines a node in a linked list Here is how you can use this class to create a simple linked list with three nodes:
 
@@ -116,7 +116,7 @@ node3 = Node(15)
 
 node1.next = node2
 node2.next = node3
-```
+```python
 
 In this example, we create three node objects, each created from the `Node` class with a data element and a pointer to the next node in the list. Having an object representing each element of data is a pattern we’ll see often as we continue to dig into data structures.
 
@@ -223,31 +223,23 @@ Linked lists are used in many different ways in programming, primarily as a basi
 
 ## CRUD
 
-<div class="sidebar">
-
-<div class="title">
-
-CRUD
-
-</div>
-
-One common set of questions you might be asked in an interview is how to develop a CRUD application for a specific language.
-
-CRUD is an acronym that stands for Create, Read, Update, and Delete. The CRUD paradigm can be applied to programming in many different contexts. You can build a CRUD application in React, like a todo list. You can CRUD a database, to test your knowledge of SQL. You can build a RESTful CRUD API in Node, or perhaps in GraphQL with Apollo.
-
-Create: Create a new item in the database / Redux store / data structure. For example: "Pick up dog food from the pet store."
-
-Read: Read an item from the database / Redux store / data structure. For example there might be a list of TODO items that can be read from the database.
-
-Update: Update an item in the database / Redux store / data structure. Maybe you really meant to write "cat food" instead of "dog food." How can you access and update the item with your API.
-
-Delete: Delete an item from the database / Redux store / data structure. This one goes without saying, but it of course means deleting the item. If you’re standing in the pet store and you realize you don’t even have a pet, that item needs to go!
-
-Depending on the context in which the question is asked, you might also be responsible for implementing an interface for the CRUD application, or to add features like sorting, filtering, dating, checking for duplicates, pagination, etc.
-
-You should try to build a CRUD application for any language or framework you’re learning as it will give you a great foundation for understanding how to work with data in that language or framework.
-
-</div>
+> **CRUD**
+>
+> One common set of questions you might be asked in an interview is how to develop a CRUD application for a specific language.
+>
+> CRUD is an acronym that stands for Create, Read, Update, and Delete. The CRUD paradigm can be applied to programming in many different contexts. You can build a CRUD application in React, like a todo list. You can CRUD a database, to test your knowledge of SQL. You can build a RESTful CRUD API in Node, or perhaps in GraphQL with Apollo.
+>
+> Create: Create a new item in the database / Redux store / data structure. For example: "Pick up dog food from the pet store."
+>
+> Read: Read an item from the database / Redux store / data structure. For example there might be a list of TODO items that can be read from the database.
+>
+> Update: Update an item in the database / Redux store / data structure. Maybe you really meant to write "cat food" instead of "dog food." How can you access and update the item with your API.
+>
+> Delete: Delete an item from the database / Redux store / data structure. This one goes without saying, but it of course means deleting the item. If you’re standing in the pet store and you realize you don’t even have a pet, that item needs to go!
+>
+> Depending on the context in which the question is asked, you might also be responsible for implementing an interface for the CRUD application, or to add features like sorting, filtering, dating, checking for duplicates, pagination, etc.
+>
+> You should try to build a CRUD application for any language or framework you’re learning as it will give you a great foundation for understanding how to work with data in that language or framework.
 
 It’s important to know how to create, read, update, and delete items in a linked list. Let’s go through each of these operations in turn.
 
@@ -289,7 +281,7 @@ current = node1
 while current is not None:
     print(current.data)
     current = current.next
-```
+```python
 
 This code will output:
 
@@ -314,7 +306,7 @@ class Node:
         return current
       current = current.next
     return False
-```
+```python
 
 ### Update
 

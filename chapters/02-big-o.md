@@ -40,15 +40,9 @@ Again, holding off on the terminology, this operation is in "O(1)" time, where "
 <figcaption aria-hidden="true">O(1)</figcaption>
 </figure>
 
-<div class="sidebar">
-
-<div class="title">
-
-</div>
-
-Can you think of a way to make the curve even steeper than O(n)? Remember, Big O is about the *number* of operations, not the *speed* of the operations, so having the waitperson walk around the block on their way to the kitchen doesn’t change the shape of the curve. \[/sidebar\]
-
-</div>
+> **Note**
+>
+> Can you think of a way to make the curve even steeper than O(n)? Remember, Big O is about the *number* of operations, not the *speed* of the operations, so having the waitperson walk around the block on their way to the kitchen doesn’t change the shape of the curve. \[/sidebar\]
 
 This is exactly what Big O is for, analyzing the speed of algorithms. The most important idea behind Big O and related terms is that they measure speed in a general and relative, and not specific, way. What "general" means is that Big O is great for comparing algorithmic approaches or finding algorithmic optimizations.
 
@@ -156,7 +150,7 @@ def multiply(limit):
       print(f"{i * j}", end=" ")
     print("\n")
 ---
-```
+```python
 
 How many operations is this? You could consider that the function definition is one, the two `for` loops are two, and the two `print()` statements are two resulting in 5 operations. But as far as Big O is concerned, the answer is it doesn’t matter. For the purposes of Big O there are two for loops, which means that whatever you pass into `limit`, the number of operations in this code is $`limit^2`$, or $`n^2`$ times. The running time is O\[n^2\].
 

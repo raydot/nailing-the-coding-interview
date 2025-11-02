@@ -37,17 +37,9 @@ A byte, which contains eight bits, can represent 2^8 or 256 discrete states, and
 
 There’s nothing special about the positions of these characters. If you grew up speaking a language other than English, you’ve probably used a keyboard where the characters are in different positions than they are on an English keyboard. That same 'd' key on a different keyboard might instead stand for "M", or "7", or "Ü", or "α". It all depends on how the keys are mapped in that lookup table. The reason why should be clear: it’s easier to change a look-up table than it is to rebuild a keyboard!
 
-<div class="sidebar">
-
-<div class="title">
-
-Understanding Character Sets
-
-</div>
-
-Whole books have been written on how computers handle and manage text, but for the most part it’s so automatic most of us rarely take the time to stop and think about it. Ever since the proliferation of "web fonts," having to move between different character sets is something that has become nearly effortless to do. There is a rich history behind how we got to this point, however, and while it’s unlikely to come up in most programming interviews, it certainly won’t hurt to know the difference between Unicode and ASCII, or to know that the "ISO-8859-1" character set is the same as the "Latin-1" character set. These kinds of issues do come up in situations where developers are dealing with internationalization or accessibility, and it’s good stuff to know if your web site or application needs to handle both English and Chinese character representations, for instance, and what the differences are between the two language representations at the level of code.
-
-</div>
+> **Understanding Character Sets**
+>
+> Whole books have been written on how computers handle and manage text, but for the most part it’s so automatic most of us rarely take the time to stop and think about it. Ever since the proliferation of "web fonts," having to move between different character sets is something that has become nearly effortless to do. There is a rich history behind how we got to this point, however, and while it’s unlikely to come up in most programming interviews, it certainly won’t hurt to know the difference between Unicode and ASCII, or to know that the "ISO-8859-1" character set is the same as the "Latin-1" character set. These kinds of issues do come up in situations where developers are dealing with internationalization or accessibility, and it’s good stuff to know if your web site or application needs to handle both English and Chinese character representations, for instance, and what the differences are between the two language representations at the level of code.
 
 So when computer programmers talk about "characters," this is what is meant. A series of symbols mapped to a lookup table, that translates them to the corresponding electrical signal represented by a keyboard key. None of that is likely to come up as an interview question, but it’s a basic idea that it’s important to understand as a developer.
 
@@ -87,7 +79,7 @@ Enter `"2" + "2" === 4` however, and what seems true is now false.
 ``` python
 >>> "2" + "2" === 4
 False
-```
+```python
 
 The reason for this is that like most programming languages, Python treats strings and symbols separately. 2 without quotes is the "symbol" for 2. It means the number 2 which is exactly what you think it means. 2 fingers, 2 sisters, 2 dollars.
 
@@ -117,7 +109,7 @@ While these functions may differ in name from language to language, they’re al
 myVar === "Hello world!"
 print(len(myVar))
 12
-```
+```javascript
 
 `toUpper() or toLower()`
 
@@ -138,7 +130,7 @@ JavaScript:
 ``` javascript
 console.log("algorithms".split(''))
 // Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
-```
+```javascript
 
 `join()`
 
@@ -189,7 +181,7 @@ I keep mentioning that Python is more "implicit", and here’s what I mean by th
 ``` python
 myVar = "Hello world!"
 myVar[0:5] # selects "Hello", the first 5 characters in the string
-```
+```python
 
 This does the exact same thing as the JavaScript example above, but the keyword "slice" is simply not needed.
 
@@ -236,7 +228,7 @@ If you’re sharp, you may have noticed that there is no "Thursday" in the myVar
 ``` javascript
 myVar = ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday", "Sunday"]
 myVar.splice(3, 0, "Thursday") // Adds "Thursday" to the array at position 3
-```
+```python
 
 Keep in mind that unlike `slice()`, `splice()`, in JavaScript, modifies the original array. Once you’ve spliced Thursday into `myVar`, it’s there as if it had always been there. You cannot recover the original array without first either making a copy of it, or using the JavaScript `toSpliced()` function which I’m not going to cover here. Just be aware of this modification when using `splice()` in your code. Maybe JavaScript linters or code libraries will warn you against programming "side effects," which you can easily cause if you’re not careful with `splice()`. Python does not have this particular issue with side effects, as it will always return a copy of the data you’re working with, and not the original data.
 
@@ -245,25 +237,17 @@ Python does not have a built-in `splice()` function, but you can use Pythonic co
 ``` python
 myVar = ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday", "Sunday"]
 myVar = myVar[:3] + ["Thursday"] + myVar[3:]
-```
+```python
 
-<div class="sidebar">
-
-<div class="title">
-
-Immutability, Side-Effects, and Strings
-
-</div>
-
-When you’re working with strings, or any other piece of data, it’s important to understand the way in which your functions are changing the data you’re passing to them. A lot of programming courses will say things like "don’t use global variables," or "your functions must be pure," but what do these things mean, exactly?
-
-A "pure" function is a function that doesn’t change the data it’s passed, or any other data for that matter. It returns a copy of a value, and that’s it. Why does this matter? Imagine you have a game that keeps a score, and you want to keep track of the score in a variable. If you’re creating a game and you have a function that changes the score, you want to be sure that the function is only changing the score, and not anything else. It should not change the player turn, the number of lives remaining, or the bonus multiplier.
-
-The reason why is because as the game grows in scale and complexity, it can become harder and harder to figure out what’s going what, and what’s going wrong. When multiple pieces of functionality are bound up in a single function, it can be hard to break out that functionality to be used in other parts of your program.
-
-When it comes to strings, you want to be very careful that any manipulations you perform on a string are not causing unintended consequences, or "side effects." It’s usually important to keep a copy of the original string, and if it needs to be transformed to transform it in a way that doesn’t change the original string. In fact, in many languages, strings are immutable, which means they can’t be changed at all. In designing your own string functions, it’s important to consider whether or not you want to make your strings mutable (probably not), or keep them immutable and only return transformed copies of the original. Either way, it’s important to consider consequences of that decision, and you are likely to be asked about string immutability and/or side effects in a coding interview.
-
-</div>
+> **Immutability, Side-Effects, and Strings**
+>
+> When you’re working with strings, or any other piece of data, it’s important to understand the way in which your functions are changing the data you’re passing to them. A lot of programming courses will say things like "don’t use global variables," or "your functions must be pure," but what do these things mean, exactly?
+>
+> A "pure" function is a function that doesn’t change the data it’s passed, or any other data for that matter. It returns a copy of a value, and that’s it. Why does this matter? Imagine you have a game that keeps a score, and you want to keep track of the score in a variable. If you’re creating a game and you have a function that changes the score, you want to be sure that the function is only changing the score, and not anything else. It should not change the player turn, the number of lives remaining, or the bonus multiplier.
+>
+> The reason why is because as the game grows in scale and complexity, it can become harder and harder to figure out what’s going what, and what’s going wrong. When multiple pieces of functionality are bound up in a single function, it can be hard to break out that functionality to be used in other parts of your program.
+>
+> When it comes to strings, you want to be very careful that any manipulations you perform on a string are not causing unintended consequences, or "side effects." It’s usually important to keep a copy of the original string, and if it needs to be transformed to transform it in a way that doesn’t change the original string. In fact, in many languages, strings are immutable, which means they can’t be changed at all. In designing your own string functions, it’s important to consider whether or not you want to make your strings mutable (probably not), or keep them immutable and only return transformed copies of the original. Either way, it’s important to consider consequences of that decision, and you are likely to be asked about string immutability and/or side effects in a coding interview.
 
 In languages that implement `splice()`, a copy of the requested data is returned without modifying the original. This can be useful as a "stripping" operation, say to remove a line return and dollar sign from the beginning of every string in a group of strings. Python contains the most robust splicing function, allowing programmers to choose from a number of different implementations.
 
@@ -292,41 +276,27 @@ console.log(myVar.slice(0, 3)) // select everything up to and including position
 // Prints ["turtle", "gecko", "frog"]
 console.log(myVar.slice(2)) // select everything after position 2
 // Prints ["frog"]
-```
+```python
 
-<div class="sidebar">
-
-<div class="title">
-
-Learning Multiple Languages
-
-</div>
-
-A basic understanding of multiple programming languages and paradigms can be a very useful thing for a developer to know. This does not mean you have to become an expert in every programming languages, but seeing how different languages implement the same functions can give you a broader appreciation and context for the way programming languages are constructed.
-
-The first programming language I learned in depth was C, and because C is that language from which so many later languages are derived, the basics of C have been applicable to every language I’ve learned since. C is a complied language, and many front-end languages are interpreted, and interpreted languages don’t a lot of the same overhead that compiled languages do. That makes them easier to learn, but some of the nuances of things like library imports, memory management, input/output control, and error handling are relatively unknown to front-end developers.
-
-Python, is an interpreted language, and so it’s easier to learn than C, but it’s also a very powerful language that can be used for a wide variety of tasks that are not as easily accomplished with JavaScript. Similarly, JavaScript has a number of built-in functions for working with web browsers that are not available in Python. There are also lower-level functional programming languages like Haskell and Lisp that are very different from Python and JavaScript, as they require developers to be very efficient and precise when defining and using functions.
-
-The more languages you spend time with, the greater appreciation you’ll have for the language you’re an expert with, and the more you’ll understand why certain languages are better suited for certain tasks than others. Again, I’m not saying you need to take a 40-hour course in SmallTalk, but it’s definitely worth your time to spend a few hours "dipping in" to a few different languages to see how the work.
-
-In addition to the ones I’ve already mentioned, Java and Rust are two languages that front-end developers should be basically familiar with, as they are widely used in the broader "full-stack" on which frontend applications are built.
-
-</div>
+> **Learning Multiple Languages**
+>
+> A basic understanding of multiple programming languages and paradigms can be a very useful thing for a developer to know. This does not mean you have to become an expert in every programming languages, but seeing how different languages implement the same functions can give you a broader appreciation and context for the way programming languages are constructed.
+>
+> The first programming language I learned in depth was C, and because C is that language from which so many later languages are derived, the basics of C have been applicable to every language I’ve learned since. C is a complied language, and many front-end languages are interpreted, and interpreted languages don’t a lot of the same overhead that compiled languages do. That makes them easier to learn, but some of the nuances of things like library imports, memory management, input/output control, and error handling are relatively unknown to front-end developers.
+>
+> Python, is an interpreted language, and so it’s easier to learn than C, but it’s also a very powerful language that can be used for a wide variety of tasks that are not as easily accomplished with JavaScript. Similarly, JavaScript has a number of built-in functions for working with web browsers that are not available in Python. There are also lower-level functional programming languages like Haskell and Lisp that are very different from Python and JavaScript, as they require developers to be very efficient and precise when defining and using functions.
+>
+> The more languages you spend time with, the greater appreciation you’ll have for the language you’re an expert with, and the more you’ll understand why certain languages are better suited for certain tasks than others. Again, I’m not saying you need to take a 40-hour course in SmallTalk, but it’s definitely worth your time to spend a few hours "dipping in" to a few different languages to see how the work.
+>
+> In addition to the ones I’ve already mentioned, Java and Rust are two languages that front-end developers should be basically familiar with, as they are widely used in the broader "full-stack" on which frontend applications are built.
 
 #### Reversing
 
 Let’s start with one simple example of a question that can be resolved in a number of ways, to show how a combination of built in functions and programming paradigms can be used to solve a problem. How can you reverse a string, without using a built-in "reverse" function?
 
-<div class="sidebar">
-
-<div class="title">
-
-</div>
-
-Before we get to the explanation, try writing your own function to reverse a string. For instance, if passed the string "apple," the function should return "elppa" Can you do the same for the words in a phrase, turning "Look at the moon" into "moon the at look?" Can you do it without using any built-in functions? Again, can you think of any other conditions that should be considered? What is the runtime (Big O) of your algorithm? Can that be improved? How, or why not?
-
-</div>
+> **Note**
+>
+> Before we get to the explanation, try writing your own function to reverse a string. For instance, if passed the string "apple," the function should return "elppa" Can you do the same for the words in a phrase, turning "Look at the moon" into "moon the at look?" Can you do it without using any built-in functions? Again, can you think of any other conditions that should be considered? What is the runtime (Big O) of your algorithm? Can that be improved? How, or why not?
 
 Here’s the answer to the reversing exercise above. The simplest and most straightforward way to reverse a string — which is a array, of course — is to use a for loop:
 
@@ -347,8 +317,9 @@ def reverseString(myString):
 
 What is the improvement in Big O with this second approach? Why?
 
-> [!NOTE]
-> When you use built-in functions always be aware that some of them might modify the data they return, and some might not. See the section on "Immutability, Side-Effects, and Strings" later in this chapter for a list of things to keep in mind when working with strings.
+> > 📝 **NOTE**
+>
+> > When you use built-in functions always be aware that some of them might modify the data they return, and some might not. See the section on "Immutability, Side-Effects, and Strings" later in this chapter for a list of things to keep in mind when working with strings.
 
 I will revisit the construction of some of these functions in the upcoming "Arrays" chapter, but hopefully this has helped you start to see the importance of these basic string manipulation problems and why they might come up in programming tests.
 
@@ -384,27 +355,19 @@ Input: s = "pwwkew" Output: 3 Explanation: The answer is "wke", with the length 
 
 *Similarly, create a function that takes a string and returns the position of a word. Given the same string as above, find the position of the word "tall." Again, as above, account for the fact that there is more than one instance of "tall" in the string. What if the word you’re given is part of a larger word? The word "add" can be found inside the word "ladder." Does your algorithm work for the cases in which this is and isn’t a valid solution to the problem? Can you think of any other things that should be considered in solving this problem?*
 
-<div class="sidebar">
-
-<div class="title">
-
-Debuggers and Stepping Through Code
-
-</div>
-
-Unless you have a photographic memory, it’s going to be hard to come up with the right answer if it uses code you don’t understand. There’s nothing complicated going in in the Sliding Windows example above, but most people (including me) can’t just look at a piece of code and know exactly what it does.
-
-Many of us — especially web developers — check our code using logs to the browser console. There’s nothing wrong with that at all, but it’s not the most effective way to examine code that isn’t running in an a browser. For that, you need a debugger.
-
-A debugger is a tool that helps you walk through code a step at a time, and provides you with feedback about what is happening in each step. There are so many different debuggers available and so many ways to debug code that I’m not going to try to cover them in this book, but every IDE has one. Or, if you’re not using an IDE, Python has a built-in debugger called 'pdb.'
-
-You use a debugger by setting a "breakpoint" in your code, which is an instruction to stop the debugger at a given line. When the code frozen in time at a specific line, you can take a moment to examine what’s going on in a function so you can better understand how things are changing.
-
-Debuggers also usually include ways to "step" through your code, which means to run it a line at a time, reporting variables, values, and other relevant things as each line executes.
-
-So again, unless you understand code in just a glance — in which case I seriously doubt you’re reading this sentence right now — pick a debugger to get started with, learn how to use it, and use it to become familiar with the solutions presented in this book. Debuggers can be a bit tricky to get started with, but the learning code isn’t as steep as it looks, and the payoff is huge!
-
-</div>
+> **Debuggers and Stepping Through Code**
+>
+> Unless you have a photographic memory, it’s going to be hard to come up with the right answer if it uses code you don’t understand. There’s nothing complicated going in in the Sliding Windows example above, but most people (including me) can’t just look at a piece of code and know exactly what it does.
+>
+> Many of us — especially web developers — check our code using logs to the browser console. There’s nothing wrong with that at all, but it’s not the most effective way to examine code that isn’t running in an a browser. For that, you need a debugger.
+>
+> A debugger is a tool that helps you walk through code a step at a time, and provides you with feedback about what is happening in each step. There are so many different debuggers available and so many ways to debug code that I’m not going to try to cover them in this book, but every IDE has one. Or, if you’re not using an IDE, Python has a built-in debugger called 'pdb.'
+>
+> You use a debugger by setting a "breakpoint" in your code, which is an instruction to stop the debugger at a given line. When the code frozen in time at a specific line, you can take a moment to examine what’s going on in a function so you can better understand how things are changing.
+>
+> Debuggers also usually include ways to "step" through your code, which means to run it a line at a time, reporting variables, values, and other relevant things as each line executes.
+>
+> So again, unless you understand code in just a glance — in which case I seriously doubt you’re reading this sentence right now — pick a debugger to get started with, learn how to use it, and use it to become familiar with the solutions presented in this book. Debuggers can be a bit tricky to get started with, but the learning code isn’t as steep as it looks, and the payoff is huge!
 
 #### Food for Further Thought
 
