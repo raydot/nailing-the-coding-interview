@@ -37,8 +37,8 @@ jobs:
       #     jupyter-book build . -v
       - name: Build Jupyter Book
         run: |
-          ls -la
-          jupyter-book build . -v -W
+          jupyter-book build . --builder html 2>&1 | tee build.log
+          cat build.log
           ls -la _build/
 
       - name: Upload artifact
