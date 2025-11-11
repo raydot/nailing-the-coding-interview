@@ -82,18 +82,21 @@ Found an error? Have a suggestion? Contributions are welcome!
 
 ## 📄 License
 
-© 2025 Dave Kanter. MIT License.
+© 2025 Dave Kanter. CC BY-NC-SA 4.0
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 This means you're free to:
+- ✅ **Share** — Copy and redistribute the material
+- ✅ **Adapt** — Remix, transform, and build upon the material
+- ✅ **Use for learning** — Personal and educational use
 
-- ✅ Use the content for learning
-- ✅ Share with others
-- ✅ Modify and adapt
-- ✅ Use commercially
+Under these conditions:
+- 📝 **Attribution** — Give appropriate credit and link to license
+- 🚫 **NonCommercial** — No commercial use or monetization
+- 🔄 **ShareAlike** — Distribute modifications under the same license
 
-Just include the original copyright notice.
+See the [LICENSE](LICENSE) file for full details.
 
 ## ✍️ Author
 
