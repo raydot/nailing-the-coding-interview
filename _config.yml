@@ -16,6 +16,11 @@ execute:
     - '.github/*'
     - 'asciidoc-source/*'
     - 'grapher/*'
+    - 'code/*'
+    - '**/.DS_Store'
+    - '**/README.md'
+    - 'SETUP.md'
+    - 'LICENSE'
 
 # LaTeX settings for PDF output
 latex:
