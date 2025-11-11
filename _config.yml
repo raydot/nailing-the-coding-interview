@@ -6,10 +6,16 @@ logo: images/logo.png # You can add a logo later
 
 # Execution settings
 execute:
-  execute_notebooks: auto # Execute notebooks that haven't been run
+  execute_notebooks: 'off' # Don't execute notebooks during build
   cache: ''
   exclude_patterns:
     - 'test-book/*'
+    - 'notebooks/*'
+    - 'drafts/*'
+    - 'docs/*'
+    - '.github/*'
+    - 'asciidoc-source/*'
+    - 'grapher/*'
 
 # LaTeX settings for PDF output
 latex:
