@@ -1,7 +1,2 @@
-# Table of contents for Nailing the Coding Interview
-
 format: jb-book
 root: intro
-chapters:
-  - file: chapters/00-preface
-    title: Preface
