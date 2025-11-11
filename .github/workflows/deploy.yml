@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -32,9 +32,14 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      # - name: Build Jupyter Book
+      #   run: |
+      #     jupyter-book build . -v
       - name: Build Jupyter Book
         run: |
-          jupyter-book build . -v
+          ls -la
+          jupyter-book build . -v -W
+          ls -la _build/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
