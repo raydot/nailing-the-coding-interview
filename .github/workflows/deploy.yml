@@ -14,16 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+          environment-file: environment.yml
+          activate-environment: nailing-coding-interview
+          auto-activate-base: false
 
       - name: Build the book
+        shell: bash -l {0}
         run: |
           jupyter-book build .
 
