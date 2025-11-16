@@ -1,19 +1,2 @@
 format: jb-book
 root: intro
-chapters:
-  - file: chapters/00-preface
-  - file: chapters/01-preparing
-  - file: chapters/02-big-o
-  - file: chapters/03-strings
-  - file: chapters/04-arrays
-  - file: chapters/05-linked-lists
-  - file: chapters/06-stacks-queues
-  - file: chapters/07-heaps
-  - file: chapters/08-hashes
-  - file: chapters/09-trees
-  - file: chapters/10-graphs
-  - file: chapters/11-functions-recursion
-  - file: chapters/12-search-sort
-  - file: chapters/13-dynamic-greedy
-  - file: chapters/14-outside-the-box
-  - file: chapters/15-gen-ai-to-study
