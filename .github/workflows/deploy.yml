@@ -20,6 +20,17 @@ jobs:
           environment-file: environment.yml
           activate-environment: nailing-coding-interview
           auto-activate-base: false
+          use-mamba: true
+
+      - name: Cache conda environment
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/share/miniconda/envs/nailing-coding-interview
+            /home/runner/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ hashFiles('environment.yml') }}
+          restore-keys: |
+            conda-${{ runner.os }}-
 
       - name: Build the book
         shell: bash -l {0}

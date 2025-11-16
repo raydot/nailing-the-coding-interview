@@ -6,7 +6,7 @@ project:
     - name: Dave Kanter
   toc:
     - file: intro.md
-    - title: Subtree 0
+    - title: Chapters
       children:
         - file: chapters/00-preface.md
         - file: chapters/01-preparing.md
