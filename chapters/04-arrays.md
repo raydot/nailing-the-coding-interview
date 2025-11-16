@@ -1071,7 +1071,7 @@ It’s my hope that you can follow my reasoning in a way that shows you how you 
 
 #### Winning Tic-Tac-Toe
 
-Tic-Tac-Toe (also called "Noughts and Crosses") is a great game for improving your knowledge of programming concepts because it has simple rules and a limited number of outcomes. There are only two players, and the game can go no more than nine moves long. xkcd, the best computer programming comic ever, \[has mandatory coverage of the subject\](<https://xkcd.com/832/>).
+Tic-Tac-Toe (also called "Noughts and Crosses") is a great game for improving your knowledge of programming concepts because it has simple rules and a limited number of outcomes. There are only two players, and the game can go no more than nine moves long. xkcd, the best computer programming comic ever, \[has mandatory coverage of the subject\](https://xkcd.com/832/).
 
 Depending on how you choose to count, there are roughly a quarter-million possible games of Tic-Tac-Toe, which isn’t really a lot for a computer. It’s even less when you consider that most of those games are duplicates of each other, since nearly 90% of them are rotations or reflections of the same game board. This section will give some ideas on how to get started, but it won’t cover the logic of the game in its entirety. That exercise is left up to the reader!
 
