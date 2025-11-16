@@ -4,7 +4,6 @@ channels:
   - defaults
 dependencies:
   - python=3.11
-  - jupyter-book
   - jupyterlab
   - numpy
   - matplotlib
@@ -13,4 +12,5 @@ dependencies:
   - ipywidgets
   - pip
   - pip:
+    - mystmd  # MyST v2 for building the book
     - ghp-import  # For deploying to GitHub Pages
