@@ -21,6 +21,16 @@ jobs:
           activate-environment: nailing-coding-interview
           auto-activate-base: false
 
+      - name: Check versions
+        shell: bash -l {0}
+        run: |
+          echo "=== Jupyter Book version ==="
+          jupyter-book --version
+          echo "=== Python version ==="
+          python --version
+          echo "=== All installed packages ==="
+          conda list | grep -E "(jupyter|sphinx|myst)"
+
       - name: Build the book
         shell: bash -l {0}
         run: |
