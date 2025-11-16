@@ -23,7 +23,8 @@ project:
     - file: chapters/14-outside-the-box.md
     - file: chapters/15-gen-ai-to-study.md
 site:
-  options:
-    folders: true
-    baseurl: /nailing-the-coding-interview
   template: book-theme
+  options:
+    logo_text: Nailing the Coding Interview
+  domains:
+    - nailing-the-coding-interview.raydot.github.io
