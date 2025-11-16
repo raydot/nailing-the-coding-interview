@@ -21,33 +21,10 @@ jobs:
           activate-environment: nailing-coding-interview
           auto-activate-base: false
 
-      - name: Debug environment
-        shell: bash -l {0}
-        run: |
-          echo "=== Checking directory structure ==="
-          pwd
-          ls -la
-
-          echo "=== Checking for problematic files ==="
-          find . -name "*.md" -type d || echo "No directories with .md extension"
-
-          echo "=== Checking chapters ==="
-          ls -la chapters/
-
-          echo "=== File types ==="
-          file intro.md
-          file chapters/00-preface.md
-
-          echo "=== Checking _toc.yml ==="
-          cat _toc.yml
-
-          echo "=== Jupyter Book version ==="
-          jupyter-book --version
-
       - name: Build the book
         shell: bash -l {0}
         run: |
-          jupyter-book build . --verbose 2>&1 | tee build.log || (cat build.log && exit 1)
+          jupyter-book build .
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
