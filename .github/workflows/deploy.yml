@@ -21,10 +21,9 @@ jobs:
           activate-environment: nailing-coding-interview
           auto-activate-base: false
 
-      - name: Initialize and build the book
+      - name: Build the book
         shell: bash -l {0}
         run: |
-          jupyter-book init
           jupyter-book build --html
 
       - name: Upload artifact
