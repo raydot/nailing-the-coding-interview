@@ -26,4 +26,5 @@ project:
 site:
   options:
     folders: true
+    baseurl: /nailing-the-coding-interview
   template: book-theme
