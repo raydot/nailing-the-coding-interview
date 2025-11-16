@@ -28,10 +28,6 @@ latex:
     targetname: nailing-the-coding-interview.tex
   latex_engine: pdflatex
 
-# Bibliography
-bibtex_bibfiles:
-  - references.bib
-
 # Repository information
 repository:
   url: https://github.com/raydot/nailing-the-coding-interview
