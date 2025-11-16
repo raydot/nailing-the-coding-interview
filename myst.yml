@@ -1,6 +1,7 @@
 version: 1
 project:
   title: Nailing the Coding Interview
+  github: https://github.com/raydot/nailing-the-coding-interview
   authors:
     - name: Dave Kanter
   toc:
