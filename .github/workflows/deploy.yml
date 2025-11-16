@@ -14,6 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache conda environment
+        uses: actions/cache@v4
+        id: cache-conda
+        with:
+          path: |
+            /usr/share/miniconda/envs/nailing-coding-interview
+          key: conda-${{ runner.os }}-${{ hashFiles('environment.yml') }}
+          restore-keys: |
+            conda-${{ runner.os }}-
+
       - name: Setup Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -21,9 +31,6 @@ jobs:
           activate-environment: nailing-coding-interview
           auto-activate-base: false
           use-mamba: true
-          # Enable built-in caching
-          cache-environment: true
-          cache-environment-key: conda-env-${{ hashFiles('environment.yml') }}
 
       - name: Build the book
         shell: bash -l {0}
