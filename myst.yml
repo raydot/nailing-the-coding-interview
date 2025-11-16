@@ -26,5 +26,3 @@ site:
   template: book-theme
   options:
     logo_text: Nailing the Coding Interview
-  domains:
-    - nailing-the-coding-interview.raydot.github.io
