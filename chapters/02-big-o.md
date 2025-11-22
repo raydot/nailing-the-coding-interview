@@ -4,7 +4,7 @@ In this chapter we dive into Big O Notation, a computer science concept that is 
 
 I’m going to start this chapter with a confession: I hated math growing up. I once gleefully told my 12th-grade precalculus teacher that I would never need to know one single thing he taught me. Mr. Wittekind, on the off chance you’re reading this book right now, you were right and I was wrong.
 
-In my biased opinion, and with a further apology to Mr. Wittekind, I think this has a lot to do with the way math is taught. Children are asked to memorize a bunch of formulas and concepts, without much of an idea of why they’re important or even what they are. If you ask most American high school students about algebra, they can likely tell you something vague about equations, quadratics, or slopes of lines. If you ask most American high school students "What *is* algebra?" I’m guessing they won’t know.
+In my biased opinion, and with a further apology to Mr. Wittekind, I think this has a lot to do with the way math is taught. Children are asked to memorize a bunch of formulas and concepts, without much of an idea of why they’re important or even what they are. If you ask most American high school students about algebra, they can likely tell you something vague about equations, quadratics, or slopes of lines. If you ask most American high school students "What _is_ algebra?" I’m guessing they won’t know.
 
 Unlike computer programming, it can be hard to make mathematical concepts immediately appreciable and understandable. I can teach you about a for loop, and then show you a cool example where you can make a computer say your name ten times. I can teach you `y = mx + b` and you might not understand why that’s important and useful to know for quite some time, if ever. It’s certainly hard to see immediately.
 
@@ -16,7 +16,7 @@ Big O Notation is one of those little bits of math. You don’t need to solve lo
 
 ## What is Big O Notation?
 
-Big O (short for "Big omnicron" or the Greek letter O) is a topic that can make developers tremble in their stylish sneakers. While the phrase "Big O" itself means something specific, which we’ll get to in a moment, what I mean by "Big O Notation" as used so far in this chapter is a set of equations that form curves on a graph. These curves usually represent time on the horizontal axis and the number of inputs to an operation — or set of operations — on the vertical axis. The "shapes" of these curves give developers a way to compare the efficiency of algorithms. Generally speaking, the flatter the curve, the more efficient the algorithm. What determines the slope of the curve is the number of operations that need to be performed to accomplish a given task.
+Big O (from the German word "Ordnung", or "order") is a topic that can make developers tremble in their stylish sneakers. While the phrase "Big O" itself means something specific, which we’ll get to in a moment, what I mean by "Big O Notation" as used so far in this chapter is a set of equations that form curves on a graph. These curves usually represent time on the horizontal axis and the number of inputs to an operation — or set of operations — on the vertical axis. The "shapes" of these curves give developers a way to compare the efficiency of algorithms. Generally speaking, the flatter the curve, the more efficient the algorithm. What determines the slope of the curve is the number of operations that need to be performed to accomplish a given task.
 
 For an example, imagine you and three friends go for dinner at a restaurant. The waitperson has only one "operation," and that’s telling the kitchen staff what you want for dinner. Each of your orders can individually be considered an "input" to this operation.
 
@@ -42,7 +42,7 @@ Again, holding off on the terminology, this operation is in "O(1)" time, where "
 
 > **Note**
 >
-> Can you think of a way to make the curve even steeper than O(n)? Remember, Big O is about the *number* of operations, not the *speed* of the operations, so having the waitperson walk around the block on their way to the kitchen doesn’t change the shape of the curve. \[/sidebar\]
+> Can you think of a way to make the curve even steeper than O(n)? Remember, Big O is about the _number_ of operations, not the _speed_ of the operations, so having the waitperson walk around the block on their way to the kitchen doesn’t change the shape of the curve. \[/sidebar\]
 
 This is exactly what Big O is for, analyzing the speed of algorithms. The most important idea behind Big O and related terms is that they measure speed in a general and relative, and not specific, way. What "general" means is that Big O is great for comparing algorithmic approaches or finding algorithmic optimizations.
 
@@ -78,14 +78,14 @@ Notice the shape of this graph. The number of inputs (y-axis) equals the number 
 
 O(n) can be very efficient if there are only a few inputs. That’s a great place to start, but when you discuss Big O, you must always consider it at scale. If there are 100 inputs or one thousand, as mentioned above, it still might be more efficient than other approaches. But what if there are 500,000, or a million, or a trillion? The efficiencies of O(n) might diminish considerably compared to other approaches.
 
-### O($`n^2`$)
+### $O(n^2)$
 
 <figure>
-<img src="../images/ch_02/oh_of_en_squared.png" alt="O(latexmath:[n^2])" />
+<img src="../images/ch_02/oh_of_en_squared.png" alt="$O(n^2)$" />
 <figcaption>O(<span class="math inline"><em>n</em><sup>2</sup></span>)</figcaption>
 </figure>
 
-O($`n^2`$) is the least efficient of all of the "shapes" discussed in this section. O($`n^2`$) (also called "quadratic") means that every operation must be done *number of inputs* multiplied by *number of inputs* times. If you have 100 inputs, it will take $`100^2`$ or 10,000 operations to complete the task. Notice that the shape of this graph takes off quickly and goes nearly vertical. The addition of even a small number of inputs will quickly cause the number of operations to skyrocket. An example of this happening is in nested for loops. Keep in mind that it gets worse than O($`n^2`$). Poorly built algorithms can take on O($`n^3`$) or O($`n^4`$) or even worse, so try to avoid these approaches if you can. There are even worse metrics, including O($`n^n`$) and O(n!). We’ll discuss these more later in this chapter and point out examples in the algorithms sections as they arise.
+$O(n^2)$ is the least efficient of all of the "shapes" discussed in this section. $O(n^2)$ (also called "quadratic") means that every operation must be done _number of inputs_ multiplied by _number of inputs_ times. If you have 100 inputs, it will take $100^2$ or 10,000 operations to complete the task. Notice that the shape of this graph takes off quickly and goes nearly vertical. The addition of even a small number of inputs will quickly cause the number of operations to skyrocket. An example of this happening is in nested for loops. Keep in mind that it gets worse than $O(n^2)$. Poorly built algorithms can take on $O(n^3)$ or $O(n^4)$, etc., so try to avoid these approaches if you can. There are even worse metrics, including $O(n^n)$ and $O(n!)$. We’ll discuss these more later in this chapter and point out examples in the algorithms sections as they arise.
 
 ### O(log n)
 
@@ -94,11 +94,11 @@ O($`n^2`$) is the least efficient of all of the "shapes" discussed in this secti
 <figcaption aria-hidden="true">O(log n)</figcaption>
 </figure>
 
-If you don’t remember logarithms from high school, a logarithm is the number something would have to be raised to in order to come up with a given number. To put that in a hopefully less confusing way, think about it like this: what would 2 have to be raised to in order to get 8? Since $`2^3`$ is 8 the answer is 3 times, and so $`\log_2(8)`$ = 3. There’s more to logarithms than this, of course, but right now we’re focusing on the shapes. Notice how slowly O(log n) grows, flattens as it grows larger, and how for a small number of inputs it can be even more efficient than O(1).
+If you don’t remember logarithms from high school, a logarithm is the number something would have to be raised to in order to come up with a given number. To put that in a hopefully less confusing way, think about it like this: what would 2 have to be raised to in order to get 8? Since $2^3$ is 8 the answer is 3 times, and so $\log_2(8) = 3$. There’s more to logarithms than this, of course, but right now we’re focusing on the shapes. Notice how slowly O(log n) grows, and flattens as it grows larger.
 
 O(log n) arises from algorithms that split the relevant numbers of inputs under consideration by half, repeatedly. You’ll soon see that this is the case with some searching and sorting algorithms, and also with binary trees. (In general if the word "binary" is involved in the description of an algorithm, it’s O(log n).) This is a highly desirable efficiency and one that should be sought wherever possible.
 
-Closely related to O(log n) is O(n log n), which is less desirable than O(n) but certainly superior to O($`n^2`$).
+Closely related to $O(\log n)$ is $O(n \log n)$, where the logarithm is multiplied by the number of inputs. This is less desirable than $O(n)$ but certainly superior to $O(n^2)$.
 
 ### All of the shapes together
 
@@ -107,7 +107,7 @@ Closely related to O(log n) is O(n log n), which is less desirable than O(n) but
 <figcaption>All Big O Shapes Together</figcaption>
 </figure>
 
-Here are all of the shapes together. Take a moment and compare each shape to the others, and go back and re-read the description of any shape in isolation if you don’t understand what it means. These shapes are going to form the basis of the rest of the discussion of Big O, so really take a moment here if you need it. If someone asks you "Which is more efficient: O($`n^2`$) or O($`log n`$)?" you should see the two shapes in your head and immediately know the answer.
+Here are all of the shapes together. Take a moment and compare each shape to the others, and go back and re-read the description of any shape in isolation if you don’t understand what it means. These shapes are going to form the basis of the rest of the discussion of Big O, so really take a moment here if you need it. If someone asks you "Which is more efficient: $O(n^2)$ or $O(log n)$?" you should see the two shapes in your head and immediately know the answer.
 
 Nothing builds understanding like doing. If you want to cement the relationship between the equations in your mind, find a graphing calculator application or website and graph these shapes yourself. Zoom in and out on the graph and the points at which the lines cross, and come up with situations in which one operation would be preferable to another. Which shapes are better for smaller or larger numbers of inputs?
 
@@ -119,19 +119,19 @@ I started with the shapes so that you could keep them in mind as we discuss Big 
 
 Big O is not about measuring the actual speed of an algorithm. For starters, that’s not an easy thing to do universally because different computers come in different memory and chipset configurations.
 
-Big O is a type of "asymptotic analysis," which is a way to mathematical way to describe limiting behavior. "Limiting behavior" means the best or worst a process can possibly do. For instance, when you buy a car you’re usually told what your expected gas mileage will be. This doesn’t mean your car will always (or ever) get this exact gas mileage. The number given is usually the absolute best the car can be expected to do, under a very specific set of conditions. But depending on any number of factors — passenger weight, tire pressure, weather, road conditions — your car won’t do as well as what the number promises. And no matter what, your car will not do better. So the number describes a "limit."
+Big O Notation is a system of asymptotic analysis - a mathematical way to describe the limiting behavior of algorithms. The notation includes several symbols, each describing different bounds: Big O (written as O) describes the upper bound or worst case, Big Omega (Ω) describes the lower bound or best case, and Big Theta (Θ) describes tight bounds when best and worst cases match.
+Think of Big O like the maximum enrollment in a class. You might see in a course catalog that the class limit is 20 students, meaning that if you're the 21st student to register, you can't join unless another student leaves. There might be 8 students in the class, or 11, or 19, but there won't be more than 20. Similarly, Big O describes the maximum number of operations an algorithm needs in its worst case - it might run faster with different data, but it won't be slower than the Big O limit.
+This is not a book about asymptotic analysis - there are many excellent resources for that. For coding interviews, you'll primarily encounter Big O (the upper bound/worst case), so that's what we'll focus on. However, when people say 'Big O Notation' casually, they often mean the entire system of analysis that includes Big Theta and Big Omega. It's confusing, but you should be aware of the distinction.
 
-Big O also describes a limit, but unlike the example above Big O actually describes the *worst* an algorithm can possibly do. If the graph describes the *best* an algorithm can possibly do, that’s referred to as Big Omega or Big Ω notation. The average case is described as Big Theta, or Big Θ notation. This is not a book about asymptotic analysis, and there are lot of them out there, so let’s stick with Big O as a general term for algorithmic analysis and the four shapes we considered earlier.
+To sum it up, an algorithm running in O(log n) time will scale better than an algorithm running in O(n²) time as inputs grow large. For small inputs, constant factors and implementation details can matter more than Big O classification, but as n increases, O(log n) will always outperform O(n²). Similarly, O(n) will always outperform O(n²) at scale, and O(1) constant-time operations will outperform everything else regardless of input size.
 
-To sum it up, if an algorithm is said to run in Big O($`n^2`$ time), that algorithm in its worst case will run worse than an algorithm running at Big O($`log n`$) time. To think about it another way, an algorithm running at Big O($`log n`$ time) will *usually*, but not always, run better than an algorithm running at Big O($`n^2`$).
-
-These descriptions should give you a sense that the idea behind Big O is to compare two approaches as generally "better" or "worse" in terms of expected performance.
+These descriptions should give you a sense that the idea behind Big O is to compare algorithmic designs as generally "better" or "worse" in terms of expected performance given some number if inputs.
 
 ### Operations
 
 In presenting the shapes to you I said that the Y-axis represented the number of inputs, while the X-axis represented the number of operations. It should be clear that the number of inputs is the number of pieces of data processed, but less clear is what is meant by the number of operations. More specifically, what exactly is an operation?
 
-For the purposes of Big O, operations are the things that have to happen for the algorithm to execute. Because for the purposes of tech interviews Big O is about *limits* and not actual timing, think of an "operation" as a constant value. There could be three things happening, or four, or ten, but we’re more interested in how many times this *group* of things has to happen, than in the number of items in the group.
+For the purposes of Big O, operations are the things that have to happen for the algorithm to execute. Because for the purposes of tech interviews Big O is about _limits_ and not actual timing, think of an "operation" as a constant value. There could be three things happening, or four, or ten, but we’re more interested in how many times this _group_ of things has to happen, than in the number of items in the group.
 
 As an example, consider the multiplication table you may have learned in grade school:
 
@@ -142,22 +142,19 @@ As an example, consider the multiplication table you may have learned in grade s
 
 Here’s a general example of how this might be accomplished. Ignore the fact that there are no headers or proper spacing or optimizations and just focus on the fact the code contains a function definition, two `for` loops, and two `print` statements. There’s nothing complicated here: the code runs through two for loops and for each iteration through the loop prints out the number in the "i \* j" position, much like the multiplication table itself does. The multiplication table in this form can be considered a "two-dimensional" piece of data.
 
-``` python
----
+```python
 def multiply(limit):
   for i in range(1, limit + 1):
     for j in range(1, limit + 1):
       print(f"{i * j}", end=" ")
     print("\n")
----
-```python
+```
 
-How many operations is this? You could consider that the function definition is one, the two `for` loops are two, and the two `print()` statements are two resulting in 5 operations. But as far as Big O is concerned, the answer is it doesn’t matter. For the purposes of Big O there are two for loops, which means that whatever you pass into `limit`, the number of operations in this code is $`limit^2`$, or $`n^2`$ times. The running time is O\[n^2\].
+How many operations is this? You could consider that the function definition is one, the two `for` loops are two, and the two `print()` statements are two resulting in 5 operations. But as far as Big O is concerned, the answer is it doesn’t matter. For the purposes of Big O there are two for loops, which means that whatever you pass into `limit`, the number of operations in this code is $limit^2$, or $n^2$ times. The running time is $O(n^2)$.
 
 What if you make the following modification to the code to add a header and a notification that the program has finished? Does this change the number of Big O operations involved?
 
-``` python
----
+```python
 def multiply(limit):
   print("Multiplication Table from 1 to ", limit)
   for i in range(1, limit + 1):
@@ -165,14 +162,13 @@ def multiply(limit):
       print(f"{i * j}", end=" ")
     print("\n")
   print("Finished!")
----
 ```
 
-If all you’re adding is two lines of code, Big O remains at latexmath\[O(n^2)\] Why? Because as I mentioned earlier, Big O is about the *trend* of the code running time, and not about the running time specifically.
+If all you’re adding is two lines of code, Big O remains at $O(n^2)$ Why? Because as I mentioned earlier, Big O is about the _trend_ of the code running time, and not about the running time specifically.
 
-So why is this important? It’s important because Big O allows us to talk about the *optimization* of code in terms of *overall* improvements to the running time of the algorithm. Again, because of the inherent differences between computers, the comparison between the running times of algorithms can be pretty meaningless. The `multiply()` function above is a very simple (I will not use the word "trivial" one single time in this book, other than right now) example that I picked to specifically illustrate latexmath\[O(n^2)\], but as we go through this book we will see some algorithmic approaches that improve Big O in terms of either time or space complexity.
+So why is this important? It’s important because Big O allows us to talk about the _optimization_ of code in terms of _overall_ improvements to the running time of the algorithm. Again, because of the inherent differences between computers, the comparison between the running times of algorithms can be pretty meaningless. The `multiply()` function above is a very simple (I will not use the word "trivial" one single time in this book, other than right now) example that I picked to specifically illustrate $O(n^2)$, but as we go through this book we will see some algorithmic approaches that improve Big O in terms of either time or space complexity.
 
-*Pause and think: Can the multiplication example above be improved so it doesn’t use two `for` loops? Can it be improved so it doesn’t use `for` loops at all? Does this change the number of operations required to run this code?*
+_Pause and think: Can the multiplication example above be improved so it doesn’t use two `for` loops? Can it be improved so it doesn’t use `for` loops at all? Does this change the number of operations required to run this code?_
 
 Now that I’ve presented you with some introductory ideas regarding Big O, it’s a good time to consider some further specifics.
 
@@ -180,19 +176,19 @@ Now that I’ve presented you with some introductory ideas regarding Big O, it�
 
 "Constant Time," or Big O(1) means that the number of operations remains the same no matter how many inputs are passed to it. As such, this is a highly desired state of algorithmic optimization. It should come as no surprise to you, however, that it’s an incredibly hard state to obtain, and for some problems may simply not be possible.
 
-Looking once again at printing the multiplication table above, no matter how you refactor the `multiply()` function, it’s going to have to run at $`O(n^2)`$. It has to in order to print the required numbers the required number of times. It cannot be optimized further.
+Looking once again at printing the multiplication table above, no matter how you refactor the `multiply()` function, it’s going to have to run at $O(n^2)$. It has to in order to print the required numbers the required number of times. It cannot be optimized further.
 
-But there will be examples in this book of starting with a "brute force" algorithm and optimizing that algorithm in order to flatten the curve. For instance, the Rabin-Karp algorithm discussed briefly in Chapter 3 changes a $`O(n^2)`$ algorithm into O(1) time
+But there will be examples in this book of starting with a "brute force" algorithm and optimizing that algorithm in order to flatten the curve. For instance, the Rabin-Karp algorithm discussed briefly in Chapter 3 changes a $O(n^2)$ algorithm into O(n) time
 
 ### Logarithmic Time (log n, n log n)
 
 Logarithmic time usually describes algorithms that split the data set in half with each iteration. For example, the Binary Search algorithm, discussed in Chapter 12, works by splitting the data set in half every time loop through the data is performed. The height of binary trees, discussed in Chapter 9, can also be derived logarithmically. Most (but not all) of the time we’re dealing with a base-2 logarithm, as is expected from a repeated reduction by half.
 
-Logarithmic time can provide a significant improvement over polynomial times (see below) even if considerable algorithmic complexity is required as a result. There are algorithms that perform multiple complex steps but that might change complexity from a single $`O({n^2})`$ step to three steps that are *O(n log n*), *O(n)*, and *O(n log n)* in complexity, leading to the entire effort running in *O(n log n)* time. Such effort might drastically increase the complexity of the algorithm which now performs in three steps instead of one, but if you’re running thousands or millions of these operations — perhaps even in real-time — the short-term complexity is more than worth the long-term gain in speed. (We will not cover any such examples in this book, but look into the "Fast Fourier Transform" if you’re interested.)
+Logarithmic time can provide a significant improvement over polynomial times (see below) even if considerable algorithmic complexity is required as a result. There are algorithms that perform multiple complex steps but that might change complexity from a single $O(n^2)$ step to three steps that are _O(n log n_), _O(n)_, and _O(n log n)_ in complexity, leading to the entire effort running in _O(n log n)_ time. Such effort might drastically increase the complexity of the algorithm which now performs in three steps instead of one, but if you’re running thousands or millions of these operations — perhaps even in real-time — the short-term complexity is more than worth the long-term gain in speed. (We will not cover any such examples in this book, but look into the "Fast Fourier Transform" if you’re interested.)
 
-### Polynomial Time ($`{n^2}, {n^3}`$)
+### Polynomial Time ($O(n^2), O(n^3)$)
 
-"Polynomial" time often occurs when a process is run through multiple loops, like in the Multiplication Table example above. If every loop through means every item needs to be considered once (or more than once), you’re in polynomial times. Of the five examples of Big O shapes given in this chapter, polynomial time is the most complex (and so the "steepest"), but there are even steeper curves including $`O{2^n}`$ and $`O{n^!}`$. There will not be too many examples of such complex algorithms given in this book, but they’re out there.
+"Polynomial" time often occurs when a process is run through multiple loops, like in the Multiplication Table example above. If every loop through means every item needs to be considered once (or more than once), you’re in polynomial times. Of the five examples of Big O shapes given in this chapter, polynomial time is the most complex (and so the "steepest"), but there are even steeper curves including $O(2^n)$ and $O(n!)$. There will not be too many examples of such complex algorithms given in this book, but they’re out there.
 
 ### Space
 
@@ -206,9 +202,9 @@ Don’t be surprised if you go for an interview at a company that focuses on the
 
 ### Best, and Worst Case Complexities
 
-For the last part of this chapter, I would like to focus on some different-than-best-case, um, cases. I briefly mentioned these above and will now expand a little bit on these different boundaries. The changes in boundaries can come from improvements to algorithms, or by using entirely different, better or worse algorithms, as you would expect. But they can also come from changes to the data. For instance, the Quicksort algorithm has a best case (Big O) of $`log n`$ but a worst case (Big Ω) of $`n^2`$. The only difference between the two cases is whether or not the data is already sorted. Because of the way the Quicksort algorithm works, it actually runs the slowest *when the data is already sorted.* This idea will be considered further when we examine Quicksort in Chapter 12.
+For the last part of this chapter, I would like to focus on some different-than-worst-case, um, cases. I briefly mentioned these above and will now expand a little bit on these different boundaries. The changes in boundaries can come from improvements to algorithms, or by using entirely different, better or worse algorithms, as you would expect. But they can also come from changes to the data. For instance, the Quicksort algorithm has a best case (Big Ω) of n log n but a worst case (Big O) of n². The only difference between the two cases is whether or not the data is already sorted. Because of the way the Quicksort algorithm works, it actually runs the slowest _when the data is already sorted._ This idea will be considered further when we examine Quicksort in Chapter 12.
 
-Not all algorithms necessarily have a best and worst-case scenario. An algorithm that runs in constant time, for example, has a best case that is identical to its worst case.
+Not all algorithms necessarily have a best and worst-case scenario. An algorithm that runs in constant time like pushing to or popping from a stack, for example, has a best case that is identical to its worst case.
 
 ### Average Case (Big Theta (θ) Complexity)
 
@@ -218,7 +214,7 @@ This is also sometimes called the "exact case." If you specifically measure ever
 
 In coding interviews, Big O will usually be used to test one of two things: Do you understand the complexity of the algorithm you’re looking at, and/or can you reduce the complexity of the algorithm you’re looking at?
 
-For example, you might be given a problem that requires you to sort an array. As a first option, you might choose to use the Quicksort algorithm which, as discussed above, has a worst-case running time of $`{n^2}`$ if the data is already sorted.
+For example, you might be given a problem that requires you to sort an array. As a first option, you might choose to use the Quicksort algorithm which, as discussed above, has a worst-case running time of $O(n^2)$ if the data is already sorted.
 
 The questions regarding the complexity of Quicksort could come up in a number of ways: Do you know the average (Big Theta) time of this algorithm? Do you know the best-case (Big Omega) running time of this algorithm? Do you know of an algorithm that runs faster than Quicksort? What has to change for the Quicksort to become more or less effective? Do you know why Quicksort runs in Big O when the array is already sorted?
 
@@ -258,17 +254,17 @@ The first and most important thing you have to understand is what is the problem
 
 Here are some basic steps to follow to optimize your code, whether you’re sitting in a coding interview or coding at work:
 
-1.  *Put the problem into plain language.* It does not matter how you do this. Write it down, say it out loud, draw a picture, whatever, but you need to say the problem in a way that allows you to comprehend what it is you’re trying to accomplish. In a work environment there might be time allocated to this, but in an interview you might have to just get this done on the side or in your head.
+1.  _Put the problem into plain language._ It does not matter how you do this. Write it down, say it out loud, draw a picture, whatever, but you need to say the problem in a way that allows you to comprehend what it is you’re trying to accomplish. In a work environment there might be time allocated to this, but in an interview you might have to just get this done on the side or in your head.
 
-2.  *Start small.* I started my career as a writer, and whenever I needed test data I would write very, very complicated test data sets. I thought it was genius because if the computer could handle a large, complicated data set, then surely the smaller, simpler sets would be no problem at all. Later I came to realize I was actually exactly wrong about this. I came to realize that I was making it harder for myself to just write good code, because I was always trying to solve a very specific, complicated, and unlikely problem. Instead of doing that, start with a small data set, and then build on that.
+2.  _Start small._ I started my career as a writer, and whenever I needed test data I would write very, very complicated test data sets. I thought it was genius because if the computer could handle a large, complicated data set, then surely the smaller, simpler sets would be no problem at all. Later I came to realize I was actually exactly wrong about this. I came to realize that I was making it harder for myself to just write good code, because I was always trying to solve a very specific, complicated, and unlikely problem. Instead of doing that, start with a small data set, and then build on that.
 
-3.  *Do the smallest thing that could possibly work.* This bullet is the same as the last one, except it applies less to the data and more to the code itself. The Agile software methodology suggests you start to "Do the smallest thing that could possibly work," and that’s great advice. A lot of what developers spend their days doing is breaking large, intractable problems down into smaller, more manageable problems and then solving those. Take this same approach in a coding interview. Don’t try to knock the whole problem out of the park in one swing. You’ll likely end up with a large tangle of code that doesn’t work and is hard to understand and either you or the person hired to replace you will have to spend a lot of time either debugging it or throwing it out and rewriting it.
+3.  _Do the smallest thing that could possibly work._ This bullet is the same as the last one, except it applies less to the data and more to the code itself. The Agile software methodology suggests you start to "Do the smallest thing that could possibly work," and that’s great advice. A lot of what developers spend their days doing is breaking large, intractable problems down into smaller, more manageable problems and then solving those. Take this same approach in a coding interview. Don’t try to knock the whole problem out of the park in one swing. You’ll likely end up with a large tangle of code that doesn’t work and is hard to understand and either you or the person hired to replace you will have to spend a lot of time either debugging it or throwing it out and rewriting it.
 
-4.  *Start with a brute force solution.* Start writing some code that solves the problem in the most straightforward way you can come up with. Do not try to start with optimization. Unless you see the optimization immediately, you’re much better off getting something down that works and then going back through the optimization process with the interviewer. Again, the trick is to start small. Get the code working first, and then the optimizations will suggest themselves.
+4.  _Start with a brute force solution._ Start writing some code that solves the problem in the most straightforward way you can come up with. Do not try to start with optimization. Unless you see the optimization immediately, you’re much better off getting something down that works and then going back through the optimization process with the interviewer. Again, the trick is to start small. Get the code working first, and then the optimizations will suggest themselves.
 
-5.  *Look for improvements.* An important part of being successful in a coding interview is "pattern recognition," a theme that will be returned to throughout this book. Nested for loops? That can probably be improved. Repeatedly calculating the same information? You can definitely get the time down on that. Once you’ve got the basic code down it’s a lot easier to see where the things are that can be done better. If you’re not sure, your can always ask the interviewer if there’s a way to improve the code. Plenty of examples of moving from brute force to a more optimized solution will be given in the algorithms section of this book.
+5.  _Look for improvements._ An important part of being successful in a coding interview is "pattern recognition," a theme that will be returned to throughout this book. Nested for loops? That can probably be improved. Repeatedly calculating the same information? You can definitely get the time down on that. Once you’ve got the basic code down it’s a lot easier to see where the things are that can be done better. If you’re not sure, your can always ask the interviewer if there’s a way to improve the code. Plenty of examples of moving from brute force to a more optimized solution will be given in the algorithms section of this book.
 
-6.  *Remember the "shapes" of the Big O Curves* Once I was in a large team meeting where a very smart developer pointed out that a solution a team member had come up with was "quadratic." No one knew what he meant, and no one raised their hand. As mentioned just above, "quadratic" means the multiplication table, nested for loops, O(n^2)! Often — not always but often — quadratic solutions can be improved. Once you recognize that this is the case, even if you can’t figure out how to improve the code, you can at least identify the problem, and signal to the interviewer that you’re aware of the issue.
+6.  Remember the "shapes" of the Big O Curves. Once I was in a large team meeting where a very smart developer pointed out that a solution a team member had come up with was "quadratic." No one knew what he meant, and no one raised their hand. If they had he could have quickly drawn a shape that explained it. As mentioned just above, "quadratic" means O(n²) - often seen in nested loops where both loops run n times, like the multiplication table example. Often — not always but often — quadratic solutions can be improved. Once you recognize that this is the case, even if you can't figure out how to improve the code, you can at least identify the problem, and signal to the interviewer that you're aware of the issue.
 
 ### Example Questions
 
