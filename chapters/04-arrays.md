@@ -66,19 +66,19 @@ In most programming languages, arrays are numbered — or "indexed" from zer
 
 That means the first element in the array `testArray` is located at array index 0. If `testArray = [21, 31, 41, …​]` then `testArray[0]` is where to find 21, `testArray[1]` is where to find 31, `testArray[2]` is where to find 41, etc.
 
-``` python
+```python
 testArray = [21, 31, 41]
-print(testArray)[0]
-`21`
-print(testArray)[1]
-`31`
-print(testArray)[2]
-`41`
+print(testArray[0])
+# Output: 21
+print(testArray[1])
+# Output: 31
+print(testArray[2])
+# Output: 41
 ```
 
-It’s not uncommon for programmers to use an "offset" variable to account for the difference in counting from 0, but it’s pretty easy to just add or subtract 1, as needed.
+Sometimes programmers to use an "offset" variable to account for the difference in counting from 0, but I don't recommend this because it’s pretty easy to just add or subtract 1, as needed.
 
-``` python
+```python
 someArray = []
 for i in range(len(someArray)):
     print("The item at position", i + 1, "is", someArray[i])
@@ -86,7 +86,7 @@ for i in range(len(someArray)):
 
 Python also allows for the selection of elements in an array by passing in a range that takes a "slice" of the array. The slicing approach was covered in the last chapter. The first number in the range is the index of the first element we wish to select while the second number is one more than the index of the second element.
 
-``` python
+```python
 arr = [1, 2, 3, 4, 5, 6, 7]
 print(arr[3:5])
 # prints [4, 5]
@@ -94,7 +94,7 @@ print(arr[3:5])
 
 Python also allows for the omission of one or the other numbers in the range, meaning "all numbers from here" or "all numbers to here":
 
-``` python
+```python
 arr = [1, 2, 3, 4, 5, 6, 7]
 print(arr[2:])
 # prints [3, 4, 5, 6, 7]
@@ -104,13 +104,13 @@ print(arr[:3])
 
 You can also pass negative values when requesting array items, which means to select from the end of the array instead of the beginning.
 
-``` python
+```python
 arr=[1, 2, 3, 4, 5, 6, 7]
 print(arr[-2])
 # prints 6
-print arr[-3:]
+print(arr[-3:])
 # prints [5, 6, 7]
-```javascript
+```
 
 ### Arrays and For Loops
 
@@ -180,20 +180,20 @@ Array modification functions include the following operations:
 
 `length()` Retrieve the length of the array, usually to do something else with it. Sometimes shortened to `len()`
 
-``` python
+```python
 demoArray = [1, 2, 3, 4, 5]
 print(len(demoArray)) # returns '5'
-```javascript
+```
 
 `for` loops Every programming language contains a function that allows for simple iteration, or "counting." Iteration is a process that has been available in programming languages from the very beginning, as it’s essential to making computers work.
 
 `for/in` Some programming languages — usually the weakly-typed ones — support `for/in` operations, which automatically consider the length of an array in iteration.
 
-``` python
+```python
 items = ["loaf of bread", "container of milk", "stick of butter"]
 for item in items:
     print(item)
-```python
+```
 
 `push() / pop()` These functions are called different things in different languages but they are for pushing an element into the end (or beginning) of an array and for retrieving an element from the beginning (or end) of an array.
 
@@ -209,9 +209,9 @@ Knowing how to program basic built-in functions is useful because you can see ho
 
 ### Multi-dimensional Arrays
 
-While most of the arrays programmers work with are one-dimensional, there are many times when a two-, three- or more dimensional array may be needed to solve a problem. These arrays are commonly called "nested arrays" because they contain arrays within arrays. For instance, the multiplication table example, above, is a two-dimensional array, and arrays with multiple (x, y, z) values are used extensively in creating 3D models for games or visualization. In this case the array becomes *nested*, with sub-arrays, each of which represents the values along a given dimension. A multidimensional array might also be called a "matrix," a concept we’ll return to in the problems at the end of this chapter. Here is a two-dimensional array that could be used to represent the state of a Tic-Tac-Toe board.
+While most of the arrays programmers work with are one-dimensional, there are many times when a two-, three- or more dimensional array may be needed to solve a problem. These arrays are commonly called "nested arrays" because they contain arrays within arrays. For instance, the multiplication table example, above, is a two-dimensional array, and arrays with multiple (x, y, z) values are used extensively in creating 3D models for games or visualization. In this case the array becomes _nested_, with sub-arrays, each of which represents the values along a given dimension. A multidimensional array might also be called a "matrix," a concept we’ll return to in the problems at the end of this chapter. Here is a two-dimensional array that could be used to represent the state of a Tic-Tac-Toe board.
 
-``` python
+```python
 tic_tac_toe_2d = [
     [(0,0), (0,1), (0,2)],
     [(1,0), (1,1), (1,2)],
@@ -221,7 +221,7 @@ tic_tac_toe_2d = [
 
 This bit of pseudocode contains an array containing three arrays, each of which contain three values. The number at each position represent the (row, column) that each position occupies in the two dimensional array. To access the value at any position, you have to pass two numbers to the array, like so:
 
-``` python
+```python
 square = tic_tac_toe_2d[0][2]
 ```
 
@@ -231,13 +231,13 @@ The spread operator is one of those things to know that really shows you’ve be
 
 Here a Python example of a simple use of the spread operator to pass an array into a function:
 
-``` python
+```python
 def sum(n1, n2, n3):
-    return a + b + c
+    return n1 + n2 + n3
 
 values = [10, 11, 12]
 print(sum(*values))
-```javascript
+```
 
 This code sample will output the value `33`. Notice the (overloaded) star operator in the function call:
 
@@ -247,16 +247,16 @@ The \* operator used in the this fashion will "spread" the values into the funct
 
 Here’s an example of a kind of reverse use, splitting a single piece of data into individual parts — in this case converting a string into a list of each individual character:
 
-``` python
+```python
 spread_hello = [*"hello"]
 print(spread_hello)
-```javascript
+```
 
 This code will output the value `['h', 'e', 'l', 'l', 'o']`.
 
 Python 3.5 and later even supports the use of the spread operator with Python dictionaries, which can be used to combine dictionaries or pass dictionary data into functions. Note the use of the double star operator in the function call:
 
-``` python
+```python
 dict1 = {'a': 1, 'b': 2}
 dict2 = {'c': 3, 'd': 4}
 combined_dict = {**dict1, **dict2}
@@ -269,29 +269,29 @@ Are there other ways to do this? Yes. Are there cooler ways to do this? I just d
 
 JavaScript also supports the spread operator, and it can be used in a similar way to Python. Instead of the `*` operator, JavaScript uses the `…​` operator. You’re not reading that wrong, it actually is three dots.
 
-``` javascript
+```javascript
 function sum(n1, n2, n3) {
-    return n1 + n2 + n3;
+  return n1 + n2 + n3
 }
 
-let values = [10, 11, 12];
-console.log(sum(...values));
+let values = [10, 11, 12]
+console.log(sum(...values))
 ```
 
 Similar to the example above, this code will output the value `33`.
 
 JavaScript also supports the reverse case, splitting a single piece of data into multiples:
 
-``` javascript
-let spread_hello = [..."hello"];
-console.log(spread_hello);
+```javascript
+let spread_hello = [...'hello']
+console.log(spread_hello)
 ```
 
 As you might expect, this code will output the value `['h', 'e', 'l', 'l', 'o']`.
 
 The spread operator is great for instance of passing data into functions when you might not know what you’re expecting. Here is a common use for passing props in a React component, where some of the props are required and some are optional:
 
-``` javascript
+```javascript
 function SpreadComponent({requiredProp1, requiredProp2, ...optionalProps}) {
     return (
         <div>
@@ -313,7 +313,7 @@ let props = {
 
 // Usage:
 <SpreadComponent {...props} />
-```javascript
+```
 
 Note the two different uses of the spread operator in this example. The first is in the function definition, where the spread operator is used with `…​optionalProps` to collect all the optional props into a single object. You can pass in as many optional props as you want, and give them all custom names, and once the function is invoked they will all be collected into the `optionalProps` object.
 
@@ -325,8 +325,8 @@ If you’re a frontend programmer you might go your whole career without ever on
 
 While they’re commonly used in C and C++, they’re available in Python and JavaScript, and can be a valuable too for passing data to a program at runtime. Node.js, for example, supports the use of `process.argv` to pass data into a a program "on the fly" at runtime:
 
-``` javascript
-console.log(process.argv);
+```javascript
+console.log(process.argv)
 ```
 
 It’s unlikely you’ll ever be asked about `argv` and `argc` in a programming interview, but they’re great tools to have in the box.
@@ -335,11 +335,11 @@ It’s unlikely you’ll ever be asked about `argv` and `argc` in a programming 
 
 JavaScript Object Notation, or JSON, is being used more and more often these days across all programming languages. It a great way to represent data that’s easy to read and immediately understand because it follows a form not too dissimilar from an outline.
 
-``` json
+```json
 {
   "animals": [
     {
-      "species": "Carcharodon carcharias",
+      "species": "Panthera leo",
       "common_name": "Lion",
       "name": "Leopold"
     },
@@ -355,7 +355,7 @@ JavaScript Object Notation, or JSON, is being used more and more often these day
     }
   ]
 }
-```javascript
+```
 
 JSON is often used an an intermediate data representation, because of the way in which is can readily be converted between platforms — data in a database, and data on a webpage, for example.
 
@@ -385,45 +385,32 @@ This only sorts the largest element in one pass though.
 
 So the algorithm returns to the beginning of the array and starts again, this time stopping one element before the end of the array. It repeats this process until the array is sorted.
 
-Hopefully you see this requires nested for loops, and that the runtime of the algorithm is O(n^2). For example:
+Hopefully you see this requires nested for loops, and that the runtime of the algorithm is $O(n^2)$. For example:
 
-``` python
-def bubble_sort(arr):
-    n = len(arr)
-    # Loop through all array elements
+```python
+def bubble_sort(lst):
+    n = len(lst)
+    # Loop through all list elements
     for i in range(n):
         # The last i elements are already sorted
         for j in range(0, n - i - 1):
-            # Loop through the array from 0 to n-i-1
+            # Loop through the list from 0 to n-i-1
             # Swap if the element found is greater than the one next to it
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
 
-    return arr
+    return lst
 
 # Example usage
-arr = [21, 38, 25, 16, 27, 9, 12, 90]
-bubble_sort(arr)
-print("Sorted array is:", arr)
-# Output: def bubble_sort(arr):
-    n = len(arr)
-    # Loop through all array elements
-    for i in range(n):
-        # The last i elements are already sorted
-        for j in range(0, n - i - 1):
-            # Loop through the array from 0 to n-i-1
-            # Swap if the element found is greater than the one next to it
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-
-    return arr
-
-# Example usage
-arr = [21, 38, 25, 16, 27, 9, 12, 90]
-bubble_sort(arr)
-print("Sorted array:", arr)
-# Output: Sorted array: [11, 12, 22, 25, 34, 64, 90]
+lst = [21, 38, 25, 16, 27, 9, 12, 90]
+bubble_sort(lst)
+print("Sorted list is:", lst)
+# Output: Sorted list is: [9, 12, 16, 21, 25, 27, 38, 90]
 ```
+
+> **Note on Python Terminology**
+>
+> You'll notice we're using `lst` as the variable name and calling it a "list" in the comments. In Python, what other languages call arrays are implemented as lists - Python's built-in `list` type is the equivalent of arrays in languages like JavaScript or Java. Throughout this chapter, when we use the term "array" we're referring to this general concept, but in Python code examples we'll use the technically correct term "list."
 
 Bubble Sort is so inefficient that it’s rarely used in practice, but we have to start the conversation somewhere. Let’s look at a slightly more practical algorithm, the Insertion Sort algorithm.
 
@@ -431,7 +418,7 @@ Insertion Sort has the advantage over Bubble Sort in that it sorts the array in 
 
 Here is an example of Insertion Sort in Python:
 
-``` python
+```python
 def insertion_sort(arr):
     # move through the entire array
     for i in range(1, len(arr)):
@@ -481,7 +468,7 @@ The great thing about binary search is it scales logarithmically. Go back and lo
 
 Here is a simple implementation of binary search to guess a number between 1-100. This is not meant to be a complete application, just some basic code to illustrated the big idea.
 
-``` python
+```python
 def binary_search(arr, target):
     left = 0
     right = 100
@@ -492,17 +479,17 @@ def binary_search(arr, target):
         guess = left + (right - left) // 2
         if guess == target:
             print ("Winner!")
-        elif arr[mid] < target:
+        elif guess < target:
             left = guess + 1
         else:
             right = guess - 1
 ```
 
-Now that I’ve covered the basics, let’s see how this could be used to find the position of a value in an array. The numbers 1-100 have a property that makes them perfect for binary search, in that they’re already sorted in order. Given a number between 1-100, I can be assured that every number to the "left" of that number on the number line is smaller, and every number to the right is larger. The leads to an important consideration when using binary search: the data must be *sorted* for the algorithm to work.
+Now that I’ve covered the basics, let’s see how this could be used to find the position of a value in an array. The numbers 1-100 have a property that makes them perfect for binary search, in that they’re already sorted in order. Given a number between 1-100, I can be assured that every number to the "left" of that number on the number line is smaller, and every number to the right is larger. The leads to an important consideration when using binary search: the data must be _sorted_ for the algorithm to work.
 
 Consider this array:
 
-``` python
+```python
 array = [21, 3, 47, 10, 40]
 ```
 
@@ -520,7 +507,7 @@ In languages that support them, the sliding window technique is implemented usin
 
 You use a type of pointer when iterating over a for loop, with a variable that is usually named `i`.
 
-``` python
+```python
 for i in range(len(arr)):
   print(arr[i])
 ```
@@ -529,7 +516,7 @@ In this case, `i` is the pointer that will go down the line of "lockers" represe
 
 Example Sliding Window Problem:
 
-*Given an array of integers, find the two adjacent integers with the largest sum.*
+_Given an array of integers, find the two adjacent integers with the largest sum._
 
 Array: \[22, 1, 21, 12, 7, 19, 9, 3, 8, 17, 2, 20\]
 
@@ -537,7 +524,7 @@ Looking the array over quickly it’s not too hard to see that the two adjacent 
 
 Let’s start by solving this problem with a brute force solution. In this case, a nested for loop is great place to start. In this solution, the variables `i` and `j` are used as the "pointers", and because j always equals `i + 1`, the sum of any two adjacent integers can be calculated by adding `arr[i]` and `arr[j]`, which comprise the two-element "window" that is moved over the array:
 
-``` python
+```python
 def largest_sum(arr):
   largest = 0
   for i in range(len(arr)):
@@ -547,18 +534,18 @@ def largest_sum(arr):
   return largest
 ```
 
-Great start, but it’s not the most efficient solution. Nested for loops should always come under consideration for optimization, as their runtime is O(n^2) — the dreaded "quadratic." So how can we do better? Do we really need to use two for loops? Can we just run that single comparison "window" over the array and get the same result? Let’s try it!
+Great start, but it’s not the most efficient solution. Nested for loops should always come under consideration for optimization, as their runtime is $O(n^2)$ — the dreaded "quadratic." So how can we do better? Do we really need to use two for loops? Can we just run that single comparison "window" over the array and get the same result? Let’s try it!
 
-``` python
+```python
 def largest_sum(arr):
   largest = 0
   for i in range(len(arr) - 1):
     if arr[i] + arr[i + 1] > largest:
       largest = arr[i] + arr[i + 1]
   return largest
-```javascript
+```
 
-Excellent! We’ve eliminated the nested for loop, and now the runtime of the function is now the preferable "linear" time of O(n).
+Excellent! We’ve eliminated the nested for loop, and now the runtime of the function is now the preferable "linear" time of $O(n)$.
 
 So that’s a simple example of the sliding window technique. Let’s look at a more complicated example. Now the interviewer asks you to find the longest substring within a given string that contains only unique characters. For instance, if you’re given the string:
 
@@ -568,7 +555,7 @@ The answer is "abdc", because it’s the longest substring that contains only un
 
 Let’s first try to get this with a brute force solution:
 
-``` python
+```python
 def longest_unique_substring(s):
   longest = 0
   for i in range(len(s)):
@@ -580,13 +567,13 @@ def longest_unique_substring(s):
 
 someVar = "abbcaabdcbb"
 print(longest_unique_substring(someVar))
-```javascript
+```
 
-This might be an example of where the brute force solution is a little more brutal than it needs to be, but I wanted to take a moment to talk about the `set()` data type. A "set" in math and logic is a group of related but *distinct* items, be they words, number, objects, etc. The days of the week are a set, as are the months of the year. Notice that the days of the week are distinct, there aren’t two Tuesdays, thank goodness.
+This might be an example of where the brute force solution is a little more brutal than it needs to be, but I wanted to take a moment to talk about the `set()` data type. A "set" in math and logic is a group of related but _distinct_ items, be they words, number, objects, etc. The days of the week are a set, as are the months of the year. Notice that the days of the week are distinct, there aren’t two Tuesdays, thank goodness.
 
 `set()` (or `new Set()` in JavaScript) is a function that creates an empty set. If you pass it an array, it takes the array and returns one of each unique element in that array. What’s returned is probably not going to be in any kind of determined order. For instance, here’s what happened when I just ran the line of code:
 
-``` python
+```python
 >>> print (set ("abcdeabcdeabcde"))
 
 {'d', 'a', 'b', 'c'}
@@ -596,7 +583,7 @@ Correct! But why in that order? I don’t really know, and I don’t think it ma
 
 Additionally, you cannot add duplicate values to a set. For instance:
 
-``` python
+```python
 # Create an empty set
 numbers = set()
 
@@ -613,13 +600,13 @@ print(numbers)  # Output: {1, 2} (no change!)
 
 # Check if number exists
 print(1 in numbers)  # Output: True
-```javascript
+```
 
 Why I’m discussing this is because you might be asked about using `set()` to solve problems related to uniqueness, and sometimes it absolutely is the right tool for the job. In this case, however, it’s not. Can you see why?
 
 Consider the run time of the `longest_unique_substring()` function above. Using `set()` to iterate repeatedly over chunks of items in the string can be considered a third nested loop, and so the runtime of the function is now O(n^3), which is a shape I didn’t even mention in the section on Big O because hopefully you won’t come across it all that often. So if you’re asked "Why didn’t you use `set()`," be careful, it’s a trick question! Let’s see how sliding windows can help solve this problem more effectively.
 
-``` python
+```python
 def longest_unique_substring(s):
     longest_length = 0
     start = 0
@@ -651,7 +638,7 @@ The basic syntax of a list comprehension is:
 
 Here, for instance, is a simple list comprehension that creates a list of the squares of the numbers from 1 to 10:
 
-``` python
+```python
 squares = [x**2 for x in range(1, 11)]
 print(squares)
 ```
@@ -662,7 +649,7 @@ This code will output:
 
 Let’s say we want to go back over that list and cube any even number. That can be done with a list comprehension as well:
 
-``` python
+```python
 cubes = [x**3 if x % 2 == 0 else x for x in squares]
 print(cubes)
 ```
@@ -673,7 +660,7 @@ This code will output:
 
 List comprehension can even be used to combine two more lists into a single list, for example:
 
-``` python
+```python
 list1 = [1, 2, 3, 4, 5]
 list2 = ['a', 'b', 'c', 'd', 'e']
 
@@ -681,7 +668,7 @@ list2 = ['a', 'b', 'c', 'd', 'e']
 combined_list = [(x, y) for x, y in zip(list1, list2)]
 
 print(combined_list)
-```python
+```
 
 This will output:
 
@@ -705,7 +692,7 @@ Clearly this question has little to do with walls and water. It’s really about
 
 From here the brute force solution should suggest itself: check the area of the rectangle formed by every "wall" in the array against every other rectangle and return the biggest one. That approach would look something like this:
 
-``` python
+```python
 def max_area(heights):
     # Start with a variable to hold the maximum area
     max_area = 0
@@ -733,7 +720,7 @@ heights = [3, 16, 7, 19, 1, 12, 8, 5, 14, 10]
 print(max_area(heights))  # Output: 80
 ```
 
-Two things are immediately apparent about this solution: 1. It gives the area, but not the two walls that make up the container. 2. It’s a brute force solution, with a runtime of O(n^2), which can likely be improved.
+Two things are immediately apparent about this solution: 1. It gives the area, but not the two walls that make up the container. 2. It’s a brute force solution, with a runtime of $O(n^2)$, which can likely be improved.
 
 I’ll leave the solution to \#1 up to you, but let’s think for a moment about the solution to \#2. At this point the interviewer might even give you a hint: "Since the maximum width is the leftmost and rightmost wall, maybe you can optimize by working from the outside in."
 
@@ -743,7 +730,7 @@ For "pointers" we can use two variables called "left" and "right" that start at 
 
 The code for our new and improved approach might look something like this:
 
-``` python
+```python
 def max_area(heights):
     # Start with a variable to hold the maximum area
     max_area = 0
@@ -774,13 +761,13 @@ heights = [3, 14, 7, 19, 1, 12, 8, 5, 16, 10]
 print(max_area(heights))  # Output: 80
 ```
 
-This solution is much more efficient, bringing our runtime down from O(n^2) to O(n). (Reason through why this is the case if it’s not obvious to you already.) It also makes it report on the values chosen, since that only requires printing the values for "left" and "right," should you be asked to do so.
+This solution is much more efficient, bringing our runtime down from $O(n^2)$ to $O(n)$. (Reason through why this is the case if it’s not obvious to you already.) It also makes it report on the values chosen, since that only requires printing the values for "left" and "right," should you be asked to do so.
 
 The two-pointer technique is a valuable technique for solving array-based problems, and we will see it again later in this book.
 
 #### Two Sum / Three Sum
 
-The Two Sum problem is a *classic* interview question where you are given a target number and an array of numbers, and asked to find the two numbers in the array that add up to the target number.
+The Two Sum problem is a _classic_ interview question where you are given a target number and an array of numbers, and asked to find the two numbers in the array that add up to the target number.
 
 The Three Sum problem is a variation of the Two Sum problem where you are given a target number and an array of numbers, and asked to find the three numbers in the array that add up to the target number.
 
@@ -794,20 +781,20 @@ Before you start answering this problem, you will want to be sure to ask the int
 
 Once again, let’s start with a brute force solution to Two Sum, using nested for loops:
 
-``` python
+```python
 def two_sum(array, target):
     for i in range(len(array)):
         for j in range(i + 1, len(array)):
-            if arr[i] + arr[j] == target:
+            if array[i] + array[j] == target:
                 return [i, j]
     return None
 ```
 
-This algorithm loops through the array twice, comparing each number to every other number in the array. Notice in line 3 that the second loop starts at `i + 1`, because there’s no need to check the same number against itself. Hopefully it doesn’t come as much of a surprise to find this code runs in O(n^2) time, or that nested for loops is not the most efficient way to solve this problem.
+This algorithm loops through the array twice, comparing each number to every other number in the array. Notice in line 3 that the second loop starts at `i + 1`, because there’s no need to check the same number against itself. Hopefully it doesn’t come as much of a surprise to find this code runs in $O(n^2)$ time, or that nested for loops is not the most efficient way to solve this problem.
 
 So how can we do better?
 
-``` python
+```python
 def two_sum(array, target):
     num_index = {}
     for i, num in enumerate(array):
@@ -815,38 +802,38 @@ def two_sum(array, target):
             return [num_index[target - num], i]
         num_index[num] = i
     return None
-```python
+```
 
 Python contains a built-in function called `enumerate()` that can be used to loop over an array and return both the index and the value of each item in the array. If you’re familiar with Javascript, `enumerate()` is similar to using the `map()` function with an index parameter.
 
 A similar implementation in JavaScript might look like this:
 
-``` javascript
-function twoSum(array, target) {
-    const numIndex = {};
-    let result = null;
-
-    array.map((num, i) => {
-        const complement = target - num;
-        if (complement in numIndex) {
-            result = [numIndex[complement], i];
-        }
-        numIndex[num] = i;
-    });
-
-    return result;
-}
 ```javascript
+function twoSum(array, target) {
+  const numIndex = {}
+  let result = null
+
+  array.map((num, i) => {
+    const complement = target - num
+    if (complement in numIndex) {
+      result = [numIndex[complement], i]
+    }
+    numIndex[num] = i
+  })
+
+  return result
+}
+```
 
 In both cases the code sets up a "compliment," which is the difference between the target number and the current number in the array. The Python version uses a dictionary to store the index of the compliment, while the JavaScript version uses an object. In both cases the code checks to see if the compliment is in the dictionary or object, and if it is, returns the index of the compliment and the current index. If the compliment is already in the dictionary (or object), the current number is a match, and the function returns the indexes of the two numbers that add up to the target number. Pretty straightforward, right?
 
-By working with a running compliment, the function can find the answer in a single pass thorough the array, which I hope you immediately recognize as O(n) time.
+By working with a running compliment, the function can find the answer in a single pass thorough the array, which I hope you immediately recognize as $O(n)$ time.
 
-The Three Sum problem is a little tricker, but it can be solved using a similar approach. I’m going to skip the brute-force method because it will involve three nested for loops, or O(n^3) time, and since we’ve already seen an improvement we will never go back.
+The Three Sum problem is a little trickier, but it can be solved using a similar approach. I’m going to skip the brute-force method because it will involve three nested for loops, or $O(n^3)$ time, and since we’ve already seen an improvement we will never go back.
 
 Here is a Python solution to the Three Sum problem:
 
-``` python
+```python
 def three_sum(array, target):
     for i in range(len(array)):
         num_index = {}
@@ -858,13 +845,13 @@ def three_sum(array, target):
     return None
 ```
 
-This works similar to the solution for Two Sum, but there is an additional loop thrown in to account for the third number in the array. This bumps the runtime up to O(n^2), which is still faster than O(n^3), but not as fast as O(n) time.
+This works similar to the solution for Two Sum, but there is an additional loop thrown in to account for the third number in the array. This bumps the runtime up to $O(n^2)$, which is still faster than $O(n^3)$, but not as fast as $O(n)$ time.
 
-Think about it: can the Three Sum problem be solved in O(n) time?
+Think about it: can the Three Sum problem be solved in $O(n)$ time?
 
 There’s one additional way to solve this problem using pointers, called the two-pointer technique that I discussed in the container problem. Since you’ve already seen that technique, I’ll provide you with the code and allow you to reason through it on your own:
 
-``` python
+```python
 def three_sum(array, target):
     array.sort()
     for i in range(len(array) - 2):
@@ -879,7 +866,7 @@ def three_sum(array, target):
             else:
                 right -= 1
     return None
-```javascript
+```
 
 Think it through: What is the runtime of this solution? What advantages does it have over using nested for loops?
 
@@ -903,7 +890,7 @@ You may even know that Python has a built-in function for rotating an array, and
 
 The challenge with moving items in an array is that you have to be careful not to lose any of them. The items that go off to the right have to be accounted for in a way that makes it possible to move them back to the left. You might immediately be tempted to create an additional array to "hold" the values that are pushed off the end of the array, but this is a problem that can absolutely be solved "in place," which means not creating additional space to hold data in memory.
 
-``` python
+```python
 def rotate_array(arr, k):
     # Get the length of the array
     n = len(arr)
@@ -926,18 +913,18 @@ rotated_arr = rotate_array(arr, k)
 print(rotated_arr)  # Output: [5, 6, 7, 1, 2, 3, 4]
 ```
 
-Simple pimple! Take the last item off the array and push it back onto the array *k* number of times, problem solved!
+Simple pimple! Take the last item off the array and push it back onto the array _k_ number of times, problem solved!
 
 What might be the cause of some confusion is these lines:
 
-``` python
+```python
 while k > n:
     k -= n
 ```
 
 It may have occurred to you to wonder, can’t we simply subtract k from n so we know the number of times to rotate the array? So that works fine if the number of rotations is less than the length of the array, but what if it’s not? This leads us to our first optimization:
 
-``` python
+```python
 def rotate_array(arr, k):
     # Get the length of the array
     n = len(arr)
@@ -951,11 +938,11 @@ def rotate_array(arr, k):
         arr.insert(0, last_element)
 
     return arr
-```python
+```
 
 > **Behold, the Modulo Operator!**
 >
-> If you’ve ever taken a course in computer programming, at some point you were probably introduced to the module operator, or *%*. The modulo operator is used to find the remainder of a division operation. In grade school, for example, you may have learned to write the answer to a long division problem using a remainder. "11 divided by 3 is 3 with a remainder of 2." or "11 *r* 2" Or, in computer terms, `11 % 3` will return `2`.
+> If you’ve ever taken a course in computer programming, at some point you were probably introduced to the module operator, or _%_. The modulo operator is used to find the remainder of a division operation. In grade school, for example, you may have learned to write the answer to a long division problem using a remainder. "11 divided by 3 is 3 with a remainder of 2." or "11 _r_ 2" Or, in computer terms, `11 % 3` will return `2`.
 >
 > Everyone learns that…​and then forgets it! Who needs that? When will I need the remainder?
 >
@@ -969,7 +956,7 @@ In this case were n is 5 and k is 17, `k % n` = `2` and so the array only needs 
 
 Additionally, we can use a more "pythonic" approach by using slicing to solve the problem. As you may know (or recall from earlier in the book) in python we can slice items in an array by including the array index range in brackets. This brings us to the following solution:
 
-``` python
+```python
 def rotate_array(arr, k):
     n = len(arr)
     k = k % n  # In case k is greater than the length of the array
@@ -978,7 +965,7 @@ def rotate_array(arr, k):
 
 Of course, as with most things involving computers, there is more than one way to solve the shifting problem. In addition to using slicing to solve the problem, we can also use an approach based on reversing the entire array, splitting into two pieces, and then reversing each piece.
 
-``` python
+```python
 def rotate_array(arr, k):
     n = len(arr)
     k = k % n
@@ -993,9 +980,9 @@ def rotate_array(arr, k):
     reverse(arr, k, n - 1)
 
     return arr
-```python
+```
 
-There’s not really an advantage to reversing over slicing, as both run in O(n) time. But both approaches are worth knowing about as they may come up as solutions to other problems as well.
+There’s not really an advantage to reversing over slicing, as both run in $O(n)$ time. But both approaches are worth knowing about as they may come up as solutions to other problems as well.
 
 #### Permutations
 
@@ -1021,7 +1008,7 @@ So how can we generate permutations? Permutations is a problem that I’ll retur
 
 In the mean time, let’s start with this awfully iterative approach:
 
-``` python
+```python
 def permute(arr):
     result = []
     n = len(arr)
@@ -1059,7 +1046,9 @@ These permutations are generated by an algorithm known as Heap’s algorithm. (B
 
 At the start of the program the counter array is initialized to all zeroes, and first permutation — the array we start out with — is added to the results array. The algorithm then iterates through the candidate array using the index `i` and the counter index `c[i]`. For each iteration, the algorithm checks if the counter is less than the index, and if it is, it swaps the first element of the array with the element at the index, based on whether the index is even or odd. The counter index is then incremented, and the algorithm starts over at the beginning of the array. If the counter is greater than the index, the counter is reset to zero and the index is incremented. That’s a lot to understand, but if you code it in and play with it for a bit it’s pretty easy to see what it’s doing.
 
-What is the running time of this algorithm? (Hint, I’ve already told you, above.)
+What is the running time of this algorithm? (Hint: I've already told you how many permutations will be generated.)
+
+The algorithm generates n! permutations, and each permutation requires O(n) time to copy into the results array. This gives us a total runtime of $O(n · n!)$. While this is sometimes simplified to $O(n!)$ since the factorial term dominates ($n!$ is bigger than $n$, right?), it's more precise to account for the copying operation. This is why permutation problems can become computationally expensive very quickly - even small values of $n$ result in massive runtimes.
 
 If you don’t understand don’t worry too much as I’ll come back to this question again in later chapters and with a more efficient solution.
 
@@ -1087,13 +1076,13 @@ Let’s consider this game only from the point of view of player "X", the first 
 
 A one dimensional array of a Tic-Tac-Toe board looks as you’d expect, a list of nine moves:
 
-``` python
+```python
 tic_tac_toe_1d = ['X', 'O', 'X', ' ', 'O', ' ', ' ', 'X', 'O']
 ```
 
 Again, just because it’s easier to work with, we’re going to use the dimensional representation, which would look like this:
 
-``` python
+```python
 tic_tac_toe_2d = [
     ['X', 'O', 'X'],
     [' ', 'O', ' '],
@@ -1103,7 +1092,7 @@ tic_tac_toe_2d = [
 
 A computer has no way of knowing how to play Tic-Tac-Toe, of course, and so doesn’t know what a winning move looks like. Here is a two-dimensional list of the winning moves by list, column, and diagonal. By checking against this list, the computer can determine whether or not it’s won or is about to win (or lose!) a game of Tic-Tac-Toe, or if the game has resulted in a draw:
 
-``` python
+```python
 winning_combinations = [
     # Rows
     [(0, 0), (0, 1), (0, 2)],
@@ -1121,7 +1110,7 @@ winning_combinations = [
 
 This list can be used to check and see if there is a winner, starting with this brute-force approach:
 
-``` python
+```python
 def check_winner(board, player):
     for combination in winning_combinations:
         all_match = True
@@ -1136,7 +1125,7 @@ def check_winner(board, player):
 
 This code takes the representation of the board, and the letter of the player to evaluate. It then sets the boolean `all_match` to True, changing it to False if no match is found among the winning combinations.
 
-``` python
+```python
 def check_winner(board, player):
     for combination in winning_combinations:
         if all(board[i][j] == player for i, j in combination):
@@ -1148,15 +1137,37 @@ def check_winner(board, player):
 
 The queen is the most powerful piece in chess. She can move across the board in a single bound down any rank, file, or diagonal.
 
-The N-Queens problem is a classic of computer science that involves placing N queens on an N x N chess board in a way that no queen can attack any other on her rank, file, or diagonal. So of course, there’s an algorithm for it!
+The N-Queens problem is a classic of computer science that involves placing N queens on an N x N chess board in a way that no queen can attack any other on her rank, file, or diagonal.
+
+Solving N-Queens generally breaks down into two distinct challenges:
+
+1. **Validation**: Given a board configuration, is it valid?
+2. **Generation**: Find all (or one) valid configurations
+
+Let's tackle validation first. Not only is this the natural first step - you can't know if you've solved the puzzle without being able to check your answer - but the validation logic itself teaches you everything you need to know about the problem's constraints. Once you've mastered validation, generating solutions becomes an exercise in systematically trying configurations and checking them with your validator.
+
+**Understanding the Constraints:**
+For the N-Queens problem on an N×N board with N queens:
+
+- Each of the N rows must contain exactly 1 queen
+- Each of the N columns must contain exactly 1 queen
+- Each diagonal can contain at most 1 queen (0 or 1)
+
+Why the difference? On a 4×4 board, we have:
+
+- 4 rows (and we need to place 4 queens)
+- 4 columns (and we need to place 4 queens)
+- 7 diagonals in each direction (but only 4 queens to place)
+
+Since there are more diagonals than queens, not every diagonal will have a queen. This is why our validation logic will be different for rows/columns versus diagonals.
 
 I’ll start by designing the board as a two-dimensional array, or matrix, with a "1" to represent a queen and a "0" to represent an empty space.
 
 It’s important when you work on algorithms that have the potential to become complex that you start with the simplest thing that could possibly work. So before we build to a full 8x8 chess board, let’s start with a quarter of that, a 4x4 board.
 
-One way to represent that board might similar to what we did in the tic-tac-toe example, using a matrix.
+One way to represent the board is to use an approach similar to what we did in the tic-tac-toe example, using a matrix.
 
-``` python
+```python
 chess_board = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
@@ -1169,28 +1180,28 @@ From here it’s simple, right? Just check every array to make sure it only cont
 
 Let’s start with the easy one, checking each row to make sure it only contains a single "1."
 
-``` python
+```python
 def check_matrix(matrix):
     for row in matrix:
         if row.count(1) != 1:
             return False
     return True
-```python
+```
 
 If you pass in this matrix, it will return True, and so we have a match!
 
-``` python
+```python
 valid_matrix = [
     [0, 1, 0, 0],
     [1, 0, 0, 0],
     [0, 0, 1, 0],
     [0, 0, 0, 1]
 ]
-```python
+```
 
 If you pass in this matrix it will also return true:
 
-``` python
+```python
 also_valid_matrix = [
     [0, 1, 0, 0],
     [1, 0, 0, 0],
@@ -1203,7 +1214,7 @@ also_valid_matrix = [
 
 Let’s try now to add column checks. First we’ll start by just checking the columns for a single "1", as we did with the rows.
 
-``` python
+```python
 valid_matrix = [
     [0, 1, 0, 0],
     [1, 0, 0, 0],
@@ -1212,9 +1223,9 @@ valid_matrix = [
 ]
 ```
 
-This one is a little tricker, but the idea is exactly the same: counting the number of "1’s" in a column to make sure there is one and only one in each.
+This one is a little trickier, but the idea is exactly the same: counting the number of "1’s" in a column to make sure there is one and only one in each.
 
-``` python
+```python
 def check_columns(matrix):
     num_rows = len(matrix)
     num_cols = len(matrix[0])
@@ -1227,11 +1238,11 @@ def check_columns(matrix):
         if count != 1:
             return False
     return True
-```javascript
+```
 
 I’ll let you test this one on your own. Again, we run into a similar problem as with the row solution. The matrix…​
 
-``` python
+```python
 also_valid_matrix = [
     [0, 1, 1, 0],
     [1, 0, 0, 0],
@@ -1248,14 +1259,14 @@ While I could make a case for either approach, for the purposes of pedagogy I’
 
 One important thing to realize before you attack this problem is that the diagonals run in not one but two directions. If you only check the diagonals from top-left to bottom-right, you might come up with a solution that is valid in only one direction. For instance:
 
-``` python
+```python
 invalid_diagonal_matrix = [
     [1, 0, 0, 0],
     [0, 0, 0, 1],
     [0, 0, 1, 0],
     [0, 1, 0, 0]
 ]
-```javascript
+```
 
 If I’m only checking the diagonals from top-left to bottom right, I will get a valid solution even though the diagonal formed by the 1s in the second, third, and fourth rows clearly make this an invalid solution, forming a diagonal that goes from column 2 in the fourth row to column 4 in the second.
 
@@ -1269,7 +1280,7 @@ From \[0, 2\] to \[1, 3\] From \[0, 1\] to \[2, 3\] From \[0, 0\] to \[3, 3\] \#
 
 Now that we have the coordinates of the diagonals, we can use this to establish a pattern that allows us to write a function to check them.
 
-``` python
+```python
 def check_diagonals(board):
     num_rows = len(board)
     num_cols = len(board[0])
@@ -1286,7 +1297,7 @@ def check_diagonals(board):
 
 What about top-right to bottom-left, the so-called "anti-diagonals?" It’s a little tricker, but the idea is the same, just in reverse.
 
-``` python
+```python
 def check_anti_diagonals(board):
     num_rows = len(board)
     num_cols = len(board[0])
@@ -1306,7 +1317,7 @@ At this point can you see how you could combine the diagonal and anti-diagonal c
 
 Now that it’s possible to check in all three directions, here is an algorithm that combines all three checks into a single function:
 
-``` python
+```python
 def check_board(board):
     return check_rows(board) and check_columns(board) and check_diagonals(board) and check_anti_diagonals(board)
 
@@ -1338,7 +1349,7 @@ def check_diagonals(board):
         for i in range(max(0, start - num_cols + 1), min(num_rows, start + 1)):
             if board[i][start - i] == 1:
                 count += 1
-        if count != 1:
+        if count > 1: # a diagonal can have 0 queens!
             return False
     return True
 
@@ -1358,6 +1369,8 @@ def check_anti_diagonals(board):
 ```
 
 That’s a longish piece of code, but it solves the problem. It was reasoned from the first basic problem to the last and more complex, and solved by breaking the larger problem into a series of smaller steps. This is great way to reason through and answer an interview question.
+
+**Exercise for the Reader**: Now that you can validate any N-Queens configuration, can you write an algorithm that generates valid solutions? Hint: Start with an empty board and try placing queens one row at a time, validating after each placement. If you get stuck, this is a perfect use case for backtracking, which we'll explore in Chapter 11.
 
 #### Valid Sudoku
 
@@ -1395,7 +1408,7 @@ The second solution neatly aligns with the layout of the Sudoku board, which usu
 
 That data structure might look like this:
 
-``` python
+```python
 board = [
     # Grid 0 (top left)
     [[5,3,0],
@@ -1446,7 +1459,7 @@ board = [
 
 This is actually a 3D data structure, or a list of lists of lists. It might be a little easier to work with in terms of rows and columns, but it’s not really ideal for checking whole rows or columns, as you would have to pull from each grid element individually. It’s great for handing the internal structure of a 3x3 grid, but that’s that’s only one of the things that makes up a Sudoku board. Here is, for example, the amount of code required to read the second column of the 9x9 Sudoku board:
 
-``` python
+```python
 def get_column(board, col_num):
     column = []
     grid_col = col_num // 3  # (0 for cols 0-2, 1 for 3-5, 2 for 6-8)
@@ -1458,13 +1471,13 @@ def get_column(board, col_num):
             column.append(board[grid_index][row][internal_col])
 
     return column
-```python
+```
 
 Ok, so that works, but it’s a lot of code to return a single column, and also it’s a but confusing. In fact, when I was writing this code I wrote the algorithm the way I was pretty sure I needed to, and watched my computer spit out the wrong answer. Except it hadn’t. What had happened is I had got confused about what the "column" looked like given the data structure, I’d created, and I was reading the wrong line of numbers. I had to get my head around that in order to continue which I take as proof that even if this data structure offers some advantages — and I’m not sure it does — it can be confusing to reason about and so it’s likely the wrong tool for the job.
 
 Ok so the first idea was too much math and the second idea was too much code, can we find a data structure that’s just right? Let’s try the 9x9 matrix.
 
-``` python
+```python
 board = [
     [5,3,0,0,7,0,0,0,0],
     [6,0,0,1,9,5,0,0,0],
@@ -1476,7 +1489,7 @@ board = [
     [0,0,0,4,1,9,0,0,5],
     [0,0,0,0,8,0,0,7,9]
 ]
-```javascript
+```
 
 This looks promising. It keeps the rows in the same order they’ll be in on the Sudoku board. The columns can be chosen by iterating via the appropriate index. This one is just right!
 
@@ -1488,7 +1501,7 @@ From the instructions you’ve been given, you have three distinct things to con
 
 You might want to try coding this on your own before looking at the solution, but I’m going to work on these one function at a time. Here is my first attempt at checking for repeated numbers in a row. As always, I ask you to think about how you might solve this problem before looking at the solution:
 
-``` python
+```python
 def check_row(board, row_num):
     row = board[row_num]
     seen = []
@@ -1498,13 +1511,13 @@ def check_row(board, row_num):
                 return False
             seen.append(num)
     return True
-```python
+```
 
 This is a fairly straightforward solution. Go down the row, put numbers into a list, and if a number repeats, return False because the board is invalid. Remember that you have to account for the 0, because a 0 means a value that is not yet present in the row. If the program sees it as a number in a row, it will return False, even though it’s not a repeated number.
 
 It’s not hard to build this up into a similar solution for checking a column. The column just needs a little help from a helper function since the data structure is not in a natural column format:
 
-``` python
+```python
 def get_column(board, col_num):
     column = []
     for row in board:
@@ -1524,7 +1537,7 @@ def check_column(board, col_num):
 
 Last of all, each 3x3 grid needs to be checked. Unsurprisingly, this check is pretty similar to the row and column checks, but with a little more math to get the right numbers in the right places. In fact, it uses the same math we looked at earlier when we were considering a one-dimensional array:
 
-``` python
+```python
 def check_grid(board, grid_num):
     grid = []
     start_row = (grid_num // 3) * 3

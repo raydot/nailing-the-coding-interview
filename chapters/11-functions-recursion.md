@@ -2,15 +2,17 @@
 
 Now that you’ve made it through 2/3 of the book, it’s time to talk about functions! "But wait," you say, "Haven’t we been talking about functions this entire time?" Indeed we have been using them, and I’ve even mentioned some things about them, but I think it’s very easy to be a programmer and use functions all the time without ever really understand some of the the more advanced concepts behind them. Indeed, one of the reasons this chapter is so far into the book is because with the understanding you’ve (hopefully) gained from previous chapters you are now ready and willing to look at functions in a whole new light. So let’s get down to it!
 
+<TODO: THIS CHAPTER NEEDS TO DISCUSS BACKTRACKING>
+
 ## Functions 101
 
 Here comes the dry, boring part of what a function is:
 
 <div class="informalequation">
 
-``` math
+```math
 f(x) = 2x
-```javascript
+```
 
 If x = 1, then f(x) = 2 \* 1 = 2. If x = 2, then f(x) = 2 \* 2 = 4. If x = 3, then f(x) = 2 \* 3 = 6…​etc.
 
@@ -22,10 +24,10 @@ So let me expand my definition to now include programming. In programming a func
 
 Here is the same f(x) = 2x function in Python:
 
-``` python
+```python
 def two_x(value):
   return (2 * value)
-```python
+```
 
 In this case, `two_x` is the function name, `value` is the value being passed in, and `2 * value` is the computation being applied to that value. The function then "returns" that value to the place from whence it was called. Because of this "return," a function can used to set a variable:
 
@@ -66,14 +68,14 @@ f(x) = 2x
 Learning about functions often included exercises to create tables of the expected results. The table for f(x) = 2x might look like this:
 
 | x   | f(x) |
-|-----|------|
+| --- | ---- |
 | 1   | 2    |
 | 2   | 4    |
 | 3   | 6    |
 
 Functions in programming perform a similar, um, function, allowing data passed in to be transformed in a way specified by the programmer. Here is the above-mentioned example high-school algebra function in Python:
 
-``` python
+````python
 def doubler-function(value):
   return (2 * value)
 ```python
@@ -156,7 +158,7 @@ With these ideas in mind you have a pretty good idea of what is meant by "encaps
 
 With all of that in mind, I do believe we were talking about closures.
 
-Let’s start with this simple closure example in JavaScript  
+Let’s start with this simple closure example in JavaScript
 
 ``` javascript
 function outerFunction() {
@@ -185,7 +187,7 @@ Encapsulation at work! Neither of these values are available outside of `OuterFu
 const closure = outerFunction()
 closure()
 // Output: I'm the outer value
-```
+````
 
 That’s the cool, closure part right there. If you look back at the `outerFunction` you’ll see that `innerFunction` is returning `outerValue`, which is a value that is no longer in scope. In addition to that, the `outerFunction` has finished executing, and yet the value of `outerValue` is still available to `innerFunction`.
 
@@ -193,14 +195,14 @@ This is a closure.
 
 It allows you to do some interesting things like this:
 
-``` javascript
+```javascript
 function outerFunction() {
-    let counter = 0
-    function innerFunction() {
-        counter++
-        console.log(`Counter value: ${counter}`)
-    }
-    return innerFunction
+  let counter = 0
+  function innerFunction() {
+    counter++
+    console.log(`Counter value: ${counter}`)
+  }
+  return innerFunction
 }
 
 const incrementCounter1 = outerFunction()
@@ -212,7 +214,7 @@ incrementCounter2() // Output: Counter value: 1
 
 It also allows you to use JavaScript key-value pairs to create objects consisting of "name":"function" pairs, each one of which is encapsulated using a closure into a single object that maintains its own state.
 
-``` javascript
+````javascript
 function createCounter() {
   let count = 0 // Private variable
   return {
@@ -329,11 +331,11 @@ result = function_taking_function(double, 5)
 print(result)  # Output: 10
 result = function_taking_function(triple, 5)
 print(result)  # Output: 15
-```
+````
 
 That’s hardly the end of it. In any language that treats functions as "first-class" you can pass them anywhere you like. Building on the example above, here are functions that are stored in an array and then passed to a function.
 
-``` python
+````python
 def function_taking_function(func, value):
     return func(value)
 
@@ -581,11 +583,11 @@ $('coolElement')
   .css('border-radius', '8px')
   .css('transition', 'all 0.3s ease-in-out')
   .fadeIn(1000);
-```
+````
 
 Or, to pass on the class-based approach and go with something entirely functional:
 
-``` javascript
+````javascript
 // Create pure functions that transform a value and return a new value
 const addClass = (className) => (element) => {
   const newElement = { ...element };
@@ -1018,7 +1020,7 @@ def fibonacci(n):
         return fibonacci(n - 1) + fibonacci(n - 2) # Recursion!
 
 print(fibonacci(10))  # Output: 55
-```
+````
 
 This straightforward example hides an awful lot of complexity, but it’s a great place to get started. One thing to consider is that because every number in the Fibonacci stack has to be calculated fresh each time it’s run through, generating the Fibonacci sequence recursively runs in O(2^n) time. Slow!
 
@@ -1028,7 +1030,7 @@ Back in chapter 4, we discussed permutations, and I showed you a simple iterativ
 
 First, the code:
 
-``` python
+```python
 def permute(arr):
     result = []
     _permute_helper(arr, 0, len(arr) - 1, result)
@@ -1046,7 +1048,7 @@ def _permute_helper(arr, left, right, result):
 
 Here’s another example from chapter 7, where I talked about heaps. In that chapter I showed an example of the heap "bubble up" operation as a while loop.
 
-``` python
+```python
 def _bubble_up(self, index):
     current = index
     parent = self.get_parent(current)
@@ -1061,7 +1063,7 @@ def _bubble_up(self, index):
 
 It stands to reason that once an item has been bubbled up, if it’s larger than its parent it can simply be bubbled up again. That sounds like a job for recursion! In this example, the while loop is replaced by a recursive call to `_bubble_up`:
 
-``` python
+````python
 def _bubble_up(self, index):
     parent = self.get_parent(index)
 
@@ -1127,4 +1129,4 @@ graphicData = vizData ? (
   <></>
 )
 )
-```
+````
