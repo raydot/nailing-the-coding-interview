@@ -29,11 +29,11 @@ Whenever you press a key on your keyboard, like I’m doing to write this book, 
 
 The positions of the characters in this table are direct descendants of the teletype systems that were widely in use in the middle part of the 20th Century. If you’re watching a movie and you see a chattering machine spitting out the latest news or a top-secret message that needs to be seen immediately by the people in charge onto a sheet of paper one line at a time, that’s a teletype machine. It might be hard to imagine, but not all that long ago computers were only able to output to printers and not screens.
 
-The size of a character in most operating systems is based on a byte. A byte contains eight bits. A bit is a symbol that can contain a one or a zero. Since each bit can represent two states, the number of signals that can be represented by a given number is bits is 2^n, where n is the number of bits.
+The size of a character in most operating systems is based on a byte. A byte contains eight bits. A bit is a symbol that can contain a one or a zero. Since each bit can represent two states, the number of signals that can be represented by a given number is bits is $2^n$, where n is the number of bits.
 
-For instance, 2 bits can represent 2^2, or 4 discrete states: \[0, 0\], \[1, 0\], \[0, 1\], and \[1, 1\]. Three bits can represent 2^3 or eight discrete states. 2^4 is 16 states, 2^5 is 32 states, etc. While there are leetCode questions that cover binary numbers, they’re beyond the scope of this book. There are piles of information available that cover computer operating systems and binary mathematics, and if you have more of an interest in the subject I encourage you to look them up.
+For instance, 2 bits can represent $2^2$, or 4 discrete states: \[0, 0\], \[1, 0\], \[0, 1\], and \[1, 1\]. Three bits can represent $2^3$ or eight discrete states. $2^4$ is 16 states, $2^5$ is 32 states, etc. While there are LeetCode questions that cover binary numbers, they’re beyond the scope of this book. There are piles of information available that cover computer operating systems and binary mathematics, and if you have more of an interest in the subject I encourage you to look them up.
 
-A byte, which contains eight bits, can represent 2^8 or 256 discrete states, and so most character systems are based on a representation of 256 characters. Usually, the first 128 of these characters are usually reserved for "regular" keys on a keyboard, while the second 128 are reserved for "special" characters. So when you press that 'd' key on your keyboard, it sends a numeric symbol to the operating system which then looks up which character is represented by that number. In the case of an English keyboard, the lowercase 'd' is represented by the decimal number 100. (This is not the same as the uppercase 'D', which is represented by the number 68.)
+A byte, which contains eight bits, can represent $2^8$ or 256 discrete states, and so most character systems are based on a representation of 256 characters. Usually, the first 128 of these characters are reserved for "regular" keys on a keyboard, while the second 128 are reserved for "special" characters. So when you press that 'd' key on your keyboard, it sends a numeric symbol to the operating system which then looks up which character is represented by that number. In the case of an English keyboard, the lowercase 'd' is represented by the decimal number 100. (This is not the same as the uppercase 'D', which is represented by the number 68.)
 
 There’s nothing special about the positions of these characters. If you grew up speaking a language other than English, you’ve probably used a keyboard where the characters are in different positions than they are on an English keyboard. That same 'd' key on a different keyboard might instead stand for "M", or "7", or "Ü", or "α". It all depends on how the keys are mapped in that lookup table. The reason why should be clear: it’s easier to change a look-up table than it is to rebuild a keyboard!
 
@@ -43,7 +43,7 @@ There’s nothing special about the positions of these characters. If you grew u
 
 So when computer programmers talk about "characters," this is what is meant. A series of symbols mapped to a lookup table, that translates them to the corresponding electrical signal represented by a keyboard key. None of that is likely to come up as an interview question, but it’s a basic idea that it’s important to understand as a developer.
 
-Another important thing to know is that not all characters are visible characters. The "space", "tab", "return", and "enter" (not always the same as return!) characters — and others — are mapped to the lookup table the same as visible characters, and have to be accounted for when you’re parsing strings. These characters are sometimes called "escape" characters since they can only be represented in strings using a symbol preceded by the character "\\. A "tab", "space", and "newline" are meaningful symbols to many programming languages and so you can’t always just type them into a string. Instead you must type a tab character as `\t`. A return is `\r`, newline is `\n`, even a space must sometimes be escaped to mean a string as a character and not a symbol that a programming language needs to consider.
+Another important thing to know is that not all characters are visible characters. The "space", "tab", "return", and "enter" (not always the same as return!) characters — and others — are mapped to the lookup table the same as visible characters, and have to be accounted for when you’re parsing strings. These characters are sometimes called "escape" characters since they can only be represented in strings using a symbol preceded by a backslash (`\`). A "tab", "space", and "newline" are meaningful symbols to many programming languages and so you can’t always just type them into a string. Instead you must type a tab character as `\t`. A return is `\r`, newline is `\n`, even a space must sometimes be escaped to mean a string as a character and not a symbol that a programming language needs to consider.
 
 These are all things to keep in mind when you hear the word "character." When you hear the phrase "array of characters" you should immediately think of a string, and vice-versa. And when you think of either you should picture that array as potentially containing the visible and non-visible characters that can be found in a table stored somewhere in the operating system.
 
@@ -63,29 +63,29 @@ For instance, many of the cells contained line returns, or the "\n" character. T
 
 ### Typecasting
 
-Everyone knows that 2 + 2 = 4, but while that’s fine for English or mathematics, that’s not necessarily the case at all when it comes to programming languages. For starters, "=" is the assignment operator, which means that 2 + 2 = 4 will return an error. Additionally, do you as a programmer mean the *expression* 2 + 2 = 4 or do you mean the *string* "2 + 2 = 4"? Notice that one is in quotes and the other is not, because one is an *expression* and the other is a string.
+Everyone knows that 2 + 2 = 4, but while that’s fine for English or mathematics, that’s not necessarily the case at all when it comes to programming languages. For starters, "=" is the assignment operator, which means that 2 + 2 = 4 will return an error. Additionally, do you as a programmer mean the _expression_ 2 + 2 = 4 or do you mean the _string_ "2 + 2 = 4"? Notice that one is in quotes and the other is not, because one is an _expression_ and the other is a string.
 
-Context is important in computer programming. Compilers really can’t be bothered trying to figure out what it is you, the programmer, are *trying* to do. They don’t care. They’re literal, and logical.
+Context is important in computer programming. Compilers really can’t be bothered trying to figure out what it is you, the programmer, are _trying_ to do. They don’t care. They’re literal, and logical.
 
 If you’re trying to evaluate whether 2 + 2 = 4, the correct expression is:
 
-``` python
-2 + 2 === 4
+```python
+>>> 2 + 2 == 4
 True
 ```
 
-Enter `"2" + "2" === 4` however, and what seems true is now false.
+Enter `"2" + "2" == 4` however, and what seems true is now false.
 
-``` python
->>> "2" + "2" === 4
-False
 ```python
+>>> "2" + "2" == 4
+False
+```
 
 The reason for this is that like most programming languages, Python treats strings and symbols separately. 2 without quotes is the "symbol" for 2. It means the number 2 which is exactly what you think it means. 2 fingers, 2 sisters, 2 dollars.
 
 "2" is the string representation of 2, which doesn’t mean anything to Python except that it’s a string. It’s a character with no built-in function except to display pixels in the form of the number 2.
 
-So what happens when you get the string "2," but what you really need is the number 2
+So what happens when you get the string "2," but what you really need is the number 2? Most languages provide type conversion functions like int() in Python or parseInt() in JavaScript, where `parseInt("2")` will return the integer number 2.
 
 ### Built-in String Functions
 
@@ -105,11 +105,11 @@ While these functions may differ in name from language to language, they’re al
 
 `length()` or `len()` or `sizeof()` These are different names for functions that return the length of the array that is passed to them. This is incredibly useful for processing strings because it allows your code to handle strings of whatever size is passed to it.
 
-``` python
-myVar === "Hello world!"
+```python
+myVar = "Hello world!"
 print(len(myVar))
-12
-```javascript
+# prints 12
+```
 
 `toUpper() or toLower()`
 
@@ -119,7 +119,7 @@ These functions will change every character in a string either to upper or lower
 
 Python:
 
-``` python
+```python
 myString = "algorithms"
 print([*myString])
 # Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
@@ -127,10 +127,10 @@ print([*myString])
 
 JavaScript:
 
-``` javascript
-console.log("algorithms".split(''))
-// Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
 ```javascript
+console.log('algorithms'.split(''))
+// Prints ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm', 's']
+```
 
 `join()`
 
@@ -150,7 +150,7 @@ Note the comma both inside and outside of the quotes surrounding the second obje
 
 Most programming languages contain a function that returns the first index of a given item in an array, which makes it an incredibly powerful search tool for some of the algorithms that will be presented in this chapter and the next. For example:
 
-``` python
+```python
 first_o = "Hello world!"
 print(first_o.index("o"))
 ```
@@ -167,21 +167,21 @@ item.slice(start position, end position, step)
 
 The item is the string or array on which you mean to operate. "slice" or "splice" are the keywords used to indicate the type of operation, although in Python, again, these keywords are implicit as will be shown momentarily.
 
-"Start position" and "end position" should be self explanatory — the indices of the items you want to select. Be careful though: what these indices represent may not be what you expect, and can even be different from language to language. Usually start position is the index of the first item you wish to select, but the end position is the index of the item *before* the one you wish to select.
+"Start position" and "end position" should be self explanatory — the indices of the items you want to select. Be careful though: what these indices represent may not be what you expect, and can even be different from language to language. Usually start position is the index of the first item you wish to select, but the end position is the index of the item _before_ the one you wish to select.
 
-``` javascript
-let myVar = "Hello world!"
+```javascript
+let myVar = 'Hello world!'
 myVar.slice(0, 5) // selects "Hello", the first 5 characters in the string
 ```
 
-Notice that the "o" is at position 4 in the string, which means that slice stops just *before* the space character at position 5.
+Notice that the "o" is at position 4 in the string, which means that slice stops just _before_ the space character at position 5.
 
-I keep mentioning that Python is more "implicit", and here’s what I mean by that. There is no explicit keyword for "slice" or "splice" in Python, with the operation instead being performed by the colon ":".
+I keep mentioning that Python is more "implicit", and here’s what I mean by that. There is no explicit keyword for "slice" in Python, with the operation instead being performed by the colon ":".
 
-``` python
+```python
 myVar = "Hello world!"
 myVar[0:5] # selects "Hello", the first 5 characters in the string
-```python
+```
 
 This does the exact same thing as the JavaScript example above, but the keyword "slice" is simply not needed.
 
@@ -189,14 +189,14 @@ Before diving into further differences between the two languages, let me explain
 
 If I wanted to return every other item in a string, I could pass a third parameter in Python.
 
-``` python
+```python
 myVar = "Hello world!"
 myVar[0:12:2] # selects "Hlowrd", every other character in the string.
 ```
 
-Python (but not JavaScript) allows for leaving out the start and or end parameter, allowing the language to fill in the blanks itself. For instance, if I wanted to select from the beginning of the string up to it’s 5th character, I could write:
+Python (but not JavaScript) allows for leaving out the start and or end parameter, allowing the language to fill in the blanks itself. For instance, if I wanted to select from the beginning of the string up to its 5th character, I could write:
 
-``` python
+```python
 myVar = "Hello world!"
 myVar[:5] # selects "Hello", the first 5 characters in the string
 ```
@@ -205,7 +205,7 @@ This is equivalent to the example given above where I explicitly stated the star
 
 Negative indices can also be passed to these functions, which allow you to choose from the end of the string instead of the beginning. These work the same in Python and JavaScript. For example, to selected the last 6 characters in a string, minus the last one, you could use:
 
-``` python
+```python
 myVar = "Hello world!"
 myVar[-6:-1] # selects "world", a sequence beginning at the 6th character from the end and ending at the 2nd character from the end.
 ```
@@ -218,26 +218,26 @@ The form of `splice()` in JavaScript is:
 
 These parameters are similar to — but not the same as — the parameters for `slice()`. `start` is the same, the index of the item you want to start with. `length`, however, is different. Instead of being a pointer, length indicates a range — specifically the the number of items you want to select. `item` is optional and indicates the item you want to insert into the string at the position indicated by `start`. Let’s look at a first example without using `item`:
 
-``` javascript
-myVar = ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday", "Sunday"]
+```javascript
+myVar = ['Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday', 'Sunday']
 myVar.splice(2, 3) // Returns "Wednesday", "Friday", "Saturday"
 ```
 
 If you’re sharp, you may have noticed that there is no "Thursday" in the myVar array. Let’s fix that using `splice()`:
 
-``` javascript
-myVar = ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday", "Sunday"]
-myVar.splice(3, 0, "Thursday") // Adds "Thursday" to the array at position 3
-```python
+```javascript
+myVar = ['Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday', 'Sunday']
+myVar.splice(3, 0, 'Thursday') // Adds "Thursday" to the array at position 3
+```
 
 Keep in mind that unlike `slice()`, `splice()`, in JavaScript, modifies the original array. Once you’ve spliced Thursday into `myVar`, it’s there as if it had always been there. You cannot recover the original array without first either making a copy of it, or using the JavaScript `toSpliced()` function which I’m not going to cover here. Just be aware of this modification when using `splice()` in your code. Maybe JavaScript linters or code libraries will warn you against programming "side effects," which you can easily cause if you’re not careful with `splice()`. Python does not have this particular issue with side effects, as it will always return a copy of the data you’re working with, and not the original data.
 
 Python does not have a built-in `splice()` function, but you can use Pythonic concatenation methods to achieve the same result.
 
-``` python
+```python
 myVar = ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday", "Sunday"]
 myVar = myVar[:3] + ["Thursday"] + myVar[3:]
-```python
+```
 
 > **Immutability, Side-Effects, and Strings**
 >
@@ -249,13 +249,13 @@ myVar = myVar[:3] + ["Thursday"] + myVar[3:]
 >
 > When it comes to strings, you want to be very careful that any manipulations you perform on a string are not causing unintended consequences, or "side effects." It’s usually important to keep a copy of the original string, and if it needs to be transformed to transform it in a way that doesn’t change the original string. In fact, in many languages, strings are immutable, which means they can’t be changed at all. In designing your own string functions, it’s important to consider whether or not you want to make your strings mutable (probably not), or keep them immutable and only return transformed copies of the original. Either way, it’s important to consider consequences of that decision, and you are likely to be asked about string immutability and/or side effects in a coding interview.
 
-In languages that implement `splice()`, a copy of the requested data is returned without modifying the original. This can be useful as a "stripping" operation, say to remove a line return and dollar sign from the beginning of every string in a group of strings. Python contains the most robust splicing function, allowing programmers to choose from a number of different implementations.
+Python's slicing operations always return a new copy without modifying the original, unlike JavaScript's splice() which modifies the array in place. While Python doesn't have a splice() function, its flexible slicing syntax with the colon operator (:) allows you to achieve similar results through slice assignment or concatenation, as shown in the "Thursday" example above.
 
-Be careful when using these functions in different languages as they all work slightly differently, and the difference usually has to do with how the range of items is chosen. For example, in Python, you can use a ":" to select the range of the items you’re interested in. Arrays start at 0, and the second value in a splice parameter is the item *before* the one in the number.
+Be careful when using these functions in different languages as they all work slightly differently, and the difference usually has to do with how the range of items is chosen. For example, in Python, you can use a ":" to select the range of the items you’re interested in. Arrays start at 0, and the second value in a splice parameter is the item _before_ the one in the number.
 
 Python:
 
-``` python
+```python
 >>> myVar = ["turtle", "gecko", "frog"]
 >>> myVar[1:2] # select from position 1 to before position 2
 ['gecko']
@@ -268,21 +268,21 @@ Python:
 
 Javascript:
 
-``` javascript
-let myVar = ["turtle", "gecko", "frog"]
+```javascript
+let myVar = ['turtle', 'gecko', 'frog']
 console.log(myVar.slice(1, 2)) // select from position 1 to before position 2
 // Prints ["gecko"]
 console.log(myVar.slice(0, 3)) // select everything up to and including position 3
 // Prints ["turtle", "gecko", "frog"]
 console.log(myVar.slice(2)) // select everything after position 2
 // Prints ["frog"]
-```python
+```
 
 > **Learning Multiple Languages**
 >
 > A basic understanding of multiple programming languages and paradigms can be a very useful thing for a developer to know. This does not mean you have to become an expert in every programming languages, but seeing how different languages implement the same functions can give you a broader appreciation and context for the way programming languages are constructed.
 >
-> The first programming language I learned in depth was C, and because C is that language from which so many later languages are derived, the basics of C have been applicable to every language I’ve learned since. C is a complied language, and many front-end languages are interpreted, and interpreted languages don’t a lot of the same overhead that compiled languages do. That makes them easier to learn, but some of the nuances of things like library imports, memory management, input/output control, and error handling are relatively unknown to front-end developers.
+> The first programming language I learned in depth was C, and because C is that language from which so many later languages are derived, the basics of C have been applicable to every language I’ve learned since. C is a compiled language, and many front-end languages are interpreted, and interpreted languages don’t have a lot of the same overhead that compiled languages do. That makes them easier to learn, but some of the nuances of things like library imports, memory management, input/output control, and error handling are relatively unknown to front-end developers.
 >
 > Python, is an interpreted language, and so it’s easier to learn than C, but it’s also a very powerful language that can be used for a wide variety of tasks that are not as easily accomplished with JavaScript. Similarly, JavaScript has a number of built-in functions for working with web browsers that are not available in Python. There are also lower-level functional programming languages like Haskell and Lisp that are very different from Python and JavaScript, as they require developers to be very efficient and precise when defining and using functions.
 >
@@ -298,9 +298,9 @@ Let’s start with one simple example of a question that can be resolved in a nu
 >
 > Before we get to the explanation, try writing your own function to reverse a string. For instance, if passed the string "apple," the function should return "elppa" Can you do the same for the words in a phrase, turning "Look at the moon" into "moon the at look?" Can you do it without using any built-in functions? Again, can you think of any other conditions that should be considered? What is the runtime (Big O) of your algorithm? Can that be improved? How, or why not?
 
-Here’s the answer to the reversing exercise above. The simplest and most straightforward way to reverse a string — which is a array, of course — is to use a for loop:
+Here’s the answer to the reversing exercise above. The simplest and most straightforward way to reverse a string — which is an array, of course — is to use a for loop:
 
-``` python
+```python
 def reverseString(myString):
   reversed = ""
   for i in range(len(myString)- 1, -1, -1):
@@ -310,12 +310,12 @@ def reverseString(myString):
 
 This is straightforward, easy to understand, and it works. But can it be improved? Is there a "better" way to do it, without using a for loop? Of course that was a rhetorical question, and the answer is "yes!" Look again at built-in string functions we discussed earlier.
 
-``` python
+```python
 def reverseString(myString):
   return myString[::-1]
 ```
 
-What is the improvement in Big O with this second approach? Why?
+Both approaches are O(n) - why? Does the more concise slicing approach offer any advantages? When might you prefer one over the other?
 
 > > 📝 **NOTE**
 >
@@ -351,13 +351,13 @@ Input: s = "pwwkew" Output: 3 Explanation: The answer is "wke", with the length 
 
 #### Finding a Character or Word in a String
 
-*Create a function that takes a string and a character and returns the position of that character in the string. For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 5. Notice that there are three "a"s in the string. How would you return the positions of all of them? Does your function account for capital and lower-case letters?*
+_Create a function that takes a string and a character and returns the position of that character in the string. For instance, given the string "One tall house, one tall ladder" and the character "a", the function would return 5. Notice that there are three "a"s in the string. How would you return the positions of all of them? Does your function account for capital and lower-case letters?_
 
-*Similarly, create a function that takes a string and returns the position of a word. Given the same string as above, find the position of the word "tall." Again, as above, account for the fact that there is more than one instance of "tall" in the string. What if the word you’re given is part of a larger word? The word "add" can be found inside the word "ladder." Does your algorithm work for the cases in which this is and isn’t a valid solution to the problem? Can you think of any other things that should be considered in solving this problem?*
+_Similarly, create a function that takes a string and returns the position of a word. Given the same string as above, find the position of the word "tall." Again, as above, account for the fact that there is more than one instance of "tall" in the string. What if the word you’re given is part of a larger word? The word "add" can be found inside the word "ladder." Does your algorithm work for the cases in which this is and isn’t a valid solution to the problem? Can you think of any other things that should be considered in solving this problem?_
 
 > **Debuggers and Stepping Through Code**
 >
-> Unless you have a photographic memory, it’s going to be hard to come up with the right answer if it uses code you don’t understand. There’s nothing complicated going in in the Sliding Windows example above, but most people (including me) can’t just look at a piece of code and know exactly what it does.
+> Unless you have a photographic memory, it’s going to be hard to come up with the right answer if it uses code you don’t understand. It can sometimes be a real challenge to just look at a piece of code and know exactly what it does.
 >
 > Many of us — especially web developers — check our code using logs to the browser console. There’s nothing wrong with that at all, but it’s not the most effective way to examine code that isn’t running in an a browser. For that, you need a debugger.
 >
@@ -371,6 +371,6 @@ Input: s = "pwwkew" Output: 3 Explanation: The answer is "wke", with the length 
 
 #### Food for Further Thought
 
-Look up the Rabin-Karp algorithm for finding a substring in a string. You probably use this algorithm often as it’s the one behind finding text in a document, like when you push `CTRL-F`. The Rabin-Karp algorithm works by converting the substring to a hash value which allows it to run in O(1) time. Hashes will not be covered until Chapter 8, but try to begin thinking about Rabin-Karp now. Is it a suitable algorithm to be used in a coding interview? Why or why not?
+Look up the Rabin-Karp algorithm for finding a substring in a string. You probably use this algorithm often as it’s the one behind finding text in a document, like when you push `CTRL-F`. The Rabin-Karp algorithm works by converting the substring to a hash value which allows it to run in O(n) time. Hashes will not be covered until Chapter 8, but try to begin thinking about Rabin-Karp now. Is it a suitable algorithm to be used in a coding interview? Why or why not?
 
 - Consider adding coding questions to the end of sections \*\*
