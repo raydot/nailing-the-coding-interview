@@ -16,11 +16,11 @@ This book is designed to help developers at all levels prepare for coding interv
 
 ## 🚀 Read Online
 
-Visit the book website: [Coming Soon]
+Visit the book website: **[https://codinginterviewsbook.davekanter.com/](https://codinginterviewsbook.davekanter.com/)**
 
 ## 💻 Code Examples
 
-All code examples are available in the [`code/`](code/) directory, organized by chapter. Examples are provided in Python, with some additional examples in JavaScript and Java.
+Code examples are embedded throughout the chapters. The [`code/`](code/) directory structure is available for organizing standalone examples as the project evolves. Most examples are provided in Python, with additional examples in JavaScript where relevant.
 
 ## 🛠️ Development
 
@@ -87,11 +87,13 @@ Found an error? Have a suggestion? Contributions are welcome!
 This work is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 This means you're free to:
+
 - ✅ **Share** — Copy and redistribute the material
 - ✅ **Adapt** — Remix, transform, and build upon the material
 - ✅ **Use for learning** — Personal and educational use
 
 Under these conditions:
+
 - 📝 **Attribution** — Give appropriate credit and link to license
 - 🚫 **NonCommercial** — No commercial use or monetization
 - 🔄 **ShareAlike** — Distribute modifications under the same license
@@ -119,9 +121,11 @@ To Momma and the Boy, because they know why. Also thanks Dad, for getting me on 
 ## 📊 Project Status
 
 - ✅ Content converted from AsciiDoc to Markdown
-- ✅ All chapters available
-- ✅ Code examples included
-- 🚧 Website deployment in progress
+- ✅ Website deployed and live at [codinginterviewsbook.davekanter.com](https://codinginterviewsbook.davekanter.com/)
+- ✅ Chapters 0–13 drafted with code examples
+- ⚠️ Chapter 14 (Parallel Thinking) needs expansion
+- ⚠️ Chapter 15 (Generative AI) not yet started
+- 🚧 Visual assets (diagrams) for chapters 4–12 in progress
 - 🚧 Interactive code examples coming soon
 
 ## 🗺️ Roadmap
@@ -129,9 +133,12 @@ To Momma and the Boy, because they know why. Also thanks Dad, for getting me on 
 - [x] Convert content to Markdown
 - [x] Remove O'Reilly branding
 - [x] Set up Jupyter Book
-- [ ] Deploy to GitHub Pages
+- [x] Deploy website to production
+- [ ] Complete Chapter 14 (Parallel Thinking Questions)
+- [ ] Write Chapter 15 (Using Generative AI to Study)
+- [ ] Create visual assets (30+ diagrams for chapters 4–12)
 - [ ] Add interactive code examples
-- [ ] Create practice problems
+- [ ] Expand practice problems and exercises
 - [ ] Add video tutorials (maybe)
 - [ ] Publish PDF/EPUB versions
 
