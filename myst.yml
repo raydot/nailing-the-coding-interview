@@ -9,19 +9,25 @@ project:
     - file: chapters/00-preface.md
     - file: chapters/01-preparing.md
     - file: chapters/02-big-o.md
-    - file: chapters/03-strings.md
-    - file: chapters/04-arrays.md
-    - file: chapters/05-linked-lists.md
-    - file: chapters/06-stacks-queues.md
-    - file: chapters/07-heaps.md
-    - file: chapters/08-hashes.md
-    - file: chapters/09-trees.md
-    - file: chapters/10-graphs.md
-    - file: chapters/11-functions-recursion.md
-    - file: chapters/12-search-sort.md
-    - file: chapters/13-dynamic-greedy.md
-    - file: chapters/14-outside-the-box.md
-    - file: chapters/15-gen-ai-to-study.md
+    - file: chapters/part-01.md
+      children:
+        - file: chapters/03-strings.md
+        - file: chapters/04-arrays.md
+        - file: chapters/05-linked-lists.md
+        - file: chapters/06-stacks-queues.md
+        - file: chapters/07-heaps.md
+        - file: chapters/08-hashes.md
+        - file: chapters/09-trees.md
+        - file: chapters/10-graphs.md
+    - file: chapters/part-02.md
+      children:
+        - file: chapters/11-functions-recursion.md
+        - file: chapters/12-search-sort.md
+        - file: chapters/13-dynamic-greedy.md
+    - file: chapters/part-03.md
+      children:
+        - file: chapters/14-outside-the-box.md
+        - file: chapters/15-gen-ai-to-study.md
 site:
   template: book-theme
   options:
