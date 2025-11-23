@@ -1,0 +1,7 @@
+# Part I: Data Structures
+
+> "The universe (which others call the Library) is composed of an indefinite, perhaps infinite number of hexagonal galleries...From any hexagon one can see the floors above and below – one after another, endlessly."
+>
+> — Jorge Luis Borges, _The Library of Babel_
+
+This first part of the book is about data structures. Data structures are ways in which code can be structured efficiently and effectively. If functions (covered in Part II) are the building blocks of software then data structures are the beams, cement, and plaster that pull them together into useful, well, structures. By the end of this part you will have a good understanding of the ways data structures can be used to solve certain problems and how to apply them in coding interviews.
