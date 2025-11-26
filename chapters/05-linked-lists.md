@@ -28,11 +28,11 @@ Keeping with the house analogy, the data might be the number of rooms in the hou
 
 That’s an incredibly simplistic view of object-oriented programming, but keep it in mind as you go through this chapter. From this simple idea entire systems of thought have arisen, and while this book will not go too much further than the basic idea of classes and objects, methods and data, if you’re interested in a deeper dive into object-oriented programming, there are many resources available to you.
 
-Let’s look at one more example in code. Let’s say we want to define a class called *Dog* that has a name, age, and breed. The dog can do three things: eat, sit, and speak.
+Let’s look at one more example in code. Let’s say we want to define a class called _Dog_ that has a name, age, and breed. The dog can do three things: eat, sit, and speak.
 
 Here’s what that might look like in Python:
 
-``` python
+```python
 class Dog:
     def __init__(self, name, age, breed):
         self.name = name
@@ -53,11 +53,11 @@ class Dog:
            print(f"{self.name} says 'I am a {self.breed} and I am {self.age} years old.'")
        else:
            print(f"{self.name} says 'Woof!'")
-```python
+```
 
 Now that the dog class has been defined, we can create as many dogs as we want by "instantiating" the class into an object and asking each object to do things. Notice that, once create, each dog object contains its **own** data and methods that are independent of all of the other dogs' data and methods. This gives you some idea of the power of object-oriented programming.
 
-``` python
+```python
 dog1 = Dog("Penny", 3, "Poodle")
 dog2 = Dog("Ellie", 7, "Skye Terrier")
 dog3 = Dog("Cinder", 2, "Black Lab")
@@ -76,13 +76,13 @@ dog3.speak("talk")
 
 dog3.speak("bark")
 # outputs "Cinder says 'Woof!'"
-```python
+```
 
 Notice the use of the `self` keyword in the methods of the class. `self` can be thought of as a way in which an object refers to itself, as opposed to other object methods, object data, or other objects of the same class. `self` is defined and used a little bit differently in different languages, but in Python, it is always the first argument to a method in a class definition. It might also be called "this" or "me" in other languages, but same basic principle applies. Think about self like this: You have a name, and everyone refers to you by that name, but you (and everyone else) refer to yourself as "me" or "I." You can say "Can you help me figure this out?" to someone else, but you say "I need to figure this out mySELF" to yourself. `self` helps with the ambiguity of functions that might be available to the program as a whole, vs. functions that are kept separate within a given object.
 
-*init* is a special method in Python that is called one time when a new object is created from a class. This is sometimes called a "constructor" method in other languages. It’s a special method that each class can contain that can be used to set up data the object needs upon creation. In the case of the Dog class, the *init* method is used to set the name, age, and breed of the dog that are passed to the dog object when it is created.
+`__init__` is a special method in Python that is called one time when a new object is created from a class. This is sometimes called a "constructor" method in other languages. It’s a special method that each class can contain that can be used to set up data the object needs upon creation. In the case of the Dog class, the `__init__` method is used to set the name, age, and breed of the dog that are passed to the dog object when it is created.
 
-Again, this is an *incredibly* simplistic view of object-oriented programming, but it should be enough to get you through this chapter.
+Again, this is an _incredibly_ simplistic view of object-oriented programming, but it should be enough to get you through this chapter.
 
 ## The Basics of Linked Lists
 
@@ -90,7 +90,7 @@ A linked list is a data structure where data is stored in "nodes." Each node con
 
 Storing every word in a sentence in text as a linked list would probably not make much sense, for example, given that you can more easily do that with a string. If you had to store a list of names, however, and maybe keep it in sorted order, now a linked list can be a useful thing to have on hand.
 
-The last node in the list points to *null* or a *null reference* which indicates the end of the list has been reached.
+The last node in the list points to _null_ or a _null reference_ which indicates the end of the list has been reached.
 
 \<Picture of a linked list TK\>
 
@@ -100,27 +100,27 @@ Thinking about this in terms of object oriented programming, you can think of a 
 
 Let’s start with the definition of a linked list node class in Python:
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
-```python
+```
 
 This is a simple class that defines a node in a linked list Here is how you can use this class to create a simple linked list with three nodes:
 
-``` python
+```python
 node1 = Node(5)
 node2 = Node(10)
 node3 = Node(15)
 
 node1.next = node2
 node2.next = node3
-```python
+```
 
 In this example, we create three node objects, each created from the `Node` class with a data element and a pointer to the next node in the list. Having an object representing each element of data is a pattern we’ll see often as we continue to dig into data structures.
 
-Having created each of the nodes with its accompanying data, we then set the `next` pointer of each node to the next node in the list. It’s not necessary to set the `next` pointer of the last node in the list to `None`, as it is already set to `None` in the `init` method of the `Node` class.
+Having created each of the nodes with its accompanying data, we then set the `next` pointer of each node to the next node in the list. It’s not necessary to set the `next` pointer of the last node in the list to `None`, as it is already set to `None` in the `__init__` method of the `Node` class.
 
 \<Diagram of a linked list with three nodes TK\>
 
@@ -128,7 +128,7 @@ This simple example is known as a "singly linked list," because each node in the
 
 To access the data in a linked list, you start at the head of the list and follow the `next` pointers until you reach the end of the list.
 
-``` python
+```python
 # current node we're interested in
 # starting with node1
 current = node1
@@ -142,7 +142,7 @@ This code will print out the data in each node of the list, starting with the fi
 
 Putting it all together in a simple Python program:
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
@@ -177,7 +177,7 @@ In a doubly linked list, you can traverse the list in either direction, from the
 
 The implementation should not be too much of a surprise:
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
@@ -187,7 +187,7 @@ class Node:
 
 Here’s how you might create a doubly linked list with three nodes, and then read through the data from start to finish, and then back again to the start:
 
-``` python
+```python
 node1 = Node("First")
 node2 = Node("Second")
 node3 = Node("Third")
@@ -253,7 +253,7 @@ The second step is to update the surrounding nodes to point to the new node.
 
 Here’s an example of inserting a node into a doubly linked list:
 
-``` python
+```python
 class Node:
   def __init__(self, data):
       self.data = data
@@ -281,7 +281,7 @@ current = node1
 while current is not None:
     print(current.data)
     current = current.next
-```python
+```
 
 This code will output:
 
@@ -293,7 +293,7 @@ How can you find a node in a linked list? You don’t have any kind of "index" t
 
 Let’s just consider the singly linked list. You want to search the list for a node that contains a specific piece of data. Here’s a simple algorithm that will go through a linked list and return the first node that returns a that data, or "False" if the data is not found:
 
-``` python
+```python
 class Node:
   def __init__(self, data):
     self.data = data
@@ -306,13 +306,13 @@ class Node:
         return current
       current = current.next
     return False
-```python
+```
 
 ### Update
 
 Given what’s already been discussed about reading and inserting nodes into a linked list, updating a node should be pretty straightforward. Again, what "update" means might be different in different contexts, but let’s say you want to update the first instance of a node with a specific piece of data, or return "False" if the data is not found.
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
@@ -338,7 +338,7 @@ Much like with the other three CRUD operations, if you know how to read, insert,
 
 What happens to the node you delete? It’s still in memory, but it’s no longer part of the list, and it will be garbage collected at some point in the future. Keep this in mind because there are some languages where you have to manually delete the node from memory, and if you don’t, you’ll have a memory leak, but with Python and Javascript, you don’t have to worry about that.
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
@@ -363,7 +363,7 @@ def delete(head, data):
 
 Ok, you’ve got a list of items, you’ve read them all in, and now you need to sort them. How do you do that with a linked list? Sorting a linked list is a bit more complex than sorting an array, mostly because you have to move the pointers around to keep the list in order. What would this look like if we tried to sort a linked list using the bubble sort algorithm we used to sort an array in chapter 4?
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
@@ -398,7 +398,7 @@ def bubble_sort(head):
     return head
 ```
 
-Notice how the algorithm works. In the array bubble sort in Chapter 4 the data was actually swapped in place in the array. In the linked list bubble sort, the nodes — the array "places" — remain in place but the data itself is swapped between them. This is *not* the only way to sort a linked list, but it’s a good example of the idea of the bubble sort algorithm having a different effect on different data structures.
+Notice how the algorithm works. In the array bubble sort in Chapter 4 the data was actually swapped in place in the array. In the linked list bubble sort, the nodes — the array "places" — remain in place but the data itself is swapped between them. This is _not_ the only way to sort a linked list, but it’s a good example of the idea of the bubble sort algorithm having a different effect on different data structures.
 
 This code will sort a linked list in ascending order, but it’s clear how much overhead is involved with sorting a linked list. You have to know the length of the list in the first place, you have to go through the list multiple times, and you have to create several temporary variables to hold data and node references while you’re moving things around.
 
@@ -408,7 +408,7 @@ The reason I’m bringing this up is really to show that in the case of choosing
 
 Do things get any easier if we start with a doubly linked list?
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data
@@ -452,7 +452,7 @@ We are coming to more effective ways to sort and search data structure beginning
 
 Now let’s try a more complex operation, merging two singly linked lists. Try reasoning through the logic of this code on your own.
 
-``` python
+```python
 class Node:
     def __init__(self, data):
         self.data = data

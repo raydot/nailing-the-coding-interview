@@ -22,12 +22,13 @@ project:
     - file: chapters/part-02.md
       children:
         - file: chapters/11-functions-recursion.md
-        - file: chapters/12-search-sort.md
-        - file: chapters/13-dynamic-greedy.md
+        - file: chapters/12-search.md
+        - file: chapters/13-sort.md
     - file: chapters/part-03.md
       children:
-        - file: chapters/14-outside-the-box.md
-        - file: chapters/15-gen-ai-to-study.md
+        - file: chapters/14-dynamic-greedy.md
+        - file: chapters/15-outside-the-box.md
+        - file: chapters/16-gen-ai-to-study.md
 site:
   template: book-theme
   options:

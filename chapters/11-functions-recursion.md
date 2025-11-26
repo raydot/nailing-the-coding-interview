@@ -75,10 +75,10 @@ Learning about functions often included exercises to create tables of the expect
 
 Functions in programming perform a similar, um, function, allowing data passed in to be transformed in a way specified by the programmer. Here is the above-mentioned example high-school algebra function in Python:
 
-````python
+```python
 def doubler-function(value):
   return (2 * value)
-```python
+```
 
 Function implementations are language-specific, with C++ and Java requiring functions be set to data types, and JavaScript containing several ways to create functions, depending on what you’re trying to accomplish. In every language, however, functions are just like the ones you encountered in high-school algebra. They take a value (or values), transform them according to a set of rules, and return the result.
 
@@ -86,14 +86,14 @@ Function implementations are language-specific, with C++ and Java requiring func
 
 ## Function prototypes
 
-In strongly typed languages, functions are usually defined by a *prototype*, a block of code that defines the function in terms of the data it can expect to receive and return. In this way, function prototypes are used to enforce type checking, to make sure that the values that are being passed to a function are what it expects to receive. This is an example function prototype in C:
+In strongly typed languages, functions are usually defined by a _prototype_, a block of code that defines the function in terms of the data it can expect to receive and return. In this way, function prototypes are used to enforce type checking, to make sure that the values that are being passed to a function are what it expects to receive. This is an example function prototype in C:
 
-``` c
+```c
 // Function prototype
 float multIntAndFloat(int num1, float num2);
-```python
+```
 
-The first `float` in this prototype indicates that it will return a float. The `int` and `float` keywords preceding the two values being passed in means these values *must* be an int and a float. If you pass or return any other type of data, the compiler will return an error — or at least a warning, depending on the C implementation you’re using.
+The first `float` in this prototype indicates that it will return a float. The `int` and `float` keywords preceding the two values being passed in means these values _must_ be an int and a float. If you pass or return any other type of data, the compiler will return an error — or at least a warning, depending on the C implementation you’re using.
 
 Weakly typed languages don’t require function prototypes, but there are ways to require them, of course. The Typescript programming language is probably the best current example of creating type-checking, for all data and not just functions, in JavaScript.
 
@@ -125,18 +125,18 @@ In Python, the (kinda, sorta) equivalent of an arrow function is a lambda functi
 
 Arrow functions absolutely can be multi-line functions, simply by adding some curly braces:
 
-``` javascript
+```javascript
 const doubler_plus_two = (x) => {
   const result = 2 * x
   return result + 2
 }
-```javascript
+```
 
 All equally valid, but now you’ve lost the need not to type return, and you have a function doing two things (doubling x and adding 2) which is fine, but not really any different from what a function can already do.
 
 ## Closures
 
-For the longest time you could not go on a programming interview without being asked, "What’s a closure?" Something funny about that, though, I’m not so sure a lot of interviewers knew either. One of the greatest texts on closures comes from the *You Don’t Know JavaScript* series by Kyle Simpson, and I highly recommended reading all of his books once you’re done with this one.
+For the longest time you could not go on a programming interview without being asked, "What’s a closure?" Something funny about that, though, I’m not so sure a lot of interviewers knew either. One of the greatest texts on closures comes from the _You Don’t Know JavaScript_ series by Kyle Simpson, and I highly recommended reading all of his books once you’re done with this one.
 
 The problem with the question "What is a closure?" is that there’s not really a single correct answer. I mean there is, but it’s not a simple one. Because of this, I suspect a lot of people were told they were "wrong" in their response, when actually, they likely weren’t, not exactly.
 
@@ -160,7 +160,7 @@ With all of that in mind, I do believe we were talking about closures.
 
 Let’s start with this simple closure example in JavaScript
 
-``` javascript
+```javascript
 function outerFunction() {
   const outerValue = "I'm the outer value"
   function innerFunction() {
@@ -168,26 +168,26 @@ function outerFunction() {
   }
   return innerFunction
 }
-```javascript
+```
 
 It’s been said that in JavaScript functions are "first-class", which means they can be passed around like any other data type. In this example, `outerFunction` is a function that returns `innerFunction`, which is a function that logs the value of `outerValue` to the console.
 
 I don’t think the following will come as a surprise, none of the data inside this function is available from outside the function.
 
-``` javascript
+```javascript
 console.log(outerValue)
 // Output: ReferenceError: outerValue is not defined
 innerFunction()
 // Output: ReferenceError: innerFunction is not defined
-```javascript
+```
 
 Encapsulation at work! Neither of these values are available outside of `OuterFunction`. This is scope defined with the curly braces that surround the data. The data inside the function is "private," and can only be accessed from within the function.
 
-``` javascript
+```javascript
 const closure = outerFunction()
 closure()
 // Output: I'm the outer value
-````
+```
 
 That’s the cool, closure part right there. If you look back at the `outerFunction` you’ll see that `innerFunction` is returning `outerValue`, which is a value that is no longer in scope. In addition to that, the `outerFunction` has finished executing, and yet the value of `outerValue` is still available to `innerFunction`.
 
@@ -214,7 +214,7 @@ incrementCounter2() // Output: Counter value: 1
 
 It also allows you to use JavaScript key-value pairs to create objects consisting of "name":"function" pairs, each one of which is encapsulated using a closure into a single object that maintains its own state.
 
-````javascript
+```javascript
 function createCounter() {
   let count = 0 // Private variable
   return {
@@ -228,7 +228,7 @@ function createCounter() {
     },
     getValue: function () {
       return count
-    },
+    }
   }
 }
 
@@ -238,13 +238,13 @@ console.log(counter1.increment()) // 2
 const counter2 = createCounter()
 console.log(counter2.increment()) // 1
 console.log(counter2.decrement()) // 0
-```javascript
+```
 
 Lots of closure stuff happening here! First "count" is a private variable that is only available to the "increment," "decrement," and "getValue" functions inside the object. Second, the "inner" functions in the "name:function" object are returned from the function, and the functions inside the object are able to access the "count" variable even though the `createCounter` function that created it has finished executing. Third, once these objects are created they maintain their own state, so that each object created by the function has its own "count" variable that is separate from the others. And I didn’t have to use a single line of Redux!
 
 It is of course possible to do a similar thing in Python using dictionaries:
 
-``` python
+```python
 def create_counter():
     count = 0
     def increment():
@@ -262,7 +262,7 @@ def create_counter():
         "decrement": decrement,
         "getValue": get_value
     }
-```javascript
+```
 
 The answer to "what is a closure?" All of the above. Specifically, a closure is a function that maintains a reference to the variables in the scope in which it was created, even after that scope has finished executing.
 
@@ -274,30 +274,30 @@ It is possible to define a function without a name, which is then called an "ano
 
 It’s arrow functions and closures that make anonymous functions possible in JavaScript. For instance, you may have done something like this in JavaScript:
 
-``` javascript
+```javascript
 const myArray = [1, 2, 3, 4, 5]
 
 const doubledArray = myArray.map(function (num) {
   return num * 2
 })
 console.log(doubledArray) // Output: [2, 4, 6, 8, 10]
-```python
+```
 
 That mystery `function` is the anonymous function. It’s needed because you have to pass in and return the number you’re trying to double. This can also be done with an arrow function:
 
-``` javascript
+```javascript
 const myArray = [1, 2, 3, 4, 5]
 const doubledArray = myArray.map((num) => num * 2)
 console.log(doubledArray) // Output: [2, 4, 6, 8, 10]
-```python
+```
 
 Be aware of the portability between the one-line and multi-line anonymous functions, which has tripped me up more than once. If the arrow function is used without curly braces, the return is implicit, and does not need to be stated. You can see that above in `map((num) ⇒ num * 2)`, where the return is implicit.
 
 But what if you need to do something a little more complex?
 
-``` javascript
+```javascript
 const numArray = [1, 2, 3, 4, 5]
-const nameArray = ["Arlo", "Bao", "Carlos", "Diana", "Eli"]
+const nameArray = ['Arlo', 'Bao', 'Carlos', 'Diana', 'Eli']
 
 const result = numArray.map((num, index) => {
   return {
@@ -305,7 +305,7 @@ const result = numArray.map((num, index) => {
     name: nameArray[index]
   }
 })
-```python
+```
 
 This example still uses an arrow function, but there are now curly braces added because more than one line of code is needed to accomplish the task. Because the curly braces have been added, the implicit `return` goes away, and you will have to explicitly use the `return` keyword to return whatever it is you want to return.
 
@@ -317,7 +317,7 @@ There are a few reasons you might want to do this, and some of them will be expl
 
 Here’s an example of passing a function to a function in Python:
 
-``` python
+```python
 def function_taking_function(func, value):
     return func(value)
 
@@ -331,11 +331,11 @@ result = function_taking_function(double, 5)
 print(result)  # Output: 10
 result = function_taking_function(triple, 5)
 print(result)  # Output: 15
-````
+```
 
 That’s hardly the end of it. In any language that treats functions as "first-class" you can pass them anywhere you like. Building on the example above, here are functions that are stored in an array and then passed to a function.
 
-````python
+```python
 def function_taking_function(func, value):
     return func(value)
 
@@ -356,7 +356,7 @@ function_array = [double, triple, quadruple, quintuple]
 for func in function_array:
     result = function_taking_function(func, 5)
     print(result)  # Output: 10, 15, 20, 25
-```javascript
+```
 
 If you’ve never considered this it can be fun to play around with it as an idea. But this is one more of those things where just because you can, doesn’t necessarily mean you should. Piling functions up and passing them around can quickly make your code tricky to reason about, especially if those functions are returning things. If you adhere to the rule where each function should only be responsible for one thing, if you start storing functions in arrays, passing them to other functions, passing those functions to functions, it sounds like a memory leak waiting to happen.
 
@@ -374,29 +374,29 @@ In JavaScript it gets a little bit tricker. Because of the way JavaScript handle
 
 In the following example, the function is a method of an object, so `this` refers to that same object — the one that is calling the function:
 
-``` javascript
-const obj = {
-  name: "Dave",
-  greet: function() {
-    console.log(`Hello, my name is ${this.name}`);
-  }
-};
-obj.greet(); // Output: Hello, my name is Dave
 ```javascript
+const obj = {
+  name: 'Dave',
+  greet: function () {
+    console.log(`Hello, my name is ${this.name}`)
+  }
+}
+obj.greet() // Output: Hello, my name is Dave
+```
 
 But if a function is created outside of an object, then `this` refers to JavaScripts global object (or `undefined` in strict mode, because, don’t do that):
 
-``` javascript
+```javascript
 function greet() {
-  console.log(`Hello, my name is ${this.name}`);
+  console.log(`Hello, my name is ${this.name}`)
 }
-```python
+```
 
 ## Constructor functions
 
 Like `this,` a constructor also has more to do with OOP than functions in particular, but is also a related concept. A constructor function is a function that helps to set up a class or object in OOP. Here’s an example in Java, where the syntax is more clear than it is in most languages:
 
-``` java
+```java
 public class Robot {
     private String name;
     private int age;
@@ -414,15 +414,15 @@ public class Robot {
         return age;
     }
 }
-```python
+```
 
 That funny looking function that has the same name as the class definition, `Robot`, is the constructor function. When the class is created, the variables passed in to the constructor function help set up the class variables. Multiple robots can be generated like this:
 
-``` java
+```java
 Robot robot1 = new Robot("Lala", 5);
 Robot robot2 = new Robot("Barney", 10);
 Robot robot3 = new Robot("Peppa", 15);
-```javascript
+```
 
 This works in much the same way as passing variables to a function does, but it only works if a constructor is defined in the first place.
 
@@ -432,18 +432,18 @@ Generators and iterators are some fancy advanced theory that I have to be honest
 
 You can think of a generator function as a fancy for-loop:
 
-``` javascript
-function* generatorFunction() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-const generator = generatorFunction();
-
-console.log(generator.next().value); // Output: 1
-console.log(generator.next().value); // Output: 2
-console.log(generator.next().value); // Output: 3
 ```javascript
+function* generatorFunction() {
+  yield 1
+  yield 2
+  yield 3
+}
+const generator = generatorFunction()
+
+console.log(generator.next().value) // Output: 1
+console.log(generator.next().value) // Output: 2
+console.log(generator.next().value) // Output: 3
+```
 
 This generic generator function example tells you pretty much everything you need to know. The syntax involves adding a `*` to the function definition. The `yield` keyword is used to store the list of values in the function. The `next()` method is used to get the next value in the list, and the `value` property is used to get the value itself.
 
@@ -461,24 +461,24 @@ You might have a pickle factory, and all pickles are made the same way. You wann
 
 Here’s an example of how you can do this with a factory function in JavaScript:
 
-``` javascript
+```javascript
 function createPickle(type) {
   return {
     pickleType: type,
-    makePickle: function() {
-      console.log(`Making a ${this.type} pickle!`);
+    makePickle: function () {
+      console.log(`Making a ${this.type} pickle!`)
     }
-  };
+  }
 }
 
-const dillPickle = createPickle("dill");
-const sweetPickle = createPickle("sweet");
-const spicyPickle = createPickle("spicy");
+const dillPickle = createPickle('dill')
+const sweetPickle = createPickle('sweet')
+const spicyPickle = createPickle('spicy')
 
-dillPickle.makePickle(); // Output: Making a dill pickle!
-sweetPickle.makePickle(); // Output: Making a sweet pickle!
-spicyPickle.makePickle(); // Output: Making a spicy pickle!
-```javascript
+dillPickle.makePickle() // Output: Making a dill pickle!
+sweetPickle.makePickle() // Output: Making a sweet pickle!
+spicyPickle.makePickle() // Output: Making a spicy pickle!
+```
 
 ## Callback functions
 
@@ -486,38 +486,38 @@ Some functions are meant to be called specifically when other functions complete
 
 One of the most prevalent examples of this is the one used to illustrate `setTimeout()` in JavaScript. `setTimeout()` is a function that takes two arguments: a function to be called, and a value of how long to wait to call it.
 
-``` javascript
+```javascript
 function myCallback() {
-  console.log("Another ten seconds gone!");
+  console.log('Another ten seconds gone!')
 }
 
-setTimeout(myCallback, 10000);
-```javascript
+setTimeout(myCallback, 10000)
+```
 
 This code will print the phrase "Another ten seconds gone!" to the console after 10 seconds.
 
 Callback functions are very useful for timing events, but they are also an invaluable tool for asynchronous programming. Here is a JavaScript example of using a callback function to wait until data is returned from an API. This is great because instead of having to "poll" repeatedly to see if data has been returned from an API, you can just hand the task over to JavaScript and count on it to let you know either when something’s complete or when it’s never going to complete.
 
-``` javascript
+```javascript
 async function fetchData() {
   // Replace this with your actual API call
-  const response = await fetch('https://some.api.com/stuff-you-want');
-  const data = await response.json();
-  return data;
+  const response = await fetch('https://some.api.com/stuff-you-want')
+  const data = await response.json()
+  return data
 }
 
 // Use fetchData as a callback
 async function main() {
   try {
-    const result = await fetchData();
-    console.log(result);
+    const result = await fetchData()
+    console.log(result)
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error)
   }
 }
 
-main();
-```javascript
+main()
+```
 
 ## Function chaining
 
@@ -527,15 +527,15 @@ Function chaining is a way to call multiple functions from a single line of code
 
 For instance, in jQuery you could do something like this:
 
-``` javascript
+```javascript
 $('#coolElement')
   .addClass('active')
   .css('color', 'salmon')
   .css('padding', '12px 20px')
   .css('border-radius', '8px')
   .css('transition', 'all 0.3s ease-in-out')
-  .fadeIn(1000);
-```javascript
+  .fadeIn(1000)
+```
 
 In this example the first line, `$('#coolElement')` is a jQuery "selector" that grabs the element from the DOM that has the ID of `coolElement`.
 
@@ -549,32 +549,32 @@ What’s behind the magic of function chaining? There are a few related ways to 
 
 While I can’t claim to have ever peeked inside the jQuery source code, I imagine its basic operation looks something like this under the hood:
 
-``` javascript
+```javascript
 function getElement(selector) {
-  const element = document.getElementById(selector);
+  const element = document.getElementById(selector)
 
   // Return an object containing only functions
   return {
-    addClass: function(className) {
-      element.classList.add(className);
-      return this; // Return the object for chaining
+    addClass: function (className) {
+      element.classList.add(className)
+      return this // Return the object for chaining
     },
 
-    css: function(property, value) {
-      element.style[property] = value;
-      return this; // Return the object for chaining
+    css: function (property, value) {
+      element.style[property] = value
+      return this // Return the object for chaining
     },
 
-    fadeIn: function(duration) {
-      element.style.transition = `opacity ${duration}ms`;
-      element.style.opacity = '1';
-      return this; // Return the object for chaining
+    fadeIn: function (duration) {
+      element.style.transition = `opacity ${duration}ms`
+      element.style.opacity = '1'
+      return this // Return the object for chaining
     }
-  };
+  }
 }
 
 // Usage:
-const $ = getElement; // Create a familiar alias
+const $ = getElement // Create a familiar alias
 
 $('coolElement')
   .addClass('active')
@@ -582,47 +582,53 @@ $('coolElement')
   .css('padding', '12px 20px')
   .css('border-radius', '8px')
   .css('transition', 'all 0.3s ease-in-out')
-  .fadeIn(1000);
-````
+  .fadeIn(1000)
+```
 
 Or, to pass on the class-based approach and go with something entirely functional:
 
-````javascript
+```javascript
 // Create pure functions that transform a value and return a new value
 const addClass = (className) => (element) => {
-  const newElement = { ...element };
-  newElement.classList = [...(element.classList || []), className];
-  return newElement;
-};
+  const newElement = { ...element }
+  newElement.classList = [...(element.classList || []), className]
+  return newElement
+}
 
 const css = (property, value) => (element) => {
-  const newElement = { ...element };
-  newElement.style = { ...(element.style || {}), [property]: value };
-  return newElement;
-};
+  const newElement = { ...element }
+  newElement.style = { ...(element.style || {}), [property]: value }
+  return newElement
+}
 
 const fadeIn = (duration) => (element) => {
-  const newElement = { ...element };
+  const newElement = { ...element }
   newElement.style = {
     ...(element.style || {}),
     transition: `opacity ${duration}ms`,
     opacity: '1'
-  };
-  return newElement;
-};
+  }
+  return newElement
+}
 
 // Helper function to start the chain with the element
 const getElement = (selector) => {
   // Mock representation of a DOM element,
   // But it gets the point across
-  return { id: selector, classList: [], style: {} };
-};
+  return { id: selector, classList: [], style: {} }
+}
 
 // Compose functions (right to left)
-const compose = (...fns) => (x) => fns.reduceRight((acc, fn) => fn(acc), x);
+const compose =
+  (...fns) =>
+  (x) =>
+    fns.reduceRight((acc, fn) => fn(acc), x)
 
 // Pipe functions (left to right) - more intuitive for chaining
-const pipe = (...fns) => (x) => fns.reduce((acc, fn) => fn(acc), x);
+const pipe =
+  (...fns) =>
+  (x) =>
+    fns.reduce((acc, fn) => fn(acc), x)
 
 // Usage:
 const elementTransformation = pipe(
@@ -632,11 +638,11 @@ const elementTransformation = pipe(
   css('border-radius', '8px'),
   css('transition', 'all 0.3s ease-in-out'),
   fadeIn(1000)
-);
+)
 
-const transformedElement = elementTransformation(getElement('coolElement'));
-console.log(transformedElement);
-```python
+const transformedElement = elementTransformation(getElement('coolElement'))
+console.log(transformedElement)
+```
 
 Pretty cool, right? But you can see how it could easily get unwieldy. Now that you’ve been shown, use it wisely.
 
@@ -674,36 +680,36 @@ This is a relatively easy paradigm to understand, but it’s a bit more of a cha
 
 A "side effect" is data that is changed outside of the function. All a function should be expected to do is take data, modify data, and return the result. If a function is changing data in the global scope, for instance, that’s a side effect. Here is an example of what that means:
 
-``` javascript
+```javascript
 let globalVariable = 0
 function incrementGlobal() {
   globalVariable += 1
 }
 incrementGlobal()
-```javascript
+```
 
 Of course that would never happen because EVERYONE knows global variables are bad, right? I mean, my gosh, I wouldn’t be caught dead coding with one. Now that my secret is safe, `incrementGlobal()` is function that creates a side effect by changing the value of `globalVariable`, which is scoped outside of the function.
 
 What’s the big deal? What if another function comes along and decides to do this:
 
-``` javascript
+```javascript
 let globalVariable = 0
 function incrementGlobalMore() {
   globalVariable += 2
 }
-```python
+```
 
 Good luck keeping track of which function is changing the value of `globalVariable`, and when.
 
 In functional programming the only way to change the value of a variable is to pass that variable to a function, and then return the result, like so:
 
-``` javascript
+```javascript
 let globalVariable = 0
 function incrementGlobal(value) {
   return value + 1
 }
 globalVariable = incrementGlobal(globalVariable)
-```python
+```
 
 The difference in this example is that `globalVariable` is not changed inside the function. When `incrementGlobal()` is called, there’s no worry that something somewhere else is going to be going the same thing to `globalVariable` at the same time.
 
@@ -711,15 +717,23 @@ One great thing about functional programming is it’s embrace of three incredib
 
 For instance, here is a use of filter to remove all of the green M&M’s from a bowl…​um…​array.
 
-``` javascript
+```javascript
 const mAndMs = [
-  "red", "brown", "green", "yellow", "blue", "green", "red", "brown", "green"
+  'red',
+  'brown',
+  'green',
+  'yellow',
+  'blue',
+  'green',
+  'red',
+  'brown',
+  'green'
 ]
-const noGreens = mAndMs.filter((m) => m !== "green")
+const noGreens = mAndMs.filter((m) => m !== 'green')
 
 console.log(noGreens)
 // Output: ["red", "brown", "yellow", "blue", "red", "brown"]
-```javascript
+```
 
 In this example the function is passed in as an arrow function, the function being the logical condition `m !== "green"`.
 
@@ -735,7 +749,7 @@ Currying (named after Haskell Curry, not the spice) is an idea that comes from f
 
 Here’s a simple example of currying in Python, same simple example that’s given in many other places:
 
-``` python
+```python
 def add(x, y):
   return x + y
 
@@ -744,7 +758,7 @@ def add10(x):
 
 print(add10(5))
 # Output: 15
-```python
+```
 
 In this example, `add10` is a curried function that takes a single argument, `x`, and returns the result of `add(x, 10)`. Which makes no sense whatsoever, because why couldn’t you just do (x + 10) and be done with it.
 
@@ -770,14 +784,14 @@ Higher order functions are functions that return other functions as their result
 
 Here’s a simple example of a higher order function in JavaScript:
 
-``` javascript
+```javascript
 function higherOrderFunction() {
   return function innerFunction() {
-    console.log("Hello from the inner function!");
-  };
+    console.log('Hello from the inner function!')
+  }
 }
-const innerFunc = higherOrderFunction();
-```javascript
+const innerFunc = higherOrderFunction()
+```
 
 This is an incredibly useful concept because it can be used to create functions "on the fly," that are much more flexible and usable than single purpose functions.
 
@@ -789,7 +803,7 @@ That last example was pretty simple, but higher order functions can solve a lot 
 
 One very stilted approach that I’ve taken more than once is to create a single function that takes in every possible property, along with flag values to indicate whether or not that property is available for that item. This can lead to some funky function signatures, can make it difficult to reason about the code, can make it difficult to scale the code, and yeah, I will confess to having done something like this at least once in my career.
 
-``` javascript
+```javascript
 function createShoeFactory(defaultOptions = {}) {
   // Base defaults for all shoes
   const baseDefaults = {
@@ -799,7 +813,7 @@ function createShoeFactory(defaultOptions = {}) {
     engravingInitials: '',
     customSole: false,
     customSoleColor: ''
-  };
+  }
 
   // Return a function that creates shoes with those defaults
   return function createShoe(name, color, size, options = {}) {
@@ -808,10 +822,10 @@ function createShoeFactory(defaultOptions = {}) {
       name,
       color,
       size
-    };
+    }
 
     // Apply customizations only if they exist
-    const fullOptions = { ...baseDefaults, ...defaultOptions, ...options };
+    const fullOptions = { ...baseDefaults, ...defaultOptions, ...options }
 
     // Only add custom properties that have been explicitly set
     Object.entries(fullOptions).forEach(([key, value]) => {
@@ -822,48 +836,50 @@ function createShoeFactory(defaultOptions = {}) {
           shoe.laces = {
             custom: true,
             style: fullOptions.laceStyle
-          };
+          }
         } else if (key === 'engraving' && value === true) {
           shoe.engraving = {
             enabled: true,
             initials: fullOptions.engravingInitials
-          };
+          }
         } else if (key === 'customSole' && value === true) {
           shoe.sole = {
             custom: true,
             color: fullOptions.customSoleColor
-          };
-        } else if (!['laceStyle', 'engravingInitials', 'customSoleColor'].includes(key)) {
+          }
+        } else if (
+          !['laceStyle', 'engravingInitials', 'customSoleColor'].includes(key)
+        ) {
           // Add other non-related properties directly
-          shoe[key] = value;
+          shoe[key] = value
         }
       }
-    });
+    })
 
-    return shoe;
-  };
+    return shoe
+  }
 }
 
 // Usage examples
-const standardShoe = createShoeFactory();
-const nike = standardShoe('Air Max', 'black', 10);
-console.log(nike); // Just name, color, size
+const standardShoe = createShoeFactory()
+const nike = standardShoe('Air Max', 'black', 10)
+console.log(nike) // Just name, color, size
 
 const customShoe = standardShoe('Air Jordan', 'red', 11, {
   customLaces: true,
   laceStyle: 'round',
   engraving: true,
   engravingInitials: 'JBD'
-});
-console.log(customShoe);
+})
+console.log(customShoe)
 // Has name, color, size, plus laces and engraving properties
-```javascript
+```
 
 Add a few more styles, options, and features and this can get pretty out of control in a hurry. And remember, most of the shoes will only have a name, a color, and a size.
 
 This can be dealt with by using a higher-order function that can "scale" as needed to accommodate the different properties of the shoes. Such a function might look a little more like this:
 
-``` javascript
+```javascript
 function createShoeFactory(defaultOptions = {}) {
   // Return a function that creates shoes with those defaults
   return function createShoe(name, color, size, options = {}) {
@@ -872,59 +888,59 @@ function createShoeFactory(defaultOptions = {}) {
       name,
       color,
       size
-    };
+    }
 
     // Combine factory defaults with specific options
-    const customizations = { ...defaultOptions, ...options };
+    const customizations = { ...defaultOptions, ...options }
 
     // Add laces if style is specified
     if (customizations.laceStyle) {
       shoe.laces = {
         style: customizations.laceStyle
-      };
+      }
     }
 
     // Add engraving if initials are specified
     if (customizations.engravingInitials) {
       shoe.engraving = {
         initials: customizations.engravingInitials
-      };
+      }
     }
 
     // Add custom sole if color is specified
     if (customizations.customSoleColor) {
       shoe.sole = {
         color: customizations.customSoleColor
-      };
+      }
     }
 
-    return shoe;
-  };
+    return shoe
+  }
 }
 
 // Usage examples
-const standardShoe = createShoeFactory();
+const standardShoe = createShoeFactory()
 
 // Basic shoe
-const basicNike = standardShoe('Air Max', 'black', 10);
+const basicNike = standardShoe('Air Max', 'black', 10)
 
 // Custom shoe with special laces
 const lacedShoe = standardShoe('Air Jordan', 'red', 11, {
   laceStyle: 'round'
-});
+})
 
 // Custom shoe with engraving
 const giftShoe = standardShoe('Dress Shoe', 'brown', 9, {
   engravingInitials: 'CLDK'
-});
+})
 
 // Custom shoe with multiple features
 const fullCustomShoe = standardShoe('Custom Elite', 'white', 10, {
   laceStyle: 'flat',
   engravingInitials: 'MVP',
   customSoleColor: 'gold'
-});
-```python
+})
+```
 
 If you’re familiar with object-oriented programming this kind of resembles extending a bae class, which it kinda is.
 
@@ -940,7 +956,7 @@ If you’re familiar with object-oriented programming this kind of resembles ext
 
 ## Recursion
 
-In the course of my career I’ve written a *lot* of recursive code, and all of it has one thing in common: it’s been some kind of exercise. I’ve been in a class and given a problem to be solved with recursion, I’ve been writing an exam and I promised there would be a problem that required recursion, or I’ve been in an interview and asked to solve a problem using recursion.
+In the course of my career I’ve written a _lot_ of recursive code, and all of it has one thing in common: it’s been some kind of exercise. I’ve been in a class and given a problem to be solved with recursion, I’ve been writing an exam and I promised there would be a problem that required recursion, or I’ve been in an interview and asked to solve a problem using recursion.
 
 In that same span of time I don’t think I’ve ever written a single line of recursive code in a production environment. It’s hard to come up with, hard to maintain, and if you get it wrong it can end up creating a heck of a lot more problems than it solves.
 
@@ -952,7 +968,7 @@ While it’s rarely the best tool for the job, recursion is a very useful concep
 
 I was a musician as a youth, and even though I always played rock songs, I worked with a teacher who taught me jazz. I loved it because playing jazz focused more on finesse, improvisation, and a broader musical understanding. When I got together with band band and we played rock, it was a lot easier to play those songs because I had a deeper understanding of music. (That’s not a value judgement by the way. I’m not saying either is "better." Plenty of people hate jazz, and while I think they’re making a huge mistake, I get it.)
 
-It’s the same with recursion. Understanding how to break a problem down in the way that’s required to come up with recursive solutions is an invaluable skill for a programmer to have, even if you never use recursion in a production environment. That’s *why* it’s focused on so much in academia and in coding interviews — it’s a way to show an advanced understanding of ways to reason about code.
+It’s the same with recursion. Understanding how to break a problem down in the way that’s required to come up with recursive solutions is an invaluable skill for a programmer to have, even if you never use recursion in a production environment. That’s _why_ it’s focused on so much in academia and in coding interviews — it’s a way to show an advanced understanding of ways to reason about code.
 
 ## Introduction to Recursion
 
@@ -1010,7 +1026,7 @@ Steps one and two are straightforward. What step three means is simply that any 
 
 This is what it looks like in Python:
 
-``` python
+```python
 def fibonacci(n):
     if n <= 0: # There are no negative fibonacci numbers
         return 0
@@ -1020,7 +1036,7 @@ def fibonacci(n):
         return fibonacci(n - 1) + fibonacci(n - 2) # Recursion!
 
 print(fibonacci(10))  # Output: 55
-````
+```
 
 This straightforward example hides an awful lot of complexity, but it’s a great place to get started. One thing to consider is that because every number in the Fibonacci stack has to be calculated fresh each time it’s run through, generating the Fibonacci sequence recursively runs in O(2^n) time. Slow!
 
@@ -1063,14 +1079,14 @@ def _bubble_up(self, index):
 
 It stands to reason that once an item has been bubbled up, if it’s larger than its parent it can simply be bubbled up again. That sounds like a job for recursion! In this example, the while loop is replaced by a recursive call to `_bubble_up`:
 
-````python
+```python
 def _bubble_up(self, index):
     parent = self.get_parent(index)
 
     if index > 0 and self.heap[index] > self.heap[parent]:
         self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
         self._bubble_up(parent)
-```python
+```
 
 ### When you (might) have a recursive pattern
 
@@ -1112,7 +1128,7 @@ Here is some real-world React production code that I’ve been pushing and pushi
 
 Please spend a moment thinking about how you would approach this question before looking at the answer. How would you refactor this code to make it more readable, more maintainable, and more efficient?
 
-``` javascript
+```javascript
 graphicData = vizData ? (
   visData.map((obj) => ({
     name: obj.time,
@@ -1123,10 +1139,9 @@ graphicData = vizData ? (
     value4: obj.value4 ? obj.value4 : null,
     value5: obj.value5 ? obj.value5 : null,
     value6: obj.value6 ? obj.value6 : null,
-    value7: obj.value7 ? obj.value7 : null,
+    value7: obj.value7 ? obj.value7 : null
   }))
 ) : (
   <></>
 )
-)
-````
+```

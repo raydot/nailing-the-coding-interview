@@ -48,7 +48,7 @@ Matrices (plural for matrix) are commonly represented as two-dimensional arrays.
 
 A two-dimensional array is a collection of arrays. all of the values that run across are called "rows" and all of the values that run down are called "columns." For example, consider this matrix:
 
-``` python
+```python
 mystery_matrix = [
     [    0,     1,    1,    0,    0,    0  ],
     [    0,     0,    1,    0,    0,    0  ],
@@ -63,7 +63,7 @@ Think for a moment about wha this matrix might represent. It could be the walls 
 
 It’s actually food web, or a diagram of "who eats whom" in an arctic food chain. Here is is again with some comments added:
 
-``` python
+```python
 # Food Web Matrix (Binary Relationships)
 # 1 = Species A (row) is eaten by Species B (column)
 # 0 = No direct predation
@@ -76,7 +76,7 @@ food_web = [
     [    0,     0,    0,    0,    0,    0  ],  # Orca     - Apex predator
     [    0,     0,    0,    0,    0,    0  ]   # Bear     - Competes with orcas for seals
 ]
-```python
+```
 
 Rows in a matrix are what goes across, from left to right. The first row in this matrix is also the first array, `[0, 1, 1, 0, 0, 0]`. The row represents algae, or, more specifically, what eats algae.
 
@@ -86,7 +86,7 @@ Don’t forget that this is a representation of a matrix in code form. If this w
 
 That’s the matrix and more intuitive representation of a graph, but if you’ve ever worked with 2D arrays you know they can quickly become unwieldy. The adjacency list is a more efficient way to represent a graph, and it is the most common way to do so in code. Here is an example of the food web matrix as an adjacency list:
 
-``` python
+```python
 # Food Web Adjacency List
 food_web = {
     'Algae': ['Krill', 'Fish'],
@@ -96,7 +96,7 @@ food_web = {
     'Orca': [],
     'Bear': []
 }
-```python
+```
 
 Instead of a 2D array, the adjacency list is a dictionary, or hash table. All of the species are listed as keys, with the values being an array of the species that eat them. This form provides two immediate advantages over the matrix form:
 
@@ -184,7 +184,7 @@ That’s a lot of theory! It’s important stuff though. A lot of stuff has been
 
 But not yet! First let’s talk about some of the basics of working with graphs. Here is some Python code that create a very simple social network graph.
 
-``` python
+```python
 class Graph:
     def __init__(self):
         self.graph = {}
@@ -235,7 +235,7 @@ g.display()
 
 If you run the code above you will see the following output:
 
-``` console
+```console
 Social Network Connections:
 Amir -> Beth, Chen, Diego
 Beth -> Amir, Emma, Farid
@@ -264,7 +264,7 @@ Now that you’ve done that, here’s my version of the graph:
 
 Back to the two forms of traversal: depth-first and breadth-first. Here is an algorithm that will traverse the graph in a depth-first manner, starting with Amir and running down all of his connections one at a time, in order.
 
-``` python
+```python
 def depth_first_traversal(self, start, visited=None):
     if visited is None:
     visited = set()
@@ -282,7 +282,7 @@ g.depth_first_traversal('Amir')
 
 When you run this code you see the following output:
 
-``` console
+```console
 Social Connections:
 Amir -> Beth, Chen, Diego
 Beth -> Amir, Emma, Farid
@@ -295,7 +295,7 @@ Hiroshi -> Diego
 Ian -> Emma
 Jamal -> Farid
 Kyle -> Gina
-```python
+```
 
 Was it what you expected? As you can see, Amir knows everybody. Or, well, if he doesn’t know somebody, then he knows someone who knows them, or he knows someone who knows someone who knows them. Right?
 
@@ -328,7 +328,7 @@ Go back to your graph drawing (or mine) and trace out the depth-first traversal.
 
 Let’s add a breadth-first traversal and see what happens there.
 
-``` python
+```python
 def breadth_first_traversal(self, start):
     visited = set()
     queue = [start]
@@ -341,11 +341,11 @@ def breadth_first_traversal(self, start):
             queue.extend(neighbor for neighbor in self.graph[vertex] if neighbor not in visited)
 # Example usage
 g.breadth_first_traversal('Amir')
-```python
+```
 
 Adding this function to our graph class and running it provides this output:
 
-``` console
+```console
 Breadth-First Traversal starting from 'Amir':
 Amir
 Beth
@@ -358,7 +358,7 @@ Hiroshi
 Ian
 Jamal
 Kyle
-```python
+```
 
 The breadth-first traversal starts at Amir and then, instead of running each connection all the way down to the end, visits each of Amir’s friends first, then their friends, then friends of friends, and so on. You will also notice it returns in a different order than the depth-first traversal, and that order just so happens to be alphabetical. Additionally, breadth-first traversal does not require nodes to be marked as "visited."
 
@@ -418,7 +418,7 @@ The Knight Walk problem can be solved using a breadth-first traversal of the gra
 
 Here is a simple implementation of the Knight Walk problem in Python:
 
-``` python
+```python
 def knight_walk(start, end):
     # Define the possible moves of a knight
     moves = [
@@ -463,7 +463,7 @@ Another common use of graphs is the "fill" algorithm. Given the boundary of a tw
 
 The fill algorithm is a graph traversal problem. Visit every pixel within a given space that isn’t filled, and fill it. As discussed in this chapter, this can be done with a depth-first or breadth-first traversal. Here is one simple way in which this might be implemented:
 
-``` python
+```python
 def flood_fill(image, x, y, new_color):
     old_color = image[x][y]
     if old_color == new_color:

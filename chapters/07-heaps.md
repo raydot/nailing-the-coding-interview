@@ -48,23 +48,23 @@ This now is the same data but with a different organization. The way this data i
 
 Now you can’t store data in a tree shape, of course, and if you fed the two above diagrams into a computer it wouldn’t really know how to handle them. So instead, let me consider the heap as a "flat tree" and see what it looks like as a linear data structure. I’ll start with a Python list:
 
-``` python
+```python
 heap = [75, 63, 60, 50, 15, 10, 5]
 ```
 
 As a heap, this list contains some organizational rules that keep the data the way it needs to be so that the values remain in the correct order. Every child in a heap has a parent, and the parent can be taking the child’s index, subtracting one, and dividing by two. Or:
 
-``` python
+```python
 parent = (child - 1) // 2
 ```
 
 To find the parent of 15, for instance, start with the index value of 15 which is 4. Subtract one from four to get three, and then divide by two to get one (remember that in Python that the `//` operator rounds down to the nearest integer).
 
-``` python
+```python
 parent = (4 - 1) // 2 # step 1
 parent = 3 // 2 # step 2
 parent = 1 # step 3
-```python
+```
 
 Looking at list element 1, the parent of 15 is 63. Go ahead and try this "trick" with any other element in the list and I think you’ll find that it works. (If it didn’t, I wouldn’t have told you about it.)
 
@@ -102,17 +102,17 @@ Have we maintained all of the rules we’ve learned so far?
 
 In list form our heap now looks like this:
 
-``` python
+```python
 heap = [75, 63, 60, 50, 15, 10, 5, 1]
 ```
 
 Can we find the parent of 1 using the formula we discussed earlier?
 
-``` python
+```python
 parent = (7 - 1) // 2
 parent = 6 // 2
 parent = 3
-```python
+```
 
 The parent of 1 is 50, which is correct.
 
@@ -172,7 +172,7 @@ Now the heap is back in order and all is right in the kingdom.
 
 Before considering other cases, I’d like to stop for a moment and consider what this looks like in code. Here is a Python class that implements the heap I’ve been discussing. It prints the heap, inserts the value 67, bubbles it up, and prints the heap again:
 
-``` python
+```python
 class Heap:
     def __init__(self, input_list=None):
         self.heap = []
@@ -202,7 +202,7 @@ heap = Heap([75, 63, 60, 50, 15, 10, 5, 1])
 print("Initial heap:", heap.display())
 heap.insert(67)
 print("After inserting 67:", heap.display())
-```javascript
+```
 
 Breaking this code down method by method, the first four are pretty straightforward:
 
@@ -216,14 +216,14 @@ The `display` method returns the heap, which can be passed to the `print` functi
 
 This leaves us with the `_bubble_up` method, which is the most interesting (in both name and function) and important part of the code.
 
-``` python
+```python
 def _bubble_up(self, index):
     parent = self.get_parent(index)
 
     if index > 0 and self.heap[index] > self.heap[parent]:
         self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
         self._bubble_up(parent)
-```python
+```
 
 This incredibly useful five lines of code does all the work of bubbling up a value in the heap. It does this by comparing an item to its parent, and swapping the two if the item is larger than its parent. I’m not sure how I could suddenly become my own mother, so the family metaphor breaks down a bit here, but you get the idea.
 
@@ -243,7 +243,7 @@ We’ve looked at inserting, so now let’s look at removing values from a heap.
 
 Deleting an item from a heap is like adding an item, but in reverse. The item is removed from the heap and then the heap is "bubbled down" so that it maintains the heap order property.
 
-The process of bubbling down is a little more complicated for this simple reason: when bubbling up an item it’s always going to be replaced with its parent. An item bubbling down, however, could be replaced with *either* of its children.
+The process of bubbling down is a little more complicated for this simple reason: when bubbling up an item it’s always going to be replaced with its parent. An item bubbling down, however, could be replaced with _either_ of its children.
 
 Before I showed the way to find the parent of a child in a heap:
 
@@ -281,7 +281,7 @@ If this sounds to you a lot like the "pop" method for a stack or a queue, that�
 
 Here’s an example of a class that only has one purpose: to remove the top value from a max heap. In other words, to use the heap as a queue. It does so while using "bubble down" to maintain the heap order property:
 
-``` python
+```python
 class MaxHeapPopper:
     def get_left_child(self, index):
         return 2 * index + 1
@@ -302,7 +302,7 @@ class MaxHeapPopper:
         if largest != index:
             self.heap[index], self.heap[largest] = self.heap[largest], self.heap[index]
             self._bubble_down(largest)
-```python
+```
 
 ## Developing Intuition: What are heaps used for?
 
@@ -320,7 +320,7 @@ If you need to, be sure and review some of the simple math ideas behind the heap
 
 ### Is it a heap?
 
-*Given an array, determine if it is a heap.*
+_Given an array, determine if it is a heap._
 
 There are a few ways this question might be asked in an interview. The question might additionally require a determination to be made about the type of heap — is it a max or min heap? There also might be some version of converting a max heap into a min heap, or vice versa.
 
@@ -344,30 +344,30 @@ Remember, the question starts with an array, so the first element in the array i
 
 Here is a Python function that implements this algorithm:
 
-``` python
+```python
 def is_heap(arr):
     for i in range(1, len(arr)):
         parent = (i - 1) // 2
         if arr[i] > arr[parent]:
             return False
     return True
-```python
+```
 
 ### Is it a max heap or a min heap?
 
-Building on the previous idea (the algorithm given above is for a max heap), how could you determine whether a heap is a min heap or a max heap? The idea is simply to flip the comparison around. If the element is *smaller* than its parent, return `false`.
+Building on the previous idea (the algorithm given above is for a max heap), how could you determine whether a heap is a min heap or a max heap? The idea is simply to flip the comparison around. If the element is _smaller_ than its parent, return `false`.
 
 There could be a trick involved with this question though. What does it mean if the some elements are larger than their parents and some are smaller? This could mean that it’s one of the special flavors of heap I mentioned above, or it could mean that the heap is not a heap at all.
 
 ### Convert max heap to min heap
 
-*Given a max heap, convert it to a min heap.*
+_Given a max heap, convert it to a min heap._
 
 This question takes a little bit of thinking about how a heap is organized. The largest value in a max heap is always at the top of the heap, but now it must be moved down to the leaves. Similarly and conversely, the smallest value in a max heap is down in the leaves, but now it must be moved to the top. Extending this logic, it’s quite possible that any number of heap values could already be exactly where they need to be.
 
 Don’t overthink it though. (Actually it was me who did the overthinking, so never mind.) It’s an easy conversion once you know the trick that stems from these observations. Here is the code that converts a max heap to a min heap:
 
-``` python
+```python
 def max_to_min(arr):
     for i in range(1, len(arr)):
         parent = (i - 1) // 2
@@ -380,7 +380,7 @@ def max_to_min(arr):
 
 This is a fairly straightforward thing to do. Take the elements in the array one at a time and keep swapping them until everything is in the right place. It’s fairly similar to the approach to converting a max heap to a min heap covered in the last section, in fact.
 
-``` python
+```python
 def heapify(arr):
     needs_heapifying = True
     while needs_heapifying:
@@ -397,11 +397,11 @@ There is also a recursive way to do this, but I want to keep things simple for n
 
 ### Top k Elements in an Array
 
-*Given an array in heap form, find the k largest (or smallest) elements in the array*
+_Given an array in heap form, find the k largest (or smallest) elements in the array_
 
 This is a perfect question for a heap, as the items are already sorted in order. In fact, the code is pretty much a one-liner:
 
-``` python
+```python
 def get_k_largest(heap_array, k):
     return heap_array[:min(k, len(heap_array))]
 ```

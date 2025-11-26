@@ -100,7 +100,7 @@ The left child of the root node is 60, and the right child is 93. Following the 
 >
 > Way, way down the stack at the level at which the code is being processed by the computer, these relationships are represented by pointers or references and have neither spacial nor familial relationships to each outside of their physical positions in memory.
 >
-> In other words, if you could somehow shrink yourself down the size of an electron and walk along the surface of your computer’s memory, (shout out to *TRON*, the movie that made me want to be a computer programmer) you may search far and wide but you will not find a actual tree, parent, or child.
+> In other words, if you could somehow shrink yourself down the size of an electron and walk along the surface of your computer’s memory, (shout out to _TRON_, the movie that made me want to be a computer programmer) you may search far and wide but you will not find a actual tree, parent, or child.
 >
 > Now that we’ve had that discussion, I will stop using the quotes.
 
@@ -124,7 +124,7 @@ In order to store data in a tree, a data structure must be create to represent t
 
 As the node is the basic building block of a tree, it’s a good place to start.
 
-``` python
+```python
 class Node:
     def __init__(self, value):
         self.value = value
@@ -138,7 +138,7 @@ Why so much code for a node? As I’ve implied by drawing all of those awesome p
 
 If this code looks familiar to you, it’s because it should be. Here is the code I used to create a linked list node in chapter 5:
 
-``` python
+```python
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -151,7 +151,7 @@ Where the two data structures are different is in the relationship between the n
 
 There are algorithmic ways to insert data into a tree, but I’m going to just "hard code" the tree in the example above for now, just to make it clear what’s going on:
 
-``` python
+```python
 # Creating a tree at the root
 root = TreeNode(88)
 
@@ -171,7 +171,7 @@ root.right.right.right = TreeNode(101)
 
 The result is a Python object that more-or-less looks like this:
 
-``` python
+```python
 {
     "value": 88,
     "left": {
@@ -257,7 +257,7 @@ Pre-order and post-order traversals have much more specific uses, some of which 
 
 Assuming this binary search tree exists in an array format, here is an example of how to traverse it in-order, using a stack to keep track of the nodes that have been visited:
 
-``` python
+```python
 def in_order_traversal_iterative(root):
     result = []
     stack = []
@@ -281,12 +281,12 @@ def in_order_traversal_iterative(root):
 
 There is a much more effective way to traverse a tree using recursion, which looks like this:
 
-``` python
+```python
 def in_order_traversal(tree):
     if tree is None:
         return []
     return in_order_traversal(tree.left) + [tree.value] + in_order_traversal(tree.right)
-```javascript
+```
 
 I’m just gonna leave that there and let you ponder it, but we’ll come back to this idea in chapter 11.
 
@@ -298,7 +298,7 @@ Inserting a node into a tree involves first finding the correct location an a ne
 
 Here is a function that can be used to build the binary search tree we’ve been discussing in this chapter:
 
-``` python
+```python
 class TreeNode:
     def __init__(self, value):
         self.value = value
@@ -395,18 +395,18 @@ Removing a node from a tree presents a bit more of a challenge. This is because 
 
 The first case is the simplest. If the node is a leaf then it can simply be snipped off the tree with no further consequences. That could be accomplished by simply doing something like this:
 
-``` python
+```python
 def delete_leaf_node(node):
     if node is None:
         return None
     if node.left is None and node.right is None:
         return None
     return node
-```javascript
+```
 
 Case two is a wee bit trickier, but not by much. If the node to be deleted only has one child, then the child can simple be moved up to take the place of the parent. All of the other children will remain in place, and balance will be restored to the kingdom. This can be accomplished with a function like this:
 
-``` python
+```python
 def delete_node_with_one_child(node):
     if node is None:
         return None
@@ -415,24 +415,24 @@ def delete_node_with_one_child(node):
     if node.right is None:
         return node.left
     return node
-```javascript
+```
 
 The third case presents a bit of a challenge. What to do if the node to be deleted has two children. If that’s the case then a lot of nodes need to move up. But there’s a simple trick that can be used to solve the problem easily. When the parent is deleted either the left child or the right child needs to be moved up to take its place. This can be done by either finding the largest value in the left child, or the smallest value in the right child, moving it up to become the parent.
 
 This is a bit of a tricky operation, but it can be with the help of a function that finds the largest value in a treeL
 
-``` python
+```python
 def find_largest_value(node):
     if node is None:
         return None
     while node.right is not None:
         node = node.right
     return node.value
-```javascript
+```
 
 With that function in place, the node is ready to be swapped out and deleted:
 
-``` python
+```python
 def delete_node_with_two_children(node):
     if node is None:
         return None
@@ -446,7 +446,7 @@ def delete_node_with_two_children(node):
         # Delete the original parent
         node.left = delete_node_with_one_child(node.left)
     return node
-```python
+```
 
 ### Balancing
 
@@ -534,7 +534,7 @@ Tries will store words one character at a time, with words that share starting c
 
 Here are some helper functions that can be added to the already defined `Trie` class that it can use to find words based on their starting characters:
 
-``` python
+```python
     def starts_with(self, prefix):
         current = self.root
 
@@ -565,7 +565,7 @@ Here are some helper functions that can be added to the already defined `Trie` c
 
         for char, child_node in node.children.items():
             self._collect_words(child_node, prefix + char, suggestions)
-```python
+```
 
 Play around with this code and add some print statements and see if you can get it to work as an autocomplete algorithm. This code is most of the way there, and shouldn’t require too much tinkering to get it to work. Another idea is to add a function that visualizes the trie, so you can see how it works. Last of all, how would you delete a word from a trie? We will return to tries in Chapter 12, so it will be worth your time to play around with them now.
 
@@ -603,7 +603,7 @@ The hint I’ll give it to consider the chapter on heaps and the upcoming chapte
 
 Write an algorithm to find the height of a binary tree. This one sounds complicated, but it’s actually pretty simple. Remember that the height of a tree is the number of edges from the root node to the furthest leaf node. I recommend you try to write it yourself before looking at the solution below, but I’ll give you a hint: the solution uses recursion.
 
-``` python
+```python
 def find_height(node):
     if node is None:
         return -1  # Return -1 for null nodes to count edges correctly

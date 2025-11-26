@@ -22,27 +22,22 @@ In the examples above I’ve mixed and matched the data types of the keys and va
 
 Most computer languages have a data structure that uses key-value pairs, although they’re called something different in almost every language. You might already be familiar with one of the most widely used forms of key-value pairs, and that’s JavaScript Object Notation, or JSON. Here’s a simple sample of a JSON Document:
 
-``` json
+```json
 {
-    "superObject": {
-        "foods": {
-            "itemOne": "pudding",
-            "itemTwo": "mangoes",
-            "itemThree": "brussels sprouts"
-        },
-        "animals": {
-            "itemOne": "dogs",
-            "itemTwo": "geese",
-            "itemThree": "possums"
-        },
-        "people": "Farmer John",
-        "funny numbers": [
-            11,
-            906,
-            7135825,
-            11
-        ]
-    }
+  "superObject": {
+    "foods": {
+      "itemOne": "pudding",
+      "itemTwo": "mangoes",
+      "itemThree": "brussels sprouts"
+    },
+    "animals": {
+      "itemOne": "dogs",
+      "itemTwo": "geese",
+      "itemThree": "possums"
+    },
+    "people": "Farmer John",
+    "funny numbers": [11, 906, 7135825, 11]
+  }
 }
 ```
 
@@ -50,29 +45,24 @@ In this JSON "object", the all of the data is stored in key-value pairs. The key
 
 The reason I put "object" in quotes earlier is because by itself, nothing in a JSON file is an object. It’s just text in string format. Load or "parse" it into a running program, however, and it’s easily accessible as a data structure of objects. The data must be "well-formed" though — you can’t just put in anything in any order and expect it to work.
 
-``` javascript
+```javascript
 const superObject = {
-    "foods": {
-        "itemOne": "pudding",
-        "itemTwo": "mangoes",
-        "itemThree": "brussels sprouts"
-    },
-    "animals": {
-        "itemOne": "dogs",
-        "itemTwo": "geese",
-        "itemThree": "possums"
-    },
-    "people": "Farmer John",
-    "funny numbers": [
-        11,
-        906,
-        7135825,
-        11
-    ]
-};
+  foods: {
+    itemOne: 'pudding',
+    itemTwo: 'mangoes',
+    itemThree: 'brussels sprouts'
+  },
+  animals: {
+    itemOne: 'dogs',
+    itemTwo: 'geese',
+    itemThree: 'possums'
+  },
+  people: 'Farmer John',
+  'funny numbers': [11, 906, 7135825, 11]
+}
 
-console.log(superObject.foods.itemOne); // "pudding" in JS dot notation
-console.log(superObject["foods"]["itemOne"]); // "pudding" in JS bracket notation
+console.log(superObject.foods.itemOne) // "pudding" in JS dot notation
+console.log(superObject['foods']['itemOne']) // "pudding" in JS bracket notation
 ```
 
 To access JSON from JavaScript, you can either use dot notation, or bracket notation. For instance to access the value of "itemOne" in the "foods" object, you could use either the dot notation `superObject.foods.itemOne` or the bracket notation `superObject["foods"]["itemOne"]`.
@@ -85,7 +75,7 @@ Even though the "J" stands for "JavaScript," JSON is an extremely versatile and 
 
 Python comes with its own built-in key-value pair data type called a "dictionary," along with its own set of functions to work with them.
 
-``` python
+```python
 superObject = {
     "foods": {
         "itemOne": "pudding",
@@ -109,7 +99,7 @@ superObject = {
 print(superObject["foods"]["itemOne"]) # "pudding"
 superObject.update({"people": "Farmer Jane"})
 print(superObject["people"]) # "Farmer Jane"
-```python
+```
 
 (Python also has a fantastic library for working with "dataframes" called Pandas, and if you’re interested in data science mixing Pandas with JSON is a great way to get started — check it out!)
 
@@ -197,7 +187,7 @@ Before we get to how to handle them there is one more thing to point out about h
 
 Let’s have a look at a simple hash function. I’ll show the code first and then go over it line by line.
 
-``` python
+```python
 def simple_hash(key, table_size):
     hash_value = 0
     for pos, char in enumerate(str(key)):
@@ -224,23 +214,23 @@ class SimpleHashTable:
             if item[0] == key:
                 return item[1]
         return None
-```javascript
+```
 
 That’s a bit longer than most examples, so I’m going to go through it a function at a time.
 
-``` python
+```python
 def simple_hash(key, table_size):
     hash_value = 0
     for pos, char in enumerate(str(key)):
         hash_value += (ord(char) * (pos + 1))
     return hash_value % table_size
-```javascript
+```
 
 `simple_hash` is a hashing function that works very similarly to the example I gave above with the only difference being that in addition to being passed the string to be hashed, it’s also passed a `table_size.` The `table_size` is the key (again, no pun intended) to handling collisions and space in a hash table, and I’ll be coming back to it before the end of this section.
 
 Otherwise it’s exactly as I described in the "Popeye the Sailor" example. `simple_hash` takes in a string, converts it into a list of characters, convers each number into its ASCII value and adds them all together. It does have the additional multiplying the ASCII value of the character by its position in the string, which helps ensure that two different string that might be the same length and with the same characters in a different order, like "name" and "main," with nonetheless hash to different values. The value is generated by taking the sum of the final value and modulo-ing it by the `table_size`. This last step additionally insures that the value will not exceed the size of the table. It’s a bunch of simple calculations, but you can see that each one provides its own unique twist on the final value.
 
-``` python
+```python
 class SimpleHashTable:
     def __init__(self, size=10):
         self.size = size
@@ -249,7 +239,7 @@ class SimpleHashTable:
 
 The hash table — the thing that actually holds all of the key-value pairs — is created and maintained in the `SimpleHashTable` class. When the table is initialized the size is arbitrarily set to 10. The table is defined as a list of lists, and each list holds the key-value pairs that modulo to the same value.
 
-``` python
+```python
     def insert(self, key, value):
         index = simple_hash(key, self.size)
         # Handle collisions with chaining
@@ -258,7 +248,7 @@ The hash table — the thing that actually holds all of the key-value pairs�
                 item[1] = value  # Update existing key
                 return
         self.table[index].append([key, value])
-```python
+```
 
 Now things are starting to get interesting. The `insert` function of the `SimpleHashTable` class takes in a key and a value, and then uses the `simple_hash` function to determine where to store the key-value pair. If I want to insert "Popeye the Sailor" into the hash table I do it by calling the insert function with the values "name" and "Popeye the Sailor."
 
@@ -266,27 +256,27 @@ But what if there’s already a key-value pair stored at that index? That’s wh
 
 In this example the table size is only 10, but there’s no limit to how large the table size can actually be. Well that’s not exactly true, there is a limit, and that limit is the size of the memory of the computer running the operation. You might sense a trade-off here. Too small a table size and you’ll have a lot of collisions. If you’re storing a billion items in a table size of 10, sure you can search it ten time faster and in O(1) time, but you’re still going to have to look through one-hundred million items to find the one you want. Too large a table size and if you don’t run out of memory you’re still going to have to look though a lot of empty space to find what you’re looking for.
 
-``` python
+```python
     def get(self, key):
         index = simple_hash(key, self.size)
         for item in self.table[index]:
             if item[0] == key:
                 return item[1]
         return None
-```python
+```
 
 What’s going on here in the `get` function of the `SimpleHashTable` class is that it’s doing the same thing as the `insert` function, but in reverse. It takes the key generated by the `simple_hash` function, and then searches through the list of key-value pairs stored at that index. When it finds the key it’s looking for, it returns the value. If it doesn’t find the key, it returns `None`.
 
 Here’s an example of the `SimpleHashTable` in action:
 
-``` python
+```python
 hash_table = SimpleHashTable()
 hash_table.insert("name", "Popeye the Sailor")
 hash_table.insert("name", "Olive Oyl")
 hash_table.insert("name", "Bluto")
 hash_table.insert("name", "Wimpy")
 print(hash_table.get("name")) # "Popeye the Sailor"
-```python
+```
 
 ## More Hash Collisions
 
@@ -298,7 +288,7 @@ Before we get to two different keys being hashed to the same value, let’s stop
 
 Take this simple example:
 
-``` python
+```python
 happy_family = {
     "Dad": "Bob",
     "Mom": "Ming",
@@ -307,7 +297,7 @@ happy_family = {
     "Child3": "Gunther",
     "Child3": "Bartholomew" #NO!
 }
-```python
+```
 
 I hope the answer that shot immediately to your head is "no." If it didn’t, just think about it for a moment. One person can live in a house, and then maybe that person gets married and has children and dogs and goldfish and they can all live at the same address, no problem. But the reverse case would cause pandemonium: if two different houses had the exact same address, the mail would never come, the sun would fall from the sky, and the world would slowly decline into an eternal nightmare.
 
@@ -373,7 +363,7 @@ Because of this you may have seen it used to "verify" a downloaded file. Some we
 
 I chose MD5 for the example here because it’s an older protocol still in fairly wide use, but it was invented in the days where most computers ran on the AMD 486 chipset which, at its highest end, had a blazingly slow clock speed of 100 MHz. Now you can buy a palm-sized Raspberry Pi for \$15 that has a clock speed of 1.5 GHz (that’s 1,500 MHz) that can easily crack MD5 hashes in a matter of minutes. Please just take this as an example and not a best practice — and do not use MD5 to secure something important because it will not protect you against someone who knows what they’re doing. There are plenty of more modern and secure hashing algorithms out there, and I chose MD5 purely for its pedagogical value and little else.
 
-``` python
+```python
 import hashlib
 
 # Create a hash object using MD5 algorithm
@@ -386,7 +376,7 @@ hash_object.update(b"Hello, world!")
 hex_dig = hash_object.hexdigest()
 
 print(hex_dig)
-```python
+```
 
 I keep saying "hash!" and "hashing algorithm!" but what does that mean in the context of MD5, exactly? Recently I came across a clever example of it online. Someone posted a photo of a flyer trying to return a lost wallet. The advertisement said "If this is your wallet, please call the following number:"
 
@@ -406,7 +396,7 @@ This is an incredibly common interview question and it’s a great way to get yo
 
 Given a piece of text, count the frequency of each word in the text. For testing I’ve included some repetitive silly text that demonstrates how the algorithm works.
 
-``` python
+```python
 text = """
 I like dogs. I have a dog. Dogs are fun. Dogs like to play.
 Dogs are fun and play and run. Dogs like to run and play.
@@ -432,7 +422,7 @@ result = word_count(text)
 
 for word, count in result.items():
     print(f"'{word}': {count}")
-```javascript
+```
 
 Notice the initialization of the Python dictionary (a type of hash table) named `word_count`. This function is simple: it checks to see if the word is in the dictionary. If it isn’t, it adds it with a count of 1. If it is, it increments the count by 1.
 
@@ -450,7 +440,7 @@ An anagram is a word or phrase formed by rearranging the letters of a different 
 
 Anagram finding is a fantastic job for a hash table. The idea builds on the earlier word count example:
 
-``` python
+```python
 def is_anagram(str1, str2):
     # Remove spaces and convert to lowercase
     str1 = str1.replace(" ", "").lower()
@@ -473,7 +463,7 @@ result = is_anagram("listen", "silent")
 print(result)  # True, because "listen" is an anagram of "silent"
 result = is_anagram("hello", "world")
 print(result)  # False, because "hello" is not an anagram of "world"
-```python
+```
 
 Can you come up with a way to connect Python to a dictionary API and use this code to return anagrams of your name? Or create an app that lets you cheat at "Words With Friends?" (If you get caught just tell your friends it’s a programming exercise. True friends will understand.)
 
@@ -481,9 +471,9 @@ Can you come up with a way to connect Python to a dictionary API and use this co
 
 We’ve looked at how to solve the palindrome problem using a string and a stack, and maybe you want to go back and try the problem at the end of Chapter 6 if you haven’t already.
 
-We can put a twist on the anagram problem by checking to see if a string is a palindrome by using a hash table. The general idea is to use a hash table to count the number of times each character appears in the string. If the string is a palindrome, then each character must appear an even number of times, except for one character which can appear an odd number of times. The thing to keep in mind here is that of course there could be a string that meets this criteria but is not a palindrome, like "aabbccd." This solution *could* be used to solve the string is a permutation of a palindrome, which might mean you’re on the right track.
+We can put a twist on the anagram problem by checking to see if a string is a palindrome by using a hash table. The general idea is to use a hash table to count the number of times each character appears in the string. If the string is a palindrome, then each character must appear an even number of times, except for one character which can appear an odd number of times. The thing to keep in mind here is that of course there could be a string that meets this criteria but is not a palindrome, like "aabbccd." This solution _could_ be used to solve the string is a permutation of a palindrome, which might mean you’re on the right track.
 
-``` python
+```python
 def is_palindrome_permutation(s):
     char_count = {}
     for char in s:

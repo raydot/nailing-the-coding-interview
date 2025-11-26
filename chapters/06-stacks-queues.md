@@ -18,21 +18,21 @@ This might seem like a trivial difference, but it turns out to have tremendous i
 
 ## PUSH and POP
 
-When dealing with stacks and queues, there are specific terms used to describing adding things too and removing them from the data structure. Generally, adding something to a stack or queue is called *pushing* and removing something is called *popping*.
+When dealing with stacks and queues, there are specific terms used to describing adding things too and removing them from the data structure. Generally, adding something to a stack or queue is called _pushing_ and removing something is called _popping_.
 
 \<Diagram of push and pop TK\>
 
 So let’s say we have a simple stack of integers, which looks like this:
 
-If I *push* the number 4 onto the stack, it will look like this:
+If I _push_ the number 4 onto the stack, it will look like this:
 
-If I *pop* the stack twice, we will remove the 4 and the 7 and it will look like this:
+If I _pop_ the stack twice, we will remove the 4 and the 7 and it will look like this:
 
 Some operations will return the value that was popped, while others will not.
 
 I’m going to start by looking the built-in Python list, which can be used as a stack or a queue.
 
-``` python
+```python
 stack = []
 stack.append(5)
 stack.append(3)
@@ -58,7 +58,7 @@ I then \_push_ed the numbers 5, 3, 2, 8, 7, and 4 onto the stack, using the buil
 
 Let’s do the same thing using a list as a queue.
 
-``` python
+```python
 queue = []
 queue.append(5)
 queue.append(3)
@@ -70,7 +70,7 @@ queue.append(4)
 print(queue.pop(0))
 print(queue.pop(0))
 print(queue)
-```python
+```
 
 This will output:
 
@@ -98,7 +98,7 @@ So far I’ve used list operations to describe stack functionality, but you migh
 
 While there is more than one way to solve the problem, this is certainly the bare minimum that you would need to implement a stack:
 
-``` python
+```python
 class Stack:
     def __init__(self):
         self.items = []
@@ -112,11 +112,11 @@ class Stack:
 
 This might seem like doing more work than is needed, especially since there’s nothing here you can’t already do with a list, but it’s good to understand this kind of basic implementation.
 
-So what’s here? There’s in *init* method that initializes the stack with an empty list, waiting to be filled. There are two methods, `push` and `pop`, that add and remove items from the stack. What’s missing? Again, think about it for a moment.
+So what’s here? There’s in _init_ method that initializes the stack with an empty list, waiting to be filled. There are two methods, `push` and `pop`, that add and remove items from the stack. What’s missing? Again, think about it for a moment.
 
 One thing that’s missing is a method to check if the stack is empty. This is a big deal because if you try to pop an empty list your program will throw `IndexError: pop from empty list`. There are a few ways this can be addressed, but it’s as easy as adding an `is_empty` method to the class.
 
-``` python
+```python
 class Stack:
     def __init__(self):
         self.items = []
@@ -131,13 +131,13 @@ class Stack:
 
     def is_empty(self):
         return len(self.items) == 0
-```python
+```
 
 Knowing how to implement a stack really helps see what’s going on in the Python list implementation. You can also easily extend this basic idea to add other methods, like `peek`, `size`, or `clear`. You can have a stack size limit by including a method to see if the stack is full. You can also add data-checking to allow only certain types of data into the stack. This very basic implementation gives access to a wide range of possibilities.
 
 For instance, how can you use what you know about a stack to implement a queue? You can start with the basic stack class provided, but you’ll have to replace "push" and "pop" with "enqueue" and "dequeue" methods which will work a little differently.
 
-``` python
+```python
 class Queue:
     def __init__(self):
         self.items = []
@@ -158,7 +158,7 @@ Same basic functions, but they add and remove data to the `items` list in a diff
 
 ## Developing Intuition: What are stacks and queues used for?
 
-Stacks and queues are often used to indicate *priority* in the processing of data. It’s not hard to see why. Imagine an elevator that only goes to two floors, say the ground floor and the 10th floor. Ten people enter the elevator on the ground floor. Because of the way elevators — and society — are constructed, the last people to board the elevator will be the first ones to leave it. The elevator creates a priority by the way it is boarded. It’s simply impossible for the people who first board the elevator to exit first, as they will be furthest from the door. This is an example of a stack.
+Stacks and queues are often used to indicate _priority_ in the processing of data. It’s not hard to see why. Imagine an elevator that only goes to two floors, say the ground floor and the 10th floor. Ten people enter the elevator on the ground floor. Because of the way elevators — and society — are constructed, the last people to board the elevator will be the first ones to leave it. The elevator creates a priority by the way it is boarded. It’s simply impossible for the people who first board the elevator to exit first, as they will be furthest from the door. This is an example of a stack.
 
 A queue is even easier to understand. We’ve all waited in line. It even seems "unfair" for people to cut in line; the first in must be the first out!
 
@@ -174,7 +174,7 @@ A priority queue is a data structure that is a combination of a queue and a heap
 
 There are many ways to implement a priority queue, but one simplistic way to do it is to use a nested array (or Python list) where the first element is the priority and the second element is the data.
 
-``` python
+```python
 priority_queue = []
 priority_queue.append([3, "low priority item"])
 priority_queue.append([1, "high priority item"])
@@ -191,7 +191,7 @@ Back in Chapter 4 we discussed permutations, and I showed you a simple iterative
 
 Now that we’ve discussed stacks and queues, I’d like to show you how you can use a stack to more effectively solve the permutations problem:
 
-``` python
+```python
 def permute(arr):
     result = []
     stack = [(arr, [])]
@@ -223,7 +223,7 @@ It’s not magic that balances those parenthesis in your code editor though, it�
 
 If you finish with parenthesis still on the stack, you know you’ve forgotten to close something somewhere. If you try to pop a parenthesis off of an empty stack, you know you’re trying to close something that was never opened. If you end up with an empty stack, no more and no less, you can rest assured that your parentheses are balanced.
 
-``` python
+```python
 def is_balanced(s):
     stack = []
     for c in s:

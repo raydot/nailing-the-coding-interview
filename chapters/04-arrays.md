@@ -76,7 +76,7 @@ print(testArray[2])
 # Output: 41
 ```
 
-Sometimes programmers to use an "offset" variable to account for the difference in counting from 0, but I don't recommend this because it’s pretty easy to just add or subtract 1, as needed.
+Sometimes programmers to use an "offCrset" variable to account for the difference in counting from 0, but I don't recommend this because it’s pretty easy to just add or subtract 1, as needed.
 
 ```python
 someArray = []
@@ -779,32 +779,7 @@ The solution to this number is \[0, 4\], because 2 + 7 = 9.
 
 Before you start answering this problem, you will want to be sure to ask the interviewer if there are any specific constraints on the problem. For instance, are there multiple answers to the problem? Is the problem guaranteed to have a solution? Does the order of the solution matter? Are there any constraints on the numbers in the array?
 
-Once again, let’s start with a brute force solution to Two Sum, using nested for loops:
-
-```python
-def two_sum(array, target):
-    for i in range(len(array)):
-        for j in range(i + 1, len(array)):
-            if array[i] + array[j] == target:
-                return [i, j]
-    return None
-```
-
-This algorithm loops through the array twice, comparing each number to every other number in the array. Notice in line 3 that the second loop starts at `i + 1`, because there’s no need to check the same number against itself. Hopefully it doesn’t come as much of a surprise to find this code runs in $O(n^2)$ time, or that nested for loops is not the most efficient way to solve this problem.
-
-So how can we do better?
-
-```python
-def two_sum(array, target):
-    num_index = {}
-    for i, num in enumerate(array):
-        if target - num in num_index:
-            return [num_index[target - num], i]
-        num_index[num] = i
-    return None
-```
-
-Python contains a built-in function called `enumerate()` that can be used to loop over an array and return both the index and the value of each item in the array. If you’re familiar with Javascript, `enumerate()` is similar to using the `map()` function with an index parameter.
+Python contains a built-in function called `enumerate()` that can be used to loop over an array and return both the index and the value of each item in the array. I'll show the Python version of `enumerate()` in the interview section. If you’re familiar with Javascript, `enumerate()` is similar to using the `map()` function with an index parameter.
 
 A similar implementation in JavaScript might look like this:
 
@@ -825,7 +800,7 @@ function twoSum(array, target) {
 }
 ```
 
-In both cases the code sets up a "compliment," which is the difference between the target number and the current number in the array. The Python version uses a dictionary to store the index of the compliment, while the JavaScript version uses an object. In both cases the code checks to see if the compliment is in the dictionary or object, and if it is, returns the index of the compliment and the current index. If the compliment is already in the dictionary (or object), the current number is a match, and the function returns the indexes of the two numbers that add up to the target number. Pretty straightforward, right?
+This code sets up a "compliment," which is the difference between the target number and the current number in the array. The Python version uses a dictionary to store the index of the compliment, while the JavaScript version uses an object. In both cases the code checks to see if the compliment is in the dictionary or object, and if it is, returns the index of the compliment and the current index. If the compliment is already in the dictionary (or object), the current number is a match, and the function returns the indexes of the two numbers that add up to the target number. Pretty straightforward, right?
 
 By working with a running compliment, the function can find the answer in a single pass thorough the array, which I hope you immediately recognize as $O(n)$ time.
 
@@ -870,6 +845,74 @@ def three_sum(array, target):
 
 Think it through: What is the runtime of this solution? What advantages does it have over using nested for loops?
 
+Now that you've learned a little bit about two sum, here's an example of how you might respond if you're given the two-sum problem in an interview:
+
+#### 🎯 Interview Pattern: Two Sum
+
+**Interviewer:** "Given an array of integers and a target sum, return the indices of two numbers that add up to the target. For example, if the array is [2, 6, 7, 10, 15] and the target is 12, so you should return [0, 3] because 2 + 10 = 12."
+
+**You:** "I see what's going on here. Just to clarify can I assume there's exactly one solution? And can the same element be used twice?"
+
+**Interviewer:** "Good questions. Yes, there's exactly one solution, and no you can't return [1. 1] because you can't use the same element twice."
+
+**You:** "Got it. Let me start with a brute force approach to make sure I understand the problem correctly..."
+
+```python
+# Brute force code
+def two_sum(nums, target):
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return None
+```
+
+**Interviewer:** "I can see that works, but what did you mean when you said it was a 'brute force' approach?"
+
+**You:** "I just wanted to start by getting something down that I can improve. I can see this is O(n²) time complexity because of the nested loops, but I think I can optimize this by using a hash map to store previously seen values and their indices, so I only need to iterate through the array once."
+
+```python
+# Optimized code
+def two_sum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return None
+```
+
+**Interviewer:** "This seems better. What would the space complexity be for your optimized approach?"
+
+**You:** "The optimized version would use O(n) space because I need to store at most n elements in the hash map."
+
+**Interviewer:** "And what's the time complexity of the optimized approach?"
+
+**You:** "The time complexity is O(n) because we only iterate through the array once, and each hash map lookup and insertion is O(1) on average. I didn't do any kind of checking to make sure the input is valid, like handling empty arrays or null values. Would you like me to do that next?"
+
+**Interviewer:** "Good catch. Since you brought that to my attention I'm going to assume you know how to handle it. Let's move on to the next question."
+
+> 💡 **Key Insight**
+>
+> Instead of asking "does this array contain the number I need?" (which requires searching through the whole array each time), you can rephrase the question to "have I already seen the number I need?" If we store each number as we go, we can eliminate the need for an extra for loop and turn an $O(n)$ search into an $O(1)$ lookup. This is the space/time tradeoff I mentioned in Chapter 2 in action. Instead, we use $O(n)$ extra memory to avoid the nested loop, cutting our runtime from $O(n^2)$ down to $O(n)$.
+
+> ⚠️ **Common Mistake**
+>
+> I've done this more than once: always make sure your output matches what's expected. It's very easy with a problem like this to forget to return the array indices (`[0,3]`) and not the numbers themselves (`[nums[0], nums[3]]`). One simple way to avoid this is to write down the expected output before you start coding. Just make a simple note at the bottom of your function like:
+>
+> `# Expected: [index1, index2]`
+>
+> Or, if the answer can be quickly found:
+>
+> `# Answer: [0, 3]`
+
+> 🔗 **Practice:**
+>
+> [LeetCode #1 Two Sum](https://leetcode.com/problems/two-sum/description/)
+>
+> [LeetCode #167 Two Sum II - Sorted Array](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
+
 #### Array Rotation
 
 Array rotation questions are good ways to test how a candidate approaches the logic of a problem, as there are many different ways in which an array rotation can be accomplished. "Rotation" in the context of arrays simply means moving all of the values to the left or right by a certain number of spaces. As items move to the right or end of the array, they wrap around to the left or beginning of the array. "Rotation" can also be referred to as "shifting" of "cycling" items in an array. For a very basic example of why it’s useful, shifting all of the digits of a binary number to the left multiples the number by two, while shifting to the right divides by two. Many programming languages have built-in operators for shifting bits, such as the `<<` and `>>` operators in Python.
@@ -882,7 +925,7 @@ For instance, an interview question might read,
 
 "Given an array of integers, rotate the array to the right by k steps."
 
-You should be given a positive integer for k. If you are given a negative integer, that should be a clear signal that it’s time to ask questions. Don’t just make the assumption that a negative integer means rotating the array to the left. It could also mean adding zeroes to the array, or have some other significance that is not readily apparent.
+You should be given a positive integer for k. If you are given a negative integer, that should be a clear signal that it’s a good idea to ask questions. Don’t just make the assumption that a negative integer means rotating the array to the left. It could also mean adding zeroes to the array, or have some other significance that is not readily apparent.
 
 As usual, start by reasoning through the problem before you start coding. Python contains several built-in functions for pushing items into and returning items from an array, several of which we covered earlier in this chapter.
 
