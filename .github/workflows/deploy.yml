@@ -31,6 +31,7 @@ jobs:
           activate-environment: nailing-coding-interview
           auto-activate-base: false
           use-mamba: true
+          cache-environment: true # Add this line
 
       - name: Build the book
         shell: bash -l {0}
