@@ -190,6 +190,59 @@ Logarithmic time can provide a significant improvement over polynomial times (se
 
 "Polynomial" time often occurs when the number of operations grows proportionally to the number of inputs raised to a power. The algorithm's running time grows at a rate of $O(n^k)$, where $k$ is a constant, like $O(n^2)$ or $O(n^3)$. While polynomial time is the most common algorithmic running time, it is not the most desirable, as it's significantly slower than linear ($O(n)$) or logarithmic ($O(n \log n)$) time. If your polynomial exponent is greater than 2 or 3, you're in for a long wait. As shown in the multiplication example above, something that adds polynomial growth to the number of operations in an algorithm is a nested for loop. If you're nesting for loops within for loops within for loops, you've missed something somewhere. That doesn't mean it's never the solution, but as a rule of thumb, if you find yourself taking a polynomial approach in an interview, that's a pretty good sign that you're missing an optimization somewhere.
 
+### Exponential Time ($2^n$) and Factorial Time ($n!$)
+
+Beyond polynomial time, there are even more complex (and slower) algorithmic complexities that you should be aware of. While you'll want to avoid these in production code whenever possible, it's important to understand them for interviews because they often are the result of initial "brute force" algorithmic starting points before optimization.
+
+#### Exponential Time ($O(2^n)$)
+
+Exponential time complexity occurs when each additional input doubles the number of operations required. The classic example is the naive recursive Fibonacci implementation, where each function call spawns two more function calls:
+
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+```
+
+This creates a binary tree of function calls that grows exponentially. For `fibonacci(5)`, you make 15 function calls. For `fibonacci(10)`, you make 177 calls. For `fibonacci(30)`, you make over 2 million calls!
+
+Other examples include:
+
+- Finding all subsets of a set (the power set has $2^n$ subsets)
+- Brute force solutions to many optimization problems
+- Certain recursive algorithms without memoization
+
+**The growth is staggering:** If you have an algorithm that takes 1 second for n=10, it will take about 17 minutes for n=20, and over 12 days for n=30. There's not enough Red Bull in the world to get through that.
+
+#### Factorial Time ($O(n!)$)
+
+Factorial time is even worse than exponential. This typically occurs when you need to consider all possible orderings or arrangements of n items. The classic example is generating all permutations of a string:
+
+```python
+def permutations(string):
+    if len(string) <= 1:
+        return [string]
+    result = []
+    for i, char in enumerate(string):
+        remaining = string[:i] + string[i+1:]
+        for perm in permutations(remaining):
+            result.append(char + perm)
+    return result
+```
+
+For a string of length 3 ("abc"), there are 6 permutations. For length 10, there are 3,628,800 permutations. For length 13, over 6 billion!
+
+Examples include:
+
+- The Traveling Salesman Problem (brute force: try every possible route)
+- Generating all permutations of a string, as just mentioned
+- Some brute force solutions to scheduling problems
+
+In an interview you might be asked to solve a problem that has an $O(n!)$ brute force solution, but the interviewer expects you to recognize this and find a better approach. Being able to say "The brute force approach would be $O(n!)$, so I need to think about optimization..." shows strong algorithmic thinking, even if you don't immediately see how to accomplish it.
+
+Be aware. If you find yourself writing an algorithm with exponential or factorial complexity, there's almost always a better way, some of which we'll cover later in this book.
+
 ### Space
 
 Big O notation in this book will refer to the complexity of the running time of the algorithm, as has been discussed throughout this entire chapter. It is possible, however, to also discuss Big O in terms of the space required to run the algorithm. Does the algorithm have to make a copy (or multiple copies) of the data to run, or can it use the existing data "in place" without the need for additional copies?
