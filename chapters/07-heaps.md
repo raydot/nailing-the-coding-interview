@@ -267,7 +267,7 @@ The basic rules are:
 
 As long as these rules are followed the heap will always stay heapy — I mean happy — and in proper (min or max) heap order.
 
-With all of that now firmly in mind, hopefully, let’s consider the process of removing a value from a heap. A heap is a first-in, first-out data structure, and as such the first value in a array representing a max heap — the top item in the heap tree — always represents the largest value in the heap. (In a max heap, anyway. In a min heap it’s the other way around. The first item in the array and/or the top item in the tree is always the smallest value in the heap.)
+With all of that now firmly in mind, hopefully, let’s consider the process of removing a value from a heap. A heap is a priority-based data structure, meaning the values are ordered by a priority determined by the programmer. As such the first value in a array representing a max heap — the top item in the heap tree — always represents the largest value in the heap. (In a max heap, anyway. In a min heap it’s the other way around. The first item in the array and/or the top item in the tree is always the smallest value in the heap.)
 
 This leads to a straight-forward process for removing a value from a heap in first-in, first-out order:
 
@@ -312,9 +312,10 @@ Between the math that’s used to keep a heap organized and the clever methods t
 
 Hopefully it’s clear that a min heap is just a max heap with the values reversed. There are other ways to create heaps. One example is a "min-max heap," which is a heap that alternates between min and max heaps. Two heaps can be combined to create a heap that maintains a median value, which is useful to know in doing statistical analysis. There are binomial heaps, fibonacci heaps, heaps with more than two children per node, and heaps that are used to manage other heaps. All of these have the same thing in common and that is that they maintain the heap order as items are added to them.
 
-## Example Interview Questions
+## Thinking Strategies
 
-Here are some example interview questions involving heaps. Try to look at these questions from two perspectives. The first perspective is the idea of problems that are specifically about heaps. The second perspective is the idea of problems that can be solved with or without heaps, but where knowledge of how heaps work might be used to either better solve the problem or to expand the answer.
+Here are some more ideas involving heaps. Try to look at these questions from two perspectives. The first perspective is the idea of problems that are specifically about heaps. The second perspective is the idea of problems that can be solved with or without heaps, but where knowledge of how heaps work might be used to either better solve the problem or to expand the answer.
+You can carry this reasoning into the "Sample Interview Problems" section at the end of the the chapter.
 
 If you need to, be sure and review some of the simple math ideas behind the heap that were provided in the "Heaps and Trees" section earlier in this chapter.
 
@@ -355,7 +356,7 @@ def is_heap(arr):
 
 ### Is it a max heap or a min heap?
 
-Building on the previous idea (the algorithm given above is for a max heap), how could you determine whether a heap is a min heap or a max heap? The idea is simply to flip the comparison around. If the element is _smaller_ than its parent, return `false`.
+Building on the previous idea (the algorithm given above is for a min heap), how could you determine whether a heap is a min heap or a max heap? The idea is simply to flip the comparison around. If the element is _smaller_ than its parent, return `false`.
 
 There could be a trick involved with this question though. What does it mean if the some elements are larger than their parents and some are smaller? This could mean that it’s one of the special flavors of heap I mentioned above, or it could mean that the heap is not a heap at all.
 
@@ -365,14 +366,18 @@ _Given a max heap, convert it to a min heap._
 
 This question takes a little bit of thinking about how a heap is organized. The largest value in a max heap is always at the top of the heap, but now it must be moved down to the leaves. Similarly and conversely, the smallest value in a max heap is down in the leaves, but now it must be moved to the top. Extending this logic, it’s quite possible that any number of heap values could already be exactly where they need to be.
 
-Don’t overthink it though. (Actually it was me who did the overthinking, so never mind.) It’s an easy conversion once you know the trick that stems from these observations. Here is the code that converts a max heap to a min heap:
+Don't overthink it though. (Actually it was me who did the overthinking, so never mind.) It's an easy conversion once you know the trick that stems from these observations. Here is the code that converts a max heap to a min heap:
 
 ```python
 def max_to_min(arr):
-    for i in range(1, len(arr)):
-        parent = (i - 1) // 2
-        if arr[i] < arr[parent]:
-            arr[i], arr[parent] = arr[parent], arr[i]
+    needs_converting = True
+    while needs_converting:
+        needs_converting = False
+        for i in range(1, len(arr)):
+            parent = (i - 1) // 2
+            if arr[i] < arr[parent]:
+                arr[i], arr[parent] = arr[parent], arr[i]
+                needs_converting = True
     return arr
 ```
 
@@ -420,8 +425,236 @@ If the array is a min heap, you’ll have to convert it into a max heap first, a
 
 Wrinkle \#3: Instead of returning the values, how can you remove the values while keeping the rest of the array in heap form?
 
-That’s an easy one, just use the "MaxHeapFunction" class discussed above, and call the "pop" method k times.
+That’s an easy one, just use the `MaxHeapPopper` class discussed above, and call the "pop" method k times.
 
-Wrinkle \#4: What else is there to know about heaps?
+## Sample Interview Problems
 
-Not much! We’ve covered a lot of ground in this chapter. Please take this code, type it into a computer, a play with it. Try to get a feel for how heaps come together, and stay together. Draw a few heaps as trees, and trees as heaps. Try to come up with some interesting variations of things you can hurl into the heap hopper. With a little curiosity and intrepidness you’ll be on top of the heap in no time!
+Here are some sample interview problems that involve heaps:
+
+### Question 1: Kth Largest Element in an Array
+
+Find the kth largest element in an unsorted array without sorting the entire array.
+
+**Example:**
+
+```
+Input: [3, 2, 1, 5, 6, 4], k = 2
+Output: 5
+
+Input: [3, 2, 3, 1, 2, 4, 5, 5, 6], k = 4
+Output: 4
+```
+
+**Solution:**
+
+```python
+import heapq
+
+def findKthLargest(nums, k):
+    # Use a min heap of size k
+    # The top of the heap will be the kth largest element
+    heap = []
+
+    for num in nums:
+        heapq.heappush(heap, num)
+        # Keep only k largest elements
+        if len(heap) > k:
+            heapq.heappop(heap)
+
+    return heap[0]
+
+# Usage
+print(findKthLargest([3, 2, 1, 5, 6, 4], 2))  # 5
+print(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))  # 4
+```
+
+**Why this works:** Instead of sorting the entire array (O(n log n)), we maintain a min heap of size k. As we iterate through the array, we keep only the k largest elements in the heap. The smallest element in this heap is the kth largest element overall.
+
+**Time Complexity:** O(n log k) - we iterate through n elements and each heap operation takes O(log k)
+**Space Complexity:** O(k) - the heap stores at most k elements
+
+---
+
+### Question 2: Merge k Sorted Lists
+
+Merge k sorted linked lists into one sorted linked list.
+
+**Example:**
+
+```
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,1,3,4,4,5,6]
+```
+
+**Solution:**
+
+```python
+import heapq
+from typing import List, Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+    # Min heap to store (value, list_index, node)
+    # We need list_index to break ties when values are equal
+    min_heap = []
+
+    # Add the first node from each list to the heap
+    for i, lst in enumerate(lists):
+        if lst:
+            heapq.heappush(min_heap, (lst.val, i, lst))
+
+    # Create a dummy node to simplify the result list
+    dummy = ListNode(0)
+    current = dummy
+
+    # Process the heap
+    while min_heap:
+        val, idx, node = heapq.heappop(min_heap)
+        current.next = node
+        current = current.next
+
+        # Add the next node from the same list to the heap
+        if node.next:
+            heapq.heappush(min_heap, (node.next.val, idx, node.next))
+
+    return dummy.next
+
+# Usage
+# Create test lists: [1,4,5], [1,3,4], [2,6]
+list1 = ListNode(1, ListNode(4, ListNode(5)))
+list2 = ListNode(1, ListNode(3, ListNode(4)))
+list3 = ListNode(2, ListNode(6))
+
+result = mergeKLists([list1, list2, list3])
+# Result: 1->1->2->1->3->4->4->5->6
+```
+
+**Why this works:** A min heap allows us to always get the smallest element across all k lists in O(log k) time. We maintain a heap of the current head of each list, pop the smallest, add it to the result, and push the next node from that list.
+
+**Time Complexity:** O(n log k) - where n is the total number of nodes across all lists, and each heap operation takes O(log k)
+**Space Complexity:** O(k) - the heap stores at most k nodes at a time
+
+---
+
+### Question 3: Top K Frequent Elements
+
+Given an integer array, return the k most frequent elements. You may return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+
+Input: nums = [4,1,1,1,2,2,3], k = 2
+Output: [1,2]
+```
+
+**Solution:**
+
+```python
+import heapq
+from collections import Counter
+from typing import List
+
+def topKFrequent(nums: List[int], k: int) -> List[int]:
+    # Step 1: Count frequencies using a hash map
+    freq_map = Counter(nums)
+
+    # Step 2: Use a min heap of size k
+    # Store (frequency, number) tuples
+    min_heap = []
+
+    for num, freq in freq_map.items():
+        heapq.heappush(min_heap, (freq, num))
+        # Keep only k most frequent elements
+        if len(min_heap) > k:
+            heapq.heappop(min_heap)
+
+    # Step 3: Extract elements from the heap
+    result = []
+    while min_heap:
+        freq, num = heapq.heappop(min_heap)
+        result.append(num)
+
+    return result
+
+# Usage
+print(topKFrequent([1,1,1,2,2,3], 2))  # [1,2]
+print(topKFrequent([4,1,1,1,2,2,3], 2))  # [1,2]
+```
+
+**Why this works:** This combines a hash map (to count frequencies) with a min heap (to find the k most frequent). The heap stores only k elements, so we don't need to sort all unique elements.
+
+**Time Complexity:** O(n + m log k) - where n is the number of elements and m is the number of unique elements. Counting takes O(n), and heap operations take O(m log k)
+**Space Complexity:** O(m) - for the hash map storing frequencies, and O(k) for the heap
+
+---
+
+### Question 4: Find Median from Data Stream
+
+Design a data structure that supports adding integers from a data stream and finding the median at any time.
+
+**Example:**
+
+```
+addNum(1)
+addNum(2)
+findMedian() -> 1.5
+
+addNum(3)
+findMedian() -> 2.0
+```
+
+**Solution:**
+
+```python
+import heapq
+
+class MedianFinder:
+    def __init__(self):
+        # Max heap for the smaller half (use negative values)
+        self.small = []
+        # Min heap for the larger half
+        self.large = []
+
+    def addNum(self, num: int) -> None:
+        # Add to max heap (small) first
+        heapq.heappush(self.small, -num)
+
+        # Ensure every element in small is <= every element in large
+        if self.small and self.large and (-self.small[0] > self.large[0]):
+            val = -heapq.heappop(self.small)
+            heapq.heappush(self.large, val)
+
+        # Balance the heaps (small should have at most 1 more element)
+        if len(self.small) > len(self.large) + 1:
+            val = -heapq.heappop(self.small)
+            heapq.heappush(self.large, val)
+        if len(self.large) > len(self.small):
+            val = heapq.heappop(self.large)
+            heapq.heappush(self.small, -val)
+
+    def findMedian(self) -> float:
+        if len(self.small) > len(self.large):
+            return float(-self.small[0])
+        return (-self.small[0] + self.large[0]) / 2.0
+
+# Usage
+mf = MedianFinder()
+mf.addNum(1)
+mf.addNum(2)
+print(mf.findMedian())  # 1.5
+
+mf.addNum(3)
+print(mf.findMedian())  # 2.0
+```
+
+**Why this works:** We use two heaps to partition the data stream into two halves. The max heap (small) stores the smaller half, and the min heap (large) stores the larger half. This allows us to find the median in O(1) time.
+
+**Time Complexity:** O(log n) for addNum, O(1) for findMedian
+**Space Complexity:** O(n) - storing all numbers across both heaps
