@@ -468,9 +468,9 @@ print(findKthLargest([3, 2, 1, 5, 6, 4], 2))  # 5
 print(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))  # 4
 ```
 
-**Why this works:** Instead of sorting the entire array (O(n log n)), we maintain a min heap of size k. As we iterate through the array, we keep only the k largest elements in the heap. The smallest element in this heap is the kth largest element overall.
+**Why this works:** Instead of sorting the entire array (O(n log n)), you can maintain a min heap of size k. As you iterate through the array, keep only the k largest elements in the heap. The smallest element in this heap is the kth largest element overall.
 
-**Time Complexity:** O(n log k) - we iterate through n elements and each heap operation takes O(log k)
+**Time Complexity:** O(n log k) - iterating through n elements and each heap operation takes O(log k)
 **Space Complexity:** O(k) - the heap stores at most k elements
 
 ---
@@ -533,7 +533,7 @@ result = mergeKLists([list1, list2, list3])
 # Result: 1->1->2->1->3->4->4->5->6
 ```
 
-**Why this works:** A min heap allows us to always get the smallest element across all k lists in O(log k) time. We maintain a heap of the current head of each list, pop the smallest, add it to the result, and push the next node from that list.
+**Why this works:** A min heap always gets the smallest element across all k lists in O(log k) time. The method is fairly straightforward: maintain a heap of the current head of each list, pop the smallest, add it to the result, and push the next node from that list.
 
 **Time Complexity:** O(n log k) - where n is the total number of nodes across all lists, and each heap operation takes O(log k)
 **Space Complexity:** O(k) - the heap stores at most k nodes at a time
@@ -542,7 +542,7 @@ result = mergeKLists([list1, list2, list3])
 
 ### Question 3: Top K Frequent Elements
 
-Given an integer array, return the k most frequent elements. You may return the answer in any order.
+Given an integer array, return the k most frequent elements in any order. ("Most frequent" means the elements that appear the most in the array.)
 
 **Example:**
 
@@ -588,14 +588,14 @@ print(topKFrequent([1,1,1,2,2,3], 2))  # [1,2]
 print(topKFrequent([4,1,1,1,2,2,3], 2))  # [1,2]
 ```
 
-**Why this works:** This combines a hash map (to count frequencies) with a min heap (to find the k most frequent). The heap stores only k elements, so we don't need to sort all unique elements.
+**Why this works:** This one's a little interesting in that it combines a hash map (to count frequencies) with a min heap (to find the k most frequent). The heap stores only k elements, so we don't actually need to sort all unique elements. Instead, we only keep track of the k most frequent elements at any time.
 
 **Time Complexity:** O(n + m log k) - where n is the number of elements and m is the number of unique elements. Counting takes O(n), and heap operations take O(m log k)
 **Space Complexity:** O(m) - for the hash map storing frequencies, and O(k) for the heap
 
 ---
 
-### Question 4: Find Median from Data Stream
+### Question 4: Given a Data Stream, Find the Median
 
 Design a data structure that supports adding integers from a data stream and finding the median at any time.
 
@@ -654,7 +654,109 @@ mf.addNum(3)
 print(mf.findMedian())  # 2.0
 ```
 
-**Why this works:** We use two heaps to partition the data stream into two halves. The max heap (small) stores the smaller half, and the min heap (large) stores the larger half. This allows us to find the median in O(1) time.
+**Why this works:** This method uses two heaps to partition the data stream into two halves. The max heap (small) stores the smaller half, and the min heap (large) stores the larger half. This allows us to find the median in O(1) time by simply looking at the tops of the heaps because the median is either the top of the max heap when the number of elements is odd, or the average of both heap tops when the number of elements is even.
 
 **Time Complexity:** O(log n) for addNum, O(1) for findMedian
 **Space Complexity:** O(n) - storing all numbers across both heaps
+
+## Exercises
+
+Now that you've got up to the top of heaps, try these exercises to deepen your understanding:
+
+1. **Last Stone Weight**: You are given an array of stones where `stones[i]` is the weight of the ith stone. On each turn, choose the two heaviest stones and smash them together. If stone x and stone y smash, the result is a stone of weight `abs(x - y)`. Return the weight of the last remaining stone, or 0 if no stones are left.
+
+2. **Reorganize String**: Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same. Return any valid arrangement of `s` (like "abcacxzca") or return an empty string if it's impossible (like "aaab").
+
+3. **Sliding Window Maximum**: Given an array of integers `nums` and an integer `k`, return an array of the maximum value in each sliding window of size `k`.
+
+4. **Furthest Building You Can Reach**: You are given integers `bricks`, `ladders`, and an array `heights` representing building heights. On each move, you can either use bricks or a ladder to climb up. Find the furthest building index you can reach.
+
+5. **Smallest Range Covering Elements from K Lists**: You have `k` lists of sorted integers. Find the smallest range that includes at least one number from each of the `k` lists.
+
+6. **Rearrange String k Distance Apart**: Given a string `s` and an integer `k`, rearrange the string such that the same characters are at least `k` distance apart. Return the rearranged string or an empty string if it's impossible.
+
+## Big O Analysis of Heap Operations
+
+Understanding the time complexity of heap operations is crucial for interview success:
+
+| Operation            | Time Complexity | Space Complexity | Notes                         |
+| -------------------- | --------------- | ---------------- | ----------------------------- |
+| Insert (push)        | O(log n)        | O(1)             | Bubble up from leaf to root   |
+| Delete/Pop           | O(log n)        | O(1)             | Bubble down from root to leaf |
+| Peek (get min/max)   | O(1)            | O(1)             | Access root element directly  |
+| Heapify (build heap) | O(n)            | O(1)             | Single pass with bubble down  |
+| Search               | O(n)            | O(1)             | No efficient search in heap   |
+| Extract k elements   | O(k log n)      | O(1)             | k pop operations              |
+
+**Key Interview Insights:**
+
+- **Heapify is O(n), not O(n log n):** Even though heap operations clock in at O(n log n), heapifying a heap comes in at O(n) because most elements don't need to bubble down far.
+
+- **Min heap of size k is efficient:** For finding a heap's k largest elements, maintain a min heap of size k (O(n log k)) instead of sorting the entire array (O(n log n)).
+- **Two heaps solve median problems:** Using a max heap and min heap allows O(log n) insertions and O(1) median queries.
+- **Heap vs. Sorted Array:** Heaps are faster for insertions/deletions but slower for searching. Choose your approach based on your use case.
+
+**When to use heaps:**
+
+- Finding k largest/smallest elements
+- Implementing priority queues
+- Scheduling tasks by priority
+- Merging sorted lists
+- Finding medians in streaming data
+- Dijkstra's algorithm for shortest paths (more on this in Chapter 10)
+
+## AI Exercise
+
+Now that you've learned about heaps, use an AI assistant to build a **Priority Queue Task Scheduler**.
+
+Your task scheduler should support:
+
+1. **Add Task** - Add a task with a priority level (1-5, where 5 is highest)
+2. **Execute Next Task** - Remove and return the highest priority task
+3. **View All Tasks** - Display all pending tasks sorted by priority
+4. **Update Task Priority** - Change the priority of an existing task
+5. **Remove Task** - Remove a specific task by name
+
+**Implementation requirements:**
+
+- Use a max heap (or Python's heapq using negative priorities) to store tasks
+- Each task should have a name, priority, and timestamp for FIFO tie-breaking
+- Tasks with the same priority should execute in FIFO order (use timestamp)
+- Support at least 10 concurrent tasks
+
+**Example usage:**
+
+```
+scheduler = TaskScheduler()
+scheduler.add_task("Walk dogs", priority=3)
+scheduler.add_task("Do taxes", priority=5)
+scheduler.add_task("Clean bathroom", priority=2)
+scheduler.execute_next()  # Returns "Do taxes"
+scheduler.execute_next()  # Returns "Walk dogs"
+scheduler.execute_next()  # Returns "Clean bathroom"
+```
+
+**Questions to explore with your AI:**
+
+- How do you handle tie-breaking when two tasks have the same priority?
+- What is the most efficient way to update a task's priority?
+- What happens if you try to execute a task when the queue is empty?
+- Consider adding a "due date" field and prioritizing by both priority and due date - how does this change the heap structure? The time complexity?
+- What are the trade-offs between using a heap vs. a sorted list?
+- Can you come up with a way to store tasks to a file and reload them for persistence?
+
+**Bonus challenges:**
+
+- Add a "pause" and "resume" feature for tasks
+- Implement task filters by category or anything else you can think might be useful
+- Add recurring tasks that re-queue themselves after execution
+- Create a data visualization showing the heap structure
+- Implement a "fair scheduling" mode where lower priority tasks eventually execute
+- Add estimated execution times and show remaining queue time and statistics
+
+As you work through this, pay attention to:
+
+- How the heap maintains order as you add/remove tasks (visualization might help!)
+- The efficiency of each operation (add, execute, update)
+- How you handle edge cases (empty queue, duplicate task names, invalid priorities, or anything else you can think of)
+- How the heap structure changes as tasks are executed
