@@ -4,13 +4,13 @@ Welcome to the hashes chapter! In this chapter I will talk about hashes, especia
 
 ## Key-Value Pairs
 
-A key-value pair is a simple idea. It’s a data structure with two pieces: a key, and a value. The key if often a string, while the value can be any number of different data types.
+A key-value pair is a simple idea. It’s a data structure with two pieces: a key, and a value. The key is often a string, while the value can be any number of different data types.
 
 Here are some examples:
 
 `name: "Popeye the Sailor"`
 
-`#age: 42`
+`age: 42`
 
 `favorite color: "blue"`
 
@@ -309,7 +309,7 @@ Python and JavaScript will both handle this example in the same way, they will s
 
 What does this have to do with collisions?
 
-Say you have a hash that is based on character ascii character values. It will generate a unique value for most strings, but two strings like "lake" and "kale" will hash to the same value because they contain the same characters, just in a different order. This doesn’t make that hash functions useless though, because at the end of the day it comes down to how a hash function is implemented.
+Collisions can happen in different ways. For instance, if you have a very simple hash function that just sums ASCII values, two different strings could produce the same sum. However, this doesn't make hash functions useless—it just means you need a well-designed hash function that minimizes collisions. The key is that good hash functions are designed to spread data evenly across the hash table, so collisions are rare and easy to handle when they do occur. You should absolutely just be aware of this. As with everything else in computer programming, there are trade-offs depending on what you're trying to do.
 
 A widely used algorithm used to handle collisions is called "chaining," which is what I used in the `SimpleHashTable` example above.
 
@@ -326,6 +326,34 @@ Fortunately for me, the author, and you, the reader, we both have an imagination
 Imagine building a hash able for DNA sequences. You could take a DNA sequence, like "ATCGGCTA", and then use a hash function to convert it into a fixed-size value, like 123456789. If there are a billion DNA sequences, you could store them all in a hash table with a size of 1,000,000, and then use the hash function to determine where to store each sequence. In doing so you can store more data in less space, retrieve it quickly, and check for duplicates.
 
 ## Building Intuition: What are hashes used for?
+
+Hashes are one of the most versatile data structures in computer science. If you're willing to use a little extra memory space, you can gain a lot more speed. Here are some example use cases:
+
+**1. Fast Lookups and Retrieval**
+The naming of items in hash tables makes them both versatile and fast. The most common use of hashes is to retrieve data quickly. Instead of searching through a list of n items (O(n)), you can simply look up a value by its key in O(1) time. Some databases use hash tables internally, and some caching systems rely on them.
+
+**2. Counting and Frequency Analysis**
+Hashes are perfect for counting occurrences of items. Need to know how many times each word appears in a document? Use a hash. Need to find duplicate values? Use a hash. This is one of the most common interview problem patterns.
+
+**3. Deduplication**
+If you need to remove duplicates from a list, a hash table makes this easy to do. Add each item to the hash as you iterate through the list—if it's already there then you know you've already found it and can now skip it. This converts an O(n²) problem into O(n).
+
+**4. Grouping Related Data**
+Hashes let you group items by some property. Group employees by department, group words by their anagram, group students by grade level. The key becomes the grouping criterion, and the value becomes a list of items in that group.
+
+**5. Caching and Memoization**
+Hashes are the backbone of caching. Store the results of expensive computations with their input as the key, and you can avoid recalculating the same result. This is especially useful in recursive algorithms where you might compute the same subproblem multiple times.
+
+**6. Implementing Other Data Structures**
+There was an example interview question in Chapter 7 that used a hash table to implement a priority queue. Many advanced data structures use hashes internally. LRU caches use a hash + doubly-linked list. Graph adjacency lists often use hashes. Sets and priority queues sometimes use hashes. Think of it like screwdriver in your toolbox. A basic tool that you will use over and over again.
+
+**7. Cryptography and Security**
+Hashes are used to verify data integrity (checksums), store passwords securely, and create digital signatures. While those hashing algorithms are different from the ones we've discussed, the concept is the same: convert data into a fixed-size value.
+
+**8. URL Shortening and Mapping**
+Ever wonder how a URL shortener like tinyurl.com works? These services use hashes to map long URLs to short codes. The hash function generates a unique, short identifier for each URL, and the hash table stores the mapping.
+
+It's worth repeating that hashes trade space for speed. You use more memory to store the hash table, but you get blazingly fast lookups in return. For most real-world applications, that trade-off is worth it.
 
 ## Reasoning about Hashes
 
@@ -345,7 +373,7 @@ Imagine building a hash able for DNA sequences. You could take a DNA sequence, l
 
 ## Hashes and Encryption
 
-Hashing is used all the time in encryption, and it’s a good way to create secure passwords. The way hashing works is that it takes a string and runs it through a hashing algorithm that returns a fixed-length string of characters. If you know the hashing algorithm, you can run it in reverse to get the original string.
+Hashing is used all the time in encryption, and it’s a good way to create secure passwords. The way hashing works is that it takes a string and runs it through a hashing algorithm that returns a fixed-length string of characters. The reason why security hashing functions work is because even if you know the hashing algorithm (they're all publically available online), you can't just run it in reverse to get the original string.
 
 For instance, running the following strings through the MD5 hashing algorithm: will return the following results:
 
@@ -388,7 +416,9 @@ This is a simple hashing algorithm that provides the "public key" of 81562314 to
 
 Salts can be used in addition to hashing to make passwords even more secure. A salt is a random string of characters that is added to the password before hashing it. So even if two people have the same password, they will have different hashes because their salts will be different. This makes it much harder for someone to crack the password, because an intruder would need to know both the password and the salt in order to get the original string. It’s specifically useful against "rainbow tables," which are pre-computed hashes of common passwords. This doesn’t mean you should continue to use "unicorn123" as your password, but it does mean that if you do maybe a salt can make it a wee bit harder for someone to guess.
 
-## Example Questions
+## Thinking About Hashes
+
+Here are questions that cover a range of topics related to hashing. Read through them and try to think about how you would approach each one. More specific examples will be covered in the "Sample Interview Problems" section at the end of the chapter.
 
 ### Word Count
 
@@ -496,8 +526,335 @@ print(result)  # True, because "Tact Coa" can be rearranged to "taco cat"
 
 There’s not necessarily a use case for solving this exact problem, but it should give you some ideas. Other more computer science-y problems that could be solved with this technique might include encryption, compression, and even some types of data storage. I encourage you to think of examples of each of these and try to implement them using a hash table.
 
-### Using AI to Study for Hash Problems
+## Sample Interview Problems
 
-While most of what I’ve talked about in this chapter is very fundamental, hashing is pretty widely used and important to understand.
+#### Two Sum
 
-Using AI, determine a few different widely used hashing algorithms, and then write simple programs that implement each of them. Feed all of the program the same input. Can you come up with a way, using AI, to determine which algorithm is the best for a given input? Can you come up with a way to measure speed? Space? Collisions? Can you come up with a visual representation of a given hash algorithm that allows you to compare every one you’ve chosen?
+We looked at the Two Sum problem in Chapter 4, but let's take another look at it now using a hash table instead of a stack.
+
+**Problem:** Given an array of integers `nums` and an integer `target`, return the indices of the two numbers that add up to the target. You may assume each input has exactly one solution, and you cannot use the same element twice.
+
+**Example:**
+
+```
+Input: nums = [2, 7, 11, 15], target = 9
+Output: [0, 1]
+Explanation: nums[0] + nums[1] = 2 + 7 = 9
+
+Input: nums = [3, 2, 4], target = 6
+Output: [1, 2]
+Explanation: nums[1] + nums[2] = 2 + 4 = 6
+```
+
+**Solution:**
+
+```python
+def two_sum(nums, target):
+    # Hash table to store value -> index mapping
+    num_map = {}
+
+    for i, num in enumerate(nums):
+        # Calculate the complement needed to reach target
+        complement = target - num
+
+        # Check if complement already exists in hash table
+        if complement in num_map:
+            return [num_map[complement], i]
+
+        # Store current number and its index
+        num_map[num] = i
+
+    return None  # No solution found
+
+# Usage
+print(two_sum([2, 7, 11, 15], 9))  # [0, 1]
+print(two_sum([3, 2, 4], 6))  # [1, 2]
+```
+
+**Why this works:** Instead of using nested loops to check every pair (O(n²)), we use a hash table to store numbers we've seen. For each number, we calculate what complement we need to reach the target, and check if it's already in the hash table. This gives us O(1) lookup time.
+
+**Time Complexity:** O(n) - single pass through the array with O(1) hash lookups
+**Space Complexity:** O(n) - hash table stores up to n elements
+
+#### Anagrams, Again
+
+There was an anagrams example earlier in this chapter, but let's consider the problem from a slightly different angle. Instead of just checking if two strings are anagrams, let's consider the problem of finding all anagrams in an array of strings.
+
+**Problem:** Given an array of strings, group the anagrams together. Return the result as a list of lists where each inner list contains all anagrams.
+
+**Example:**
+
+```
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["eat","tea","ate"],["tan","nat"],["bat"]]
+
+Input: strs = [""]
+Output: [[""]]
+```
+
+**Solution:**
+
+```python
+def group_anagrams(strs):
+    # Hash table to group anagrams
+    anagram_map = {}
+
+    for word in strs:
+        # Sort the word to create a canonical form
+        # All anagrams will have the same sorted form
+        sorted_word = ''.join(sorted(word))
+
+        # Add word to the group with this sorted form
+        if sorted_word not in anagram_map:
+            anagram_map[sorted_word] = []
+        anagram_map[sorted_word].append(word)
+
+    # Return all groups as a list of lists
+    return list(anagram_map.values())
+
+# Usage
+print(group_anagrams(["eat","tea","tan","ate","nat","bat"]))
+# [["eat","tea","ate"],["tan","nat"],["bat"]]
+print(group_anagrams([""]))
+# [[""]]
+```
+
+**Why this works:** The key insight is that all anagrams of a word will have the same letters when sorted. By sorting each word and using it as a hash key, we group all anagrams together. This is much more efficient than comparing every pair of words.
+
+**Time Complexity:** O(n _ k log k) - where n is the number of strings and k is the maximum length of a string (sorting takes k log k)
+**Space Complexity:** O(n _ k) - hash table stores all strings
+
+#### Longest Substring Without Repeating Characters
+
+Given a string `s`, find the length of the longest substring without repeating characters. For example, given the string "abcabcbb", the answer is 3, as the longest substring without repeating characters is "abc".
+
+**Example:**
+
+```
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+```
+
+**Solution:**
+
+```python
+def length_of_longest_substring(s):
+    # Hash table to store character -> index mapping
+    char_index = {}
+    max_length = 0
+    start = 0  # Start of current substring
+
+    for end in range(len(s)):
+        char = s[end]
+
+        # If character is already in current substring,
+        # move start pointer to the right of the previous occurrence
+        if char in char_index and char_index[char] >= start:
+            start = char_index[char] + 1
+
+        # Update the character's most recent index
+        char_index[char] = end
+
+        # Update max length
+        max_length = max(max_length, end - start + 1)
+
+    return max_length
+
+# Usage
+print(length_of_longest_substring("abcabcbb"))  # 3
+print(length_of_longest_substring("bbbbb"))     # 1
+print(length_of_longest_substring("pwwkew"))    # 3
+```
+
+**Why this works:** This uses a sliding window approach with a hash table. We maintain a window of characters without repeats. When we encounter a duplicate, we move the start of the window past the previous occurrence. The hash table gives us O(1) lookup to check if a character is in the current window.
+
+**Time Complexity:** O(n) - single pass through the string with O(1) hash operations
+**Space Complexity:** O(min(n, m)) - hash table stores at most m unique characters (where m is the character set size)
+
+#### Least Recently Used (LRU) Cache
+
+An LRU cache is a data structure that stores a fixed number of key-value pairs and automatically removes the least recently used pair when the cache is full. This is similar to how the undo feature works in a text editor, or a web browser's back button. You know you can go back, but you can't go back forever because eventually the application "forgets" the items the longest back in history to make room for new items. Design and implement a data structure for a Least Recently Used (LRU) cache. It should support two operations: `get` and `put`.
+
+**Example:**
+
+```
+LRUCache lru_cache = LRUCache(2)
+lru_cache.put(1, 1)     # cache is {1=1}
+lru_cache.put(2, 2)     # cache is {1=1, 2=2}
+print(lru_cache.get(1)) # returns 1
+lru_cache.put(3, 3)     # evicts key 2, cache is {1=1, 3=3}
+print(lru_cache.get(2)) # returns -1 (not found)
+lru_cache.put(4, 4)     # evicts key 1, cache is {4=4, 3=3}
+print(lru_cache.get(1)) # returns -1 (not found)
+print(lru_cache.get(3)) # returns 3
+print(lru_cache.get(4)) # returns 4
+```
+
+**Solution:**
+
+```python
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        # OrderedDict maintains insertion order
+        self.cache = OrderedDict()
+
+    def get(self, key):
+        if key not in self.cache:
+            return -1
+
+        # Move to end to mark as recently used
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key, value):
+        if key in self.cache:
+            # Update value and move to end
+            self.cache[key] = value
+            self.cache.move_to_end(key)
+        else:
+            # Add new key-value pair
+            self.cache[key] = value
+
+            # If cache exceeds capacity, remove least recently used (first item)
+            if len(self.cache) > self.capacity:
+                self.cache.popitem(last=False)
+
+# Usage
+lru_cache = LRUCache(2)
+lru_cache.put(1, 1)
+lru_cache.put(2, 2)
+print(lru_cache.get(1))  # 1
+lru_cache.put(3, 3)      # evicts 2
+print(lru_cache.get(2))  # -1
+lru_cache.put(4, 4)      # evicts 1
+print(lru_cache.get(1))  # -1
+print(lru_cache.get(3))  # 3
+print(lru_cache.get(4))  # 4
+```
+
+**Why this works:** We use an OrderedDict which maintains insertion order. When we access or update a key, we move it to the end (most recently used). When the cache exceeds capacity, we remove the first item (least recently used). This gives us O(1) for all operations.
+
+**Time Complexity:** O(1) for both get and put operations
+**Space Complexity:** O(capacity) - stores at most capacity key-value pairs
+
+## Exercises
+
+Now that you've seen how hashes solve common interview problems, try these exercises to deepen your understanding:
+
+1. **Two Sum II - Input Array Is Sorted**: Given a 1-indexed array of integers `numbers` that is already sorted in increasing order, find two numbers such that they add up to a specific `target` number. Return the indices of the two numbers as an integer array `answer` of length 2. Returning arrays as answers instead of just indices is a common practice in interview problems.
+
+2. **Majority Element**: Given an array of size n, find the element that appears more than n/2 times. Assume the element always exists in the array.
+
+3. **Contains Duplicate**: Given an integer array `nums`, return `true` if any value appears at two or more times in the array, and return `false` if every element is distinct. Can you do this in O(n) time and O(1) space? Can you scale this to strings of different lengths?
+
+4. **Isomorphic Strings - Password Security**: Given two password patterns, determine if they are isomorphic. This is useful for detecting if a user is following a consistent pattern when creating passwords. For example, if a user creates passwords like "aabbcc" and later "xxyyzz", they're following the same pattern (pair-pair-pair), which might indicate weak password security since the pattern is predictable. Two strings are isomorphic if the characters in the first string can be consistently mapped to characters in the second string. All occurrences of a character must be replaced with the same character, and no two different characters can map to the same character.
+
+5. **Happy Number**: I wish I knew this one when I was asked by my 10th grade math teacher: Write an algorithm to determine if a number `n` is happy. A happy number is defined by the following process: starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process. Eventually one of two things will happen: the final number will equal 1, and you've got a happy number! Or, you'll get into a cycle of numbers that never reach 1 in which case the number is unhappy. For instance, 4 is unhappy because 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4, while 7 is happy because 7 -> 49 -> 97 -> 130 -> 10 -> 1.
+
+6. **Intersection of Two Arrays**: Given two integer arrays `nums1` and `nums2`, return an array of their intersection, or the numbers that appear in both arrays. This can be scaled to strings of different lengths.
+
+## Big O Analysis of Hash Operations
+
+Understanding the time complexity of hash operations is crucial for interview success:
+
+| Operation         | Time Complexity          | Space Complexity | Notes                                                                 |
+| ----------------- | ------------------------ | ---------------- | --------------------------------------------------------------------- |
+| Insert (add)      | O(1) average, O(n) worst | O(1)             | Average case with good hash function; worst case with many collisions |
+| Delete (remove)   | O(1) average, O(n) worst | O(1)             | Same as insert; depends on collision handling                         |
+| Search (lookup)   | O(1) average, O(n) worst | O(1)             | Direct key lookup; worst case with poor hash function                 |
+| Iterate all items | O(n)                     | O(1)             | Must visit every item in the hash table                               |
+| Get all keys      | O(n)                     | O(n)             | Returns list of all keys                                              |
+| Get all values    | O(n)                     | O(n)             | Returns list of all values                                            |
+
+**Key Interview Insights:**
+
+- **Average vs. Worst Case:** Hash tables are O(1) on average, but O(n) in the worst case when many collisions occur. Good hash functions minimize collisions.
+- **Load Factor:** The ratio of items to table size affects performance. When load factor gets too high, the hash table is resized (rehashing takes O(n) time).
+- **Hash Function Quality:** A poor hash function can turn O(1) operations into O(n). This is why cryptographic hashes are important for security.
+- **Collision Resolution:** Chaining (storing lists at each bucket) and open addressing (finding another empty slot) are two common strategies.
+- **Space-Time Trade-off:** Hashes use more memory than arrays but provide faster lookups. For large datasets, this trade-off is usually worth it.
+
+**When to use hashes:**
+
+- Fast lookups by key (O(1) vs O(n) for arrays)
+- Counting frequencies of items
+- Removing duplicates from a list
+- Grouping items by some property
+- Caching results of expensive computations
+- Implementing sets and dictionaries
+- Detecting cycles in graphs
+
+## AI Exercise
+
+Now that you've learned about hashes, use an AI assistant to build your own **URL Shortener Service**.
+
+Your URL shortener should support these operations:
+
+1. **Shorten URL** - Convert a long URL into a short code (e.g., "https://example.com/very/long/path" → "abc123")
+2. **Retrieve URL** - Given a short code, return the original long URL
+3. **View All URLs** - Display all shortened URLs and their original counterparts
+4. **Delete URL** - Remove a shortened URL from the system
+5. **Check Expiration** - URLs should expire after a certain time period (e.g., 30 days)
+
+**Implementation requirements:**
+
+- You must use a hash table to store the mapping of short codes to long URLs
+- Generate unique short codes (at least 6 characters)
+- Store metadata: creation time, expiration time, access count
+- If a short code already exists, handle the collision gracefully
+- Support short URLs at scale. It's easy to support 10 or even 100, but how would you support 100,000 or 1,000,000?
+
+**Example usage:**
+
+```
+shortener = URLShortener()
+short_code = shortener.shorten("https://www.example.com/articles/how-to-learn-programming")
+# Returns: "a7k9m2"
+
+original_url = shortener.get_url("a7k9m2")
+# Returns: "https://www.example.com/articles/how-to-learn-programming"
+
+shortener.delete("a7k9m2")
+# URL is removed from the system
+```
+
+**Questions to explore with your AI:**
+
+- How do you generate unique short codes without collisions?
+- What's the best way to handle URL expiration? (Check on access? Background cleanup?)
+- How would you handle the same long URL being shortened multiple times by different users?
+- How could you add analytics (track how many times each URL is accessed)?
+- How would you prevent abuse (rate limiting, spam detection)?
+- What's the trade-off between short code length and collision probability?
+
+**Bonus challenges:**
+
+Try finding some URL shorteners online and explore their features.
+
+- Add custom short codes (let users choose their own code)
+- Implement URL validation (check if the URL is valid before shortening)
+- Add QR code generation for shortened URLs
+- Create a dashboard showing statistics (most popular URLs, expiration dates)
+- Add URL preview functionality (show a snippet of the page before redirecting)
+- Implement user accounts (track which user created which shortened URL)
+
+As you work through this, pay attention to:
+
+- How the hash table stores and retrieves data efficiently
+- The efficiency of each operation (shorten, retrieve, delete)
+- How you handle edge cases (expired URLs, duplicate long URLs, invalid inputs)
+- How the hash table scales as you add more URLs
+- The trade-offs between storage space and lookup speed
+- How the hash table can become a bottleneck as you add more URLs

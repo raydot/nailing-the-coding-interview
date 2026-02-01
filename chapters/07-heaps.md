@@ -312,7 +312,7 @@ Between the math that’s used to keep a heap organized and the clever methods t
 
 Hopefully it’s clear that a min heap is just a max heap with the values reversed. There are other ways to create heaps. One example is a "min-max heap," which is a heap that alternates between min and max heaps. Two heaps can be combined to create a heap that maintains a median value, which is useful to know in doing statistical analysis. There are binomial heaps, fibonacci heaps, heaps with more than two children per node, and heaps that are used to manage other heaps. All of these have the same thing in common and that is that they maintain the heap order as items are added to them.
 
-## Thinking Strategies
+## Thinking About Heaps
 
 Here are some more ideas involving heaps. Try to look at these questions from two perspectives. The first perspective is the idea of problems that are specifically about heaps. The second perspective is the idea of problems that can be solved with or without heaps, but where knowledge of how heaps work might be used to either better solve the problem or to expand the answer.
 You can carry this reasoning into the "Sample Interview Problems" section at the end of the the chapter.
@@ -589,6 +589,8 @@ print(topKFrequent([4,1,1,1,2,2,3], 2))  # [1,2]
 ```
 
 **Why this works:** This one's a little interesting in that it combines a hash map (to count frequencies) with a min heap (to find the k most frequent). The heap stores only k elements, so we don't actually need to sort all unique elements. Instead, we only keep track of the k most frequent elements at any time.
+
+If the hash map part of this question is a little confusing, you might want to skip this for now and come back to it after you've read through Chapter 8.
 
 **Time Complexity:** O(n + m log k) - where n is the number of elements and m is the number of unique elements. Counting takes O(n), and heap operations take O(m log k)
 **Space Complexity:** O(m) - for the hash map storing frequencies, and O(k) for the heap

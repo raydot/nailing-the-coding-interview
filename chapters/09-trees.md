@@ -156,11 +156,11 @@ There are algorithmic ways to insert data into a tree, but I’m going to just "
 root = TreeNode(88)
 
 # Populate the left subtree
-root.left = Tree(60)
-root.left.left = Tree(43)
-root.left.right = Tree(67)
-root.left.left.left = Tree(10)
-root.left.left.left.right = Tree(22)
+root.left = TreeNode(60)
+root.left.left = TreeNode(43)
+root.left.right = TreeNode(67)
+root.left.left.left = TreeNode(10)
+root.left.left.right = TreeNode(22)
 
 # Populate the right subtree
 root.right = TreeNode(93)
@@ -252,6 +252,10 @@ Looking at the example from earlier in the chapter:
     10   22           101
 
 The in-order traversal of this tree results in this array of numbers which, not at all coincidentally, is also the sorted order of the numbers in the tree:
+
+```
+[10, 22, 43, 60, 67, 88, 91, 93, 99, 101]
+```
 
 Pre-order and post-order traversals have much more specific uses, some of which will be explored before the end of this chapter.
 
@@ -419,7 +423,7 @@ def delete_node_with_one_child(node):
 
 The third case presents a bit of a challenge. What to do if the node to be deleted has two children. If that’s the case then a lot of nodes need to move up. But there’s a simple trick that can be used to solve the problem easily. When the parent is deleted either the left child or the right child needs to be moved up to take its place. This can be done by either finding the largest value in the left child, or the smallest value in the right child, moving it up to become the parent.
 
-This is a bit of a tricky operation, but it can be with the help of a function that finds the largest value in a treeL
+This is a bit of a tricky operation, but it can be with the help of a function that finds the largest value in a tree:
 
 ```python
 def find_largest_value(node):
@@ -445,12 +449,11 @@ def delete_node_with_two_children(node):
         node.value = largest_value
         # Delete the original parent
         node.left = delete_node_with_one_child(node.left)
-    return node
 ```
 
 ### Balancing
 
-Something I was confused about what I first got started with trees is the idea that something in the algorithm needs to "balance" the tree. Like, I don’t want to end up with a tree that looks like this:
+Something I was confused about when I first started with trees is the idea that something in the algorithm needs to "balance" the tree. Like, I don't want to end up with a tree that looks like this:
 
             88
           /
@@ -460,9 +463,66 @@ Something I was confused about what I first got started with trees is the idea t
      /
     10
 
-This is more of a linked list than a tree, right? Maybe 60 should be at the root, with 88 as its right child. How can I prevent such a thing from happening?
+If you insert values in sorted order—say 10, then 43, then 60, then 88—you'll get exactly the unwanted (more on that in a second) structure shown above. Each new value goes to the right of the previous one, creating a linked list masquerading as a tree.
 
-The great thing about BSTs is that they are self-balancing. All of the rules that go into creating a BST also ensure that the tree stays balanced. This might not be true for every kind of tree, but it is true for BSTs. So keep calm, and rip trees.
+Why that's unwanted is because the performance benefits of a tree depend on its height. A balanced tree with n nodes has a height of O(log n), which means searching, inserting, and deleting all take O(log n) time. An unbalanced tree can have a height of O(n), which means all those operations degrade to O(n) making it no better than a linked list.
+
+#### Keeping Trees Balanced
+
+Fortunately, there are aa few things you can do to keep your trees ever green:
+
+**1. Insert in Random Order**
+
+If you have control over the insertion order, randomizing it can help. Instead of inserting [10, 43, 60, 88] in sorted order, shuffle them first. This won't guarantee balance, but it makes severe imbalance much less likely.
+
+**2. Use a Self-Balancing Tree Variant**
+
+This is where AVL trees and Red-Black trees (mentioned earlier in this chapter) come in. These variants add extra rules and perform "rotations" after insertions and deletions to maintain balance.
+
+- **AVL trees** track the height of each subtree and rebalance when the difference exceeds 1
+- **Red-Black trees** assign colors to nodes and enforce color rules that guarantee the tree never gets too tall
+
+These variants are a bit more complex to implement, but they guarantee O(log n) operations even in the worst case.
+
+**3. Rebuild the Tree**
+
+If you have an unbalanced tree, you can rebuild it into a balanced one. Here's the approach:
+
+1. Do an in-order traversal to get all values in sorted order
+2. Build a new tree by recursively choosing the middle element as the root
+3. The left half becomes the left subtree, the right half becomes the right subtree
+
+This takes O(n) time but gives you a perfectly balanced tree. Like this:
+
+```python
+def build_balanced_tree_from_array(arr):
+    if not arr:
+        return None
+
+    mid = len(arr) // 2
+    node = TreeNode(arr[mid])
+    node.left = build_balanced_tree_from_array(arr[:mid])
+    node.right = build_balanced_tree_from_array(arr[mid + 1:])
+    return node
+
+def balance_tree(root):
+    # Step 1: Get sorted values via in-order traversal
+    values = in_order_traversal(root)
+
+    # Step 2: Build balanced tree from sorted array
+    return build_balanced_tree_from_array(values)
+```
+
+#### What You Need to Know for Interviews
+
+Some ways trees and balancing might come up in an interview:
+
+- **Basic BSTs** can become unbalanced. If asked to implement one, implement what we've shown in this chapter.
+- If an interviewer asks "what happens if values are inserted in sorted order?", the correct answer is "the tree builds itself into a linked list with O(n) operations instead of O(log n)."
+- If they ask how to fix it, mention self-balancing variants (AVL, Red-Black) or the rebuild approach above.
+- Most interview problems assume you're working with a reasonably balanced tree, or they focus on traversal/manipulation rather than insertion order. But it never hurts to double-check.
+
+The good news? You rarely need to implement self-balancing logic from scratch in an interview. Understanding that the problem exists and knowing the solutions is usually enough. So keep calm, and rip trees.
 
 > **If Trees are so great, why don’t programming languages already have them?**
 >
@@ -581,7 +641,7 @@ B-Trees can be used to store data that is easy to search, update, and delete. Th
 
 Red and black trees are similar to the binary search trees described in this chapter, with a few added rules to help keep them balanced. Red and black trees are primarily used in places where data is being constantly added and removed, like a database or file system.
 
-In a red and black tree, it should not surprised you to find that either node is — wait for it! — red or black. Because of these additional rules, red and black trees are more self balancing than binary search trees
+In a red and black tree, it should not surprised you to find that each node is — wait for it! — red or black. Because of these additional rules, red and black trees are more self balancing than binary search trees
 
 ### AVL Trees
 
@@ -591,7 +651,7 @@ AVL trees are another type of self-balancing binary search tree. The work simila
 
 ### Balancing trees
 
-I said earlier in the chapter that binary search trees are self-balancing, but that’s a bit of an oversimplification two reasons. First of all, binary search trees are only self-balancing if they’re constructed in a way that maintains the self-balancing properties. This construction has to extend to the insertion and deletion of nodes, and all that might entail in terms of moving nodes around. The second reason is that I chose binary search trees because they’re both widely used and also because they’re among the easiest trees to construct and understand.
+I said earlier in the chapter that binary search trees are self-balancing, but that’s a bit of an oversimplification for two reasons. First of all, binary search trees are only self-balancing if they’re constructed in a way that maintains the self-balancing properties. This construction has to extend to the insertion and deletion of nodes, and all that might entail in terms of moving nodes around. The second reason is that I chose binary search trees because they’re both widely used and also because they’re among the easiest trees to construct and understand.
 
 While not only binary search trees but other types of trees like red and black trees and AVL trees are self-balancing, there are other types of trees that are not. My first question for you is: Why? What could the possible advantage be to using a tree that is not self-balancing?
 
@@ -616,12 +676,270 @@ def find_height(node):
 
 Write an algorithm to find the longest path in a binary tree. If you’ve found the height of a tree then you’re not too far off from finding the longest path.
 
+The longest path in a binary tree is also called the "diameter" of the tree. It's the number of edges in the longest path between any two nodes in the tree. This path doesn't necessarily pass through the root—it could be entirely within a subtree.
+
+Here's how:
+
+1. For each node, calculate the height of its left and right subtrees
+2. The longest path through that node is the sum of both heights
+3. Track the maximum path found across all nodes
+
+```python
+def longest_path(root):
+    # Track the maximum diameter found
+    max_diameter = [0]
+
+    def height(node):
+        if node is None:
+            return 0
+
+        # Recursively find height of left and right subtrees
+        left_height = height(node.left)
+        right_height = height(node.right)
+
+        # Update max diameter if path through this node is longer
+        # The path through this node is left_height + right_height
+        max_diameter[0] = max(max_diameter[0], left_height + right_height)
+
+        # Return height of this subtree
+        return 1 + max(left_height, right_height)
+
+    height(root)
+    return max_diameter[0]
+```
+
+**Why this works:** The algorithm does a post-order traversal, calculating heights from the bottom up. At each node, it considers whether the path through that node (connecting its left and right subtrees) is the longest path seen so far. The time complexity is O(n) since we visit each node once.
+
 ### Merging trees
 
-Write an algorithm to merge two binary trees. Hint: We did this in chapter 7 with heaps, and the same principles apply here.
+Much like we did with linked lists in chapter 5, we can merge two binary trees by combining their structures and values.
+A very real use case might arise from one company acquiring another, and needing to merge their employee contact databases. It just so happens that both companies maintain their contact lists as binary search trees.
+Isn't that convenient?
+How can the two company contact lists be merged into a single list?
+The process involves these steps:
+
+1. Extract the sorted values from both trees into arrays using in-order traversal
+2. Merge the two sorted arrays into one sorted array
+3. Build a new balanced binary search tree from the merged array, using the `build_balanced_tree_from_array()` function from earlier in this chapter
+
+Seems pretty straightforward, right?
+
+```python
+def merge_bsts(tree1, tree2):
+    # Step 1: Get sorted values from both trees
+    values1 = in_order_traversal(tree1)
+    values2 = in_order_traversal(tree2)
+
+    # Step 2: Merge two sorted arrays
+    merged_values = merge_sorted_arrays(values1, values2)
+
+    # Step 3: Build balanced tree from merged array
+    return build_balanced_tree_from_array(merged_values)
+
+def merge_sorted_arrays(arr1, arr2):
+    # Two-pointer merge (like merge sort)
+    result = []
+    i, j = 0, 0
+
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] <= arr2[j]:
+            result.append(arr1[i])
+            i += 1
+        else:
+            result.append(arr2[j])
+            j += 1
+
+    result.extend(arr1[i:])
+    result.extend(arr2[j:])
+    return result
+```
+
+Challenge yourself: What is the time complexity of this algorithm? Hint: think about the time complexity of each step. What about the space complexity? It's unlikely two merged companies would have duplicate employees, but what if they did? How could you modify this algorithm to handle duplicates? How would that change the time and space complexity?
+
+## Interview Patterns
+
+### Validate Binary Search Tree
+
+This is a question that comes up often in technical interviews. It's LeetCode problem #98.
+
+**Interviewer:** "Given the root of a binary tree, determine if it's a valid binary search tree."
+
+**You:** "Just to clarify—does a valid BST mean that for every node, all values in the left subtree are less than the node's value, and all values in the right subtree are greater?"
+
+**Interviewer:** "Exactly. And assume all values are unique."
+
+**You:** "Assume all nodes are unique: got it. My first instinct is to check each node against its immediate children, so I'll start there. Let me think through an example..."
+
+```python
+# This DOESN'T work - only checks immediate children
+def is_valid_bst_wrong(node):
+    if not node:
+        return True
+
+    # This only checks direct children, not all descendants
+    if node.left and node.left.value >= node.value:
+        return False
+    if node.right and node.right.value <= node.value:
+        return False
+
+    return is_valid_bst_wrong(node.left) and is_valid_bst_wrong(node.right)
+```
+
+(I'm of course not suggesting you deliberately write incorrect code just to look like a genius for fixing your own mistake, but sometimes it's okay to start with a simpler approach and then refine it as you go.)
+
+You: "Actually, this fails for a tree like [5, 1, 6, null, null, 4, 7] where 4 is in the right subtree of 5 but is less than 5. I need to track valid ranges for each node."
+
+```python
+def is_valid_bst(node, min_val=float('-inf'), max_val=float('inf')):
+    # Empty tree is valid
+    if not node:
+        return True
+
+    # Current node must be within the valid range
+    if node.value <= min_val or node.value >= max_val:
+        return False
+
+    # Left subtree: all values must be < node.value
+    # Right subtree: all values must be > node.value
+    return (is_valid_bst(node.left, min_val, node.value) and
+            is_valid_bst(node.right, node.value, max_val))
+```
+
+💡 Key Insight
+
+Please notice that each node doesn't just need to satisfy its parent—it needs to satisfy ALL of its ancestors. By passing down min/max bounds, your algorithm ensures every node respects the entire path from root.
+
+⚠️ Common Mistake
+
+If you only check immediate children (left < node < right) you might miss structural violations deeper in the tree. A node in the right subtree must be greater than ALL ancestors on the left path.
+
+### Invert Binary Tree
+
+This one's a bit more tricky, but it's a classic problem. You can find it on LeetCode as problem #226.
+There's more about recursion in Chapter 11.
+
+**Interviewer:** "Given the root of a binary tree, invert it. Find a way to swap every left and right child."
+
+**You:** "So if I have a tree where the root is 4 with left child 2 and right child 7, after inverting, 2 should be on the right and 7 on the left?"
+
+**Interviewer:** "Correct. And this applies recursively to all subtrees."
+
+**You:** "This feels like a natural fit for recursion. I haven't read chapter 11 yet but I'll swap the children at each node, then recursively invert the subtrees."
+
+```python
+def invert_tree(root):
+    # Base case: empty tree or leaf node
+    if not root:
+        return None
+
+    # Swap left and right children
+    root.left, root.right = root.right, root.left
+
+    # Recursively invert both subtrees
+    invert_tree(root.left)
+    invert_tree(root.right)
+
+    return root
+```
+
+Interviewer: "Good. What's the time and space complexity?"
+
+You: "The time complexity is O(n) since we visit every node once. The space complexity is O(h) for the recursion stack, where h is the height—O(log n) for balanced trees, with O(n) being the worst case for skewed trees."
+
+Interviewer: "Could you do this iteratively?"
+
+You: "Yes, using a queue for level-order traversal:"
+
+```python
+def invert_tree_iterative(root):
+    if not root:
+        return None
+
+    queue = [root]
+
+    while queue:
+        node = queue.pop(0)
+
+        # Swap children
+        node.left, node.right = node.right, node.left
+
+        # Add children to queue for processing
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+
+    return root
+```
+
+💡 Key Insight
+
+Tree problems often have both recursive and iterative solutions. Recursive is usually cleaner for tree structure, but iterative avoids stack overflow on very deep trees, and in some cases can be more efficient.
+
+⚠️ Common Mistake
+
+Forgetting to return the root node. Many tree problems expect you to return the modified tree, not just modify it in place. It's a good idea to put on your functional programming pants in solving these problems.
+
+## Exercises:
+
+1. Validate Binary Search Tree: Given a binary tree, create a function that determines if it's a valid BST. Keep in mind that all left descendants must be less than the node, and all right descendants must be greater.
+
+2. Lowest Common Ancestor: Given a BST and two nodes, find their lowest common ancestor (the deepest node that has both nodes as descendants). Can you use this as a building block for other algorithms?
+
+3. Level Order Traversal: Given a binary tree, return the values of nodes at each level. For example, return [[root], [level1_nodes], [level2_nodes]]. Hint: Use a queue.
+
+4. Symmetric Tree: Write a function that determines whether a binary tree is a mirror of itself (symmetric around its center). For example, [1,2,2,3,4,4,3] is symmetric.
+
+5. Path Sum: Given a binary tree and a target sum, determine if there exists a root-to-leaf path where the sum of node values equals the target.
+
+6. Serialize and Deserialize Binary Tree: Design an algorithm to serialize a binary tree to a string and deserialize it back to the tree structure. This is very useful for saving/loading tree data.
+
+## Big O Analysis of Tree Operations
+
+Understanding the time complexity of tree operations is crucial for interview success:
+
+| Operation             | BST Average | BST Worst Case | Balanced Tree | Notes                                                                 |
+| --------------------- | ----------- | -------------- | ------------- | --------------------------------------------------------------------- |
+| Search                | O(log n)    | O(n)           | O(log n)      | Average assumes balanced tree; worst case is degenerate (linked list) |
+| Insert                | O(log n)    | O(n)           | O(log n)      | Must traverse to find insertion point                                 |
+| Delete                | O(log n)    | O(n)           | O(log n)      | Find node + restructure; two-child case most complex                  |
+| In-order traversal    | O(n)        | O(n)           | O(n)          | Must visit every node once                                            |
+| Pre-order traversal   | O(n)        | O(n)           | O(n)          | Must visit every node once                                            |
+| Post-order traversal  | O(n)        | O(n)           | O(n)          | Must visit every node once                                            |
+| Find min/max          | O(log n)    | O(n)           | O(log n)      | Go all the way left (min) or right (max)                              |
+| Find height           | O(n)        | O(n)           | O(n)          | Must check all paths to leaves                                        |
+| Level-order traversal | O(n)        | O(n)           | O(n)          | BFS approach, visits every node                                       |
+| Balance tree          | O(n)        | O(n)           | O(n)          | Traverse + rebuild; creates new balanced tree                         |
+
+**Key Interview Insights:**
+
+- **Balance Matters:** Basic BST operations degrade from O(log n) to O(n) when a tree becomes unbalanced. Self-balancing trees (AVL, Red-Black) _guarantee_ O(log n).
+- **Height = Performance:** Tree height determines search/insert/delete time. Balanced tree height is O(log n); unbalanced can be O(n).
+- **Traversal Always O(n):** In any structure tree, visiting all nodes takes O(n) time.
+- **Space Complexity:** Recursive operations use O(height) stack space.
+- **Worst Case Scenario:** Inserting sorted data into basic BST creates linked list (O(n) operations). It's important to consider insertion order.
+
+**When to use trees:**
+
+- Need sorted/searchable data with O(log n) operations
+- Hierarchical relationships (DOM, file systems, org charts)
+- Range queries (find all values between x and y)
+- Prefix matching (tries for autocomplete)
+- Priority-based processing (heaps)
+- Maintaining sorted order while allowing insertion/deletion
+
+**Tree vs Other Structures:**
+
+- **vs Arrays:** Trees allow O(log n) insert/delete vs O(n) for arrays, but arrays have O(1) index access
+- **vs Hash Tables:** Trees maintain order and allow range queries; hashes are faster (O(1)) but unordered
+- **vs Linked Lists:** Trees provide O(log n) search vs O(n) for lists, but more complex to implement
 
 ## Using AI to Study Trees
 
-Not so long ago, or so it seems, I was following a computer science tutorial on a fairly well-known online learning platform that primarily specializes in mathematics. I already knew a decent amount about trees, but I’m a big fan at getting multiple takes on the same topic, so I followed the tutorial. At the end, as a "stretch goal," the chapter question was "Write an algorithm that can draw a tree."
+Not so long ago, or so it seems, I was following a computer science tutorial on a fairly well-known online learning platform that primarily specializes in mathematics. I already knew a decent amount about trees, but I’m a big fan at getting multiple takes on the same topic, so I followed the tutorial. At the end, as a "stretch goal," the chapter question was "Write an algorithm that can draw a tree." I'm going to suggest something low-tech: take out paper and pencil or use a dry-erase board and draw some trees. Putting hand-to-paper will really, really help cement tree structures in your mind.
 
-In these days of AI that seems a lot easier than it was when I was asked. My suggestion is to use AI to explore trees visually. Start with a single tree visualization algorithm, but expand from there to explore some of the algorithms laid out in this chapter. Create illustrations of insertion, deletion, traversal, etc., etc. Try to do this in a way that allows you to play around with the algorithms as discussed, and see if you can talk AI into helping you come up with some ideas of your own.
+Once you've done that, and you really feel you have an understanding, try using AI to help you build more intuition that bridges code to structure. Draw a tree the way I did above, using / \ to represent connections.  
+Ask AI to walk you visually through some of the ideas covered in this chapter.  
+Have it walk you visually through merging, sorting, and traversing.
+Have it take you through these operations with some of the different types of trees we've covered.  
+Do that a few times and once you feel you've really got a grasp of the differences between tree types and operations, return to the visualization problem. Can you write a small Python or JavaScript application that visualizes what's in this section. It could be an invaluable tool for really understanding trees.
